@@ -6,6 +6,16 @@ on:
       - master
 
 jobs:
+  Verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Verify battle-e
+        run: |
+          cd battle-e && make verify
+
   Test:
     runs-on: ubuntu-latest
     steps:

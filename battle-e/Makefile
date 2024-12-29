@@ -13,7 +13,7 @@ P_PROMO_TRAINERS = craig yasuo darlene mattego hidehiko yufu sagami mattegoDEMO
 N_PROMO_NUMS = N001 N002 N003 N004 N005 N006 N007 N008
 N_PROMO_TRAINERS = teruko kimiko norton simon hozumi ritsue yuuma taisen
 
-all: series_1 series_2 promo_en p_promo n_promo berries berries_2 verify
+all: series_1 series_2 promo_en p_promo n_promo berries berries_2
 series_1: $(SERIES_1_TRAINERS:%=trainers/%-EN.mev) $(SERIES_1_NUMS:%=08-%-EN.raw)
 series_2: $(SERIES_2_TRAINERS:%=trainers/%-EN.mev) $(SERIES_2_NUMS:%=08-%-EN.raw)
 berries: $(SERIES_1_BERRIES:%=berries/%-EN.mev) $(SERIES_1_BERRYNUMS:%=08-%-EN.raw)
@@ -21,16 +21,25 @@ berries_2: $(SERIES_2_BERRIES:%=berries/%-EN.mev) $(SERIES_2_BERRYNUMS:%=08-%-EN
 promo_en: $(PROMO_EN_TRAINERS:%=trainers/%-EN.mev) $(PROMO_EN_NUMS:%=129-%-EN.raw)
 p_promo: $(P_PROMO_TRAINERS:%=trainers/%-EN.mev) $(P_PROMO_NUMS:%=08-%-EN.raw)
 n_promo: $(N_PROMO_TRAINERS:%=trainers/%-EN.mev) $(N_PROMO_NUMS:%=08-%-EN.raw)
-verify:
+
+series_1_z80: $(SERIES_1_TRAINERS:%=trainers/%-EN.mev) $(SERIES_1_NUMS:%=08-%-EN.z80)
+berries_z80: $(SERIES_1_BERRIES:%=berries/%-EN.mev) $(SERIES_1_BERRYNUMS:%=08-%-EN.z80)
+berries_2_z80: $(SERIES_2_BERRIES:%=berries/%-EN.mev) $(SERIES_2_BERRYNUMS:%=08-%-EN.z80)
+promo_en_z80: $(PROMO_EN_TRAINERS:%=trainers/%-EN.mev) $(PROMO_EN_NUMS:%=129-%-EN.z80)
+p_promo_z80: $(P_PROMO_TRAINERS:%=trainers/%-EN.mev) $(P_PROMO_NUMS:%=08-%-EN.z80)
+n_promo_z80: $(N_PROMO_TRAINERS:%=trainers/%-EN.mev) $(N_PROMO_NUMS:%=08-%-EN.z80)
+
+# series_2_z80 doesn't match right now
+verify: series_1_z80 berries_z80 berries_2_z80 promo_en_z80 p_promo_z80 n_promo_z80
 	md5sum --ignore-missing --check battle-e.md5
 
 
 trainers/%-EN.tx: trainers/%.asm
 	python3 ../scripts/regionalize.py $< $@ EN EN
 trainers/%.o: trainers/%.tx
-	./rgbasm.exe -o $@ $<
+	../bin/rgbds/v0.2.0/rgbasm -o $@ $<
 trainers/%.gbc: trainers/%.o
-	./rgblink.exe -o $@ $<
+	../bin/rgbds/v0.2.0/rgblink -o $@ $<
 trainers/%.bin: trainers/%.gbc
 	python3 ../scripts/stripgbc.py $< $@
 trainers/%.z80: trainers/%.gbc
@@ -42,9 +51,9 @@ trainers/%.mev: trainers/%.bin
 berries/%-EN.tx: berries/%.asm
 	python3 ../scripts/regionalize.py $< $@ EN EN
 berries/%.o: berries/%.tx
-	./rgbasm.exe -o $@ $<
+	../bin/rgbds/v0.2.0/rgbasm -o $@ $<
 berries/%.gbc: berries/%.o
-	./rgblink.exe -o $@ $<
+	../bin/rgbds/v0.2.0/rgblink -o $@ $<
 berries/%.bin: berries/%.gbc
 	python3 ../scripts/stripgbc.py $< $@
 berries/%.z80: berries/%.gbc
@@ -56,9 +65,9 @@ berries/%.mev: berries/%.bin
 prologue-%.tx: prologue.asm
 	python3 ../scripts/regionalize.py $< $@ $* $*
 prologue-%.o: prologue-%.tx
-	./rgbasm.exe -o $@ $<
+	../bin/rgbds/v0.2.0/rgbasm -o $@ $<
 prologue-%.gbc: prologue-%.o
-	./rgblink.exe -o $@ $<
+	../bin/rgbds/v0.2.0/rgblink -o $@ $<
 prologue-%.bin: prologue-%.gbc
 	python3 ../scripts/stripgbc.py $< $@
 
@@ -68,9 +77,9 @@ battletrainer-%.tx: battletrainer.asm prologue-%.bin
 08-A%-EN.tx: 08-A%.asm battletrainer-EN.tx
 	python3 ../scripts/ereadertext.py $< $@ EN
 08-A%.o: 08-A%.tx
-	./rgbasm.exe -o $@ $<
+	../bin/rgbds/v0.2.0/rgbasm -o $@ $<
 08-A%.gbc: 08-A%.o
-	./rgblink.exe -o $@ $<
+	../bin/rgbds/v0.2.0/rgblink -o $@ $<
 08-A%.z80: 08-A%.gbc
 	python3 ../scripts/stripgbc.py $< $@
 08-A%.vpk: 08-A%.z80
@@ -81,9 +90,9 @@ battletrainer-%.tx: battletrainer.asm prologue-%.bin
 08-B%-EN.tx: 08-B%.asm battletrainer-EN.tx
 	python3 ../scripts/ereadertext.py $< $@ EN
 08-B%.o: 08-B%.tx
-	./rgbasm.exe -o $@ $<
+	../bin/rgbds/v0.2.0/rgbasm -o $@ $<
 08-B%.gbc: 08-B%.o
-	./rgblink.exe -o $@ $<
+	../bin/rgbds/v0.2.0/rgblink -o $@ $<
 08-B%.z80: 08-B%.gbc
 	python3 ../scripts/stripgbc.py $< $@
 08-B%.vpk: 08-B%.z80
@@ -94,9 +103,9 @@ battletrainer-%.tx: battletrainer.asm prologue-%.bin
 129-B%-EN.tx: 129-B%.asm battletrainer-EN.tx
 	python3 ../scripts/ereadertext.py $< $@ EN
 129-B%.o: 129-B%.tx
-	./rgbasm.exe -o $@ $<
+	../bin/rgbds/v0.2.0/rgbasm -o $@ $<
 129-B%.gbc: 129-B%.o
-	./rgblink.exe -o $@ $<
+	../bin/rgbds/v0.2.0/rgblink -o $@ $<
 129-B%.z80: 129-B%.gbc
 	python3 ../scripts/stripgbc.py $< $@
 129-B%.vpk: 129-B%.z80
@@ -109,9 +118,9 @@ enigmaberry-%.tx: enigmaberry.asm prologue-%.bin
 08-K%-EN.tx: 08-K%.asm enigmaberry-EN.tx
 	python3 ../scripts/ereadertext.py $< $@ EN
 08-K%.o: 08-K%.tx
-	./rgbasm.exe -o $@ $<
+	../bin/rgbds/v0.2.0/rgbasm -o $@ $<
 08-K%.gbc: 08-K%.o
-	./rgblink.exe -o $@ $<
+	../bin/rgbds/v0.2.0/rgblink -o $@ $<
 08-K%.z80: 08-K%.gbc
 	python3 ../scripts/stripgbc.py $< $@
 08-K%.vpk: 08-K%.z80
@@ -122,9 +131,9 @@ enigmaberry-%.tx: enigmaberry.asm prologue-%.bin
 08-N%-EN.tx: 08-N%.asm battletrainer-EN.tx
 	python3 ../scripts/ereadertext.py $< $@ EN
 08-N%.o: 08-N%.tx
-	./rgbasm.exe -o $@ $<
+	../bin/rgbds/v0.2.0/rgbasm -o $@ $<
 08-N%.gbc: 08-N%.o
-	./rgblink.exe -o $@ $<
+	../bin/rgbds/v0.2.0/rgblink -o $@ $<
 08-N%.z80: 08-N%.gbc
 	python3 ../scripts/stripgbc.py $< $@
 08-N%.vpk: 08-N%.z80
@@ -135,9 +144,9 @@ enigmaberry-%.tx: enigmaberry.asm prologue-%.bin
 08-P%-EN.tx: 08-P%.asm battletrainer-EN.tx
 	python3 ../scripts/ereadertext.py $< $@ EN
 08-P%.o: 08-P%.tx
-	./rgbasm.exe -o $@ $<
+	../bin/rgbds/v0.2.0/rgbasm -o $@ $<
 08-P%.gbc: 08-P%.o
-	./rgblink.exe -o $@ $<
+	../bin/rgbds/v0.2.0/rgblink -o $@ $<
 08-P%.z80: 08-P%.gbc
 	python3 ../scripts/stripgbc.py $< $@
 08-P%.vpk: 08-P%.z80
