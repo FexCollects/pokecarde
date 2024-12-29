@@ -1,4 +1,3 @@
-#!/usr/bin/env python2.7
 asmProblemBytes = ['\x00', '\x09', '\x0A', '\x22']
 def asmQuote(t):
 	result = ""
