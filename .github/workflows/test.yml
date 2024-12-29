@@ -1,0 +1,15 @@
+name: Test Python Scripts
+on:
+  pull_request:
+  push:
+
+jobs:
+  Test Python Scriptts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Test stripgbc
+        run: |
+          tests/scripts/stripgbc/pass.sh
