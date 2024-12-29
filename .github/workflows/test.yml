@@ -12,4 +12,4 @@ jobs:
 
       - name: Test stripgbc
         run: |
-          tests/scripts/stripgbc/pass.sh
+          cd tests/scripts/stripgbc/ && ./pass.sh
