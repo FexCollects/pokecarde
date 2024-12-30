@@ -83,9 +83,9 @@ battletrainer-%.tx: battletrainer.asm prologue-%.bin
 08-A%.z80: 08-A%.gbc
 	python3 ../scripts/stripgbc.py $< $@
 08-A%.vpk: 08-A%.z80
-	./nevpk.exe -c -i $< -o $@
+	../bin/nedc/v1.4/nevpk -c -i $< -o $@
 08-A%.raw: 08-A%.vpk
-	./nedcmake.exe -i $< -o $@ -type 1 -region 1
+	../bin/nedc/v1.4/nedcmake -i $< -o $@ -type 1 -region 1
 
 08-B%-EN.tx: 08-B%.asm battletrainer-EN.tx
 	python3 ../scripts/ereadertext.py $< $@ EN
@@ -96,9 +96,9 @@ battletrainer-%.tx: battletrainer.asm prologue-%.bin
 08-B%.z80: 08-B%.gbc
 	python3 ../scripts/stripgbc.py $< $@
 08-B%.vpk: 08-B%.z80
-	./nevpk.exe -c -i $< -o $@
+	../bin/nedc/v1.4/nevpk -c -i $< -o $@
 08-B%.raw: 08-B%.vpk
-	./nedcmake.exe -i $< -o $@ -type 1 -region 1
+	../bin/nedc/v1.4/nedcmake -i $< -o $@ -type 1 -region 1
 
 129-B%-EN.tx: 129-B%.asm battletrainer-EN.tx
 	python3 ../scripts/ereadertext.py $< $@ EN
@@ -109,9 +109,9 @@ battletrainer-%.tx: battletrainer.asm prologue-%.bin
 129-B%.z80: 129-B%.gbc
 	python3 ../scripts/stripgbc.py $< $@
 129-B%.vpk: 129-B%.z80
-	./nevpk.exe -c -i $< -o $@
+	../bin/nedc/v1.4/nevpk -c -i $< -o $@
 129-B%.raw: 129-B%.vpk
-	./nedcmake.exe -i $< -o $@ -type 1 -region 1
+	../bin/nedc/v1.4/nedcmake -i $< -o $@ -type 1 -region 1
 
 enigmaberry-%.tx: enigmaberry.asm prologue-%.bin
 	python3 ../scripts/ereadertext.py $< $@ $*
@@ -124,9 +124,9 @@ enigmaberry-%.tx: enigmaberry.asm prologue-%.bin
 08-K%.z80: 08-K%.gbc
 	python3 ../scripts/stripgbc.py $< $@
 08-K%.vpk: 08-K%.z80
-	./nevpk.exe -c -i $< -o $@
+	../bin/nedc/v1.4/nevpk -c -i $< -o $@
 08-K%.raw: 08-K%.vpk
-	./nedcmake.exe -i $< -o $@ -type 1 -region 1 -raw
+	../bin/nedc/v1.4/nedcmake -i $< -o $@ -type 1 -region 1 -raw
 
 08-N%-EN.tx: 08-N%.asm battletrainer-EN.tx
 	python3 ../scripts/ereadertext.py $< $@ EN
@@ -137,9 +137,9 @@ enigmaberry-%.tx: enigmaberry.asm prologue-%.bin
 08-N%.z80: 08-N%.gbc
 	python3 ../scripts/stripgbc.py $< $@
 08-N%.vpk: 08-N%.z80
-	./nevpk.exe -c -i $< -o $@
+	../bin/nedc/v1.4/nevpk -c -i $< -o $@
 08-N%.raw: 08-N%.vpk
-	./nedcmake.exe -i $< -o $@ -type 1 -region 1
+	../bin/nedc/v1.4/nedcmake -i $< -o $@ -type 1 -region 1
 
 08-P%-EN.tx: 08-P%.asm battletrainer-EN.tx
 	python3 ../scripts/ereadertext.py $< $@ EN
@@ -150,9 +150,9 @@ enigmaberry-%.tx: enigmaberry.asm prologue-%.bin
 08-P%.z80: 08-P%.gbc
 	python3 ../scripts/stripgbc.py $< $@
 08-P%.vpk: 08-P%.z80
-	./nevpk.exe -c -i $< -o $@
+	../bin/nedc/v1.4/nevpk -c -i $< -o $@
 08-P%.raw: 08-P%.vpk
-	./nedcmake.exe -i $< -o $@ -type 1 -region 1
+	../bin/nedc/v1.4/nedcmake -i $< -o $@ -type 1 -region 1
 
 
 clean:
