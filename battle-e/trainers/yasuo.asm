@@ -13,7 +13,7 @@ INCLUDE "trainers/macros.asm"
 	Win_JP $1205, $0e08, $ffff, $140b, $2699, $0c01
 	Loss_JP $1217, $0e08, $ffff, $0a1f, $26c2, $0c01
 
-	Intro_EN HERE_I_COME, _EX_EX, TIME, FOR, BATTLE, _EX_EX
+	Intro_EN HERE_I_COME, _EX_EX, TIME, _FOR, BATTLE, _EX_EX
 	Win_EN DID, YOU, SEE, THAT, _EXPLOSION, _QU_EX
 	Loss_EN ALWAYS, _DESTINY_BOND, WITH, MY, POKEMON, _ELIP
 

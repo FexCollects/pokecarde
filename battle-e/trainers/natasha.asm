@@ -11,7 +11,7 @@ INCLUDE "trainers/macros.asm"
 
 	Intro_EN LOOK,_EX,MY,SKILLED,ATTACK,_EX_EX
 	Win_EN   OH_,WHERE,WAS,YOUR,_LIGHT_SCREEN,_QU
-	Loss_EN  I,WAS,NO_MATCH,FOR,YOU,_EX_EX
+	Loss_EN  I,WAS,NO_MATCH,_FOR,YOU,_EX_EX
 
 	Intro_JP $1643, $0c00, $1e0b, $063e, $0617, $0c01
 	Win_JP $0c0c, $0c03, $2671, $142f, $1034, $0c03

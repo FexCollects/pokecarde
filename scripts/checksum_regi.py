@@ -30,7 +30,7 @@ pos=list(find_all(data,b'\x01\x00\x00\x00\x02\x02\x00\x02\x00\x00\x00\x04\x00\x8
 
 for i in pos:
 	i=i+17
-	chunk_type = ord(data[i])
+	chunk_type = data[i]
 	if chunk_type == 0x02: # END_OF_CHUNKS
 		break
 	elif chunk_type == 0x07: # CUSTOM_BERRY
@@ -73,7 +73,7 @@ for wordwise in wordwises:
 for bytewise in bytewises:
 	sum = 0
 	for i in range(bytewise[1], bytewise[2]):
-		sum = (sum + ord(data[i])) & 0xFFFFFFFF
+		sum = (sum + data[i]) & 0xFFFFFFFF
 	bytewise_results.append(sum)
 i = 0
 for bytewise in bytewises:
@@ -85,7 +85,7 @@ for bytewise in bytewises:
 for crc in crcs:
 	sum = 0x1121
 	for i in range(crc[1], crc[2]):
-		sum ^= ord(data[i])
+		sum ^= data[i]
 		for j in range(8):
 			if(sum & 1):
 				sum = (sum >> 1) ^ 0x8408
@@ -101,5 +101,5 @@ for crc in crcs:
 
 
 # write the updated file
-out = open(sys.argv[2], 'w')
+out = open(sys.argv[2], 'wb')
 out.write(data)

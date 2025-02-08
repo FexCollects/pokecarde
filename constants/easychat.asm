@@ -691,7 +691,7 @@ ABOUT        EQU $1027
 OVER         EQU $1028
 IT           EQU $1029
 ALL          EQU $102A
-FOR          EQU $102B
+_FOR         EQU $102B ; rgbds keyword
 ON           EQU $102C
 OFF          EQU $102D
 AS           EQU $102E
@@ -843,7 +843,7 @@ NATURAL      EQU $1431
 BECOMES      EQU $1432
 LUKEWARM     EQU $1433
 FAST         EQU $1434
-LOW          EQU $1435
+_LOW         EQU $1435 ; rgbds keyword
 AWFUL        EQU $1436
 ALONE        EQU $1437
 BORED        EQU $1438
@@ -1100,7 +1100,7 @@ THING        EQU $1E05
 BELOW        EQU $1E06
 ABOVE        EQU $1E07
 BACK         EQU $1E08
-HIGH         EQU $1E09
+_HIGH        EQU $1E09 ; rgbds keyword
 HERE         EQU $1E0A
 INSIDE       EQU $1E0B
 OUTSIDE      EQU $1E0C
@@ -1155,7 +1155,7 @@ THICK        EQU $2010
 SMOOTH       EQU $2011
 SLIMY        EQU $2012
 THIN         EQU $2013
-BREAK        EQU $2014
+_BREAK       EQU $2014 ; rgbds keyword
 VORACIOUS    EQU $2015
 SCATTER      EQU $2016
 AWESOME      EQU $2017

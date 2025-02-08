@@ -9,7 +9,7 @@ INCLUDE "trainers/macros.asm"
 	Text_JP "リョウ"8
 	OT_ID 00000, 00000
 
-	Intro_EN I, WILL, AIM, FOR, WEAK, POINTS	
+	Intro_EN I, WILL, AIM, _FOR, WEAK, POINTS
 	Win_EN I, HIT, YOUR, WEAK, POINTS, _EX	
 	Loss_EN I, COULDN_T, SEE, THE, WEAK, POINTS
 
