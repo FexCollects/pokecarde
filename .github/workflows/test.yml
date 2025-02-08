@@ -6,6 +6,16 @@ on:
       - master
 
 jobs:
+  BuildDecoration:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Verify decoration
+        run: |
+          cd decoration && make
+
   BuildBattleE:
     runs-on: ubuntu-24.04
     steps:
@@ -15,10 +25,6 @@ jobs:
       - name: Verify battle-e
         run: |
           cd battle-e && make
-
-      - name: Verify decoration
-        run: |
-          cd ../decoration && make
 
   Verify:
     runs-on: ubuntu-24.04
