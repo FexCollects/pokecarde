@@ -6,6 +6,26 @@ on:
       - master
 
 jobs:
+  BuildGift:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Verify gift 
+        run: |
+          cd giftpokemon && make
+
+  BuildRibbons:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Verify ribbons
+        run: |
+          cd ribbons && make
+
   BuildDecoration:
     runs-on: ubuntu-24.04
     steps:

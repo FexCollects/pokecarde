@@ -18,15 +18,15 @@ key3 = ((pv ^ otid) >> 16) & mask
 key2 = ((pv ^ otid) >> 8) & mask
 key1 = (pv ^ otid) & mask
 
-substructG=[struct.unpack('<B', data[68])[0]]
-substructA=[struct.unpack('<B', data[80])[0]]
-substructE=[struct.unpack('<B', data[92])[0]]
-substructM=[struct.unpack('<B', data[104])[0]]
+substructG=[struct.unpack('<B', data[68:69])[0]]
+substructA=[struct.unpack('<B', data[80:81])[0]]
+substructE=[struct.unpack('<B', data[92:93])[0]]
+substructM=[struct.unpack('<B', data[104:105])[0]]
 for i in range(1,12):
-	substructG.append(struct.unpack('<B', data[68+i])[0])
-	substructA.append(struct.unpack('<B', data[80+i])[0])
-	substructE.append(struct.unpack('<B', data[92+i])[0])
-	substructM.append(struct.unpack('<B', data[104+i])[0])
+    substructG.append(struct.unpack('<B', data[68+i:69+i])[0])
+    substructA.append(struct.unpack('<B', data[80+i:81+i])[0])
+    substructE.append(struct.unpack('<B', data[92+i:93+i])[0])
+    substructM.append(struct.unpack('<B', data[104+i:105+i])[0])
 
 
 checksum=0
@@ -206,5 +206,5 @@ else:
 		data = data[0:104+i] + struct.pack('<B', substructG[i]) + data[105+i:]
 
 
-out = open(sys.argv[2], 'w')
+out = open(sys.argv[2], 'wb')
 out.write(data)
