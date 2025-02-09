@@ -6,9 +6,9 @@ verify:
 eonticket-%.tx: eonticket.asm
 	python3 ../scripts/regionalize.py $< $@ $* $*
 eonticket-%.o: eonticket-%.tx
-	../bin/rgbds/v0.5.0/rgbasm -o $@ $<
+	../bin/rgbds/v0.6.0/rgbasm -o $@ $<
 eonticket-%.gbc: eonticket-%.o
-	../bin/rgbds/v0.5.0/rgblink -o $@ $<
+	../bin/rgbds/v0.6.0/rgblink -o $@ $<
 eonticket-%.bin: eonticket-%.gbc
 	python3 ../scripts/stripgbc.py $< $@
 eonticket-%.mev: eonticket-%.bin
@@ -17,18 +17,18 @@ eonticket-%.mev: eonticket-%.bin
 prologue-%.tx: prologue.asm
 	python3 ../scripts/regionalize.py $< $@ $* $*
 prologue-%.o: prologue-%.tx
-	../bin/rgbds/v0.5.0/rgbasm -o $@ $<
+	../bin/rgbds/v0.6.0/rgbasm -o $@ $<
 prologue-%.gbc: prologue-%.o
-	../bin/rgbds/v0.5.0/rgblink -o $@ $<
+	../bin/rgbds/v0.6.0/rgblink -o $@ $<
 prologue-%.bin: prologue-%.gbc
 	python3 ../scripts/stripgbc.py $< $@
 
 00-C000-%.tx: 00-C000.asm eonticket-%.mev prologue-%.bin
 	python3 ../scripts/ereadertext.py $< $@ $*
 00-C000-%.o: 00-C000-%.tx
-	../bin/rgbds/v0.5.0/rgbasm -o $@ $<
+	../bin/rgbds/v0.6.0/rgbasm -o $@ $<
 00-C000-%.gbc: 00-C000-%.o
-	../bin/rgbds/v0.5.0/rgblink -o $@ $<
+	../bin/rgbds/v0.6.0/rgblink -o $@ $<
 00-C000-%.z80: 00-C000-%.gbc
 	python3 ../scripts/stripgbc.py $< $@
 00-C000-%.vpk: 00-C000-%.z80

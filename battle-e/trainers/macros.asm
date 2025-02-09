@@ -9,7 +9,7 @@ INCLUDE "../constants/trainerclasses.asm"
 
 MOSSDEEP EQU 0
 
-Battle_Trainer: MACRO
+MACRO Battle_Trainer
 	Section "battle",ROM0[$100]
 	db $01
 	dd $02000000
@@ -22,32 +22,32 @@ Battle_Trainer: MACRO
 BT_Level EQUS "db"
 Class EQUS "db"
 BT_Floor EQUS "dw" ; the byte after it is 00, but apparently means something…
-Intro_EN: MACRO
+MACRO Intro_EN
 	IF REGION == REGION_EN
 	dw \1, \2, \3, \4, \5, \6
 	ENDC
 	ENDM
-Win_EN: MACRO
+MACRO Win_EN
 	IF REGION == REGION_EN
 	dw \1, \2, \3, \4, \5, \6
 	ENDC
 	ENDM
-Loss_EN: MACRO
+MACRO Loss_EN
 	IF REGION == REGION_EN
 	dw \1, \2, \3, \4, \5, \6
 	ENDC
 	ENDM
-Intro_JP: MACRO
+MACRO Intro_JP
 	IF REGION == REGION_JP
 	dw \1, \2, \3, \4, \5, \6
 	ENDC
 	ENDM
-Win_JP: MACRO
+MACRO Win_JP
 	IF REGION == REGION_JP
 	dw \1, \2, \3, \4, \5, \6
 	ENDC
 	ENDM
-Loss_JP: MACRO
+MACRO Loss_JP
 	IF REGION == REGION_JP
 	dw \1, \2, \3, \4, \5, \6
 	ENDC
@@ -56,21 +56,21 @@ Pokemon EQUS "dw"
 Holds EQUS "dw"
 Moves EQUS "dw"
 Level EQUS "db"
-PP_Ups: MACRO
+MACRO PP_Ups
 	db (\1) + (\2 << 2) + (\3 << 4) + (\4 << 6)
 	ENDM
 EVs EQUS "db"
 OT_ID EQUS "dw"
-IVs: MACRO
+MACRO IVs
 	dw \1 + (\2 << 5) + (\3 << 10) + ((\4 & 1) << 15)
 	dw (\4 >> 1) + (\5 << 4) + (\6 << 9) + (\7 << 15)
 	ENDM
-PV: MACRO
+MACRO PV
 	dw (\1 & $FFFF), (\1 >> 16)
 	ENDM
 Friendship EQUS "db"
 
-End_Trainer: MACRO
+MACRO End_Trainer
 	db 0,0,0,0
 	EOF
 	ENDM

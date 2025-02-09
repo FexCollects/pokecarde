@@ -1,6 +1,7 @@
 INCLUDE "../macros.asm"
 INCLUDE "../constants/items.asm"
 INCLUDE "../constants/scriptcommands.asm"
+SECTION "CODE", ROM0
 
 DataStartRegirock:
 	Mystery_Event

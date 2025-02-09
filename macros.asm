@@ -2,111 +2,111 @@
 ; but are used in e-Reader programs
 
 ; ld [\1], hl
-LD_IND_HL: MACRO
+MACRO LD_IND_HL
 	db $22, (\1 & $FF), (\1 >> 8)
 	ENDM
 ; ld [\1], a
-LD_IND_A: MACRO
+MACRO LD_IND_A
 	db $32, (\1 & $FF), (\1 >> 8)
 	ENDM
 
 ; ld hl, [\1]
-LD_HL_IND: MACRO
+MACRO LD_HL_IND
 	db $2A, (\1 & $FF), (\1 >> 8)
 	ENDM
 ; ld a, [\1]
-LD_A_IND: MACRO
+MACRO LD_A_IND
 	db $3A
 	dw \1
 	ENDM
 
-waita: MACRO
+MACRO waita
 	ld a, \1
 	db $76
 	ENDM
 ; ld [hl], a
-LD_IND_HL_A: MACRO
+MACRO LD_IND_HL_A
 	db $77
 	ENDM
 
 ; ld a, [hl]
-LD_IND_A_HL: MACRO
+MACRO LD_IND_A_HL
 	db $7E
 	ENDM
 
 ; ld c, [hl]
-LD_IND_C_HL: MACRO
+MACRO LD_IND_C_HL
 	db $4E
 	ENDM
 
 ; ld b, [hl]
-LD_IND_B_HL: MACRO
+MACRO LD_IND_B_HL
 	db $46
 	ENDM
 
 ; ld l, [hl]
-LD_IND_L_HL: MACRO
+MACRO LD_IND_L_HL
 	db $6E
 	ENDM
 
 ; ld e, [hl]
-LD_IND_E_HL: MACRO
+MACRO LD_IND_E_HL
 	db $5E
 	ENDM
 
 ; ld d, [hl]
-LD_IND_D_HL: MACRO
+MACRO LD_IND_D_HL
 	db $56
 	ENDM
 
 ; ld [hl], c
-LD_IND_HL_C: MACRO
+MACRO LD_IND_HL_C
 	db $71
 	ENDM
 
 ; ld [hl], b
-LD_IND_HL_B: MACRO
+MACRO LD_IND_HL_B
 	db $70
 	ENDM
 
 ; ld a, [de]
-LD_IND_A_DE: MACRO
+MACRO LD_IND_A_DE
 	db $1A
 	ENDM
 
 ; add a, [hl]
-ADD_A_HL_IND: MACRO
+MACRO ADD_A_HL_IND
 	db $86
 	ENDM
 
-EX_DE_HL: MACRO
+MACRO EX_DE_HL
 	db $EB
 	ENDM
 
-wait: MACRO
+MACRO wait
 	db $D3, \1
 	ENDM
 
-API: MACRO
+MACRO API
 	db ($C7 + (\1 & $100) >> 5), (\1 & $FF) ; $C7 for API $0xx, $CF for API $1xx
 	ENDM
 
 
 
-dd: MACRO
+MACRO dd
 	dw (\1) & $FFFF
 	dw (\1) >> 16
 	ENDM
 
-RGB: MACRO
+MACRO RGB
 	dw (\1) | ((\2) << 5) | ((\3) << 10)
 	ENDM
 
-GBAPTR: MACRO
+MACRO GBAPTR
 	dd $02000000 + \1 - ScriptBaseAddress
 	ENDM
 
-Insert_Prologue: MACRO
+MACRO Insert_Prologue
 	db "GameFreak inc."
 	db 0,0,0,0,0,0
 	dd \1
@@ -122,7 +122,7 @@ Insert_Prologue: MACRO
 	db 0,0
 	ENDM
 
-Mystery_Event: MACRO
+MACRO Mystery_Event
 ScriptBaseAddress EQU $100
 	SECTION "mysteryevent", ROM0[$100]
 	db $01
@@ -157,30 +157,30 @@ DOME_TRAINER     EQU $11 ; Battle Dome trainer
 
 ; an FF byte followed by 00s will flag the end of the program so that it can
 ; be extracted automatically from the Game Boy ROM that rgbds tries to build
-EOF: MACRO
+MACRO EOF
 	db $FF
 	ENDM
 
 
 ; names for some API functions based on Martin Korth’s GBATEK
 ; http://problemkaputt.de/gbatek.htm
-FadeIn: MACRO
+MACRO FadeIn
 	ld a, \1
 	API $000
 	ENDM
-SetBackgroundAutoScroll: MACRO
+MACRO SetBackgroundAutoScroll
 	ld bc, \1
 	ld de, \2
 	xor a
 	API $012
 	ENDM
-SetBackgroundMode: MACRO
+MACRO SetBackgroundMode
 	ld e, \1
 	push de
 	xor a
 	API $019
 	ENDM
-API_02C: MACRO
+MACRO API_02C
 	ld hl, $0000
 	push hl
 	ld bc, \1
@@ -192,7 +192,7 @@ API_02C: MACRO
 	ENDC
 	API $02C
 	ENDM
-LoadCustomBackground: MACRO
+MACRO LoadCustomBackground
 	ld de, \1
 	IF \2 == 0
 		xor a ; save a byte
@@ -201,44 +201,44 @@ LoadCustomBackground: MACRO
 	ENDC
 	API $02D
 	ENDM
-SetSpritePos: MACRO
+MACRO SetSpritePos
 	ld bc, \3
 	ld de, \2
 	LD_HL_IND \1
 	API $032
 	ENDM
-SpriteShow: MACRO
+MACRO SpriteShow
 	LD_HL_IND \1
 	API $046
 	ENDM
-SpriteHide: MACRO
+MACRO SpriteHide
 	LD_HL_IND \1
 	API $047
 	ENDM
-SpriteMirrorToggle: MACRO
+MACRO SpriteMirrorToggle
 	ld e, \1
 	LD_HL_IND \2
 	API $048
 	ENDM
-CreateCustomSprite: MACRO
+MACRO CreateCustomSprite
 	ld e, \2
 	ld hl, \3
 	API $04D
 	LD_IND_HL \1
 	ENDM
-SpriteAutoScaleUntilSize: MACRO
+MACRO SpriteAutoScaleUntilSize
 	ld c, \2
 	ld de, \3
 	LD_HL_IND \1
 	API $05B
 	ENDM
-SetBackgroundPalette: MACRO
+MACRO SetBackgroundPalette
 	ld c, \1
 	ld de, \2
 	ld hl, \3
 	API $07E
 	ENDM
-API_084: MACRO
+MACRO API_084
 	ld l, \4
 	push hl
 	ld bc, \3
@@ -246,63 +246,63 @@ API_084: MACRO
 	LD_HL_IND \1
 	API $084
 	ENDM
-CreateRegion: MACRO
+MACRO CreateRegion
 	ld bc, (\2 << 8 + \3)
 	ld de, (\4 << 8 + \5)
 	ld hl, (\6 << 8 + \7)
 	API $090
 	LD_IND_A \1
 	ENDM
-SetRegionColor: MACRO
+MACRO SetRegionColor
 	ld e, \2
 	LD_A_IND \1
 	API $091
 	ENDM
-CLEAR_REGION: MACRO
+MACRO CLEAR_REGION
 	LD_A_IND \1
 	API $092
 	ENDM
-SetTextColor: MACRO
+MACRO SetTextColor
 	ld de, (\2 << 8 + \3)
 	LD_A_IND \1
 	API $098
 	ENDM
-DrawText: MACRO
+MACRO DrawText
 	CLEAR_REGION \1
 	ld bc, \2
 	ld de, (\3 << 8 + \4)
 	LD_A_IND \1
 	API $099
 	ENDM
-SetTextSize: MACRO
+MACRO SetTextSize
 	API $09A
 	ENDM
-API_09B: MACRO
+MACRO API_09B
 	ld de, \2
 	LD_A_IND \1
 	API $09B
 	ENDM
-GetTextWidth: MACRO
+MACRO GetTextWidth
 	ld de, \2
 	LD_A_IND \1
 	API $0C0
 	ENDM
-API_0C7: MACRO
+MACRO API_0C7
 	ld hl, \1
 	API $0C7
 	ENDM
-EXIT: MACRO
+MACRO EXIT
 	API $100
 	ENDM
-API_106: MACRO
+MACRO API_106
 	ld de, \1
 	ld hl, \2
 	API $106
 	ENDM
-SOUND_PAUSE: MACRO
+MACRO SOUND_PAUSE
 	API $116
 	ENDM
-IS_SOUND_PLAYING: MACRO
+MACRO IS_SOUND_PLAYING
 	API $08D
 	ld b, $00
 	ld e, $01
@@ -311,7 +311,7 @@ IS_SOUND_PLAYING: MACRO
 	ld a, \1
 	EXIT
 	ENDM
-API_121: MACRO
+MACRO API_121
 	ld de, $0000
 	ld hl, $0000
 	API $121

@@ -1,184 +1,184 @@
 LASTRESULT EQU $800D
-end: MACRO
+MACRO end
 	db $02
 	ENDM
-return: MACRO
+MACRO return
 	db $03
 	ENDM
-goto: MACRO
+MACRO goto
 	db $05
 	dd \1
 	ENDM
-goto_if: MACRO
+MACRO goto_if
 	db $06
 	db \1
 	dd \2
 	ENDM
-call_if: MACRO
+MACRO call_if
 	db $07
 	db \1
 	dd \2
 	ENDM
-gotostd: MACRO
+MACRO gotostd
 	db $08
 	db \1
 	ENDM
-callstd: MACRO
+MACRO callstd
 	db $09, \1
 	ENDM
-gotostd_if: MACRO
+MACRO gotostd_if
 	db $0A
 	db \1
 	db \2
 	ENDM
-callstd_if: MACRO
+MACRO callstd_if
 	db $0B
 	db \3
 	db \2
 	ENDM
-returnram: MACRO
+MACRO returnram
 	db $0C
 	ENDM
-killscript: MACRO
+MACRO killscript
 	db $0D
 	ENDM
-setbyte: MACRO
+MACRO setbyte
 	db $0E, \1
 	ENDM
-loadword: MACRO
+MACRO loadword
 	db $0F
 	db \1
 	dd \2
 	ENDM
-loadbyte: MACRO
+MACRO loadbyte
 	db $10
 	db \1
 	db \2
 	ENDM
-writebytetoaddr: MACRO
+MACRO writebytetoaddr
 	db $11
 	db \1
 	dd \2
 	ENDM
-loadbytefromaddr: MACRO
+MACRO loadbytefromaddr
 	db $12
 	db \1
 	dd \2
 	ENDM
-setptrbyte: MACRO
+MACRO setptrbyte
 	db $13
 	db \1
 	dd \2
 	ENDM
-copylocal: MACRO
+MACRO copylocal
 	db $14
 	db \1
 	db \2
 	ENDM
-copybyte: MACRO
+MACRO copybyte
 	db $15
 	dd \1
 	dd \2
 	ENDM
-setvar: MACRO
+MACRO setvar
 	db $16
 	dw \1
 	dw \2
 	ENDM
-addvar: MACRO
+MACRO addvar
 	db $17
 	dw \1
 	dw \2
 	ENDM
-subvar: MACRO
+MACRO subvar
 	db $18
 	dw \1
 	dw \2
 	ENDM
-copyvar: MACRO
+MACRO copyvar
 	db $19
 	dw \1
 	dw \2
 	ENDM
-copyvarifnotzero: MACRO
+MACRO copyvarifnotzero
 	db $1A
 	dw \1, \2
 	ENDM
-compare: MACRO
+MACRO compare
 	db $21
 	dw \1, \2
 	ENDM
-setflag: MACRO
+MACRO setflag
 	db $29
 	dw \1
 	ENDM
-checkflag: MACRO
+MACRO checkflag
 	db $2B
 	dw \1
 	ENDM
-playfanfare: MACRO
+MACRO playfanfare
 	db $31
 	dw \1
 	ENDM
-waitfanfare: MACRO
+MACRO waitfanfare
 	db $32
 	ENDM
-getpartysize: MACRO
+MACRO getpartysize
 	db $43
 	ENDM
-additem: MACRO
+MACRO additem
 	db $44
 	dw \1, \2
 	ENDM
-checkitemroom: MACRO
+MACRO checkitemroom
 	db $46
 	dw \1, \2
 	ENDM
-checkitem: MACRO
+MACRO checkitem
 	db $47
 	dw \1, \2
 	ENDM
-checkpcitem: MACRO
+MACRO checkpcitem
 	db $4A
 	dw \1, \2
 	ENDM
-adddecoration: MACRO
+MACRO adddecoration
 	db $4b
 	dw \1
 	ENDM
-faceplayer: MACRO
+MACRO faceplayer
 	db $5A
 	ENDM
-waitmsg: MACRO
+MACRO waitmsg
 	db $66
 	ENDM
-lock: MACRO
+MACRO lock
 	db $6A
 	ENDM
-release: MACRO
+MACRO release
 	db $6C
 	ENDM
-waitkeypress: MACRO
+MACRO waitkeypress
 	db $6D
 	ENDM
-showmonpic: MACRO
+MACRO showmonpic
 	db $75
 	dw \1
 	db \2
 	db \3
 	ENDM
-hidemonpic: MACRO
+MACRO hidemonpic
 	db $76
 	ENDM
-showcontestpainting: MACRO
+MACRO showcontestpainting
 	db $77
 	db \1
 	ENDM
-braillemessage: MACRO
+MACRO braillemessage
 	db $78
 	dd \1
 	ENDM
-brailleformat: MACRO
+MACRO brailleformat
 	db \1
 	db \2
 	db \3
@@ -186,7 +186,7 @@ brailleformat: MACRO
 	db \5
 	db \6
 	ENDM
-givemon: MACRO
+MACRO givemon
 	db $79
 	dw \1
 	db \2
@@ -195,103 +195,103 @@ givemon: MACRO
 	dd \5
 	db \6
 	ENDM
-giveegg: MACRO
+MACRO giveegg
 	db $7A
 	dw \1
 	ENDM
-setmonmove: MACRO
+MACRO setmonmove
 	db $7b
 	db \1
 	db \2
 	dw \3
 	ENDM
-checkpartymove: MACRO
+MACRO checkpartymove
 	db $7c
 	dw \1
 	ENDM
-bufferspeciesname: MACRO
+MACRO bufferspeciesname
 	db $7d
 	db \1
 	dw \2
 	ENDM
-bufferleadmonspeciesname: MACRO
+MACRO bufferleadmonspeciesname
 	db $7E
 	db \1
 	ENDM
-bufferpartymonnick: MACRO
+MACRO bufferpartymonnick
 	db $7f
 	db \1
 	dw \2
 	ENDM
-bufferitemname: MACRO
+MACRO bufferitemname
 	db $80
 	db \1
 	dw \2
 	ENDM
-bufferdecorationname: MACRO
+MACRO bufferdecorationname
 	db $81
 	db \1
 	dw \2
 	ENDM
-buffermovename: MACRO
+MACRO buffermovename
 	db $82
 	db \1
 	dw \2
 	ENDM
-random: MACRO
+MACRO random
 	db $8F
 	dw \1
 	ENDM
-setrespawn: MACRO
+MACRO setrespawn
 	db $9F
 	dw \1
 	ENDM
-checkplayergender: MACRO
+MACRO checkplayergender
 	db $A0
 	ENDM
-playmoncry: MACRO
+MACRO playmoncry
 	db $A1
 	dw \1
 	dw \2
 	ENDM
-setwildbattle: MACRO
+MACRO setwildbattle
 	db $B6
 	dw \1
 	db \2
 	dw \3
 	ENDM
-dowildbattle: MACRO
+MACRO dowildbattle
 	db $B7
 	ENDM
-setvirtualaddress: MACRO
+MACRO setvirtualaddress
 	db $B8
 	GBAPTR \1
 	ENDM
-virtualgotoif: MACRO
+MACRO virtualgotoif
 	db $BB
 	db \1
 	GBAPTR \2
 	ENDM
-virtualmsgbox: MACRO
+MACRO virtualmsgbox
 	db $BD
 	GBAPTR \1
 	ENDM
-virtualloadpointer: MACRO
+MACRO virtualloadpointer
 	db $BE
 	GBAPTR \1
 	ENDM
-waitmoncry: MACRO
+MACRO waitmoncry
 	db $C5
 	ENDM
-setmoneventlegal: MACRO
+MACRO setmoneventlegal
 	db $CD
 	dw \1
 	ENDM
-checkmoneventlegal: MACRO
+MACRO checkmoneventlegal
 	db $CE
 	dw \1
 	ENDM
-setmonmetlocation: MACRO
+MACRO setmonmetlocation
 	db $D2
 	dw \1
 	db \2
