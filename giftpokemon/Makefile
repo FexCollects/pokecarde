@@ -4,9 +4,9 @@ all: 00-G000-EN.raw
 giftpokemon-%.tx: giftpokemon.asm
 	python3 ../scripts/regionalize.py $< $@ $* $*
 giftpokemon-%.o: giftpokemon-%.tx
-	../bin/rgbds/v0.8.0/rgbasm -o $@ $<
+	../bin/rgbds/v0.9.1/rgbasm -o $@ $<
 giftpokemon-%.gbc: giftpokemon-%.o
-	../bin/rgbds/v0.8.0/rgblink -o $@ $<
+	../bin/rgbds/v0.9.1/rgblink -o $@ $<
 giftpokemon1-%.bin: giftpokemon-%.gbc
 	python3 ../scripts/stripgbc.py $< $@
 giftpokemon-%.bin: giftpokemon1-%.bin
@@ -17,18 +17,18 @@ giftpokemon-%.mev: giftpokemon-%.bin
 prologue-%.tx: prologue.asm
 	python3 ../scripts/regionalize.py $< $@ $* $*
 prologue-%.o: prologue-%.tx
-	../bin/rgbds/v0.8.0/rgbasm -o $@ $<
+	../bin/rgbds/v0.9.1/rgbasm -o $@ $<
 prologue-%.gbc: prologue-%.o
-	../bin/rgbds/v0.8.0/rgblink -o $@ $<
+	../bin/rgbds/v0.9.1/rgblink -o $@ $<
 prologue-%.bin: prologue-%.gbc
 	python3 ../scripts/stripgbc.py $< $@
 
 00-G000-%.tx: 00-G000.asm giftpokemon-%.mev prologue-%.bin
 	python3 ../scripts/ereadertext.py $< $@ $*
 00-G000-%.o: 00-G000-%.tx
-	../bin/rgbds/v0.8.0/rgbasm -o $@ $<
+	../bin/rgbds/v0.9.1/rgbasm -o $@ $<
 00-G000-%.gbc: 00-G000-%.o
-	../bin/rgbds/v0.8.0/rgblink -o $@ $<
+	../bin/rgbds/v0.9.1/rgblink -o $@ $<
 00-G000-%.z80: 00-G000-%.gbc
 	python3 ../scripts/stripgbc.py $< $@
 00-G000-%.vpk: 00-G000-%.z80
