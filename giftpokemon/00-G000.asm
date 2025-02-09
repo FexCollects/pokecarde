@@ -142,12 +142,12 @@ INCLUDE "../common/wait_for_link.asm"
 	ld a, b
 	nop
 
-UNKNOWN_VALUE EQU $0078
+DEF UNKNOWN_VALUE EQU $0078
 INCLUDE "../common/wait_for_ready.asm"
 
 	DrawText RegionHandlePtr, DeliveryInProcess, 8, 4
 
-DATA_TRANSFER_LENGTH EQU 6144
+DEF DATA_TRANSFER_LENGTH EQU 6144
 INCLUDE "../common/transfer_data.asm"
 	ld hl, $5fff
 	LD_IND_HL Space_1

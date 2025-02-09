@@ -1,4 +1,4 @@
 INCLUDE "../macros.asm"
-CLASS EQUS   "pkmn_breeder_f"
-TRAINER EQUS "momoko"
+DEF CLASS EQUS   "pkmn_breeder_f"
+DEF TRAINER EQUS "momoko"
 INCLUDE "battletrainer-{REGION_NAME}.tx"

@@ -1,4 +1,4 @@
 INCLUDE "../macros.asm"
-CLASS EQUS   "pokefan_f"
-TRAINER EQUS "darlene"
+DEF CLASS EQUS   "pokefan_f"
+DEF TRAINER EQUS "darlene"
 INCLUDE "battletrainer-{REGION_NAME}.tx"

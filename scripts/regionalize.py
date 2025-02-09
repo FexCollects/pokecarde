@@ -28,6 +28,6 @@ with open(sys.argv[1], 'r') as f:
 			out.write(asm)
 			if "macros.asm" in asm:
 				# can’t do this until after REGION_EN, etc. are loaded
-				out.write("REGION EQU REGION_" + data_region + "\n")
+				out.write("DEF REGION EQU REGION_" + data_region + "\n")
 		# else this is foreign text, delete it
 f.closed

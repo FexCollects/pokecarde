@@ -20,7 +20,7 @@ with open(sys.argv[1], 'r') as f:
 		else:
 			out.write(asm)
 			if "macros.asm" in asm:
-				out.write("REGION EQU REGION_{0}\n".format(region))
-				out.write('REGION_NAME EQUS "{0}"\n'.format(region))
+				out.write("DEF REGION EQU REGION_{0}\n".format(region))
+				out.write('DEF REGION_NAME EQUS "{0}"\n'.format(region))
 
 f.closed

@@ -161,13 +161,13 @@ INCLUDE "../common/wait_for_link.asm"
 	and [hl]
 	ld [bc], a
 	
-UNKNOWN_VALUE EQU $02A6
+DEF UNKNOWN_VALUE EQU $02A6
 INCLUDE "../common/wait_for_ready.asm"
 
 	call Close_Doors
 	DrawText RegionHandlePtr, BattleEntryInProcess, 8, 4
 
-DATA_TRANSFER_LENGTH EQU 6144
+DEF DATA_TRANSFER_LENGTH EQU 6144
 INCLUDE "../common/transfer_data.asm"
 
 	ld hl, $5fff

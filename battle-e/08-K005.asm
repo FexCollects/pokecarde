@@ -1,3 +1,3 @@
 INCLUDE "../macros.asm"
-BERRY EQUS "eggant"
+DEF BERRY EQUS "eggant"
 INCLUDE "enigmaberry-{REGION_NAME}.tx"
