@@ -80,8 +80,10 @@ build/card-%.vpk: build/card-%.z80
 	../bin/nedc/v1.4/nevpk -c -i $< -o $@
 build/card-%-01.raw: build/card-%.vpk
 	../bin/nedc/v1.4/nedcmake -i $< -o $(subst -01.raw,,$@) -type 1 -region 1
+build/card-%.300.bmp: build/card-%-01.raw
+	../bin/nedc/v1.4.1/raw2bmp -i $< -o $(subst .bmp,,$@) -dpi 300
 
-.PRECIOUS: build/card-%-EN.tx build/card-%.o build/card-%.gbc build/card-%.z80 build/card-%.vpk build/card-%-01.raw
+.PRECIOUS: build/card-%-EN.tx build/card-%.o build/card-%.gbc build/card-%.z80 build/card-%.vpk build/card-%-01.raw build/card-%.300.bmp
 
 # Automatically create build dirs if missing
 BUILD_DIRS=build build/trainers build/berries
