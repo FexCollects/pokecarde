@@ -7,3 +7,5 @@
 *.pyc
 /.vs/pokecarde/v16
 /.vs
+eonticket/build
+battle-e/build
