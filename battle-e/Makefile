@@ -7,12 +7,12 @@ internal_series_nums = 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 
 internal_promo_nums = 01 02 03 04 05 06 07 08 
 internal_berry_nums = 01 02 03 04 05 06 07 08 09 10 11 12
 
-series_1_en: $(internal_series_nums:%=build/08-A0%-EN-01.raw)
-series_2_en: $(internal_series_nums:%=build/08-B0%-EN-01.raw)
-129_promos_en: build/129-B001-EN-01.raw build/129-B002-EN-01.raw
-n_promos_en: $(internal_promo_nums:%=build/08-N0%-EN-01.raw)
-p_promos_en: $(internal_promo_nums:%=build/08-P0%-EN-01.raw)
-berries: $(internal_berry_nums:%=build/08-K0%-EN-01.raw)
+series_1_en: $(internal_series_nums:%=build/card-08-A0%-EN-01.raw)
+series_2_en: $(internal_series_nums:%=build/card-08-B0%-EN-01.raw)
+129_promos_en: build/card-129-B001-EN-01.raw build/card-129-B002-EN-01.raw
+n_promos_en: $(internal_promo_nums:%=build/card-08-N0%-EN-01.raw)
+p_promos_en: $(internal_promo_nums:%=build/card-08-P0%-EN-01.raw)
+berries: $(internal_berry_nums:%=build/card-08-K0%-EN-01.raw)
 
 # Include the card id to trainer definition mapping
 include trainer_cards.mk 
@@ -67,35 +67,20 @@ build/trainers/%.mev: build/trainers/%.bin
 
 .PRECIOUS: build/trainers/%-EN.tx build/trainers/%.o build/trainers/%.gbc build/trainers/%.bin build/trainers/%.mev
 
-build/08-%-EN.tx: 08-%.asm
+build/card-%-EN.tx: card-%.asm
 	python3 ../scripts/ereadertext.py $< $@ EN
-build/08-%.o: build/08-%.tx build/prologue-EN.tx build/battletrainer-EN.tx build/enigmaberry-EN.tx
+build/card-%.o: build/card-%.tx build/prologue-EN.tx build/battletrainer-EN.tx build/enigmaberry-EN.tx
 	../bin/rgbds/v0.9.1/rgbasm -I build -M $@.d -o $@ $<
-build/08-%.gbc: build/08-%.o
+build/card-%.gbc: build/card-%.o
 	../bin/rgbds/v0.9.1/rgblink -o $@ $<
-build/08-%.z80: build/08-%.gbc
+build/card-%.z80: build/card-%.gbc
 	python3 ../scripts/stripgbc.py $< $@
-build/08-%.vpk: build/08-%.z80
+build/card-%.vpk: build/card-%.z80
 	../bin/nedc/v1.4/nevpk -c -i $< -o $@
-build/08-%-01.raw: build/08-%.vpk
+build/card-%-01.raw: build/card-%.vpk
 	../bin/nedc/v1.4/nedcmake -i $< -o $(subst -01.raw,,$@) -type 1 -region 1
 
-.PRECIOUS: build/08-%-EN.tx build/08-%.o build/08-%.gbc build/08-%.z80 build/08-%.vpk build/08-%-01.raw
-
-build/129-%-EN.tx: 129-%.asm
-	python3 ../scripts/ereadertext.py $< $@ EN
-build/129-%.o: build/129-%.tx build/prologue-EN.tx build/battletrainer-EN.tx build/enigmaberry-EN.tx
-	../bin/rgbds/v0.9.1/rgbasm -I build -M $@.d -o $@ $<
-build/129-%.gbc: build/129-%.o
-	../bin/rgbds/v0.9.1/rgblink -o $@ $<
-build/129-%.z80: build/129-%.gbc
-	python3 ../scripts/stripgbc.py $< $@
-build/129-%.vpk: build/129-%.z80
-	../bin/nedc/v1.4/nevpk -c -i $< -o $@
-build/129-%-01.raw: build/129-%.vpk
-	../bin/nedc/v1.4/nedcmake -i $< -o $(subst -01.raw,,$@) -type 1 -region 1
-
-.PRECIOUS: build/129-%-EN.tx build/129-%.o build/129-%.gbc build/129-%.z80 build/129-%.vpk build/129-%-01.raw
+.PRECIOUS: build/card-%-EN.tx build/card-%.o build/card-%.gbc build/card-%.z80 build/card-%.vpk build/card-%-01.raw
 
 # Automatically create build dirs if missing
 BUILD_DIRS=build build/trainers build/berries

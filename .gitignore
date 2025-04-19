@@ -1,11 +1,3 @@
-*.bin
-*.gbc
-*.o
-*.tx
-*.z80
-*.mev
 *.pyc
-/.vs/pokecarde/v16
-/.vs
 eonticket/build
 battle-e/build
