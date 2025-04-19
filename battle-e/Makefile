@@ -1,6 +1,6 @@
 all: verify 
 
-verify: series_1_en series_2_en 129_promos_en n_promos_en p_promos_en berries
+verify: series_1_en series_2_en 129_promos_en n_promos_en p_promos_en berries custom_series_1_en
 	md5sum --check battle-e.md5
 
 internal_series_nums = 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48
@@ -13,6 +13,7 @@ series_2_en: $(internal_series_nums:%=build/card-08-B0%-EN-01.raw)
 n_promos_en: $(internal_promo_nums:%=build/card-08-N0%-EN-01.raw)
 p_promos_en: $(internal_promo_nums:%=build/card-08-P0%-EN-01.raw)
 berries: $(internal_berry_nums:%=build/card-08-K0%-EN-01.raw)
+custom_series_1_en: build/card-99-A001-EN-01.raw
 
 # Include the card id to trainer definition mapping
 include trainer_cards.mk 

@@ -112,3 +112,6 @@ build/card-08-P007-EN.o: build/trainers/sagami-EN.mev
 build/card-08-P008-EN.o: build/trainers/mattegoDEMO-EN.mev
 build/card-129-B001-EN.o: build/trainers/nils-EN.mev
 build/card-129-B002-EN.o: build/trainers/astrid-EN.mev
+
+# Custom series trainers
+build/card-99-A001-EN.o: build/trainers/fex-EN.mev
