@@ -23,16 +23,15 @@ p_promo: $(P_PROMO_TRAINERS:%=trainers/%-EN.mev) $(P_PROMO_NUMS:%=08-%-EN.raw)
 n_promo: $(N_PROMO_TRAINERS:%=trainers/%-EN.mev) $(N_PROMO_NUMS:%=08-%-EN.raw)
 
 series_1_z80: $(SERIES_1_TRAINERS:%=trainers/%-EN.mev) $(SERIES_1_NUMS:%=08-%-EN.z80)
+series_2_z80: $(SERIES_2_TRAINERS:%=trainers/%-EN.mev) $(SERIES_2_NUMS:%=08-%-EN.z80)
 berries_z80: $(SERIES_1_BERRIES:%=berries/%-EN.mev) $(SERIES_1_BERRYNUMS:%=08-%-EN.z80)
 berries_2_z80: $(SERIES_2_BERRIES:%=berries/%-EN.mev) $(SERIES_2_BERRYNUMS:%=08-%-EN.z80)
 promo_en_z80: $(PROMO_EN_TRAINERS:%=trainers/%-EN.mev) $(PROMO_EN_NUMS:%=129-%-EN.z80)
 p_promo_z80: $(P_PROMO_TRAINERS:%=trainers/%-EN.mev) $(P_PROMO_NUMS:%=08-%-EN.z80)
 n_promo_z80: $(N_PROMO_TRAINERS:%=trainers/%-EN.mev) $(N_PROMO_NUMS:%=08-%-EN.z80)
 
-# series_2_z80 doesn't match right now
-verify: series_1_z80 berries_z80 berries_2_z80 promo_en_z80 p_promo_z80 n_promo_z80
-	md5sum --ignore-missing --check battle-e.md5
-
+verify: series_1_z80 series_2_z80 berries_z80 berries_2_z80 promo_en_z80 p_promo_z80 n_promo_z80
+	md5sum --check battle-e.md5
 
 trainers/%-EN.tx: trainers/%.asm
 	python3 ../scripts/regionalize.py $< $@ EN EN
