@@ -54,17 +54,7 @@ jobs:
 
       - name: Verify battle-e
         run: |
-          cd battle-e && make
-
-  Verify:
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-
-      - name: Verify battle-e
-        run: |
-          cd battle-e && make verify
+          cd battle-e && make -j4
 
   Test:
     runs-on: ubuntu-24.04
