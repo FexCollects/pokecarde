@@ -1,3 +1,6 @@
 *.pyc
-eonticket/build
 battle-e/build
+decoration/build
+eonticket/build
+giftpokemon/build
+ribbons/build

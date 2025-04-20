@@ -1,40 +1,55 @@
-all: 00-R000-EN.raw
+all: build/00-R000-EN-01.raw verify
 
+.PHONY: verify
+verify: build/00-R000-EN.z80 
+	md5sum --check ribbons.md5
 
-ribbon-%.tx: ribbon.asm
+build/prologue-%.tx: prologue.asm
 	python3 ../scripts/regionalize.py $< $@ $* $*
-ribbon-%.o: ribbon-%.tx
-	../bin/rgbds/v0.9.1/rgbasm -o $@ $<
-ribbon-%.gbc: ribbon-%.o
+build/prologue-%.o: build/prologue-%.tx
+	../bin/rgbds/v0.9.1/rgbasm -M $@.d -o $@ $<
+build/prologue-%.gbc: build/prologue-%.o
 	../bin/rgbds/v0.9.1/rgblink -o $@ $<
-ribbon-%.bin: ribbon-%.gbc
+build/prologue-%.bin: build/prologue-%.gbc
 	python3 ../scripts/stripgbc.py $< $@
-ribbon-%.mev: ribbon-%.bin
+
+.PRECIOUS: build/prologue-%.tx build/prologue-%.o build/prologue-%.gbc build/prologue-%.bin
+
+build/ribbon-%.tx: ribbon.asm
+	python3 ../scripts/regionalize.py $< $@ $* $*
+build/ribbon-%.o: build/ribbon-%.tx
+	../bin/rgbds/v0.9.1/rgbasm -M $@.d -o $@ $<
+build/ribbon-%.gbc: build/ribbon-%.o
+	../bin/rgbds/v0.9.1/rgblink -o $@ $<
+build/ribbon-%.bin: build/ribbon-%.gbc
+	python3 ../scripts/stripgbc.py $< $@
+build/ribbon-%.mev: build/ribbon-%.bin
 	python3 ../scripts/checksum.py $< $@
 
-prologue-%.tx: prologue.asm
-	python3 ../scripts/regionalize.py $< $@ $* $*
-prologue-%.o: prologue-%.tx
-	../bin/rgbds/v0.9.1/rgbasm -o $@ $<
-prologue-%.gbc: prologue-%.o
-	../bin/rgbds/v0.9.1/rgblink -o $@ $<
-prologue-%.bin: prologue-%.gbc
-	python3 ../scripts/stripgbc.py $< $@
+.PRECIOUS: build/ribbon-%.tx build/ribbon-%.o build/ribbon-%.gbc build/ribbon-%.bin build/ribbon-%.mev
 
-00-R000-%.tx: 00-R000.asm ribbon-%.mev prologue-%.bin
+build/00-R000-%.tx: 00-R000.asm build/ribbon-%.mev build/prologue-%.bin
 	python3 ../scripts/ereadertext.py $< $@ $*
-00-R000-%.o: 00-R000-%.tx
-	../bin/rgbds/v0.9.1/rgbasm -o $@ $<
-00-R000-%.gbc: 00-R000-%.o
+build/00-R000-%.o: build/00-R000-%.tx
+	../bin/rgbds/v0.9.1/rgbasm -M $@.d -I build -o $@ $<
+build/00-R000-%.gbc: build/00-R000-%.o
 	../bin/rgbds/v0.9.1/rgblink -o $@ $<
-00-R000-%.z80: 00-R000-%.gbc
+build/00-R000-%.z80: build/00-R000-%.gbc
 	python3 ../scripts/stripgbc.py $< $@
-00-R000-%.vpk: 00-R000-%.z80
+build/00-R000-%.vpk: build/00-R000-%.z80
 	../bin/nedc/v1.4/nevpk -c -i $< -o $@
-00-R000-%.raw: 00-R000-%.vpk
-	../bin/nedc/v1.4/nedcmake -i $< -o $@ -type 1 -region 1
-	mv $@-01.raw $@
+build/00-R000-%.raw: build/00-R000-%.vpk
+	../bin/nedc/v1.4/nedcmake -i $< -o $(subst -01.raw,,$@) -type 1 -region 1
 
+.PRECIOUS: build/00-R000-%.tx build/00-R000-%.o build/00-R000-%.gbc build/00-R000-%.z80 build/00-R000-%.vpk build/00-R000-%-01.raw
 
+# Automatically create build dirs if missing
+BUILD_DIRS=build
+$(info $(shell mkdir -p $(BUILD_DIRS)))
+
+.PHONY: clean
 clean:
-	rm -f *.tx *.o *.gbc *.z80 *.bin *.mev *.vpk *.raw
+	rm -rf build && mkdir -p $(BUILD_DIRS)
+
+# Automatically generated dep files
+-include build/*.d
