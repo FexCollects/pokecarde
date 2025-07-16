@@ -10,9 +10,9 @@ INCLUDE "../constants/ribbons.asm"
 	GBAPTR DataEnd
 
 DataStart:
-	db AWARD_RIBBON 
+	db COUNTRY_RIBBON 
 	db MARINE_RIBBON ; Marine Ribbon
-	db $01 ; description $01=2003 REGIONAL TOURNEY CHAMPION RIBBON
+	db $28 ; description
 	db $02 ; end of chunks
 
 DataEnd:

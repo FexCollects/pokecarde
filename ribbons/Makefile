@@ -1,4 +1,4 @@
-all: build/00-R000-EN-01.raw verify
+all: build/00-R000-EN-01.raw
 
 .PHONY: verify
 verify: build/00-R000-EN.z80 
@@ -51,5 +51,3 @@ $(info $(shell mkdir -p $(BUILD_DIRS)))
 clean:
 	rm -rf build && mkdir -p $(BUILD_DIRS)
 
-# Automatically generated dep files
--include build/*.d
