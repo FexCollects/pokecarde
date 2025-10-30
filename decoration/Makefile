@@ -39,7 +39,7 @@ build/08-O001-%.z80: build/08-O001-%.gbc
 build/08-O001-%.vpk: build/08-O001-%.z80
 	../bin/nedc/v1.4.1/nevpk -c -i $< -o $@
 build/08-O001-%-01.raw: build/08-O001-%.vpk
-	../bin/nedc/v1.4.1/nedcmake -i $< -o $(subst -01.raw,,$@) -type 1 -region 1
+	../bin/nedc/v1.4.1/nedcmake -i $< -o $(subst -01.raw,,$@) -type 1 -region 1 -save 1 -fill 1 -name "Decor Gift"
 
 .PRECIOUS: build/08-O001-%.tx build/08-O001-%.o build/08-O001-%.gbc build/08-O001-%.z80 build/08-O001-%.vpk build/08-O001-%-01.raw
 
