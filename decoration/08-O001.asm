@@ -1,37 +1,14 @@
 INCLUDE "../macros.asm"
-SECTION "decoration",ROM0[$100]
-jp Start
-db $00
+SECTION "code",ROM0
 
-;memory structs for deco card, don't touch
-RegionHandlePtr0104: db 0,0
-RegionHandlePtr0106:
-    REPT 14
-        db 0
-    ENDR
-RegionHandlePtr0114:
-    REPT 32
-        db 0
-    ENDR
-
-;Also don't touch
-Prologue:
-	INCBIN "prologue-{REGION_NAME}.bin"
-
-; The data chunks from decoration.asm
-DataPacket:
-    INCBIN "decoration-{REGION_NAME}.mev"
-
-; Pointers to the data chunks found in decoration.asm
-; Currently needs to be changed manually
 DataPointers:
-    db $70,$01 ; DataStartRegirock
-    db $EF,$01 ; DataStartRegice
-    db $6E,$02 ; DataStartRegisteel
+    dw DataStartRegirock
+    dw DataStartRegice
+    dw DataStartRegisteel
 
 ; Transfer data
 sub_02D2:
-	LD_IND_HL RegionHandlePtr283D
+    LD_IND_HL RegionHandlePtr283D
     push de
     ld hl,$bbbb
     LD_IND_HL RegionHandlePtr0104
@@ -180,7 +157,7 @@ sub_03AD:
     xor a
     ret
 label_26:
-	LD_HL_IND RegionHandlePtr0114
+    LD_HL_IND RegionHandlePtr0114
     ld a,l
     cp $22
     jr nz,sub_03AD
@@ -224,17 +201,17 @@ label_33:
 ;Has Japanese text bytes if you want. Just uncomment tehm and comment the english text
 
 TitleText:
-	db "DECORATION PRESENT\0"
+    db "DECORATION PRESENT\0"
     ;db $82,$E0,$82,$E6,$82,$A4,$82,$AA,$82,$A6,$83,$4F,$83,$62,$83,$59,$81,$40,$83,$76,$83,$8C,$83,$5B,$83,$93,$83,$67,$00
 
 FrontPageText: ; 1872
-	db "“Decorate your SECRET BASE!”\0"
+    db "“Decorate your SECRET BASE!”\0"
     ;db $81,$75,$82,$D0,$82,$DD,$82,$C2,$82,$AB,$82,$BF,$82,$F0,$82,$A9,$82,$B4,$82,$EB,$82,$A4,$81,$49,$81,$76,$83,$4C,$83,$83,$83,$93,$83,$79,$81,$5B,$83,$93,$82,$C9,$00
 FrontPageTextLine2:
-	db "Thank you for participating!\0"
+    db "Thank you for participating!\0"
     ;db $82,$B2,$82,$A8,$82,$A4,$82,$DA,$82,$A2,$82,$BD,$82,$BE,$82,$AB,$81,$40,$82,$A0,$82,$E8,$82,$AA,$82,$C6,$82,$A4,$82,$B2,$82,$B4,$82,$A2,$82,$DC,$82,$B5,$82,$BD,$00
 FrontPageTextLine3:
-	db "Please press the A Button.\0"
+    db "Please press the A Button.\0"
     ;db $82,$60,$83,$7B,$83,$5E,$83,$93,$82,$F0,$81,$40,$82,$A8,$82,$B5,$82,$C4,$82,$AD,$82,$BE,$82,$B3,$82,$A2,$00
 
 FirstPage:
@@ -293,7 +270,7 @@ FifthPageLine3:
 
 
 TransferFailed:
-	db "Link failed...\0"
+    db "Link failed...\0"
     ;db $82,$C4,$82,$F1,$82,$BB,$82,$A4,$82,$C9,$81,$40,$82,$B5,$82,$C1,$82,$CF,$82,$A2,$82,$B5,$82,$DC,$82,$B5,$82,$BD,$00
 
 PressA:
@@ -321,15 +298,15 @@ FinishB2:
 ;Second and third options may need spaces at the start
 ;My guess as to why is in Japanese the regi dolls have the same length and so moves ahead a certain amount instead of using pointers
 RegirockDollText:
-	db "REGIROCK DOLL \0"
+    db "REGIROCK DOLL \0"
     ;db $83,$8C,$83,$57,$83,$8D,$83,$62,$83,$4E,$83,$68,$81,$5B,$83,$8B,$00
 
 RegiceDollText:
-	db "  REGICE DOLL \0"
+    db "  REGICE DOLL \0"
     ;db $83,$8C,$83,$57,$83,$41,$83,$43,$83,$58,$83,$68,$81,$5B,$83,$8B,$00
 
 RegisteelDollText:
-	db "    REGISTEEL DOLL \0"
+    db "    REGISTEEL DOLL \0"
     ;db $83,$8C,$83,$57,$83,$58,$83,$60,$83,$8B,$83,$68,$81,$5B,$83,$8B,$00
 
 
@@ -337,70 +314,70 @@ RegisteelDollText:
 ;Graphics Section
 
 ArrowSprite:
-	INCBIN "sprites/arrow.4bpp"
+    INCBIN "sprites/arrow.4bpp"
 ArrowPalette:
-	INCBIN "sprites/arrow.gbapal"
+    INCBIN "sprites/arrow.gbapal"
 
 ;Sprites are in order of 1-3-2
 RegirockSprite:
-	INCBIN "sprites/regirock.4bpp"
+    INCBIN "sprites/regirock.4bpp"
 RegisteelSprite:
-	INCBIN "sprites/registeel.4bpp"
+    INCBIN "sprites/registeel.4bpp"
 RegiceSprite:
-	INCBIN "sprites/regice.4bpp"
+    INCBIN "sprites/regice.4bpp"
 
 ;All 3 regi dolls share the same palette
 RegiPalette:
-	INCBIN "sprites/regi.gbapal"
+    INCBIN "sprites/regi.gbapal"
 
 TextboxesTiles:
-	INCBIN "sprites/textboxes.4bpp"
+    INCBIN "sprites/textboxes.4bpp"
 TextboxesPalette:
-	INCBIN "sprites/textboxes.gbapal"
+    INCBIN "sprites/textboxes.gbapal"
 TextboxesTilemap:
-	INCBIN "sprites/textboxes.tilemap"
+    INCBIN "sprites/textboxes.tilemap"
 
 PokeballBgTiles:
-	INCBIN "sprites/pokeball_bg.4bpp"
+    INCBIN "sprites/pokeball_bg.4bpp"
 PokeballBgPalette:
-	INCBIN "sprites/pokeball_bg.gbapal"
+    INCBIN "sprites/pokeball_bg.gbapal"
 PokeballBgTilemap:
-	INCBIN "sprites/pokeball_bg.tilemap"
+    INCBIN "sprites/pokeball_bg.tilemap"
 
 ;This tilemap is just for the first large textbox
 TextboxMainTilemap:
-	INCBIN "sprites/textbox_main.tilemap"
+    INCBIN "sprites/textbox_main.tilemap"
 
 
 ;Pointers to graphics
 
 ArrowSpriteData:
-	dw ArrowSprite
-	dw ArrowPalette
-	db $01,$01,$01,$01,$00,$00,$01  ;byte 1&2=width and height of sprite in tiles,3=No. of frames?  4=Starting Frame? 5&6=Unk 7=Unk
+    dw ArrowSprite
+    dw ArrowPalette
+    db $01,$01,$01,$01,$00,$00,$01  ;byte 1&2=width and height of sprite in tiles,3=No. of frames?  4=Starting Frame? 5&6=Unk 7=Unk
 
 RegirockSpriteData:
-	dw RegirockSprite
-	dw RegiPalette
-	db $04,$04,$03,$01,$00,$00,$03  ;first 2 bytes are 4 because the sprites are 32x32px, 3rd byte is 3 because of 3 frames (I think)
+    dw RegirockSprite
+    dw RegiPalette
+    db $04,$04,$03,$01,$00,$00,$03  ;first 2 bytes are 4 because the sprites are 32x32px, 3rd byte is 3 because of 3 frames (I think)
 
 TextboxesData:
-	dw TextboxesTiles
-	dw TextboxesPalette
-	dw TextboxesTilemap
-	db $0A,$00,$01,$00
+    dw TextboxesTiles
+    dw TextboxesPalette
+    dw TextboxesTilemap
+    db $0A,$00,$01,$00
 
 PokeballBgData:
-	dw PokeballBgTiles
-	dw PokeballBgPalette
-	dw PokeballBgTilemap
-	db $0A,$00,$01,$00
+    dw PokeballBgTiles
+    dw PokeballBgPalette
+    dw PokeballBgTilemap
+    db $0A,$00,$01,$00
 
 TextboxMainData:
-	dw TextboxesTiles
-	dw TextboxesPalette
-	dw TextboxMainTilemap
-	db $0A,$00,$01,$00
+    dw TextboxesTiles
+    dw TextboxesPalette
+    dw TextboxMainTilemap
+    db $0A,$00,$01,$00
 
 ;Not exactly sure what this is but I think it's setting up layer stuff
 BGSetUpStuffIThink:
@@ -416,53 +393,53 @@ stuff_22AC:
 TextPaletteBefore:
     db $00
 TextPalette:
-	INCBIN "sprites/text.gbapal"
+    INCBIN "sprites/text.gbapal"
 
 
 
 ;Starting function, sets everything up
-Start:
-	SetBackgroundMode 0
+Start::
+    SetBackgroundMode 0
 
-	ld e, $10
-	ld a, $32
-	API $01a
+    ld e, $10
+    ld a, $32
+    API $01a
 
-	LoadCustomBackground TextboxesData, 1
-	LoadCustomBackground PokeballBgData, 0
-	SetBackgroundAutoScroll $ff80, $0080
-	LoadCustomBackground TextboxMainData, 3
-	SetBackgroundPalette 6, $00f0, TextPalette
-	CreateRegion RegionHandlePtr2847, 26, 3, 2, 0, 2, 15
-	CreateRegion RegionHandlePtr2844, 13, 7, 3, 5, 2, 15
-	CreateRegion RegionHandlePtr2841, 30, 6, 0, 14, 2, 15
+    LoadCustomBackground TextboxesData, 1
+    LoadCustomBackground PokeballBgData, 0
+    SetBackgroundAutoScroll $ff80, $0080
+    LoadCustomBackground TextboxMainData, 3
+    SetBackgroundPalette 6, $00f0, TextPalette
+    CreateRegion RegionHandlePtr2847, 26, 3, 2, 0, 2, 15
+    CreateRegion RegionHandlePtr2844, 13, 7, 3, 5, 2, 15
+    CreateRegion RegionHandlePtr2841, 30, 6, 0, 14, 2, 15
 
-	LD_A_IND RegionHandlePtr2847
+    LD_A_IND RegionHandlePtr2847
     ld hl,$0002
     or h
     ld h,a
-	SetTextSize
+    SetTextSize
 
-	LD_A_IND RegionHandlePtr2844
+    LD_A_IND RegionHandlePtr2844
     ld hl,$0002
     or h
     ld h,a
-	SetTextSize
+    SetTextSize
 
-	LD_A_IND RegionHandlePtr2841
+    LD_A_IND RegionHandlePtr2841
     ld hl,$0001
     or h
     ld h,a
-	SetTextSize
+    SetTextSize
 
-	SetTextColor RegionHandlePtr2847, 1, 0
-	SetTextColor RegionHandlePtr2844, 1, 0
-	SetTextColor RegionHandlePtr2841, 1, 0
+    SetTextColor RegionHandlePtr2847, 1, 0
+    SetTextColor RegionHandlePtr2844, 1, 0
+    SetTextColor RegionHandlePtr2841, 1, 0
     SetRegionColor RegionHandlePtr2841, 0   ;This isn't in the original, the japanese ereader sets the text background to be transparent automatically
 
-	call sub_270D ; WriteText
-	call sub_273C ; RegiSelectText
-	ld bc,FirstPageLine3
+    call sub_270D ; WriteText
+    call sub_273C ; RegiSelectText
+    ld bc,FirstPageLine3
     ld de,FirstPageLine2
     ld hl,FirstPage
     call sub_2796
@@ -505,19 +482,19 @@ sub_23C2:
     ld e, $02
     jr label_3
 label_2:
-	dec e
+    dec e
 label_3:
-	push de
-	API $08d
-	nop
-	nop
-	pop de
-	push de
-	ld a, e
-	call sub_2463
-	LD_HL_IND RegionHandlePtr2845
-	API $034
-	pop de
+    push de
+    API $08d
+    nop
+    nop
+    pop de
+    push de
+    ld a, e
+    call sub_2463
+    LD_HL_IND RegionHandlePtr2845
+    API $034
+    pop de
 label_1:
     LD_HL_IND $00C2
     ld a,l
@@ -540,8 +517,8 @@ label_6:
     ld a,e
     call sub_2463
     LD_HL_IND RegionHandlePtr2845
-	API $035
-	pop de
+    API $035
+    pop de
 label_4:
     LD_HL_IND $00C2
     ld a,l
@@ -629,7 +606,7 @@ sub_247C:
     ret
 
 sub_248C:    
-	ld l,$41
+    ld l,$41
     push hl
     ld bc,$0000
     ld de,$0000
@@ -1126,20 +1103,3 @@ label_2833:
     ld b,h
     pop hl
     ret
-
-
-
-;Bytes that come after the program in memory for storing data
-
-RegionHandlePtr283B: db $FF,0  ; marks EOF
-RegionHandlePtr283D: db 0,0
-RegionHandlePtr283F: db 0
-RegionHandlePtr2840: db 0
-RegionHandlePtr2841: db 0
-RegionHandlePtr2842: db 0,0
-RegionHandlePtr2844: db 0
-RegionHandlePtr2845: db 0,0
-RegionHandlePtr2847: db 0
-RegionHandlePtr2848: db 0
-RegionHandlePtr2849: db 0
-RegionHandlePtr284A: db 0
