@@ -15,9 +15,6 @@ with open(sys.argv[1], 'rb') as f:
 	data = f.read()
 f.closed
 
-base_address = struct.unpack('<I', data[1:5])[0]
-
-
 def find_all(a_str, sub):
     start = 0
     while True:
@@ -27,6 +24,8 @@ def find_all(a_str, sub):
         start += len(sub) # use start += 1 to find overlapping matches
 
 pos=list(find_all(data,b'\x01\x00\x00\x00\x02\x02\x00\x02\x00\x00\x00\x04\x00\x80\x01\x00\x00\x10'))
+
+base_address = struct.unpack('<I', data[pos[0]+1:pos[0]+5])[0]
 
 for i in pos:
 	i=i+17

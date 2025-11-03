@@ -41,7 +41,7 @@ build/00-C000-%.vpk: build/00-C000-%.z80
 
 # Sub maps 00-C000-LANG-01.raw -> 00-C000-LANG so the tool output matches
 build/00-C000-%-01.raw: build/00-C000-%.vpk
-	../bin/nedc/v1.4/nedcmake -i $< -o $(subst -01.raw,,$@) -type 1 -region 1
+	../bin/nedc/v1.4/nedcmake -i $< -o $(subst -01.raw,,$@) -type 1 -region 1 -save 1 -fill 1 -name "Eon Ticket"
 
 .PRECIOUS: build/00-C000-%.tx build/00-C000-%.o build/00-C000-%.gbc build/00-C000-%.z80 build/00-C000-%.vpk build/00-C000-%-01.raw
 

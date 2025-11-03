@@ -1,5 +1,5 @@
 INCLUDE "../macros.asm"
-SECTION "prologue", ROM0[$100]
+SECTION "prologue", ROM0
 
 	db "GameFreak inc."
 	db 0,0,0,0,0,0
@@ -12,5 +12,3 @@ SECTION "prologue", ROM0[$100]
 	db 0
 	db "GameFreak inc."
 	db 0,0
-
-	EOF
