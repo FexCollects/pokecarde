@@ -1,0 +1,11 @@
+ROM0
+  ORG $100
+  "common/app_init"
+  "app/battle-e/prologue.a"
+  "app/battle-e/black_belt.pal"
+  "app/battle-e/prologue.b"
+  "common/prologue"
+  "payload/battle/tsutomu"
+  "app/battle-e/black_belt.gfx"
+  "app/battle-e/main"
+  "common/eof"
