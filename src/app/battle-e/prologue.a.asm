@@ -1,16 +1,15 @@
 SECTION "app/battle-e/prologue.a", ROM0
 
-MACRO RGB
-	dw (\1) | ((\2) << 5) | ((\3) << 10)
-	ENDM
-
 BattleTrainerBackdrop:: ; 104
-	INCBIN "sprites/battletrainer.4bpp"
+	INCBIN "build/gfx/battle-e/background1.4bpp"
 DoorSprite:: ; 604
 	INCBIN "build/gfx/battle-e/door.4bpp"
 
 BackdropPalettes:: ; A04
-	INCLUDE "sprites/battletrainer1.pal"
-	INCLUDE "sprites/battletrainer2.pal"
-	INCLUDE "sprites/battletrainer3.pal"
-	INCLUDE "sprites/battletrainer4.pal"
+	INCBIN "build/gfx/battle-e/background1.gbapal"
+	INCBIN "build/gfx/battle-e/background2.gbapal"
+	INCBIN "build/gfx/battle-e/background3.gbapal"
+        ; The 4th palette is only 4 colors for some reason??
+        ; This doesn't actually make sense and most likely the
+        ; remaining bytes are hidden somewhere. Needs more research
+	INCLUDE "gfx/battle-e/background4.pal"

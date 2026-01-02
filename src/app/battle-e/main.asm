@@ -92,12 +92,14 @@ Start:: ; 1984
 	pop bc
 	LoadCustomBackground BackdropSpriteData, 1
 
+        ; Is this  LoadCustomBackground BackdropSpriteData, 2 ?
 	API_02C $1e06, $000e, $01
-
 	pop bc
+
+        ; Is this  LoadCustomBackground BackdropSpriteData, 3 ?
 	API_02C $0808, $0B04, $00
-
 	pop bc
+
 	ld a, $4
 	API $0AE
 

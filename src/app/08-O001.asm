@@ -314,39 +314,39 @@ RegisteelDollText:
 ;Graphics Section
 
 ArrowSprite:
-    INCBIN "sprites/decoration/arrow.4bpp"
+    INCBIN "build/gfx/decoration/arrow.4bpp"
 ArrowPalette:
-    INCBIN "sprites/decoration/arrow.gbapal"
+    INCBIN "build/gfx/decoration/arrow.gbapal"
 
 ;Sprites are in order of 1-3-2
 RegirockSprite:
-    INCBIN "sprites/decoration/regirock.4bpp"
+    INCBIN "build/gfx/decoration/regirock.4bpp"
 RegisteelSprite:
-    INCBIN "sprites/decoration/registeel.4bpp"
+    INCBIN "build/gfx/decoration/registeel.4bpp"
 RegiceSprite:
-    INCBIN "sprites/decoration/regice.4bpp"
+    INCBIN "build/gfx/decoration/regice.4bpp"
 
 ;All 3 regi dolls share the same palette
 RegiPalette:
-    INCBIN "sprites/decoration/regi.gbapal"
+    INCBIN "build/gfx/decoration/registeel.gbapal"
 
 TextboxesTiles:
-    INCBIN "sprites/decoration/textboxes.4bpp"
+    INCBIN "build/gfx/decoration/textboxes.4bpp"
 TextboxesPalette:
-    INCBIN "sprites/decoration/textboxes.gbapal"
+    INCBIN "build/gfx/decoration/textboxes.gbapal"
 TextboxesTilemap:
-    INCBIN "sprites/decoration/textboxes.tilemap"
+    INCBIN "gfx/decoration/textboxes.tilemap"
 
 PokeballBgTiles:
-    INCBIN "sprites/decoration/pokeball_bg.4bpp"
+    INCBIN "build/gfx/decoration/pokeball_bg.4bpp" 
 PokeballBgPalette:
-    INCBIN "sprites/decoration/pokeball_bg.gbapal"
+    INCBIN "build/gfx/decoration/pokeball_bg.gbapal"
 PokeballBgTilemap:
-    INCBIN "sprites/decoration/pokeball_bg.tilemap"
+    INCBIN "gfx/decoration/pokeball_bg.tilemap"
 
 ;This tilemap is just for the first large textbox
 TextboxMainTilemap:
-    INCBIN "sprites/decoration/textbox_main.tilemap"
+    INCBIN "gfx/decoration/textbox_main.tilemap"
 
 
 ;Pointers to graphics
@@ -393,7 +393,7 @@ stuff_22AC:
 TextPaletteBefore:
     db $00
 TextPalette:
-    INCBIN "sprites/decoration/text.gbapal"
+    INCBIN "gfx/decoration/text.gbapal"
 
 
 
