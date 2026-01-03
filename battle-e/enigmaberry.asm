@@ -65,10 +65,9 @@ AfterTransfer:
 	ret
 
 Start:
-	API_121
+	SuppressPauseScreen
 	LoadCustomBackground BackgroundSpriteData, 0
-	API_02C $1E06, $000E, 0
-	pop bc
+        TileFillBackground 0, 0, 0, 14, 30, 6, 0
 
 	CreateCustomSprite SpriteHandlePtr, $80, BerrySpriteData
 	SetSpritePos SpriteHandlePtr, 376, 56
@@ -77,7 +76,7 @@ Start:
 	ld h, a
 	ld l, $00
 	SetTextSize
-	API_09B RegionHandlePtr, $0102
+        IncreaseTextKerning RegionHandlePtr, 01, 02
 	SetTextColor RegionHandlePtr, 2, 0
 	SetRegionColor RegionHandlePtr, 0
 	SetBackgroundPalette $10, $0040, UnknownPalette

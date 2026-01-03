@@ -79,26 +79,21 @@ Close_Doors: ; 1965
 	ret
 
 Start:: ; 1984
-	API_121
+	SuppressPauseScreen
+
+        ; Load the background on layer 0
 	LoadCustomBackground BackdropSpriteData, 0
+        ; Clear garbage in the text area
+        TileFillBackground 0, 0, 0, 14, 30, 6, 0
 
-	ld hl, $0000
-	push hl
-	ld bc, $1e06
-	ld de, $000e
-	xor a
-	API $02C
-
-	pop bc
+        ; Load the background on layer 1
+        ; Pretty sure this is to allow the doors to be covered by their frame
 	LoadCustomBackground BackdropSpriteData, 1
+        ; Clear the garbage in the text area
+        TileFillBackground 0, 0, 0, 14, 30, 6, 1
 
-        ; Is this  LoadCustomBackground BackdropSpriteData, 2 ?
-	API_02C $1e06, $000e, $01
-	pop bc
-
-        ; Is this  LoadCustomBackground BackdropSpriteData, 3 ?
-	API_02C $0808, $0B04, $00
-	pop bc
+        ; Clear the door area on layer 0
+        TileFillBackground 0, 0, 11, 4, 8, 8, 0
 
 	ld a, $4
 	API $0AE
@@ -116,7 +111,7 @@ Start:: ; 1984
 	ld h, a
 	ld l, $00
 	SetTextSize
-	API_09B RegionHandlePtr, $0102
+        IncreaseTextKerning RegionHandlePtr, 01, 02
 	SetTextColor RegionHandlePtr, 3, 0
 
 	FadeIn 16

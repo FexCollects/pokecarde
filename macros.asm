@@ -88,10 +88,19 @@ MACRO wait
 	ENDM
 
 MACRO API
-	db ($C7 + (\1 & $100) >> 5), (\1 & $FF) ; $C7 for API $0xx, $CF for API $1xx
+        ; If the api number is less than $100 use rst 0 otherwise use rst 8
+        ; Doing this instead of having an API_0 and API_8 simplifies the call
+        ; stack at the cost of slightly renaming api numbers from publicaly
+        ; available documentation
+	IF \1 < $100
+        rst 0
+	ELSE
+        rst 8
+	ENDC
+
+        ; remove the upper bit which was only used to pick the rst
+	db (\1 & $FF)
 	ENDM
-
-
 
 MACRO dd
 	dw (\1) & $FFFF
@@ -180,17 +189,29 @@ MACRO SetBackgroundMode
 	xor a
 	API $019
 	ENDM
-MACRO API_02C
-	ld hl, $0000
+; TileFillBackground paletteIdx tile x y width height layer
+MACRO TileFillBackground
+;BackgroundTileFill:
+;  Fills a portion of the screen with a tile in a specified background layer 
+;  The api call doesn't pop the stack so you have to manually pop it
+;  Params:
+;    high nibble of the top of the stack: palette index
+;    low byte (+second highest nibble?) of the top of the stack: tile index
+;    b: fill width
+;    c: fill height
+;    d: fill x
+;    e: fill y
+	ld hl, (\1 << 8 + \2)
 	push hl
-	ld bc, \1
-	ld de, \2
-	IF \3 == 0
+	ld bc, (\5 << 8 + \6)
+	ld de, (\3 << 8 + \4)
+	IF \7 == 0
 		xor a ; save a byte
 	ELSE
-		ld a, \3
+		ld a, \7
 	ENDC
 	API $02C
+        pop bc
 	ENDM
 MACRO LoadCustomBackground
 	ld de, \1
@@ -277,8 +298,15 @@ MACRO DrawText
 MACRO SetTextSize
 	API $09A
 	ENDM
-MACRO API_09B
-	ld de, \2
+; IncreaseTextKerning ($9B rst 0)
+; Increases the number of pixels between each letter in the region.
+;  initial kerning is 1,1
+; Params
+; d: x kerning
+; e: y kerning
+; a: region handle
+MACRO IncreaseTextKerning
+	ld de, (\2 << 8 + \3)
 	LD_A_IND \1
 	API $09B
 	ENDM
@@ -311,8 +339,13 @@ MACRO IS_SOUND_PLAYING
 	ld a, \1
 	EXIT
 	ENDM
-MACRO API_121
+MACRO SuppressPauseScreen
 	ld de, $0000
 	ld hl, $0000
+	API $121
+	ENDM
+MACRO UnsuppressPauseScreen
+	ld de, $0000
+	ld hl, $0008
 	API $121
 	ENDM

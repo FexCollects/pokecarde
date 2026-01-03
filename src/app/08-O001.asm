@@ -618,7 +618,7 @@ sub_248C:
 sub_249C:
     LD_IND_A RegionHandlePtr2840
     API_106 $0040,$0081
-    API_121
+    SuppressPauseScreen
     ld bc,SecondPageLine3
     ld de,SecondPageLine2
     ld hl,SecondPage
@@ -634,9 +634,7 @@ sub_249C:
     ld de,PressA2
     ld hl,TransferCancelled
     call sub_2796
-    ld de,$0000
-    ld hl,$0008
-    API $121
+    UnsuppressPauseScreen
     xor a
     ret
 
@@ -676,9 +674,7 @@ label_11:
     ld de,PressA
     ld hl,TransferFailed
     call sub_2796
-    ld de,$0000
-    ld hl,$0008
-    API $121
+    UnsuppressPauseScreen
     xor a
     ret
 
@@ -694,9 +690,7 @@ label_12:
     ld de,PressA
     ld hl,TransferFailed
     call sub_2796
-    ld de,$0000
-    ld hl,$0008
-    API $121
+    UnsuppressPauseScreen
     xor a
     ret
 
@@ -739,9 +733,7 @@ label_13:
     ld de,PressA
     ld hl,TransferFailed
     call sub_2796
-    ld de,$0000
-    ld hl,$0008
-    API $121
+    UnsuppressPauseScreen
     xor a
     ret
 
@@ -770,9 +762,7 @@ label_14:
     ld de,FifthPageLine2
     ld hl,RegionHandlePtr284A
     call sub_2796
-    ld de,$0000
-    ld hl,$0008
-    API $121
+    UnsuppressPauseScreen
     API $08D
     db $FA,$00,$3E,$01 ; idk what instructions these bytes are, if you know tell me
     ret

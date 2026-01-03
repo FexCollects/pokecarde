@@ -107,7 +107,7 @@ TransferData:
 	jr .asm_1aa1
 
 Start: ; 1ae2
-	API_121
+	SuppressPauseScreen
 
 	CreateCustomSprite SpriteHandlePtr, $80, SpriteData
 	SetSpritePos SpriteHandlePtr, 120, 64
@@ -119,7 +119,7 @@ Start: ; 1ae2
 	ld l, $00
 	SetTextSize
 
-	API_09B RegionHandlePtr, $0102
+        IncreaseTextKerning RegionHandlePtr, 01, 02
 	SetTextColor RegionHandlePtr, 2, 0
 	SetRegionColor RegionHandlePtr, 0
 	SetBackgroundPalette 16, $0040, TicketPalette

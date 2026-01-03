@@ -109,25 +109,15 @@ Close_Doors: ; 1965
 	ret
 
 Start: ; 1984
-	API_121
+	SuppressPauseScreen
 	LoadCustomBackground BackdropSpriteData, 0
+        TileFillBackground 0, 0, 0, 14, 30, 6, 0
 
-	ld hl, $0000
-	push hl
-	ld bc, $1e06
-	ld de, $000e
-	xor a
-	API $02C
-
-	pop bc
 	LoadCustomBackground BackdropSpriteData, 1
+        TileFillBackground 0, 0, 0, 14, 30, 6, 1
 
-	API_02C $1e06, $000e, $01
+        TileFillBackground 0, 0, 11, 4, 8, 8, 0
 
-	pop bc
-	API_02C $0808, $0B04, $00
-
-	pop bc
 	ld a, $4
 	API $0AE
 
@@ -144,7 +134,7 @@ Start: ; 1984
 	ld h, a
 	ld l, $00
 	SetTextSize
-	API_09B RegionHandlePtr, $0102
+        IncreaseTextKerning RegionHandlePtr, 01, 02
 	SetTextColor RegionHandlePtr, 3, 0
 
 	FadeIn 16

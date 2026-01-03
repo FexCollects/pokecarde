@@ -618,7 +618,7 @@ sub_248C:
 sub_249C:
     LD_IND_A RegionHandlePtr2840
     API_106 $0040,$0081
-    API_121
+    SuppressPauseScreen
     ld bc,SecondPageLine3
     ld de,SecondPageLine2
     ld hl,SecondPage
