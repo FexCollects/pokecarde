@@ -69,6 +69,4 @@ MACRO PV
 	ENDM
 DEF Friendship EQUS "db"
 
-MACRO End_Trainer
-	db 0,0,0,0
-	ENDM
+DEF End_Trainer EQUS "dl"

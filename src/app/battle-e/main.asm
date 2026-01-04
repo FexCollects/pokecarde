@@ -155,11 +155,11 @@ INCLUDE "../common/transfer_data.asm"
 INCLUDE "../common/wrap_up.asm"
 INCLUDE "../common/word_shift_right.asm"
 
-SomeVar1: ds 1               ; 1B9F
-SomeVar2: ds 2              ; 1BA0
-RegionHandlePtr: ds 1       ; 1BA2
-LeftDoorSpriteHandle: ds 2  ; 1BA3
-RightDoorSpriteHandle: ds 2 ; 1BA5
-TrainerSpriteHandle: ds 2   ; 1BA7
+SomeVar1: db                ; 1B9F
+SomeVar2: dw                ; 1BA0
+RegionHandlePtr: db         ; 1BA2
+LeftDoorSpriteHandle: dw    ; 1BA3
+RightDoorSpriteHandle: dw   ; 1BA5
+TrainerSpriteHandle: dw     ; 1BA7
 
-    db $0A
+EOF_OFFSET $0A

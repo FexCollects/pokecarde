@@ -102,6 +102,7 @@ MACRO API
 	db (\1 & $FF)
 	ENDM
 
+; use dl instead!!
 MACRO dd
 	dw (\1) & $FFFF
 	dw (\1) >> 16
@@ -349,3 +350,4 @@ MACRO UnsuppressPauseScreen
 	ld hl, $0008
 	API $121
 	ENDM
+DEF EOF_OFFSET EQUS "db"

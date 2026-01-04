@@ -73,9 +73,10 @@ def crc_one_payload(payload_start, payload_end):
         if chunk_type == 0x02: # END_OF_CHUNKS
             break
         elif chunk_type == 0x07: # CUSTOM_BERRY
-            raise NotImplementedError
-            start_address = d_word(data, i + 1) - base_address
-            bytewises.append([start_address + 0x52C, start_address, start_address + 0x52C])
+            berry_address = d_word(data, i + 1)
+            offset_size = berry_address - base_address
+            data_idx = payload_start + offset_size
+            bytewises.append([data_idx + 0x52C, data_idx, data_idx + 0x52C])
         elif chunk_type == 0x0D: # BATTLE_TRAINER
             trainer_address = d_word(data, i + 1)
             offset_size = trainer_address - base_address
