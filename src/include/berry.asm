@@ -3,7 +3,7 @@ INCLUDE "../region.asm"
 MACRO Enigma_Berry
 	db $01
 	dl $02000000
-	db CREGION,0,CREGION,0,0,0,$04,0,$80,$01,0,0
+	db REGION,0,REGION,0,0,0,$04,0,$80,$01,0,0
 	db $07
 	dl $02000018
 	db $02,$00

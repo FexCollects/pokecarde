@@ -12,7 +12,7 @@ build/%.gbapal: %.png
 # Asm -> Object Rules
 # TODO: notdir below is wrong
 build/$(REGION)/%.o: %.asm
-	../bin/rgbds/v0.9.1/rgbasm -M build/deps/$(notdir $@).d -DCREGION=REGION_$(REGION) -o $@ $<
+	../bin/rgbds/v0.9.1/rgbasm -M build/deps/$(notdir $@).d -DREGION=REGION_$(REGION) -o $@ $<
 
 # ROM -> Card .raw Rules
 build/$(REGION)/%.z80: build/$(REGION)/%.gbc

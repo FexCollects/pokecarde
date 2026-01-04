@@ -12,7 +12,7 @@ DEF MOSSDEEP EQU 0
 MACRO Battle_Trainer
 	db $01
 	dl $02000000
-	db CREGION,0,CREGION,0,0,0,$04,0,$80,$01,0,0
+	db REGION,0,REGION,0,0,0,$04,0,$80,$01,0,0
 	db $0D
 	dl $02000018
 	db $02,$00
@@ -22,32 +22,32 @@ DEF BT_Level EQUS "db"
 DEF Class EQUS "db"
 DEF BT_Floor EQUS "dw" ; the byte after it is 00, but apparently means something…
 MACRO Intro_EN
-	IF CREGION == REGION_EN
+	IF REGION == REGION_EN
 	dw \1, \2, \3, \4, \5, \6
 	ENDC
 	ENDM
 MACRO Win_EN
-	IF CREGION == REGION_EN
+	IF REGION == REGION_EN
 	dw \1, \2, \3, \4, \5, \6
 	ENDC
 	ENDM
 MACRO Loss_EN
-	IF CREGION == REGION_EN
+	IF REGION == REGION_EN
 	dw \1, \2, \3, \4, \5, \6
 	ENDC
 	ENDM
 MACRO Intro_JP
-	IF CREGION == REGION_JP
+	IF REGION == REGION_JP
 	dw \1, \2, \3, \4, \5, \6
 	ENDC
 	ENDM
 MACRO Win_JP
-	IF CREGION == REGION_JP
+	IF REGION == REGION_JP
 	dw \1, \2, \3, \4, \5, \6
 	ENDC
 	ENDM
 MACRO Loss_JP
-	IF CREGION == REGION_JP
+	IF REGION == REGION_JP
 	dw \1, \2, \3, \4, \5, \6
 	ENDC
 	ENDM

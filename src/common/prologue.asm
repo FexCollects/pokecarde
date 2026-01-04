@@ -8,7 +8,7 @@ Prologue::
     ; Text "e reader" ; no string terminator
     db 0,0,0,0,0,0,0,$01,$55
     db 0,0,0,0
-    db CREGION
+    db REGION
     db 0
     db "GameFreak inc."
     db 0,0
