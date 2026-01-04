@@ -1,5 +1,8 @@
 SECTION "payload/battle/hillary", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class LADY
 	BT_Floor MOSSDEEP
-	Text_EN "HILLARY"8
-	Text_JP "ヒサエ"8
+	db "HILLARY@"
+	; Text_JP "ヒサエ"8
 	OT_ID 00000, 00000
 
 	Intro_EN OH_,IS,MY,POKEMON,OVERWHELMING,_QU
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 0,15,15,31,31,15, XATU_SYNCHRONIZE
 	PV $000000D7 ; ♂ Modest
-	Text_EN "XATU"11
-	Text_JP "ネイティオ"11
+	db "XATU@      "
+	; Text_JP "ネイティオ"11
 	Friendship 255
 
 	Pokemon WOBBUFFET
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,31,15,15,31, WOBBUFFET_SHADOW_TAG
 	PV $00000012 ; ♀ Bashful
-	Text_EN "WOBBUFFET"11
-	Text_JP "ソーナンス"11
+	db "WOBBUFFET@ "
+	; Text_JP "ソーナンス"11
 	Friendship 255
 
 	Pokemon HOUNDOOM
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, HOUNDOOM_FLASH_FIRE
 	PV $000000D7 ; ♂ Modest
-	Text_EN "HOUNDOOM"11
-	Text_JP "ヘルガー"11
+	db "HOUNDOOM@  "
+	; Text_JP "ヘルガー"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

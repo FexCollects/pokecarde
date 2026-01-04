@@ -1,5 +1,8 @@
 SECTION "payload/battle/sandia", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 100
 	Class EXPERT_F
 	BT_Floor 12
-	Text_EN "SANDIA"8
-	Text_JP "オスズ"8
+	db "SANDIA@ "
+	; Text_JP "オスズ"8
 	OT_ID 00000, 00000
 
 	Intro_EN HERE_I_COME,_EX,MY,GUARD,IS,INVINCIBLE
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 20,20,31,20,20,31, CLAYDOL_LEVITATE
 	PV $0000000F ; ⚲ Modest
-	Text_EN "CLAYDOL"11
-	Text_JP "ネンドール"11
+	db "CLAYDOL@   "
+	; Text_JP "ネンドール"11
 	Friendship 255
 
 	Pokemon METAGROSS
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 20,31,20,20,20,31, METAGROSS_CLEAR_BODY
 	PV $0000001C ; ⚲ Adamant
-	Text_EN "METAGROSS"11
-	Text_JP "メタグロス"11
+	db "METAGROSS@ "
+	; Text_JP "メタグロス"11
 	Friendship 255
 
 	Pokemon REGICE
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 20,20,31,31,20,20, REGICE_CLEAR_BODY
 	PV $0000001E ; ⚲ Bold
-	Text_EN "REGICE"11
-	Text_JP "レジアイス"11
+	db "REGICE@    "
+	; Text_JP "レジアイス"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

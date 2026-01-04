@@ -1,5 +1,8 @@
 SECTION "payload/battle/norton", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	Class GENTLEMAN
 	BT_Floor 0
-	Text_EN "NORBERT"8
-	Text_JP "ノートン"8
+	db "NORBERT@"
+	; Text_JP "ノートン"8
 	OT_ID 00000, 00000
 
 	Intro_JP $0618, $0e28, $0616, $0e0b, $062b, $1025
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,31,15,15,31, 0
 	PV $000000E7
-	Text_EN "TORKOAL"11
-	Text_JP "コータス"11
+	db "TORKOAL@   "
+	; Text_JP "コータス"11
 	Friendship 255
 
 	Pokemon CLAYDOL
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,15,15,31, 0
 	PV $00000017
-	Text_EN "CLAYDOL"11
-	Text_JP "ネンドール"11
+	db "CLAYDOL@   "
+	; Text_JP "ネンドール"11
 	Friendship 255
 
 	Pokemon DUSCLOPS
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,31,15,15,31, 0
 	PV $000000E6
-	Text_EN "DUSCLOPS"11
-	Text_JP "サマヨール"11
+	db "DUSCLOPS@  "
+	; Text_JP "サマヨール"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

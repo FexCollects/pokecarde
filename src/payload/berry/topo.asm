@@ -1,11 +1,14 @@
 SECTION "payload/berry/topo", ROM0
 INCLUDE "include/berry.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Enigma_Berry
 
-	Text_EN "TOPO@@@"7
-	;Text_JP "トポ@@@@@"7	
+	db "TOPO@@@"
+	; Text_JP "トポ@@@@@"7	
 	Firmness VERY_HARD
 	Size 8,8
 	Yield_Range 4, 12
@@ -20,8 +23,8 @@ BerrySprite::
 BerryPalette::
 	INCBIN "build/gfx/berries/topo.gbapal"
 
-	Text_EN "It grows slowly, but abundantly."45
-	Text_EN "Its full of sweet and sour juice."45
+        db "It grows slowly, but abundantly.@            "
+        db "Its full of sweet and sour juice.@           "
 	
 	;Text_JP "そだちは　おそいが　たくさんの　みが　つく。"45
 	;Text_JP "なかみは　あまずっぱい　しるで　いっぱい。"45	
@@ -29,3 +32,5 @@ BerryPalette::
         ds 22 ; Pokéblock ingredient only
 
 	End_Berry
+
+POPC

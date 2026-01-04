@@ -1,5 +1,8 @@
 SECTION "payload/battle/moet", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db LADY
 	BT_Floor 0
-	Text_EN "CAMRYN"8
-	Text_JP "モエ"8
+	db "CAMRYN@ "
+	; Text_JP "モエ"8
 	OT_ID 00000, 00000
 
 	Intro_EN MY, POKEMON, WILL, _SWEET_SCENT, YOU, _EX	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,31,15,15,31, 1
 	PV $0000001F
-	Text_EN "RALTS"11
-	Text_JP "ラルトス"11
+	db "RALTS@     "
+	; Text_JP "ラルトス"11
 	Friendship 255
 
 	Pokemon KIRLIA
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,15,31, 0
 	PV $00000012
-	Text_EN "KIRLIA"11
-	Text_JP "キルリア"11
+	db "KIRLIA@    "
+	; Text_JP "キルリア"11
 	Friendship 255
 
 	Pokemon GARDEVOIR
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00015, 00000
 	IVs 15,15,15,31,31,15, 0
 	PV $0000000F
-	Text_EN "GARDEVOIR"11
-	Text_JP "サーナイト"11
+	db "GARDEVOIR@ "
+	; Text_JP "サーナイト"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

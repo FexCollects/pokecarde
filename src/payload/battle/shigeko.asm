@@ -1,5 +1,8 @@
 SECTION "payload/battle/shigeko", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db POKEFAN_F
 	BT_Floor 0
-	Text_EN "PAULINE"8
-	Text_JP "シゲコ"8
+	db "PAULINE@"
+	; Text_JP "シゲコ"8
 	OT_ID 00000, 00000
 
 	Intro_EN AREN_T, MY, POKEMON, CUTE, _QU, $ffff
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, 0
 	PV $0000000C
-	Text_EN "WAILMER"11
-	Text_JP "ホエルコ"11
+	db "WAILMER@   "
+	; Text_JP "ホエルコ"11
 	Friendship 255
 
 	Pokemon SEEDOT
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, 1
 	PV $000000E0
-	Text_EN "SEEDOT"11
-	Text_JP "タネボー"11
+	db "SEEDOT@    "
+	; Text_JP "タネボー"11
 	Friendship 255
 
 	Pokemon PIKACHU
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, 0
 	PV $00000013
-	Text_EN "PIKACHU"11
-	Text_JP "ピカチュウ"11
+	db "PIKACHU@   "
+	; Text_JP "ピカチュウ"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

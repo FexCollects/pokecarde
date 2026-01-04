@@ -1,5 +1,8 @@
 SECTION "payload/battle/reina", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db PKMN_RANGER_F
 	BT_Floor 0
-	Text_EN "EZRA"8
-	Text_JP "レイナ"8
+	db "EZRA@   "
+	; Text_JP "レイナ"8
 	OT_ID 00000, 00000
 
 	Intro_EN WANT, TO, SEE, _A, TRICK, _QU	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, 1
 	PV $00000080
-	Text_EN "MAWILE"11
-	Text_JP "クチート"11
+	db "MAWILE@    "
+	; Text_JP "クチート"11
 	Friendship 255
 
 	Pokemon GOLDUCK
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,31, 1
 	PV $0000000F
-	Text_EN "GOLDUCK"11
-	Text_JP "ゴルダック"11
+	db "GOLDUCK@   "
+	; Text_JP "ゴルダック"11
 	Friendship 255
 
 	Pokemon TROPIUS
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,0,15,15,15, 0
 	PV $00000080
-	Text_EN "TROPIUS"11
-	Text_JP "トロピウス"11
+	db "TROPIUS@   "
+	; Text_JP "トロピウス"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

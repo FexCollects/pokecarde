@@ -1,5 +1,8 @@
 SECTION "payload/battle/natsuko", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db TRIATHLETE_F_SWIM
 	BT_Floor 0
-	Text_EN "AUTUMN"8
-	Text_JP "ナツコ"8
+	db "AUTUMN@ "
+	; Text_JP "ナツコ"8
 	OT_ID 00000, 00000
 
 	Intro_EN ALWAYS, DIVE, WITH, GOOD, SPIRIT, _EX	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, 0
 	PV $0000000F
-	Text_EN "LANTURN"11
-	Text_JP "ランターン"11
+	db "LANTURN@   "
+	; Text_JP "ランターン"11
 	Friendship 255
 
 	Pokemon HUNTAIL
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, 0
 	PV $00000095
-	Text_EN "HUNTAIL"11
-	Text_JP "ハンテール"11
+	db "HUNTAIL@   "
+	; Text_JP "ハンテール"11
 	Friendship 255
 
 	Pokemon RELICANTH
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00008, 00000
 	IVs 31,15,31,15,15,31, 0
 	PV $00000080
-	Text_EN "RELICANTH"11
-	Text_JP "ジーランス"11
+	db "RELICANTH@ "
+	; Text_JP "ジーランス"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

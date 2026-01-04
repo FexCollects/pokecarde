@@ -1,5 +1,8 @@
 SECTION "payload/battle/justine", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class POKEFAN_F
 	BT_Floor MOSSDEEP
-	Text_EN "JUSTINE"8
-	Text_JP "セツコ"8
+	db "JUSTINE@"
+	; Text_JP "セツコ"8
 	OT_ID 00000, 00000
 
 	Intro_EN HEY,_QU_EX,LOOK,AT,MY,POKEMON
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, PIKACHU_STATIC
 	PV $0000000F ; ♀ Modest
-	Text_EN "PIKACHU"11
-	Text_JP "ピカチュウ"11
+	db "PIKACHU@   "
+	; Text_JP "ピカチュウ"11
 	Friendship 255
 
 	Pokemon GOLEM
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,31, GOLEM_STURDY
 	PV $0000001B ; ♀ Brave
-	Text_EN "GOLEM"11
-	Text_JP "ゴローニャ"11
+	db "GOLEM@     "
+	; Text_JP "ゴローニャ"11
 	Friendship 255
 
 	Pokemon GENGAR
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,31,15,15,15, GENGAR_LEVITATE
 	PV $00000087 ; ♂ Timid
-	Text_EN "GENGAR"11
-	Text_JP "ゲンガー"11
+	db "GENGAR@    "
+	; Text_JP "ゲンガー"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

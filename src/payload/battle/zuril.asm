@@ -1,5 +1,8 @@
 SECTION "payload/battle/zuril", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 100
 	Class RUIN_MANIAC
 	BT_Floor 12
-	Text_EN "ZURIL"8
-	Text_JP "イナオ"8
+	db "ZURIL@  "
+	; Text_JP "イナオ"8
 	OT_ID 00000, 00000
 
 	Intro_EN FINALLY,I,GOT,_A,LEGEND,POKEMON
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,20,20,31,20,20, FLYGON_LEVITATE
 	PV $0000000C ; ♀ Serious
-	Text_EN "FLYGON"11
-	Text_JP "フライゴン"11
+	db "FLYGON@    "
+	; Text_JP "フライゴン"11
 	Friendship 255
 
 	Pokemon WHISCASH
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,20,20,20,20, WHISCASH_OBLIVIOUS
 	PV $00000095 ; ♂ Quirky
-	Text_EN "WHISCASH"11
-	Text_JP "ナマズン"11
+	db "WHISCASH@  "
+	; Text_JP "ナマズン"11
 	Friendship 255
 
 	Pokemon REGIROCK
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,20,20,20,20,31, REGIROCK_CLEAR_BODY
 	PV $0000001B ; ⚲ Brave
-	Text_EN "REGIROCK"11
-	Text_JP "レジロック"11
+	db "REGIROCK@  "
+	; Text_JP "レジロック"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

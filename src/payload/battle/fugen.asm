@@ -1,5 +1,8 @@
 SECTION "payload/battle/fugen", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 100
 	db EXPERT_M
 	BT_Floor 5
-	Text_EN "BALDWIN"8
-	Text_JP "フゲン"8
+	db "BALDWIN@"
+	; Text_JP "フゲン"8
 	OT_ID 00000, 00000
 
 	Intro_EN YOU_RE, FIGHTING, YOUR, OWN, BATTLE, _EX	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 20,20,20,31,31,20, 0
 	PV $0000001D
-	Text_EN "RAICHU"11
-	Text_JP "ライチュウ"11
+	db "RAICHU@    "
+	; Text_JP "ライチュウ"11
 	Friendship 255
 
 	Pokemon MEDICHAM
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,20,20,31,20,20, 0
 	PV $00000080
-	Text_EN "MEDICHAM"11
-	Text_JP "チャーレム"11
+	db "MEDICHAM@  "
+	; Text_JP "チャーレム"11
 	Friendship 255
 
 	Pokemon BLAZIKEN
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 20,31,20,31,20,20, 0
 	PV $000000E2
-	Text_EN "BLAZIKEN"11
-	Text_JP "バシャーモ"11
+	db "BLAZIKEN@  "
+	; Text_JP "バシャーモ"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

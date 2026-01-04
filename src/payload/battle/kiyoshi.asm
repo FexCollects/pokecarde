@@ -1,5 +1,8 @@
 SECTION "payload/battle/kiyoshi", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 50
 	db PSYCHIC_M
 	BT_Floor 12
-	Text_EN "JERRY"8
-	Text_JP "キヨシ"8
+	db "JERRY@  "
+	; Text_JP "キヨシ"8
 	OT_ID 00000, 00000
 
 	Intro_EN I, SENSE, _A, POWER, _EX_EX, $ffff
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,31,15,15, 1
 	PV $00000013
-	Text_EN "GRUMPIG"11
-	Text_JP "ブーピッグ"11
+	db "GRUMPIG@   "
+	; Text_JP "ブーピッグ"11
 	Friendship 255
 
 	Pokemon SHIFTRY
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, 1
 	PV $00000011
-	Text_EN "SHIFTRY"11
-	Text_JP "ダーテング"11
+	db "SHIFTRY@   "
+	; Text_JP "ダーテング"11
 	Friendship 255
 
 	Pokemon EXPLOUD
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, 0
 	PV $0000008C
-	Text_EN "EXPLOUD"11
-	Text_JP "バクオング"11
+	db "EXPLOUD@   "
+	; Text_JP "バクオング"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

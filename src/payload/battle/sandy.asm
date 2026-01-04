@@ -1,5 +1,8 @@
 SECTION "payload/battle/sandy", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 50
 	Class PICNICKER
 	BT_Floor 19
-	Text_EN "SANDY"8
-	Text_JP "トシミ"8
+	db "SANDY@  "
+	; Text_JP "トシミ"8
 	OT_ID 00000, 00000
 
 	Intro_EN I,GOT,MY,POKEMON,WITH,POKEBLOCK
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,15,15, HERACROSS_GUTS
 	PV $00000080 ; ♂ Adamant
-	Text_EN "HERACROSS"11
-	Text_JP "ヘラクロス"11
+	db "HERACROSS@ "
+	; Text_JP "ヘラクロス"11
 	Friendship 255
 
 	Pokemon GIRAFARIG
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,31,15,15, GIRAFARIG_INNER_FOCUS
 	PV $00000018 ; ♀ Quirky
-	Text_EN "GIRAFARIG"11
-	Text_JP "キリンリキ"11
+	db "GIRAFARIG@ "
+	; Text_JP "キリンリキ"11
 	Friendship 255
 
 	Pokemon DODRIO
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,15,15, DODRIO_EARLY_BIRD
 	PV $00000080 ; ♂ Adamant
-	Text_EN "DODRIO"11
-	Text_JP "ドードリオ"11
+	db "DODRIO@    "
+	; Text_JP "ドードリオ"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

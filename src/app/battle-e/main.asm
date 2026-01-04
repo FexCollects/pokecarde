@@ -1,5 +1,6 @@
 SECTION "app/battle-e/main", ROM0
 INCLUDE "../macros.asm"
+INCLUDE "include/charmaps.asm"
 
 TrainerSpriteData: ; 1738
 	dw TrainerSprite

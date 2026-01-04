@@ -1,5 +1,8 @@
 SECTION "payload/battle/tyler", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class POKEMANIAC
 	BT_Floor MOSSDEEP
-	Text_EN "TYLER"8
-	Text_JP "トモタカ"8
+	db "TYLER@  "
+	; Text_JP "トモタカ"8
 	OT_ID 00000, 00000
 
 	Intro_EN WHOAH,OVERWHELMING,MEGA,BLANK,ATTACK,_EX
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,31,15,15,31, WALREIN_THICK_FAT
 	PV $00000013 ; ♀ Rash
-	Text_EN "WALREIN"11
-	Text_JP "トドゼルガ"11
+	db "WALREIN@   "
+	; Text_JP "トドゼルガ"11
 	Friendship 255
 
 	Pokemon PINSIR
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,31,15,15, PINSIR_HYPER_CUTTER
 	PV $0000008A ; ♂ Jolly
-	Text_EN "PINSIR"11
-	Text_JP "カイロス"11
+	db "PINSIR@    "
+	; Text_JP "カイロス"11
 	Friendship 255
 
 	Pokemon RHYDON
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, RHYDON_ROCK_HEAD
 	PV $00000016 ; ♀ Sassy
-	Text_EN "RHYDON"11
-	Text_JP "サイドン"11
+	db "RHYDON@    "
+	; Text_JP "サイドン"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

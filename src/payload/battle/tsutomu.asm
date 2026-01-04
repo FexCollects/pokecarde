@@ -1,5 +1,8 @@
 SECTION "payload/battle/tsutomu", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class TC_BLACK_BELT
 	BT_Floor MOSSDEEP
-	Text_EN "TSUTOMU"8
-	Text_JP "トシユキ"8
+	db "TSUTOMU@"
+	; Text_JP "トシユキ"8
 	OT_ID 00000, 00000
 
 	Intro_EN HIYAH,I,KNOW,YOUR,WEAK,POINTS
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,31,15,15, ZANGOOSE_IMMUNITY
 	PV $0000001C ; ♀ Adamant
-	Text_EN "ZANGOOSE"11
-	Text_JP "ザングース"11
+	db "ZANGOOSE@  "
+	; Text_JP "ザングース"11
 	Friendship 255
 
 	Pokemon SEVIPER
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,31,15,15, SEVIPER_SHED_SKIN
 	PV $00000080 ; ♂ Adamant
-	Text_EN "SEVIPER"11
-	Text_JP "ハブネーク"11
+	db "SEVIPER@   "
+	; Text_JP "ハブネーク"11
 	Friendship 255
 
 	Pokemon MACHAMP
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 30,31,14,15,15,14, MACHAMP_GUTS ; HP Electric 70
 	PV $0000001C ; ♀ Adamant
-	Text_EN "MACHAMP"11
-	Text_JP "カイリキー"11
+	db "MACHAMP@   "
+	; Text_JP "カイリキー"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

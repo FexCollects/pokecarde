@@ -1,5 +1,8 @@
 SECTION "payload/battle/patrick", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class CAMPER
 	BT_Floor MOSSDEEP
-	Text_EN "PATRICK"8
-	Text_JP "ヤスヒロ"8
+	db "PATRICK@"
+	; Text_JP "ヤスヒロ"8
 	OT_ID 00000, 00000
 
 	Intro_EN WHAT,COLOR,DO,I,LIKE,_QU
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,31,15,15, XATU_SYNCHRONIZE
 	PV $0000000F ; ♀ Modest
-	Text_EN "XATU"11
-	Text_JP "ネイティオ"11
+	db "XATU@      "
+	; Text_JP "ネイティオ"11
 	Friendship 255
 
 	Pokemon LUDICOLO
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,31,15,15,15, LUDICOLO_SWIFT_SWIM
 	PV $00000014 ; ♀ Calm
-	Text_EN "LUDICOLO"11
-	Text_JP "ルンパッパ"11
+	db "LUDICOLO@  "
+	; Text_JP "ルンパッパ"11
 	Friendship 255
 
 	Pokemon FLYGON
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, FLYGON_LEVITATE
 	PV $00000090 ; ♂ Rash
-	Text_EN "FLYGON"11
-	Text_JP "フライゴン"11
+	db "FLYGON@    "
+	; Text_JP "フライゴン"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

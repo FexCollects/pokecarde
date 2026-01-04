@@ -1,5 +1,8 @@
 SECTION "payload/battle/yufu", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 100
 	Class COOLTRAINER_F
 	BT_Floor 5
-	Text_EN "ADELE"8
-	Text_JP "ユフ"8
+	db "ADELE@  "
+	; Text_JP "ユフ"8
 	OT_ID 00000, 00000
 
 	Intro_JP $0e0e, $0a02, $0c01, $0603, $161a, $102a
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 20,20,20,31,31,20, 0
 	PV $0000000F
-	Text_EN "GARDEVOIR"11
-	Text_JP "サーナイト"11
+	db "GARDEVOIR@ "
+	; Text_JP "サーナイト"11
 	Friendship 255
 
 	Pokemon HERACROSS
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 20,31,20,31,20,20, 1
 	PV $0000008A
-	Text_EN "HERACROSS"11
-	Text_JP "ヘラクロス"11
+	db "HERACROSS@ "
+	; Text_JP "ヘラクロス"11
 	Friendship 255
 
 	Pokemon SALAMENCE
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 20,20,20,31,31,20, 0
 	PV $0000008B
-	Text_EN "SALAMENCE"11
-	Text_JP "ボーマンダ"11
+	db "SALAMENCE@ "
+	; Text_JP "ボーマンダ"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

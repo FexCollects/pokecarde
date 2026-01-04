@@ -1,5 +1,8 @@
 SECTION "payload/battle/taisen", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 100
 	Class EXPERT_M
 	BT_Floor 5
-	Text_EN "OSWALD"8
-	Text_JP "タイセン"8
+	db "OSWALD@ "
+	; Text_JP "タイセン"8
 	OT_ID 00000, 00000
 
 	Intro_JP $0a43, $1034, $061e, $2213, $2214, $100b
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 20,20,31,20,31,20, 0
 	PV $0000000F
-	Text_EN "MILOTIC"11
-	Text_JP "ミロカロス"11
+	db "MILOTIC@   "
+	; Text_JP "ミロカロス"11
 	Friendship 255
 
 	Pokemon TENTACRUEL
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,20,31,20,20,20, 1
 	PV $000000E8
-	Text_EN "TENTACRUEL"11
-	Text_JP "ドククラゲ"11
+	db "TENTACRUEL@"
+	; Text_JP "ドククラゲ"11
 	Friendship 255
 
 	Pokemon SWAMPERT
@@ -54,11 +57,13 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 20,31,20,31,20,20, 0
 	PV $000000E4
-	Text_EN "SWAMPERT"11
-	Text_JP "ラグラージ"11
+	db "SWAMPERT@  "
+	; Text_JP "ラグラージ"11
 	Friendship 255
 
 	End_Trainer
 
 
         ds 44 ; Pad to 256
+
+POPC

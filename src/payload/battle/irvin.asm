@@ -1,5 +1,8 @@
 SECTION "payload/battle/irvin", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class BUG_MANIAC
 	BT_Floor MOSSDEEP
-	Text_EN "IRVIN"8
-	Text_JP "ムツオ"8
+	db "IRVIN@  "
+	; Text_JP "ムツオ"8
 	OT_ID 00000, 00000
 
 	Intro_EN MMM,_ELIP_EX,I,TRUST,BUG,POKEMON
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, BEAUTIFLY_SWARM
 	PV $0000001C ; ♀ Adamant
-	Text_EN "BEAUTIFLY"11
-	Text_JP "アゲハント"11
+	db "BEAUTIFLY@ "
+	; Text_JP "アゲハント"11
 	Friendship 255
 
 	Pokemon DUSTOX
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,31,15,15,31, DUSTOX_SHIELD_DUST
 	PV $000000E1 ; ♂ Hardy
-	Text_EN "DUSTOX"11
-	Text_JP "ドクケイル"11
+	db "DUSTOX@    "
+	; Text_JP "ドクケイル"11
 	Friendship 255
 
 	Pokemon MASQUERAIN
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,31,15,15,31, MASQUERAIN_INTIMIDATE
 	PV $00000019 ; ♀ Hardy
-	Text_EN "MASQUERAIN"11
-	Text_JP "アメモース"11
+	db "MASQUERAIN@"
+	; Text_JP "アメモース"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

@@ -1,5 +1,8 @@
 SECTION "payload/battle/irazu", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 100
 	Class PKMN_RANGER_M
 	BT_Floor 12
-	Text_EN "IRAZU"8
-	Text_JP "コシキ"8
+	db "IRAZU@  "
+	; Text_JP "コシキ"8
 	OT_ID 00000, 00000
 
 	Intro_EN MY,POKEMON,THANKS,ME,_FOR,CARE
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,20,20,20,20, KINGDRA_SWIFT_SWIM
 	PV $0000001C ; ♀ Adamant
-	Text_EN "KINGDRA"11
-	Text_JP "キングドラ"11
+	db "KINGDRA@   "
+	; Text_JP "キングドラ"11
 	Friendship 255
 
 	Pokemon HARIYAMA
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,20,20,20,20,31, HARIYAMA_THICK_FAT
 	PV $00000080 ; ♂ Adamant
-	Text_EN "HARIYAMA"11
-	Text_JP "ハリテヤマ"11
+	db "HARIYAMA@  "
+	; Text_JP "ハリテヤマ"11
 	Friendship 255
 
 	Pokemon REGISTEEL
@@ -54,11 +57,13 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,20,20,20,20,31, REGISTEEL_CLEAR_BODY
 	PV $0000001C ; ⚲ Adamant
-	Text_EN "REGISTEEL"11
-	Text_JP "レジスチル"11
+	db "REGISTEEL@ "
+	; Text_JP "レジスチル"11
 	Friendship 255
 
 	End_Trainer
 
 
         ds 44 ; Pad to 256
+
+POPC

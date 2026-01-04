@@ -1,5 +1,8 @@
 SECTION "payload/battle/mandy", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 50
 	Class SCHOOL_KID_F
 	BT_Floor 12
-	Text_EN "MANDY"8
-	Text_JP "ユキコ"8
+	db "MANDY@  "
+	; Text_JP "ユキコ"8
 	OT_ID 00000, 00000
 
 	Intro_EN I,WAKE_UP,_AND,STUDY,VERY,HARD
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,31,15,31,15, ALTARIA_NATURAL_CURE
 	PV $0000000F ; ♀ Modest
-	Text_EN "ALTARIA"11
-	Text_JP "チルタリス"11
+	db "ALTARIA@   "
+	; Text_JP "チルタリス"11
 	Friendship 255
 
 	Pokemon BRELOOM
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, BRELOOM_EFFECT_SPORE
 	PV $000000E4 ; ♂ Adamant
-	Text_EN "BRELOOM"11
-	Text_JP "キノガッサ"11
+	db "BRELOOM@   "
+	; Text_JP "キノガッサ"11
 	Friendship 255
 
 	Pokemon SLAKING
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,15,15,31, SLAKING_TRUANT
 	PV $000000DE ; ♂ Sassy
-	Text_EN "SLAKING"11
-	Text_JP "ケッキング"11
+	db "SLAKING@   "
+	; Text_JP "ケッキング"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

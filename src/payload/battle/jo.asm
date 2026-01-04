@@ -1,5 +1,8 @@
 SECTION "payload/battle/jo", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db KINDLER
 	BT_Floor 0
-	Text_EN "RAUL"8
-	Text_JP "ジョウ"8
+	db "RAUL@   "
+	; Text_JP "ジョウ"8
 	OT_ID 00000, 00000
 
 	Intro_EN WHAT, _A, NICE, _SUNNY_DAY, IT, IS	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,31, 0
 	PV $0000000F
-	Text_EN "SOLROCK"11
-	Text_JP "ソルロック"11
+	db "SOLROCK@   "
+	; Text_JP "ソルロック"11
 	Friendship 255
 
 	Pokemon SHIFTRY
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, 0
 	PV $0000000F
-	Text_EN "SHIFTRY"11
-	Text_JP "ダーテング"11
+	db "SHIFTRY@   "
+	; Text_JP "ダーテング"11
 	Friendship 255
 
 	Pokemon CAMERUPT
@@ -54,11 +57,13 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,31,15,15,15, 0
 	PV $0000008C
-	Text_EN "CAMERUPT"11
-	Text_JP "バクーダ"11
+	db "CAMERUPT@  "
+	; Text_JP "バクーダ"11
 	Friendship 255
 
 	End_Trainer
 
 
         ds 44 ; Pad to 256
+
+POPC

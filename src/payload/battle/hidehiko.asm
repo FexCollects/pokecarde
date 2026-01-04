@@ -1,5 +1,8 @@
 SECTION "payload/battle/hidehiko", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	Class COLLECTOR
 	BT_Floor 0
-	Text_EN "PETE"8
-	Text_JP "ヒデヒコ"8
+	db "PETE@   "
+	; Text_JP "ヒデヒコ"8
 	OT_ID 00000, 00000
 
 	Intro_JP $0a3a, $020e, $0a3d, $1405, $0408, $1e24
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, 0
 	PV $0000000F
-	Text_EN "SEAKING"11
-	Text_JP "アズマオウ"11
+	db "SEAKING@   "
+	; Text_JP "アズマオウ"11
 	Friendship 255
 
 	Pokemon MAGCARGO
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,31,15,15,15, 1
 	PV $00000089
-	Text_EN "MAGCARGO"11
-	Text_JP "マグカルゴ"11
+	db "MAGCARGO@  "
+	; Text_JP "マグカルゴ"11
 	Friendship 255
 
 	Pokemon BRELOOM
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,15,15, 0
 	PV $000000CB
-	Text_EN "BRELOOM"11
-	Text_JP "キノガッサ"11
+	db "BRELOOM@   "
+	; Text_JP "キノガッサ"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

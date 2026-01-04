@@ -1,5 +1,8 @@
 SECTION "payload/battle/ellie", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class BEAUTY
 	BT_Floor MOSSDEEP
-	Text_EN "ELLIE"8
-	Text_JP "リエ"8
+	db "ELLIE@  "
+	; Text_JP "リエ"8
 	OT_ID 00000, 00000
 
 	Intro_EN I_AM,ON,A_LITTLE,DIET,_AND,HUNGRY
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, CASTFORM_FORECAST
 	PV $0000000F ; ♀ Modest
-	Text_EN "CASTFORM"11
-	Text_JP "ポワルン"11
+	db "CASTFORM@  "
+	; Text_JP "ポワルン"11
 	Friendship 255
 
 	Pokemon KOFFING
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,31, KOFFING_LEVITATE
 	PV $0000008F ; ♂ Bashful
-	Text_EN "KOFFING"11
-	Text_JP "ドガース"11
+	db "KOFFING@   "
+	; Text_JP "ドガース"11
 	Friendship 255
 
 	Pokemon CHIMECHO
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, CHIMECHO_LEVITATE
 	PV $0000000F ; ♀ Modest
-	Text_EN "CHIMECHO"11
-	Text_JP "チリーン"11
+	db "CHIMECHO@  "
+	; Text_JP "チリーン"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

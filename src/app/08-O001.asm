@@ -1,5 +1,6 @@
-INCLUDE "../macros.asm"
 SECTION "app/08-O001", ROM0
+INCLUDE "../macros.asm"
+INCLUDE "include/charmaps.asm"
 
 DataPointers:
     dw DataStartRegirock

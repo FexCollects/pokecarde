@@ -1,5 +1,8 @@
 SECTION "payload/battle/ihara", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 100
 	db COOLTRAINER_M
 	BT_Floor 12
-	Text_EN "IHARA"8
-	Text_JP "イハラ"8
+	db "IHARA@  "
+	; Text_JP "イハラ"8
 	OT_ID 00000, 00000
 
 	Intro_EN MY, POKEMON, _AND, I, WORK, TOGETHER	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 20,20,20,31,31,20, 1
 	PV $0000000F
-	Text_EN "SHIFTRY"11
-	Text_JP "ダーテング"11
+	db "SHIFTRY@   "
+	; Text_JP "ダーテング"11
 	Friendship 255
 
 	Pokemon WAILORD
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,20,20,20,31,20, 0
 	PV $0000000F
-	Text_EN "WAILORD"11
-	Text_JP "ホエルオー"11
+	db "WAILORD@   "
+	; Text_JP "ホエルオー"11
 	Friendship 255
 
 	Pokemon SLAKING
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,20,20,20,20, 0
 	PV $00000080
-	Text_EN "SLAKING"11
-	Text_JP "ケッキング"11
+	db "SLAKING@   "
+	; Text_JP "ケッキング"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

@@ -1,5 +1,8 @@
 SECTION "payload/battle/miyoko", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db AROMA_LADY
 	BT_Floor 0
-	Text_EN "ESTHER"8
-	Text_JP "ミヨコ"8
+	db "ESTHER@ "
+	; Text_JP "ミヨコ"8
 	OT_ID 00000, 00000
 
 	Intro_EN DO, YOU, LIKE, GRASS, POKEMON, _QU	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,31,15,31,15, 0
 	PV $000000DC
-	Text_EN "CACTURNE"11
-	Text_JP "ノクタス"11
+	db "CACTURNE@  "
+	; Text_JP "ノクタス"11
 	Friendship 255
 
 	Pokemon LUDICOLO
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,31,15,15,31, 1
 	PV $00000014
-	Text_EN "LUDICOLO"11
-	Text_JP "ルンパッパ"11
+	db "LUDICOLO@  "
+	; Text_JP "ルンパッパ"11
 	Friendship 255
 
 	Pokemon SCEPTILE
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, 0
 	PV $000000D7
-	Text_EN "SCEPTILE"11
-	Text_JP "ジュカイン"11
+	db "SCEPTILE@  "
+	; Text_JP "ジュカイン"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

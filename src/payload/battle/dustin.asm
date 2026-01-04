@@ -1,5 +1,8 @@
 SECTION "payload/battle/dustin", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class TRIATHLETE_M_SWIM
 	BT_Floor MOSSDEEP
-	Text_EN "DUSTIN"8
-	Text_JP "タカアキ"8
+	db "DUSTIN@ "
+	; Text_JP "タカアキ"8
 	OT_ID 00000, 00000
 
 	Intro_EN RUN,_EX,I,NEVER,_STOP,_EX
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, DODRIO_EARLY_BIRD
 	PV $0000008A ; ♂ Jolly
-	Text_EN "DODRIO"11
-	Text_JP "ドードリオ"11
+	db "DODRIO@    "
+	; Text_JP "ドードリオ"11
 	Friendship 255
 
 	Pokemon MANECTRIC
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,15,15,15, MANECTRIC_STATIC
 	PV $0000000E ; ♀ Naive
-	Text_EN "MANECTRIC"11
-	Text_JP "ライボルト"11
+	db "MANECTRIC@ "
+	; Text_JP "ライボルト"11
 	Friendship 255
 
 	Pokemon LINOONE
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,31,15,15, LINOONE_PICKUP
 	PV $0000008B ; ♂ Naive
-	Text_EN "LINOONE"11
-	Text_JP "マッスグマ"11
+	db "LINOONE@   "
+	; Text_JP "マッスグマ"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

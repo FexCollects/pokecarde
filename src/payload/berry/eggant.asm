@@ -1,10 +1,13 @@
 SECTION "payload/berry/eggant", ROM0
 INCLUDE "include/berry.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Enigma_Berry
 
-	Text_EN "EGGANT"7
+	db "EGGANT@"
 	Firmness SOFT
 	Size 4,1
 	Yield_Range 2, 3
@@ -19,8 +22,8 @@ BerrySprite::
 BerryPalette::
 	INCBIN "build/gfx/berries/eggant.gbapal"
 
-	Text_EN "Very dry tasting, especially the"45
-	Text_EN "parts not exposed to the sun."45
+        db "Very dry tasting, especially the@            "
+        db "parts not exposed to the sun.@               "
 
 	db 0,0,0
 	db $00
@@ -29,3 +32,5 @@ BerryPalette::
 	db 0,0,0
 
 	End_Berry
+
+POPC

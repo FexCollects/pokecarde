@@ -1,5 +1,8 @@
 SECTION "payload/battle/kendall", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class POKEFAN_M
 	BT_Floor MOSSDEEP
-	Text_EN "KENDALL"8
-	Text_JP "タケモト"8
+	db "KENDALL@"
+	; Text_JP "タケモト"8
 	OT_ID 00000, 00000
 
 	Intro_EN _FLASH,_EX_EX,I,LIKE,IT,_EX_EX
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, PLUSLE_PLUS
 	PV $0000008C ; ♂ Modest
-	Text_EN "PLUSLE"11
-	Text_JP "プラスル"11
+	db "PLUSLE@    "
+	; Text_JP "プラスル"11
 	Friendship 255
 
 	Pokemon MINUN
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,31,15,15, MINUN_MINUS
 	PV $0000000F ; ♀ Modest
-	Text_EN "MINUN"11
-	Text_JP "マイナン"11
+	db "MINUN@     "
+	; Text_JP "マイナン"11
 	Friendship 255
 
 	Pokemon SNORUNT
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,31, SNORUNT_INNER_FOCUS
 	PV $0000000F ; ♀ Modest
-	Text_EN "SNORUNT"11
-	Text_JP "ユキワラシ"11
+	db "SNORUNT@   "
+	; Text_JP "ユキワラシ"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

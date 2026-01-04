@@ -1,5 +1,8 @@
 SECTION "payload/battle/junpei", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db RICH_BOY
 	BT_Floor 0
-	Text_EN "AXEL"8
-	Text_JP "ジュンペイ"8
+	db "AXEL@   "
+	; Text_JP "ジュンペイ"8
 	OT_ID 00000, 00000
 
 	Intro_EN ISN_T, MY, COLOR, CHOICE, FABULOUS, _QU	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,31, 0
 	PV $00000089
-	Text_EN "ALTARIA"11
-	Text_JP "チルタリス"11
+	db "ALTARIA@   "
+	; Text_JP "チルタリス"11
 	Friendship 255
 
 	Pokemon METAGROSS
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,31,15,15,15, 0
 	PV $0000001B
-	Text_EN "METAGROSS"11
-	Text_JP "メタグロス"11
+	db "METAGROSS@ "
+	; Text_JP "メタグロス"11
 	Friendship 255
 
 	Pokemon KINGDRA
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,15,31,31, 0
 	PV $0000000F
-	Text_EN "KINGDRA"11
-	Text_JP "キングドラ"11
+	db "KINGDRA@   "
+	; Text_JP "キングドラ"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

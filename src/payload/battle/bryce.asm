@@ -1,5 +1,8 @@
 SECTION "payload/battle/bryce", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class FISHERMAN
 	BT_Floor MOSSDEEP
-	Text_EN "BRYCE"8
-	Text_JP "ナオユキ"8
+	db "BRYCE@  "
+	; Text_JP "ナオユキ"8
 	OT_ID 00000, 00000
 
 	Intro_EN FISHING,IS,JUST,SO,FANTASTIC,_EX
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,31,15,15,31, LANTURN_VOLT_ABSORB
 	PV $0000000F ; ♀ Modest
-	Text_EN "LANTURN"11
-	Text_JP "ランターン"11
+	db "LANTURN@   "
+	; Text_JP "ランターン"11
 	Friendship 255
 
 	Pokemon SHARPEDO
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,15,31,15, SHARPEDO_ROUGH_SKIN
 	PV $000000D9 ; ♂ Quiet
-	Text_EN "SHARPEDO"11
-	Text_JP "サメハダー"11
+	db "SHARPEDO@  "
+	; Text_JP "サメハダー"11
 	Friendship 255
 
 	Pokemon WHISCASH
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,31,15,15,31, WHISCASH_OBLIVIOUS
 	PV $000000D4 ; ♂ Serious
-	Text_EN "WHISCASH"11
-	Text_JP "ナマズン"11
+	db "WHISCASH@  "
+	; Text_JP "ナマズン"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

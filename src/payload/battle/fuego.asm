@@ -1,5 +1,8 @@
 SECTION "payload/battle/fuego", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 100
 	Class COOLTRAINER_M
 	BT_Floor 5
-	Text_EN "FUEGO"8
-	Text_JP "ヒエイ"8
+	db "FUEGO@  "
+	; Text_JP "ヒエイ"8
 	OT_ID 00000, 00000
 
 	Intro_EN I,HAVE,_A,FEELING,YOU,CAN_T_WIN
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,20,31,20,20,20, GLALIE_INNER_FOCUS
 	PV $00000096 ; ♂ Hardy
-	Text_EN "GLALIE"11
-	Text_JP "オニゴーリ"11
+	db "GLALIE@    "
+	; Text_JP "オニゴーリ"11
 	Friendship 255
 
 	Pokemon SKARMORY
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,20,20,20,20,31, SKARMORY_KEEN_EYE
 	PV $00000017 ; ♀ Careful
-	Text_EN "SKARMORY"11
-	Text_JP "エアームド"11
+	db "SKARMORY@  "
+	; Text_JP "エアームド"11
 	Friendship 255
 
 	Pokemon REGIROCK
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,20,20,20,20, MASQUERAIN_INTIMIDATE
 	PV $0000001B ; ⚲ Brave
-	Text_EN "REGIROCK"11
-	Text_JP "レジロック"11
+	db "REGIROCK@  "
+	; Text_JP "レジロック"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

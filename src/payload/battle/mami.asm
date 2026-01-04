@@ -1,5 +1,8 @@
 SECTION "payload/battle/mami", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 50
 	db PKMN_BREEDER_F
 	BT_Floor 5
-	Text_EN "JANI"8
-	Text_JP "マミ"8
+	db "JANI@   "
+	; Text_JP "マミ"8
 	OT_ID 00000, 00000
 
 	Intro_EN IT_S, NOT, JUST, ABOUT, BEAUTY, _EX	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, 0
 	PV $0000000F
-	Text_EN "GARDEVOIR"11
-	Text_JP "サーナイト"11
+	db "GARDEVOIR@ "
+	; Text_JP "サーナイト"11
 	Friendship 255
 
 	Pokemon NINETALES
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, 0
 	PV $0000000F
-	Text_EN "NINETALES"11
-	Text_JP "キュウコン"11
+	db "NINETALES@ "
+	; Text_JP "キュウコン"11
 	Friendship 255
 
 	Pokemon MILOTIC
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,31,15,15,15, 0
 	PV $0000000F
-	Text_EN "MILOTIC"11
-	Text_JP "ミロカロス"11
+	db "MILOTIC@   "
+	; Text_JP "ミロカロス"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

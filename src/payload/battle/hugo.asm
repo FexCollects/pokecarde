@@ -1,5 +1,8 @@
 SECTION "payload/battle/hugo", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class HIKER
 	BT_Floor MOSSDEEP
-	Text_EN "HUGO"8
-	Text_JP "ユキヒコ"8
+	db "HUGO@   "
+	; Text_JP "ユキヒコ"8
 	OT_ID 00000, 00000
 
 	Intro_EN START,_A,DIET,_QU,NO,WAY
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, WALREIN_THICK_FAT
 	PV $0000008E ; ♂ Quiet
-	Text_EN "WALREIN"11
-	Text_JP "トドゼルガ"11
+	db "WALREIN@   "
+	; Text_JP "トドゼルガ"11
 	Friendship 255
 
 	Pokemon HARIYAMA
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, HARIYAMA_THICK_FAT
 	PV $0000007F ; ♂ Brave
-	Text_EN "HARIYAMA"11
-	Text_JP "ハリテヤマ"11
+	db "HARIYAMA@  "
+	; Text_JP "ハリテヤマ"11
 	Friendship 255
 
 	Pokemon GRUMPIG
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,15,31,31, GRUMPIG_THICK_FAT
 	PV $00000018 ; ♀ Quirky
-	Text_EN "GRUMPIG"11
-	Text_JP "ブーピッグ"11
+	db "GRUMPIG@   "
+	; Text_JP "ブーピッグ"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

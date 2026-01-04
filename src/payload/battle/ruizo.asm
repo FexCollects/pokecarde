@@ -1,5 +1,8 @@
 SECTION "payload/battle/ruizo", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 50
 	db NINJA_BOY
 	BT_Floor 5
-	Text_EN "TALON"8
-	Text_JP "ルイゾウ"8
+	db "TALON@  "
+	; Text_JP "ルイゾウ"8
 	OT_ID 00000, 00000
 
 	Intro_EN YAY, _EX, $ffff, TIME, TO, TRAIN	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,15,15,31, 0
 	PV $0000001C
-	Text_EN "SANDSLASH"11
-	Text_JP "サンドパン"11
+	db "SANDSLASH@ "
+	; Text_JP "サンドパン"11
 	Friendship 255
 
 	Pokemon VIGOROTH
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,15,15, 0
 	PV $000000E4
-	Text_EN "VIGOROTH"11
-	Text_JP "ヤルキモノ"11
+	db "VIGOROTH@  "
+	; Text_JP "ヤルキモノ"11
 	Friendship 255
 
 	Pokemon ZANGOOSE
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,15,15, 0
 	PV $000000E4
-	Text_EN "ZANGOOSE"11
-	Text_JP "ザングース"11
+	db "ZANGOOSE@  "
+	; Text_JP "ザングース"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

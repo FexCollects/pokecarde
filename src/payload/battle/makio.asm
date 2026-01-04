@@ -1,5 +1,8 @@
 SECTION "payload/battle/makio", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db POKEFAN_M
 	BT_Floor 0
-	Text_EN "KYLER"8
-	Text_JP "マキオ"8
+	db "KYLER@  "
+	; Text_JP "マキオ"8
 	OT_ID 00000, 00000
 
 	Intro_EN ARE, MY, POKEMON, SCARY, _QU, $ffff
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, 0
 	PV $000000D7
-	Text_EN "GLALIE"11
-	Text_JP "オニゴーリ"11
+	db "GLALIE@    "
+	; Text_JP "オニゴーリ"11
 	Friendship 255
 
 	Pokemon LOUDRED
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,15,31,15, 0
 	PV $000000E1
-	Text_EN "LOUDRED"11
-	Text_JP "ドゴーム"11
+	db "LOUDRED@   "
+	; Text_JP "ドゴーム"11
 	Friendship 255
 
 	Pokemon SHIFTRY
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, 1
 	PV $000000D7
-	Text_EN "SHIFTRY"11
-	Text_JP "ダーテング"11
+	db "SHIFTRY@   "
+	; Text_JP "ダーテング"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

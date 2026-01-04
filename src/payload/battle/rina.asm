@@ -1,5 +1,8 @@
 SECTION "payload/battle/rina", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db HEX_MANIAC
 	BT_Floor 0
-	Text_EN "ELI"8
-	Text_JP "リナ"8
+	db "ELI@    "
+	; Text_JP "リナ"8
 	OT_ID 00000, 00000
 
 	Intro_EN JUST, GIVE_UP, I, HAVE, WON, _EX	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,31,15,15,31, 0
 	PV $000000D5
-	Text_EN "DUSCLOPS"11
-	Text_JP "サマヨール"11
+	db "DUSCLOPS@  "
+	; Text_JP "サマヨール"11
 	Friendship 255
 
 	Pokemon BANETTE
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,15,15, 0
 	PV $0000000A
-	Text_EN "BANETTE"11
-	Text_JP "ジュペッタ"11
+	db "BANETTE@   "
+	; Text_JP "ジュペッタ"11
 	Friendship 255
 
 	Pokemon GARDEVOIR
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, 1
 	PV $0000000A
-	Text_EN "GARDEVOIR"11
-	Text_JP "サーナイト"11
+	db "GARDEVOIR@ "
+	; Text_JP "サーナイト"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

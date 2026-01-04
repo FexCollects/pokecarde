@@ -1,5 +1,8 @@
 SECTION "payload/battle/astrid", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,7 +10,7 @@ DataPacket::
 	BT_Level 50
 	Class LADY
 	BT_Floor 0
-	Text_EN "ASTRID"8
+	db "ASTRID@ "
 	OT_ID 00000, 00000
 
 	Intro_EN TALKING,ABOUT,MY,CUTE,POKEMON,_QU
@@ -23,7 +26,7 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,15,15,15, MAWILE_INTIMIDATE
 	PV $0000001F ; ♀ Docile
-	Text_EN "MAWILE"11
+	db "MAWILE@    "
 	Friendship 255
 
 	Pokemon MINUN
@@ -35,7 +38,7 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,15,15,15, MINUN_MINUS
 	PV $000000D7 ; ♂ Modest
-	Text_EN "MINUN"11
+	db "MINUN@     "
 	Friendship 255
 
 	Pokemon SHIFTRY
@@ -47,9 +50,11 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,15,15,15, SHIFTRY_EARLY_BIRD
 	PV $000000D2 ; ♂ Timid
-	Text_EN "SHIFTRY"11
+	db "SHIFTRY@   "
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

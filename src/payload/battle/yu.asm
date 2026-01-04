@@ -1,5 +1,8 @@
 SECTION "payload/battle/yu", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db NINJA_BOY
 	BT_Floor 0
-	Text_EN "AARON"8
-	Text_JP "ユウ"8
+	db "AARON@  "
+	; Text_JP "ユウ"8
 	OT_ID 00000, 00000
 
 	Intro_EN ISN_T, _SLUDGE_BOMB, GREAT, _QU_EX, $ffff, $ffff
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,15,31, 0
 	PV $000000E1
-	Text_EN "WEEZING"11
-	Text_JP "マタドガス"11
+	db "WEEZING@   "
+	; Text_JP "マタドガス"11
 	Friendship 255
 
 	Pokemon SWALOT
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,31,15,15,31, 0
 	PV $00000019
-	Text_EN "SWALOT"11
-	Text_JP "マルノーム"11
+	db "SWALOT@    "
+	; Text_JP "マルノーム"11
 	Friendship 255
 
 	Pokemon MUK
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,15,15,31, 1
 	PV $000000E4
-	Text_EN "MUK"11
-	Text_JP "ベトベトン"11
+	db "MUK@       "
+	; Text_JP "ベトベトン"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

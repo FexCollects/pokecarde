@@ -1,11 +1,14 @@
 SECTION "payload/berry/yago", ROM0
 INCLUDE "include/berry.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Enigma_Berry
 
-	Text_EN "BITMEL@"7
-	;Text_JP "ヤゴ@@@@@"7
+	db "BITMEL@"
+	; Text_JP "ヤゴ@@@@@"7
 	Firmness VERY_HARD
 	Size 3,6
 	Yield_Range 2, 3
@@ -20,11 +23,11 @@ BerrySprite::
 BerryPalette::
 	INCBIN "build/gfx/berries/yago.gbapal"
 
-	Text_EN "This BERRY is amazingly bitter."45
-	Text_EN "It feels weightless when held."45
+        db "This BERRY is amazingly bitter.@             "
+        db "It feels weightless when held.@              "
 	
-	;Text_JP "とてつもなく　にがい。　てで　もっても"45
-	;Text_JP "おもさを　かんじない　くらい　かるい。"45	
+	; Text_JP "とてつもなく　にがい。　てで　もっても"45
+	; Text_JP "おもさを　かんじない　くらい　かるい。"45	
 
 	db 0,0,0
 	db $08 ; cures burn
@@ -33,3 +36,5 @@ BerryPalette::
 	db 0,0,0
 
 	End_Berry
+
+POPC

@@ -1,5 +1,8 @@
 SECTION "payload/battle/koto", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db EXPERT_F
 	BT_Floor 0
-	Text_EN "ELLE"8
-	Text_JP "コト"8
+	db "ELLE@   "
+	; Text_JP "コト"8
 	OT_ID 00000, 00000
 
 	Intro_EN I, LIKE, TO, TRAVEL, _AND, TRAIN
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,31,15,15, 0
 	PV $000000DF
-	Text_EN "PINSIR"11
-	Text_JP "カイロス"11
+	db "PINSIR@    "
+	; Text_JP "カイロス"11
 	Friendship 255
 
 	Pokemon SEAKING
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,31,15,15, 1
 	PV $000000DC
-	Text_EN "SEAKING"11
-	Text_JP "アズマオウ"11
+	db "SEAKING@   "
+	; Text_JP "アズマオウ"11
 	Friendship 255
 
 	Pokemon DUGTRIO
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,31,15,15,31, 1
 	PV $000000DF
-	Text_EN "DUGTRIO"11
-	Text_JP "ダグトリオ"11
+	db "DUGTRIO@   "
+	; Text_JP "ダグトリオ"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

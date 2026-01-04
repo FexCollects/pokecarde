@@ -1,5 +1,8 @@
 SECTION "payload/battle/yasuo", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	Class NINJA_BOY
 	BT_Floor 0
-	Text_EN "YASUO"8
-	Text_JP "コウヘイ"8
+	db "YASUO@  "
+	; Text_JP "コウヘイ"8
 	OT_ID 00000, 00000
 
 	Intro_JP $0812, $0c01, $ffff, $0c2b, $0618, $0c01
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, 1
 	PV $000000E4
-	Text_EN "NOSEPASS"11
-	Text_JP "ノズパス"11
+	db "NOSEPASS@  "
+	; Text_JP "ノズパス"11
 	Friendship 255
 
 	Pokemon WOBBUFFET
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,31,15,15,15, 0
 	PV $0000001E
-	Text_EN "WOBBUFFET"11
-	Text_JP "ソーナンス"11
+	db "WOBBUFFET@ "
+	; Text_JP "ソーナンス"11
 	Friendship 255
 
 	Pokemon WEEZING
@@ -54,11 +57,13 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,15,15, 0
 	PV $000000E4
-	Text_EN "WEEZING"11
-	Text_JP "マタドガス"11
+	db "WEEZING@   "
+	; Text_JP "マタドガス"11
 	Friendship 255
 
 	End_Trainer
 
 
         ds 44 ; Pad to 256
+
+POPC

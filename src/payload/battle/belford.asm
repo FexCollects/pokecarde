@@ -1,5 +1,8 @@
 SECTION "payload/battle/belford", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 100
 	Class COOLTRAINER_M
 	BT_Floor 5
-	Text_EN "BELFORD"8
-	Text_JP "ミスケ"8
+	db "BELFORD@"
+	; Text_JP "ミスケ"8
 	OT_ID 00000, 00000
 
 	Intro_EN YOU,WILL,NOT,LIKE,MY,ATTACK
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,20,31,20,20,20, DUSCLOPS_PRESSURE
 	PV $00000094 ; ♂ Careful
-	Text_EN "DUSCLOPS"11
-	Text_JP "サマヨール"11
+	db "DUSCLOPS@  "
+	; Text_JP "サマヨール"11
 	Friendship 255
 
 	Pokemon CROBAT
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,20,20,20,20, CROBAT_INNER_FOCUS
 	PV $0000001C ; ♀ Adamant
-	Text_EN "CROBAT"11
-	Text_JP "クロバット"11
+	db "CROBAT@    "
+	; Text_JP "クロバット"11
 	Friendship 255
 
 	Pokemon REGISTEEL
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,20,20,20,20,31, REGISTEEL_CLEAR_BODY
 	PV $0000001E ; ⚲ Bold
-	Text_EN "REGISTEEL"11
-	Text_JP "レジスチル"11
+	db "REGISTEEL@ "
+	; Text_JP "レジスチル"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

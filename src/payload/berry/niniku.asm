@@ -1,11 +1,14 @@
 SECTION "payload/berry/niniku", ROM0
 INCLUDE "include/berry.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Enigma_Berry
 
-	Text_EN "GARLIK@"7
-	;Text_JP "ニニク@@@@"7	
+	db "GARLIK@"
+	; Text_JP "ニニク@@@@"7	
 	Firmness HARD
 	Size 24,9
 	Yield_Range 1, 2
@@ -20,12 +23,14 @@ BerrySprite::
 BerryPalette::
 	INCBIN "build/gfx/berries/niniku.gbapal"
 
-	Text_EN "This sparse BERRY grows quickly."45
-	Text_EN "Its stem gives off a pleasant aroma."45
+        db "This sparse BERRY grows quickly.@            "
+        db "Its stem gives off a pleasant aroma.@        "
 	
-	;Text_JP "そだちは　はやいが　あまり　みが　つかない。"45
-	;Text_JP "くきを　とおって　よい　かおりが　でてくる。"45	
+	; Text_JP "そだちは　はやいが　あまり　みが　つかない。"45
+	; Text_JP "くきを　とおって　よい　かおりが　でてくる。"45	
 
         ds 22 ; Pokéblock ingredient only
 
 	End_Berry
+
+POPC

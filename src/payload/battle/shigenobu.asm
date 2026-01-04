@@ -1,5 +1,8 @@
 SECTION "payload/battle/shigenobu", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db PKMN_BREEDER_M
 	BT_Floor 0
-	Text_EN "CANDICE"8
-	Text_JP "シゲノブ"8
+	db "CANDICE@"
+	; Text_JP "シゲノブ"8
 	OT_ID 00000, 00000
 
 	Intro_EN YOUR, MOVE, WILL, HIT, YOU, BACK	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,15,15,31, 0
 	PV $0000006E
-	Text_EN "TORCHIC"11
-	Text_JP "アチャモ"11
+	db "TORCHIC@   "
+	; Text_JP "アチャモ"11
 	Friendship 255
 
 	Pokemon BEAUTIFLY
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, 0
 	PV $00000010
-	Text_EN "BEAUTIFLY"11
-	Text_JP "アゲハント"11
+	db "BEAUTIFLY@ "
+	; Text_JP "アゲハント"11
 	Friendship 255
 
 	Pokemon SPOINK
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, 1
 	PV $00000091
-	Text_EN "SPOINK"11
-	Text_JP "バネブー"11
+	db "SPOINK@    "
+	; Text_JP "バネブー"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

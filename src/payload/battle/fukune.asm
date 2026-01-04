@@ -1,5 +1,8 @@
 SECTION "payload/battle/fukune", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 100
 	db HEX_MANIAC
 	BT_Floor 12
-	Text_EN "VERITY"8
-	Text_JP "フクネ"8
+	db "VERITY@ "
+	; Text_JP "フクネ"8
 	OT_ID 00000, 00000
 
 	Intro_EN YOU, WILL, SHAKE, WITH, FEAR, _ELIP_EX	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,20,20,20,20,31, 0
 	PV $00000093
-	Text_EN "DUSCLOPS"11
-	Text_JP "サマヨール"11
+	db "DUSCLOPS@  "
+	; Text_JP "サマヨール"11
 	Friendship 255
 
 	Pokemon TORKOAL
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,20,20,20,20,31, 0
 	PV $00000016
-	Text_EN "TORKOAL"11
-	Text_JP "コータス"11
+	db "TORKOAL@   "
+	; Text_JP "コータス"11
 	Friendship 255
 
 	Pokemon SWAMPERT
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,20,20,20,20,31, 0
 	PV $00000080
-	Text_EN "SWAMPERT"11
-	Text_JP "ラグラージ"11
+	db "SWAMPERT@  "
+	; Text_JP "ラグラージ"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

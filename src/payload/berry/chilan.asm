@@ -1,10 +1,13 @@
 SECTION "payload/berry/chilan", ROM0
 INCLUDE "include/berry.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Enigma_Berry
 
-	Text_EN "CHILAN"7
+	db "CHILAN@"
 	Firmness SOFT
 	Size 27,2
 	Yield_Range 1, 2
@@ -19,9 +22,11 @@ BerrySprite::
 BerryPalette::
 	INCBIN "build/gfx/berries/chilan.gbapal"
 
-	Text_EN "This sparse BERRY grows quickly."45
-	Text_EN "Its skin is quite tough."45
+	db "This sparse BERRY grows quickly.@            "
+	db "Its skin is quite tough.@                    "
 
         ds 22 ; Pokéblock ingredient only
 
 	End_Berry
+
+POPC

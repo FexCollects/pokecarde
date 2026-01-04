@@ -1,5 +1,8 @@
 SECTION "payload/battle/goro", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class NINJA_BOY
 	BT_Floor MOSSDEEP
-	Text_EN "GORO"8
-	Text_JP "タカナオ"8
+	db "GORO@   "
+	; Text_JP "タカナオ"8
 	OT_ID 00000, 00000
 
 	Intro_EN COME_ON,_EX_EX,COME_ON,_EX_EX,SPEED_BOOST,_EX_EX
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, ELECTRODE_STATIC
 	PV $0000000E ; ⚲ Naive
-	Text_EN "ELECTRODE"11
-	Text_JP "マルマイン"11
+	db "ELECTRODE@ "
+	; Text_JP "マルマイン"11
 	Friendship 255
 
 	Pokemon NINJASK
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,15,15, NINJASK_SPEED_BOOST
 	PV $000000D5 ; ♂ Jolly
-	Text_EN "NINJASK"11
-	Text_JP "テッカニン"11
+	db "NINJASK@   "
+	; Text_JP "テッカニン"11
 	Friendship 255
 
 	Pokemon CROBAT
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,15,15, CROBAT_INNER_FOCUS
 	PV $0000000D ; ♀ Jolly
-	Text_EN "CROBAT"11
-	Text_JP "クロバット"11
+	db "CROBAT@    "
+	; Text_JP "クロバット"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

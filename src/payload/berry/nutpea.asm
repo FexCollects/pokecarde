@@ -1,10 +1,13 @@
 SECTION "payload/berry/nutpea", ROM0
 INCLUDE "include/berry.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Enigma_Berry
 
-	Text_EN "NUTPEA"7
+	db "NUTPEA@"
 	Firmness SUPER_HARD
 	Size 12,4
 	Yield_Range 1, 3
@@ -19,9 +22,11 @@ BerrySprite::
 BerryPalette::
 	INCBIN "build/gfx/berries/nutpea.gbapal"
 
-	Text_EN "This BERRY is rigid and cracks open"45
-	Text_EN "when the center is squeezed."45
+        db "This BERRY is rigid and cracks open@         "
+        db "when the center is squeezed.@                "
 
         ds 22 ; Pokéblock ingredient only
 
 	End_Berry
+
+POPC

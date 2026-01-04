@@ -1,5 +1,8 @@
 SECTION "payload/battle/judith", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class PSYCHIC_F
 	BT_Floor MOSSDEEP
-	Text_EN "JUDITH"8
-	Text_JP "ナナエ"8
+	db "JUDITH@ "
+	; Text_JP "ナナエ"8
 	OT_ID 00000, 00000
 
 	Intro_EN WELCOME,_ELIP_EX,I_AM,_A,_TRICK,_T_PSYCHIC
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, ALAKAZAM_SYNCHRONIZE
 	PV $00000087 ; ♂ Timid
-	Text_EN "ALAKAZAM"11
-	Text_JP "フーディン"11
+	db "ALAKAZAM@  "
+	; Text_JP "フーディン"11
 	Friendship 255
 
 	Pokemon KECLEON
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,31,15,15,15, KECLEON_COLOR_CHANGE
 	PV $00000016 ; ⚲ Sassy
-	Text_EN "KECLEON"11
-	Text_JP "カクレオン"11
+	db "KECLEON@   "
+	; Text_JP "カクレオン"11
 	Friendship 255
 
 	Pokemon LINOONE
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,31,15,15, LINOONE_PICKUP
 	PV $00000085 ; ♂ Impish
-	Text_EN "LINOONE"11
-	Text_JP "マッスグマ"11
+	db "LINOONE@   "
+	; Text_JP "マッスグマ"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

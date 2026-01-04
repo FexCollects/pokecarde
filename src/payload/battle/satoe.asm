@@ -1,5 +1,8 @@
 SECTION "payload/battle/satoe", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 50
 	db PSYCHIC_F
 	BT_Floor 12
-	Text_EN "PORTIA"8
-	Text_JP "サトエ"8
+	db "PORTIA@ "
+	; Text_JP "サトエ"8
 	OT_ID 00000, 00000
 
 	Intro_EN I, GOT, THESE, POKEMON, WITH, POKEBLOCK	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, 0
 	PV $0000000F
-	Text_EN "ALAKAZAM"11
-	Text_JP "フーディン"11
+	db "ALAKAZAM@  "
+	; Text_JP "フーディン"11
 	Friendship 255
 
 	Pokemon GOLDUCK
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, 1
 	PV $000000E0
-	Text_EN "GOLDUCK"11
-	Text_JP "ゴルダック"11
+	db "GOLDUCK@   "
+	; Text_JP "ゴルダック"11
 	Friendship 255
 
 	Pokemon MAGNETON
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, 1
 	PV $0000000F
-	Text_EN "MAGNETON"11
-	Text_JP "レアコイル"11
+	db "MAGNETON@  "
+	; Text_JP "レアコイル"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

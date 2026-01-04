@@ -1,5 +1,8 @@
 SECTION "payload/battle/nozomu", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db TRIATHLETE_M_BIKE
 	BT_Floor 0
-	Text_EN "DAWSON"8
-	Text_JP "ノゾム"8
+	db "DAWSON@ "
+	; Text_JP "ノゾム"8
 	OT_ID 00000, 00000
 
 	Intro_EN AREN_T, MY, POKEMON, COOL, _QU, $ffff
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, 0
 	PV $0000000F
-	Text_EN "RAICHU"11
-	Text_JP "ライチュウ"11
+	db "RAICHU@    "
+	; Text_JP "ライチュウ"11
 	Friendship 255
 
 	Pokemon GOLDUCK
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, 0
 	PV $000000D7
-	Text_EN "GOLDUCK"11
-	Text_JP "ゴルダック"11
+	db "GOLDUCK@   "
+	; Text_JP "ゴルダック"11
 	Friendship 255
 
 	Pokemon TAUROS
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,15,15,31, 0
 	PV $000000E4
-	Text_EN "TAUROS"11
-	Text_JP "ケンタロス"11
+	db "TAUROS@    "
+	; Text_JP "ケンタロス"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

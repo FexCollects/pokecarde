@@ -1,5 +1,8 @@
 SECTION "payload/battle/sophie", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class LADY
 	BT_Floor MOSSDEEP
-	Text_EN "SOPHIE"8
-	Text_JP "マミナ"8
+	db "SOPHIE@ "
+	; Text_JP "マミナ"8
 	OT_ID 00000, 00000
 
 	Intro_EN MY,CUTENESS,WILL,_STOP,YOU,_EX
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,15,15, DELCATTY_CUTE_CHARM
 	PV $0000001C ; ♀ Adamant
-	Text_EN "DELCATTY"11
-	Text_JP "エネコロロ"11
+	db "DELCATTY@  "
+	; Text_JP "エネコロロ"11
 	Friendship 255
 
 	Pokemon LUVDISC
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, LUVDISC_SWIFT_SWIM
 	PV $000000E7 ; ♂ Docile
-	Text_EN "LUVDISC"11
-	Text_JP "ラブカス"11
+	db "LUVDISC@   "
+	; Text_JP "ラブカス"11
 	Friendship 255
 
 	Pokemon KIRLIA
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, KIRLIA_TRACE
 	PV $0000000F ; ♀ Modest
-	Text_EN "KIRLIA"11
-	Text_JP "キルリア"11
+	db "KIRLIA@    "
+	; Text_JP "キルリア"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

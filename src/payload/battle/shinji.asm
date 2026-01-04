@@ -1,5 +1,8 @@
 SECTION "payload/battle/shinji", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db PKMN_BREEDER_M
 	BT_Floor 0
-	Text_EN "WILSON"8
-	Text_JP "シンジ"8
+	db "WILSON@ "
+	; Text_JP "シンジ"8
 	OT_ID 00000, 00000
 
 	Intro_EN I_AM, QUITE, DIFFERENT, FROM, BEFORE, _EX	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, 0
 	PV $00000012
-	Text_EN "BELLOSSOM"11
-	Text_JP "キレイハナ"11
+	db "BELLOSSOM@ "
+	; Text_JP "キレイハナ"11
 	Friendship 255
 
 	Pokemon DUSTOX
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, 0
 	PV $00000083
-	Text_EN "DUSTOX"11
-	Text_JP "ドクケイル"11
+	db "DUSTOX@    "
+	; Text_JP "ドクケイル"11
 	Friendship 255
 
 	Pokemon GOREBYSS
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,31, 0
 	PV $0000000F
-	Text_EN "GOREBYSS"11
-	Text_JP "サクラビス"11
+	db "GOREBYSS@  "
+	; Text_JP "サクラビス"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

@@ -1,5 +1,8 @@
 SECTION "payload/battle/griffin", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class PSYCHIC_M
 	BT_Floor MOSSDEEP
-	Text_EN "GRIFFIN"8
-	Text_JP "アスオ"8
+	db "GRIFFIN@"
+	; Text_JP "アスオ"8
 	OT_ID 00000, 00000
 
 	Intro_EN CAN,YOU,SENSE,THE,PRESSURE,_QU
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,31,15,15,15, BANETTE_INSOMNIA
 	PV $00000085 ; ♂ Impish
-	Text_EN "BANETTE"11
-	Text_JP "ジュペッタ"11
+	db "BANETTE@   "
+	; Text_JP "ジュペッタ"11
 	Friendship 255
 
 	Pokemon ABSOL
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,31,15,15,15, ABSOL_PRESSURE
 	PV $0000001C ; ♀ Adamant
-	Text_EN "ABSOL"11
-	Text_JP "アブソル"11
+	db "ABSOL@     "
+	; Text_JP "アブソル"11
 	Friendship 255
 
 	Pokemon DUSCLOPS
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,31, DUSCLOPS_PRESSURE
 	PV $0000001C ; ♀ Adamant
-	Text_EN "DUSCLOPS"11
-	Text_JP "サマヨール"11
+	db "DUSCLOPS@  "
+	; Text_JP "サマヨール"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

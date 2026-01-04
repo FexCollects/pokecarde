@@ -1,5 +1,8 @@
 SECTION "payload/battle/darlene", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	Class POKEFAN_F
 	BT_Floor 0
-	Text_EN "DARLENE"8
-	Text_JP "ノブエ"8
+	db "DARLENE@"
+	; Text_JP "ノブエ"8
 	OT_ID 00000, 00000
 
 	Intro_JP $2021, $26d5, $0c00, $0a01, $1034, $020e
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,31,15,15, 0
 	PV $0000000A
-	Text_EN "LUVDISC"11
-	Text_JP "ラブカス"11
+	db "LUVDISC@   "
+	; Text_JP "ラブカス"11
 	Friendship 255
 
 	Pokemon SKITTY
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,31,15,15, 0
 	PV $0000000A
-	Text_EN "SKITTY"11
-	Text_JP "エネコ"11
+	db "SKITTY@    "
+	; Text_JP "エネコ"11
 	Friendship 255
 
 	Pokemon PIKACHU
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,31,15,31,15, 0
 	PV $000000D7
-	Text_EN "PIKACHU"11
-	Text_JP "ピカチュウ"11
+	db "PIKACHU@   "
+	; Text_JP "ピカチュウ"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

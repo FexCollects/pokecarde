@@ -1,5 +1,8 @@
 SECTION "payload/battle/fay", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 100
 	Class BEAUTY
 	BT_Floor 19
-	Text_EN "FAY"8
-	Text_JP "セイラ"8
+	db "FAY@    "
+	; Text_JP "セイラ"8
 	OT_ID 00000, 00000
 
 	Intro_EN I,CAN_T,WAIT,TO,BATTLE,_EX_EX
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 20,31,20,20,31,20, ALTARIA_NATURAL_CURE
 	PV $000000E7 ; ♂ Docile
-	Text_EN "ALTARIA"11
-	Text_JP "チルタリス"11
+	db "ALTARIA@   "
+	; Text_JP "チルタリス"11
 	Friendship 255
 
 	Pokemon STARMIE
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,20,20,20,31,20, STARMIE_NATURAL_CURE
 	PV $0000000F ; ⚲ Modest
-	Text_EN "STARMIE"11
-	Text_JP "スターミー"11
+	db "STARMIE@   "
+	; Text_JP "スターミー"11
 	Friendship 255
 
 	Pokemon REGICE
@@ -54,11 +57,13 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 20,20,31,20,31,20, REGICE_CLEAR_BODY
 	PV $00000020 ; ⚲ Relaxed
-	Text_EN "REGICE"11
-	Text_JP "レジアイス"11
+	db "REGICE@    "
+	; Text_JP "レジアイス"11
 	Friendship 255
 
 	End_Trainer
 
 
         ds 44 ; Pad to 256
+
+POPC

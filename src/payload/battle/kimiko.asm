@@ -1,5 +1,8 @@
 SECTION "payload/battle/kimiko", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	Class TRIATHLETE_F_RUN
 	BT_Floor 0
-	Text_EN "ISABEL"8
-	Text_JP "キミコ"8
+	db "ISABEL@ "
+	; Text_JP "キミコ"8
 	OT_ID 00000, 00000
 
 	Intro_JP $142a, $0e29, $062e, $142f, $0620, $0430
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,31,15,15,31, 1
 	PV $0000001E
-	Text_EN "LUDICOLO"11
-	Text_JP "ルンパッパ"11
+	db "LUDICOLO@  "
+	; Text_JP "ルンパッパ"11
 	Friendship 255
 
 	Pokemon CRADILY
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,31, 0
 	PV $000000E6
-	Text_EN "CRADILY"11
-	Text_JP "ユレイドル"11
+	db "CRADILY@   "
+	; Text_JP "ユレイドル"11
 	Friendship 255
 
 	Pokemon WAILORD
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,31, 1
 	PV $000000DC
-	Text_EN "WAILORD"11
-	Text_JP "ホエルオー"11
+	db "WAILORD@   "
+	; Text_JP "ホエルオー"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

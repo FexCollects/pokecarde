@@ -10,11 +10,8 @@ build/%.gbapal: %.png
 	../bin/pret/gbagfx $< $@
 
 # Asm -> Object Rules
-build/$(REGION)/app/%.tx: app/%.asm
-	python3 ../scripts/ereadertext.py $< $@ $(REGION)
-build/$(REGION)/%.tx: %.asm
-	python3 ../scripts/regionalize.py $< $@ $(REGION) $(REGION)
-build/$(REGION)/%.o: build/$(REGION)/%.tx
+# TODO: notdir below is wrong
+build/$(REGION)/%.o: %.asm
 	../bin/rgbds/v0.9.1/rgbasm -M build/deps/$(notdir $@).d -DCREGION=REGION_$(REGION) -o $@ $<
 
 # ROM -> Card .raw Rules
@@ -27,6 +24,8 @@ build/$(REGION)/%.vpk: build/$(REGION)/%.crc
 build/$(REGION)/%-01.raw: build/$(REGION)/%.vpk
 	@echo " [CC]  $@"
 	../bin/nedc/v1.4.1/nedcmake -i $< -o $(subst -01.raw,,$@) -type 1 -region 1
+
+.PRECIOUS: build/$(REGION)/%.z80
 
 # Baseline ROM generation rule, deps for specfic files are generated
 build/$(REGION)/%.gbc:

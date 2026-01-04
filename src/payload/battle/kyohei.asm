@@ -1,5 +1,8 @@
 SECTION "payload/battle/kyohei", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db GUITARIST
 	BT_Floor 0
-	Text_EN "CLYDE"8
-	Text_JP "キョウヘイ"8
+	db "CLYDE@  "
+	; Text_JP "キョウヘイ"8
 	OT_ID 00000, 00000
 
 	Intro_EN HEAR, ME, ROAR, WROOOAAR_, _EX_EX, $ffff
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, 0
 	PV $000000D7
-	Text_EN "RAICHU"11
-	Text_JP "ライチュウ"11
+	db "RAICHU@    "
+	; Text_JP "ライチュウ"11
 	Friendship 255
 
 	Pokemon SHARPEDO
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,15,31,15, 0
 	PV $000000E1
-	Text_EN "SHARPEDO"11
-	Text_JP "サメハダー"11
+	db "SHARPEDO@  "
+	; Text_JP "サメハダー"11
 	Friendship 255
 
 	Pokemon ROSELIA
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,15,15, 1
 	PV $00000019
-	Text_EN "ROSELIA"11
-	Text_JP "ロゼリア"11
+	db "ROSELIA@   "
+	; Text_JP "ロゼリア"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

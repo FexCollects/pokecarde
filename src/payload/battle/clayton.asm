@@ -1,5 +1,8 @@
 SECTION "payload/battle/clayton", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 50
 	Class PKMN_RANGER_M
 	BT_Floor 5
-	Text_EN "CLAYTON"8
-	Text_JP "エイコウ"8
+	db "CLAYTON@"
+	; Text_JP "エイコウ"8
 	OT_ID 00000, 00000
 
 	Intro_EN HEHE,MY,BATTLE,ISN_T,THAT,SHAKY
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,15,15, FLYGON_LEVITATE
 	PV $00000090 ; ♂ Rash
-	Text_EN "FLYGON"11
-	Text_JP "フライゴン"11
+	db "FLYGON@    "
+	; Text_JP "フライゴン"11
 	Friendship 255
 
 	Pokemon RHYDON
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, RHYDON_ROCK_HEAD
 	PV $0000001B ; ♀ Brave
-	Text_EN "RHYDON"11
-	Text_JP "サイドン"11
+	db "RHYDON@    "
+	; Text_JP "サイドン"11
 	Friendship 255
 
 	Pokemon SWAMPERT
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, SWAMPERT_TORRENT
 	PV $0000007E ; ♂ Lonely
-	Text_EN "SWAMPERT"11
-	Text_JP "ラグラージ"11
+	db "SWAMPERT@  "
+	; Text_JP "ラグラージ"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

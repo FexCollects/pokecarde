@@ -1,5 +1,8 @@
 SECTION "payload/battle/junji", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db COLLECTOR
 	BT_Floor 0
-	Text_EN "JACE"8
-	Text_JP "ジュンジ"8
+	db "JACE@   "
+	; Text_JP "ジュンジ"8
 	OT_ID 00000, 00000
 
 	Intro_EN I, COLLECT, POKEMON, WITH, DIFFERENT, LOOKS	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, 0
 	PV $EEE32A53
-	Text_EN "SPINDA"11
-	Text_JP "パッチール"11
+	db "SPINDA@    "
+	; Text_JP "パッチール"11
 	Friendship 255
 
 	Pokemon SPINDA
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,15,15,15, 0
 	PV $E3FDF3FD
-	Text_EN "SPINDA"11
-	Text_JP "パッチール"11
+	db "SPINDA@    "
+	; Text_JP "パッチール"11
 	Friendship 255
 
 	Pokemon SPINDA
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 08888, 00000
 	IVs 31,15,15,15,15,15, 0
 	PV $88888888
-	Text_EN "SPINDA"11
-	Text_JP "パッチール"11
+	db "SPINDA@    "
+	; Text_JP "パッチール"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

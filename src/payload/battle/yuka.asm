@@ -1,5 +1,8 @@
 SECTION "payload/battle/yuka", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db BEAUTY
 	BT_Floor 0
-	Text_EN "DAWN"8
-	Text_JP "ユカ"8
+	db "DAWN@   "
+	; Text_JP "ユカ"8
 	OT_ID 00000, 00000
 
 	Intro_EN MY, FASHION, WILL, MAKE, ME, SHINE	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, 0
 	PV $0000001B
-	Text_EN "SABLEYE"11
-	Text_JP "ヤミラミ"11
+	db "SABLEYE@   "
+	; Text_JP "ヤミラミ"11
 	Friendship 255
 
 	Pokemon GRUMPIG
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, 0
 	PV $0000008C
-	Text_EN "GRUMPIG"11
-	Text_JP "ブーピッグ"11
+	db "GRUMPIG@   "
+	; Text_JP "ブーピッグ"11
 	Friendship 255
 
 	Pokemon CLAMPERL
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, 0
 	PV $00000016
-	Text_EN "CLAMPERL"11
-	Text_JP "パールル"11
+	db "CLAMPERL@  "
+	; Text_JP "パールル"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

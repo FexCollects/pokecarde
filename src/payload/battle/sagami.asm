@@ -1,5 +1,8 @@
 SECTION "payload/battle/sagami", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	Class RUIN_MANIAC
 	BT_Floor 0
-	Text_EN "REGINALD"8
-	Text_JP "サガミ"8
+	db "REGINALD"
+	; Text_JP "サガミ"8
 	OT_ID 00000, 00000
 
 	Intro_JP $0a43, $1034, $1606, $1010, $020e, $081b
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,31,15,15,15, 0
 	PV $0000001B
-	Text_EN "REGIROCK"11
-	Text_JP "レジロック"11
+	db "REGIROCK@  "
+	; Text_JP "レジロック"11
 	Friendship 255
 
 	Pokemon REGICE
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,31,15,31,15, 0
 	PV $00000020
-	Text_EN "REGICE"11
-	Text_JP "レジアイス"11
+	db "REGICE@    "
+	; Text_JP "レジアイス"11
 	Friendship 255
 
 	Pokemon REGISTEEL
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,31, 0
 	PV $0000001C
-	Text_EN "REGISTEEL"11
-	Text_JP "レジスチル"11
+	db "REGISTEEL@ "
+	; Text_JP "レジスチル"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

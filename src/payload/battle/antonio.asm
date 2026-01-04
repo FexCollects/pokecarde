@@ -1,5 +1,8 @@
 SECTION "payload/battle/antonio", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class GENTLEMAN
 	BT_Floor MOSSDEEP
-	Text_EN "ANTONIO"8
-	Text_JP "クリント"8
+	db "ANTONIO@"
+	; Text_JP "クリント"8
 	OT_ID 00000, 00000
 
 	Intro_EN HMM,HOW,ARE,MY,POKEMON,_QU
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, DONPHAN_STURDY
 	PV $000000E4 ; ♂ Adamant
-	Text_EN "DONPHAN"11
-	Text_JP "ドンファン"11
+	db "DONPHAN@   "
+	; Text_JP "ドンファン"11
 	Friendship 255
 
 	Pokemon SKARMORY
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,15,15, SKARMORY_STURDY
 	PV $0000001C ; ♀ Adamant
-	Text_EN "SKARMORY"11
-	Text_JP "エアームド"11
+	db "SKARMORY@  "
+	; Text_JP "エアームド"11
 	Friendship 255
 
 	Pokemon HOUNDOOM
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,31,15, HOUNDOOM_EARLY_BIRD
 	PV $000000E1 ; ♂ Hardy
-	Text_EN "HOUNDOOM"11
-	Text_JP "ヘルガー"11
+	db "HOUNDOOM@  "
+	; Text_JP "ヘルガー"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

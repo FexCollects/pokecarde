@@ -1,10 +1,13 @@
 SECTION "payload/berry/drash", ROM0
 INCLUDE "include/berry.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Enigma_Berry
 
-	Text_EN "DRASH@@"7
+	db "DRASH@@"
 	Firmness VERY_HARD
 	Size 13,4
 	Yield_Range 2, 3
@@ -19,8 +22,8 @@ BerrySprite::
 BerryPalette::
 	INCBIN "build/gfx/berries/drash.gbapal"
 
-	Text_EN "When it ripens, this sweet BERRY"45
-	Text_EN "falls and sticks into the ground."45
+        db "When it ripens, this sweet BERRY@            "
+        db "falls and sticks into the ground.@           "
 
 	db 0,0,0
 	db $10 ; cures poison
@@ -29,3 +32,5 @@ BerryPalette::
 	db 0,0,0
 
 	End_Berry
+
+POPC

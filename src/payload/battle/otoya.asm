@@ -1,5 +1,8 @@
 SECTION "payload/battle/otoya", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db BIRD_KEEPER
 	BT_Floor 0
-	Text_EN "CORWIN"8
-	Text_JP "オトヤ"8
+	db "CORWIN@ "
+	; Text_JP "オトヤ"8
 	OT_ID 00000, 00000
 
 	Intro_EN GO, _EX, MY, FLYING, FRIEND, _EX_EX	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, 0
 	PV $000000E3
-	Text_EN "TROPIUS"11
-	Text_JP "トロピウス"11
+	db "TROPIUS@   "
+	; Text_JP "トロピウス"11
 	Friendship 255
 
 	Pokemon XATU
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,15,15,15, 0
 	PV $0000000C
-	Text_EN "XATU"11
-	Text_JP "ネイティオ"11
+	db "XATU@      "
+	; Text_JP "ネイティオ"11
 	Friendship 255
 
 	Pokemon SKARMORY
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, 0
 	PV $00000080
-	Text_EN "SKARMORY"11
-	Text_JP "エアームド"11
+	db "SKARMORY@  "
+	; Text_JP "エアームド"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

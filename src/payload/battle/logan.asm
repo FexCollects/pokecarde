@@ -1,5 +1,8 @@
 SECTION "payload/battle/logan", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class RUIN_MANIAC
 	BT_Floor MOSSDEEP
-	Text_EN "LOGAN"8
-	Text_JP "マサユキ"8
+	db "LOGAN@  "
+	; Text_JP "マサユキ"8
 	OT_ID 00000, 00000
 
 	Intro_EN BEGINNING,_QU,END,_QU_EX,I_AM,CONFUSED
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, WAILORD_OBLIVIOUS
 	PV $00000011 ; ♀ Quiet
-	Text_EN "WAILORD"11
-	Text_JP "ホエルオー"11
+	db "WAILORD@   "
+	; Text_JP "ホエルオー"11
 	Friendship 255
 
 	Pokemon ARMALDO
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, ARMALDO_BATTLE_ARMOR
 	PV $00000080 ; ♂ Adamant
-	Text_EN "ARMALDO"11
-	Text_JP "アーマルド"11
+	db "ARMALDO@   "
+	; Text_JP "アーマルド"11
 	Friendship 255
 
 	Pokemon RELICANTH
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, RELICANTH_ROCK_HEAD
 	PV $00000076 ; ♂ Bashful
-	Text_EN "RELICANTH"11
-	Text_JP "ジーランス"11
+	db "RELICANTH@ "
+	; Text_JP "ジーランス"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

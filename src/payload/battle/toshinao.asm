@@ -1,5 +1,8 @@
 SECTION "payload/battle/toshinao", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db NINJA_BOY
 	BT_Floor 0
-	Text_EN "KEANE"8
-	Text_JP "トシナオ"8
+	db "KEANE@  "
+	; Text_JP "トシナオ"8
 	OT_ID 00000, 00000
 
 	Intro_EN HERE, I, AM, LET_S, GO, _EX
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,31,15,15,15, 0
 	PV $0000008C
-	Text_EN "TENTACRUEL"11
-	Text_JP "ドククラゲ"11
+	db "TENTACRUEL@"
+	; Text_JP "ドククラゲ"11
 	Friendship 255
 
 	Pokemon WEEZING
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,31, 0
 	PV $00000080
-	Text_EN "WEEZING"11
-	Text_JP "マタドガス"11
+	db "WEEZING@   "
+	; Text_JP "マタドガス"11
 	Friendship 255
 
 	Pokemon CROBAT
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,31, 0
 	PV $0000001C
-	Text_EN "CROBAT"11
-	Text_JP "クロバット"11
+	db "CROBAT@    "
+	; Text_JP "クロバット"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

@@ -1,10 +1,13 @@
 SECTION "payload/berry/pumkin", ROM0
 INCLUDE "include/berry.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Enigma_Berry
 
-	Text_EN "PUMKIN"7
+	db "PUMKIN@"
 	Firmness SUPER_HARD
 	Size 4,8
 	Yield_Range 2, 3
@@ -19,8 +22,8 @@ BerrySprite::
 BerryPalette::
 	INCBIN "build/gfx/berries/pumkin.gbapal"
 
-	Text_EN "This BERRY is amazingly sour."45
-	Text_EN "It’s heavy due to its dense filling."45
+        db "This BERRY is amazingly sour.@               "
+        db "It’s heavy due to its dense filling.@        "
 
 	db 0,0,0
 	db $04 ; cures freeze
@@ -29,3 +32,5 @@ BerryPalette::
 	db 0,0,0
 
 	End_Berry
+
+POPC

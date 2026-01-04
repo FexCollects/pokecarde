@@ -1,5 +1,8 @@
 SECTION "payload/battle/sueno", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db HEX_MANIAC
 	BT_Floor 0
-	Text_EN "ANABEL"8
-	Text_JP "スエノ"8
+	db "ANABEL@ "
+	; Text_JP "スエノ"8
 	OT_ID 00000, 00000
 
 	Intro_EN YOU, SHOULD, RUN_AWAY, NOW, _EX, $ffff
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,31,15,15,31, 0
 	PV $00000021
-	Text_EN "WOBBUFFET"11
-	Text_JP "ソーナンス"11
+	db "WOBBUFFET@ "
+	; Text_JP "ソーナンス"11
 	Friendship 255
 
 	Pokemon DUSCLOPS
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,31,15,15,31, 0
 	PV $000000E6
-	Text_EN "DUSCLOPS"11
-	Text_JP "サマヨール"11
+	db "DUSCLOPS@  "
+	; Text_JP "サマヨール"11
 	Friendship 255
 
 	Pokemon NOSEPASS
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,15,15,31, 1
 	PV $000000E9
-	Text_EN "NOSEPASS"11
-	Text_JP "ノズパス"11
+	db "NOSEPASS@  "
+	; Text_JP "ノズパス"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

@@ -1,5 +1,8 @@
 SECTION "payload/battle/stuart", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class COLLECTOR
 	BT_Floor MOSSDEEP
-	Text_EN "STUART"8
-	Text_JP "エツヤ"8
+	db "STUART@ "
+	; Text_JP "エツヤ"8
 	OT_ID 00000, 00000
 
 	Intro_EN THERE,IS,NOTHING,BAD,ABOUT,THICK_FAT
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, AGGRON_ROCK_HEAD
 	PV $00000016 ; ♀ Sassy
-	Text_EN "AGGRON"11
-	Text_JP "ボスゴドラ"11
+	db "AGGRON@    "
+	; Text_JP "ボスゴドラ"11
 	Friendship 255
 
 	Pokemon WAILORD
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,31, WAILORD_OBLIVIOUS
 	PV $00000091 ; ♂ Calm
-	Text_EN "WAILORD"11
-	Text_JP "ホエルオー"11
+	db "WAILORD@   "
+	; Text_JP "ホエルオー"11
 	Friendship 255
 
 	Pokemon METAGROSS
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, METAGROSS_CLEAR_BODY
 	PV $00000017 ; ⚲ Careful
-	Text_EN "METAGROSS"11
-	Text_JP "メタグロス"11
+	db "METAGROSS@ "
+	; Text_JP "メタグロス"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

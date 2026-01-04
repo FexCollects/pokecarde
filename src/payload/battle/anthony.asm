@@ -1,5 +1,8 @@
 SECTION "payload/battle/anthony", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db GENTLEMAN
 	BT_Floor 0
-	Text_EN "GREGORY"8
-	Text_JP "アンソニー"8
+	db "GREGORY@"
+	; Text_JP "アンソニー"8
 	OT_ID 00000, 00000
 
 	Intro_EN MY, NEED, TO, WIN, IS, OVERWHELMING	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, 0
 	PV $0000000F
-	Text_EN "ALAKAZAM"11
-	Text_JP "フーディン"11
+	db "ALAKAZAM@  "
+	; Text_JP "フーディン"11
 	Friendship 255
 
 	Pokemon HARIYAMA
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, 0
 	PV $00000080
-	Text_EN "HARIMYAMA"11
-	Text_JP "ハリテヤマ"11
+	db "HARIMYAMA@ "
+	; Text_JP "ハリテヤマ"11
 	Friendship 255
 
 	Pokemon SHEDINJA
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,15,15, 0
 	PV $0000001C
-	Text_EN "SHEDINJA"11
-	Text_JP "ヌケニン"11
+	db "SHEDINJA@  "
+	; Text_JP "ヌケニン"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

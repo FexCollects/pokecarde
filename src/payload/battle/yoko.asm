@@ -1,5 +1,8 @@
 SECTION "payload/battle/yoko", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db LASS
 	BT_Floor 0
-	Text_EN "AMELIA"8
-	Text_JP "ヨウコ"8
+	db "AMELIA@ "
+	; Text_JP "ヨウコ"8
 	OT_ID 00000, 00000
 
 	Intro_EN LOOK, _EX, ISN_T, IT, CUTE, _QU	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,31,15,15,15, 0
 	PV $00000012
-	Text_EN "JIGGLYPUFF"11
-	Text_JP "プリン"11
+	db "JIGGLYPUFF@"
+	; Text_JP "プリン"11
 	Friendship 255
 
 	Pokemon SKITTY
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,15, 0
 	PV $000000DA
-	Text_EN "SKITTY"11
-	Text_JP "エネコ"11
+	db "SKITTY@    "
+	; Text_JP "エネコ"11
 	Friendship 255
 
 	Pokemon LUVDISC
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,31,15,15, 0
 	PV $00000012
-	Text_EN "LUVDISC"11
-	Text_JP "ラブカス"11
+	db "LUVDISC@   "
+	; Text_JP "ラブカス"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

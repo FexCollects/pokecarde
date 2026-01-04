@@ -1,5 +1,8 @@
 SECTION "payload/battle/maggie", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class POKEFAN_F
 	BT_Floor MOSSDEEP
-	Text_EN "MAGGIE"8
-	Text_JP "ミスズ"8
+	db "MAGGIE@ "
+	; Text_JP "ミスズ"8
 	OT_ID 00000, 00000
 
 	Intro_EN LOOK,AT,MY,CUTE,POKEMON,_EX
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,31,15,15,15, WYNAUT_SHADOW_TAG
 	PV $00000083 ; ♂ Docile
-	Text_EN "WYNAUT"11
-	Text_JP "ソーナノ"11
+	db "WYNAUT@    "
+	; Text_JP "ソーナノ"11
 	Friendship 255
 
 	Pokemon WHISMUR
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, WHISMUR_SOUNDPROOF
 	PV $0000001F ; ♀ Docile
-	Text_EN "WHISMUR"11
-	Text_JP "ゴニョニョ"11
+	db "WHISMUR@   "
+	; Text_JP "ゴニョニョ"11
 	Friendship 255
 
 	Pokemon PIKACHU
@@ -54,11 +57,13 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,31,15,15, PIKACHU_STATIC
 	PV $00000083 ; ♂ Docile
-	Text_EN "PIKACHU"11
-	Text_JP "ピカチュウ"11
+	db "PIKACHU@   "
+	; Text_JP "ピカチュウ"11
 	Friendship 255
 
 	End_Trainer
 
 
         ds 44 ; Pad to 256
+
+POPC

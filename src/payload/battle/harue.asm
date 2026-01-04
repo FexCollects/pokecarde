@@ -1,5 +1,8 @@
 SECTION "payload/battle/harue", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db TUBER_F
 	BT_Floor 0
-	Text_EN "MALORY"8
-	Text_JP "ハルエ"8
+	db "MALORY@ "
+	; Text_JP "ハルエ"8
 	OT_ID 00000, 00000
 
 	Intro_EN I, WILL, SHOW, YOU, MY, _ARMALDO
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,31,15,15,31, 0
 	PV $000000DC
-	Text_EN "CLAMPERL"11
-	Text_JP "パールル"11
+	db "CLAMPERL@  "
+	; Text_JP "パールル"11
 	Friendship 255
 
 	Pokemon HUNTAIL
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,15,31,31, 0
 	PV $00000010
-	Text_EN "HUNTAIL"11
-	Text_JP "ハンテール"11
+	db "HUNTAIL@   "
+	; Text_JP "ハンテール"11
 	Friendship 255
 
 	Pokemon GOREBYSS
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,15,31,31, 0
 	PV $00000010
-	Text_EN "GOREBYSS"11
-	Text_JP "サクラビス"11
+	db "GOREBYSS@  "
+	; Text_JP "サクラビス"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

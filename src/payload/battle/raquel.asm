@@ -1,5 +1,8 @@
 SECTION "payload/battle/raquel", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class COOLTRAINER_F
 	BT_Floor MOSSDEEP
-	Text_EN "RAQUEL"8
-	Text_JP "トシコ"8
+	db "RAQUEL@ "
+	; Text_JP "トシコ"8
 	OT_ID 00000, 00000
 
 	Intro_EN YOU_RE,NOT,_A,MATCH,TO_ME,_ELIP
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, CRAWDAUNT_HYPER_CUTTER ; HP Dark 70
 	PV $00000011 ; ♀ Quiet
-	Text_EN "CRAWDAUNT"11
-	Text_JP "シザリガー"11
+	db "CRAWDAUNT@ "
+	; Text_JP "シザリガー"11
 	Friendship 0
 
 	Pokemon ELECTRODE
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, ELECTRODE_STATIC
 	PV $0000000A ; ⚲ Timid
-	Text_EN "ELECTRODE"11
-	Text_JP "マルマイン"11
+	db "ELECTRODE@ "
+	; Text_JP "マルマイン"11
 	Friendship 255
 
 	Pokemon BLAZIKEN
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,15,15, BLAZIKEN_BLAZE
 	PV $0000008C ; ♂ Modest
-	Text_EN "BLAZIKEN"11
-	Text_JP "バシャーモ"11
+	db "BLAZIKEN@  "
+	; Text_JP "バシャーモ"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

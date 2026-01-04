@@ -1,5 +1,8 @@
 SECTION "payload/battle/marcus", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 50
 	Class EXPERT_M
 	BT_Floor 5
-	Text_EN "MARCUS"8
-	Text_JP "ヨシヒコ"8
+	db "MARCUS@ "
+	; Text_JP "ヨシヒコ"8
 	OT_ID 00000, 00000
 
 	Intro_EN MY,ATTACK,IS,GENIUS,_AND,INVINCIBLE
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,14,15,15,14,30, SKARMORY_KEEN_EYE ; HP Bug 70
 	PV $00000094 ; ♂ Careful
-	Text_EN "SKARMORY"11
-	Text_JP "エアームド"11
+	db "SKARMORY@  "
+	; Text_JP "エアームド"11
 	Friendship 255
 
 	Pokemon HERACROSS
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,31,15,15, HERACROSS_GUTS
 	PV $0000000D ; ♀ Jolly
-	Text_EN "HERACROSS"11
-	Text_JP "ヘラクロス"11
+	db "HERACROSS@ "
+	; Text_JP "ヘラクロス"11
 	Friendship 255
 
 	Pokemon SWAMPERT
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,15, SWAMPERT_TORRENT
 	PV $0000007F ; ♂ Brave
-	Text_EN "SWAMPERT"11
-	Text_JP "ラグラージ"11
+	db "SWAMPERT@  "
+	; Text_JP "ラグラージ"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

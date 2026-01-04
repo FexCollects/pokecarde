@@ -1,5 +1,8 @@
 SECTION "payload/battle/matsuo", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db RICH_BOY
 	BT_Floor 0
-	Text_EN "COLE"8
-	Text_JP "マツオ"8
+	db "COLE@   "
+	; Text_JP "マツオ"8
 	OT_ID 00000, 00000
 
 	Intro_EN CUTE, POKEMON, ARE, THE, BEST, _EX
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,15,31,15, 0
 	PV $00000011
-	Text_EN "SPHEAL"11
-	Text_JP "タマザラシ"11
+	db "SPHEAL@    "
+	; Text_JP "タマザラシ"11
 	Friendship 255
 
 	Pokemon JIGGLYPUFF
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,15,31,15, 0
 	PV $0000001B
-	Text_EN "JIGGLYPUFF"11
-	Text_JP "プリン"11
+	db "JIGGLYPUFF@"
+	; Text_JP "プリン"11
 	Friendship 255
 
 	Pokemon MARILL
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,15,31,15, 1
 	PV $0000001F
-	Text_EN "MARILL"11
-	Text_JP "マリル"11
+	db "MARILL@    "
+	; Text_JP "マリル"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

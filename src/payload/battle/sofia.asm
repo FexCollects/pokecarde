@@ -1,5 +1,8 @@
 SECTION "payload/battle/sofia", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class PARASOL_LADY
 	BT_Floor MOSSDEEP
-	Text_EN "SOFIA"8
-	Text_JP "フミコ"8
+	db "SOFIA@  "
+	; Text_JP "フミコ"8
 	OT_ID 00000, 00000
 
 	Intro_EN HAPPY,_ELIP,DRIZZLE,_ELIP,_RAIN_DANCE,_EX
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, KINGDRA_SWIFT_SWIM
 	PV $0000000F ; ♀ Modest
-	Text_EN "KINGDRA"11
-	Text_JP "キングドラ"11
+	db "KINGDRA@   "
+	; Text_JP "キングドラ"11
 	Friendship 255
 
 	Pokemon LUDICOLO
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,31,15,15,15, LUDICOLO_RAIN_DISH
 	PV $000000E9 ; ♂ Impish
-	Text_EN "LUDICOLO"11
-	Text_JP "ルンパッパ"11
+	db "LUDICOLO@  "
+	; Text_JP "ルンパッパ"11
 	Friendship 255
 
 	Pokemon MANECTRIC
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, MANECTRIC_STATIC
 	PV $0000000F ; ♀ Modest
-	Text_EN "MANECTRIC"11
-	Text_JP "ライボルト"11
+	db "MANECTRIC@ "
+	; Text_JP "ライボルト"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

@@ -1,5 +1,8 @@
 SECTION "payload/battle/yukio", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db BUG_CATCHER
 	BT_Floor 0
-	Text_EN "BRETT"8
-	Text_JP "ユキオ"8
+	db "BRETT@  "
+	; Text_JP "ユキオ"8
 	OT_ID 00000, 00000
 
 	Intro_EN SEE, THE, POWER, OF, BUG, POKEMON	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,15,15, 0
 	PV $0000001C
-	Text_EN "NINJASK"11
-	Text_JP "テッカニン"11
+	db "NINJASK@   "
+	; Text_JP "テッカニン"11
 	Friendship 255
 
 	Pokemon PINSIR
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,15,15, 0
 	PV $000000E4
-	Text_EN "PINSIR"11
-	Text_JP "カイロス"11
+	db "PINSIR@    "
+	; Text_JP "カイロス"11
 	Friendship 255
 
 	Pokemon HERACROSS
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,15,15, 0
 	PV $000000E4
-	Text_EN "HERACROSS"11
-	Text_JP "ヘラクロス"11
+	db "HERACROSS@ "
+	; Text_JP "ヘラクロス"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

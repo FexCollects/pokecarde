@@ -1,5 +1,8 @@
 SECTION "payload/battle/ryo", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db TRIATHLETE_M_SWIM
 	BT_Floor 0
-	Text_EN "DAMON"8
-	Text_JP "リョウ"8
+	db "DAMON@  "
+	; Text_JP "リョウ"8
 	OT_ID 00000, 00000
 
 	Intro_EN I, WILL, AIM, _FOR, WEAK, POINTS
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,31,15,15,15, 0
 	PV $00000011
-	Text_EN "MAGCARGO"11
-	Text_JP "マグカルゴ"11
+	db "MAGCARGO@  "
+	; Text_JP "マグカルゴ"11
 	Friendship 255
 
 	Pokemon AZUMARILL
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,31,15,15,15, 1
 	PV $00000080
-	Text_EN "AZUMARILL"11
-	Text_JP "マリルリ"11
+	db "AZUMARILL@ "
+	; Text_JP "マリルリ"11
 	Friendship 255
 
 	Pokemon PORYGON2
@@ -54,11 +57,13 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, 0
 	PV $0000000F
-	Text_EN "PORYGON2"11
-	Text_JP "ポリゴン２"11
+	db "PORYGON2@  "
+	; Text_JP "ポリゴン２"11
 	Friendship 255
 
 	End_Trainer
 
 
         ds 44 ; Pad to 256
+
+POPC

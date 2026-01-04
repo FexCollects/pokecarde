@@ -1,5 +1,8 @@
 SECTION "payload/battle/suekichi", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db BIRD_KEEPER
 	BT_Floor 0
-	Text_EN "HORACE"8
-	Text_JP "スエキチ"8
+	db "HORACE@ "
+	; Text_JP "スエキチ"8
 	OT_ID 00000, 00000
 
 	Intro_EN HOW, ABOUT, SOME, WATER, POKEMON, _EX_EX	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,15,31,15, 0
 	PV $000000E7
-	Text_EN "KECLEON"11
-	Text_JP "カクレオン"11
+	db "KECLEON@   "
+	; Text_JP "カクレオン"11
 	Friendship 255
 
 	Pokemon SWELLOW
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,15,15, 0
 	PV $0000001C
-	Text_EN "SWELLOW"11
-	Text_JP "オオスバメ"11
+	db "SWELLOW@   "
+	; Text_JP "オオスバメ"11
 	Friendship 255
 
 	Pokemon SANDSLASH
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, 0
 	PV $000000E4
-	Text_EN "SANDSLASH"11
-	Text_JP "サンドパン"11
+	db "SANDSLASH@ "
+	; Text_JP "サンドパン"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

@@ -1,5 +1,8 @@
 SECTION "payload/battle/hoyoshi", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 100
 	db PKMN_RANGER_F
 	BT_Floor 19
-	Text_EN "BEATRICE"8
-	Text_JP "ホヨシ"8
+	db "BEATRICE"
+	; Text_JP "ホヨシ"8
 	OT_ID 00000, 00000
 
 	Intro_EN MY, GUARD, CAN_T, BE, DEFEATED, _EX	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 20,20,31,20,20,31, 0
 	PV $0000001E
-	Text_EN "CRADILY"11
-	Text_JP "ユレイドル"11
+	db "CRADILY@   "
+	; Text_JP "ユレイドル"11
 	Friendship 255
 
 	Pokemon LUDICOLO
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,20,31,20,20,20, 1
 	PV $000000E6
-	Text_EN "LUDICOLO"11
-	Text_JP "ルンパッパ"11
+	db "LUDICOLO@  "
+	; Text_JP "ルンパッパ"11
 	Friendship 255
 
 	Pokemon MILOTIC
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 20,20,31,31,20,20, 0
 	PV $0000001E
-	Text_EN "MILOTIC"11
-	Text_JP "ミロカロス"11
+	db "MILOTIC@   "
+	; Text_JP "ミロカロス"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

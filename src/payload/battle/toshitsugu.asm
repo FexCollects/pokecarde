@@ -1,5 +1,8 @@
 SECTION "payload/battle/toshitsugu", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db RUIN_MANIAC
 	BT_Floor 0
-	Text_EN "COSMO"8
-	Text_JP "トシツグ"8
+	db "COSMO@  "
+	; Text_JP "トシツグ"8
 	OT_ID 00000, 00000
 
 	Intro_EN I, DREAM, OF, THE, OLDEN, DAYS
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, 0
 	PV $000000D4
-	Text_EN "RELICANTH"11
-	Text_JP "ジーランス"11
+	db "RELICANTH@ "
+	; Text_JP "ジーランス"11
 	Friendship 255
 
 	Pokemon ARMALDO
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,15,15,31, 0
 	PV $0000001C
-	Text_EN "ARMALDO"11
-	Text_JP "アーマルド"11
+	db "ARMALDO@   "
+	; Text_JP "アーマルド"11
 	Friendship 255
 
 	Pokemon CRADILY
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00008, 00000
 	IVs 15,15,31,15,15,31, 0
 	PV $00000007
-	Text_EN "CRADILY"11
-	Text_JP "ユレイドル"11
+	db "CRADILY@   "
+	; Text_JP "ユレイドル"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

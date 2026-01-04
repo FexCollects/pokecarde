@@ -1,5 +1,8 @@
 SECTION "payload/battle/sonya", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class TUBER_F
 	BT_Floor MOSSDEEP
-	Text_EN "SONYA"8
-	Text_JP "ジュンコ"8
+	db "SONYA@  "
+	; Text_JP "ジュンコ"8
 	OT_ID 00000, 00000
 
 	Intro_EN GROUND,POKEMON,ARE,SO,SCARY,_ELIP
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,15,31,15, CLAYDOL_LEVITATE
 	PV $00000020 ; ⚲ Relaxed
-	Text_EN "CLAYDOL"11
-	Text_JP "ネンドール"11
+	db "CLAYDOL@   "
+	; Text_JP "ネンドール"11
 	Friendship 255
 
 	Pokemon CHIMECHO
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,0, CHIMECHO_LEVITATE
 	PV $0000000F ; ♀ Modest
-	Text_EN "CHIMECHO"11
-	Text_JP "チリーン"11
+	db "CHIMECHO@  "
+	; Text_JP "チリーン"11
 	Friendship 255
 
 	Pokemon WEEZING
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,15,31,15, WEEZING_LEVITATE
 	PV $000000D9 ; ♂ Quiet
-	Text_EN "WEEZING"11
-	Text_JP "マタドガス"11
+	db "WEEZING@   "
+	; Text_JP "マタドガス"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

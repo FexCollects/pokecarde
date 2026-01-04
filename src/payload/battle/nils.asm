@@ -1,5 +1,8 @@
 SECTION "payload/battle/nils", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,7 +10,7 @@ DataPacket::
 	BT_Level 50
 	Class GENTLEMAN
 	BT_Floor 0
-	Text_EN "NILS"8
+	db "NILS@   "
 	OT_ID 00000, 00000
 
 	Intro_EN YOUR,CHALLENGE,IS,MORE,THAN,WELCOME
@@ -23,7 +26,7 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,15,15,15, SABLEYE_KEEN_EYE
 	PV $000000CE ; ♂ Docile
-	Text_EN "SABLEYE"11
+	db "SABLEYE@   "
 	Friendship 255
 
 	Pokemon PLUSLE
@@ -35,7 +38,7 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,15,15,15, PLUSLE_PLUS
 	PV $0000000F ; ♀ Modest
-	Text_EN "PLUSLE"11
+	db "PLUSLE@    "
 	Friendship 255
 
 	Pokemon LUDICOLO
@@ -47,9 +50,11 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,15,15,15, LUDICOLO_SWIFT_SWIM
 	PV $000000D2 ; ♂ Timid
-	Text_EN "LUDICOLO"11
+	db "LUDICOLO@  "
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

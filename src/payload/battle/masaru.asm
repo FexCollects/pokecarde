@@ -1,5 +1,8 @@
 SECTION "payload/battle/masaru", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db TC_BLACK_BELT
 	BT_Floor 0
-	Text_EN "MYMO"8
-	Text_JP "マサル"8
+	db "MYMO@   "
+	; Text_JP "マサル"8
 	OT_ID 00000, 00000
 
 	Intro_EN WHOAH, _EX_EX, $ffff, POWER, IS, LIFE
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,15,31,15, 0
 	PV $0000001F
-	Text_EN "MEDICHAM"11
-	Text_JP "チャーレム"11
+	db "MEDICHAM@  "
+	; Text_JP "チャーレム"11
 	Friendship 255
 
 	Pokemon MACHAMP
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,15,15, 0
 	PV $000000E4
-	Text_EN "MACHAMP"11
-	Text_JP "カイリキー"11
+	db "MACHAMP@   "
+	; Text_JP "カイリキー"11
 	Friendship 255
 
 	Pokemon HERACROSS
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,15,15, 0
 	PV $000000E4
-	Text_EN "HERACROSS"11
-	Text_JP "ヘラクロス"11
+	db "HERACROSS@ "
+	; Text_JP "ヘラクロス"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

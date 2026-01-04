@@ -1,5 +1,8 @@
 SECTION "payload/battle/celina", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class HEX_MANIAC
 	BT_Floor MOSSDEEP
-	Text_EN "CELINA"8
-	Text_JP "チトセ"8
+	db "CELINA@ "
+	; Text_JP "チトセ"8
 	OT_ID 00000, 00000
 
 	Intro_EN GHOST,_ELIP,WHAT,COULD,THAT,BE
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, DUSCLOPS_PRESSURE
 	PV $00000095 ; ♂ Quirky
-	Text_EN "DUSCLOPS"11
-	Text_JP "サマヨール"11
+	db "DUSCLOPS@  "
+	; Text_JP "サマヨール"11
 	Friendship 255
 
 	Pokemon SABLEYE
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,31, SABLEYE_KEEN_EYE
 	PV $00000096 ; ♂ Hardy
-	Text_EN "SABLEYE"11
-	Text_JP "ヤミラミ"11
+	db "SABLEYE@   "
+	; Text_JP "ヤミラミ"11
 	Friendship 255
 
 	Pokemon SHEDINJA
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,15,15, SHEDINJA_WONDER_GUARD
 	PV $00000080 ; ⚲ Adamant
-	Text_EN "SHEDINJA"11
-	Text_JP "ヌケニン"11
+	db "SHEDINJA@  "
+	; Text_JP "ヌケニン"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

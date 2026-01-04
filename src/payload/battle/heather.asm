@@ -1,5 +1,8 @@
 SECTION "payload/battle/heather", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class PKMN_RANGER_F
 	BT_Floor MOSSDEEP
-	Text_EN "HEATHER"8
-	Text_JP "シズカ"8
+	db "HEATHER@"
+	; Text_JP "シズカ"8
 	OT_ID 00000, 00000
 
 	Intro_EN YOUR,ATTACK,GOES,BACK,TO,YOU
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,31, MACHAMP_GUTS
 	PV $00000080 ; ♂ Adamant
-	Text_EN "MACHAMP"11
-	Text_JP "カイリキー"11
+	db "MACHAMP@   "
+	; Text_JP "カイリキー"11
 	Friendship 255
 
 	Pokemon TENTACRUEL
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,31,15,15,15, TENTACRUEL_LIQUID_OOZE
 	PV $0000000F ; ♀ Modest
-	Text_EN "TENTACRUEL"11
-	Text_JP "ドククラゲ"11
+	db "TENTACRUEL@"
+	; Text_JP "ドククラゲ"11
 	Friendship 255
 
 	Pokemon WOBBUFFET
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,31, WOBBUFFET_SHADOW_TAG
 	PV $00000085 ; ♂ Impish
-	Text_EN "WOBBUFFET"11
-	Text_JP "ソーナンス"11
+	db "WOBBUFFET@ "
+	; Text_JP "ソーナンス"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

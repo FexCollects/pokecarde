@@ -1,5 +1,8 @@
 SECTION "payload/battle/chisa", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db SCHOOL_KID_F
 	BT_Floor 0
-	Text_EN "DOLLY"8
-	Text_JP "チサ"8
+	db "DOLLY@  "
+	; Text_JP "チサ"8
 	OT_ID 00000, 00000
 
 	Intro_EN DO, YOU, LIKE, GRASS, POKEMON, _QU	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,31,15,15,31, 0
 	PV $00000019
-	Text_EN "AZURILL"11
-	Text_JP "ルリリ"11
+	db "AZURILL@   "
+	; Text_JP "ルリリ"11
 	Friendship 255
 
 	Pokemon WYNAUT
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,31,15,15,31, 0
 	PV $000000E0
-	Text_EN "WYNAUT"11
-	Text_JP "ソーナノ"11
+	db "WYNAUT@    "
+	; Text_JP "ソーナノ"11
 	Friendship 255
 
 	Pokemon PICHU
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, 0
 	PV $000000E7
-	Text_EN "PICHU"11
-	Text_JP "ピチュー"11
+	db "PICHU@     "
+	; Text_JP "ピチュー"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

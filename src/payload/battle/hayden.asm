@@ -1,5 +1,8 @@
 SECTION "payload/battle/hayden", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class GUITARIST
 	BT_Floor MOSSDEEP
-	Text_EN "HAYDEN"8
-	Text_JP "シュウキチ"8
+	db "HAYDEN@ "
+	; Text_JP "シュウキチ"8
 	OT_ID 00000, 00000
 
 	Intro_EN YEAH,_EX,COOL,_EXPLOSION,SONGS,_EX_EX
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,15, ELECTRODE_STATIC
 	PV $00000080 ; ⚲ Adamant
-	Text_EN "ELECTRODE"11
-	Text_JP "マルマイン"11
+	db "ELECTRODE@ "
+	; Text_JP "マルマイン"11
 	Friendship 255
 
 	Pokemon SOLROCK
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,31, SOLROCK_LEVITATE
 	PV $0000007F ; ⚲ Brave
-	Text_EN "SOLROCK"11
-	Text_JP "ソルロック"11
+	db "SOLROCK@   "
+	; Text_JP "ソルロック"11
 	Friendship 255
 
 	Pokemon SHIFTRY
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,31,15,15, SHIFTRY_EARLY_BIRD
 	PV $00000080 ; ♂ Adamant
-	Text_EN "SHIFTRY"11
-	Text_JP "ダーテング"11
+	db "SHIFTRY@   "
+	; Text_JP "ダーテング"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

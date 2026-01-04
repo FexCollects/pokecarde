@@ -1,5 +1,8 @@
 SECTION "payload/battle/umami", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 100
 	db COOLTRAINER_F
 	BT_Floor 12
-	Text_EN "PHILLIPA"8
-	Text_JP "ウマミ"8
+	db "PHILLIPA"
+	; Text_JP "ウマミ"8
 	OT_ID 00000, 00000
 
 	Intro_EN MY, POKEMON, WON_T, LOSE, TO, YOU	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 20,31,31,20,20,20, 0
 	PV $0000001C
-	Text_EN "ARMALDO"11
-	Text_JP "アーマルド"11
+	db "ARMALDO@   "
+	; Text_JP "アーマルド"11
 	Friendship 255
 
 	Pokemon AGGRON
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 20,31,31,20,20,20, 1
 	PV $000000E4
-	Text_EN "AGGRON"11
-	Text_JP "ボスゴドラ"11
+	db "AGGRON@    "
+	; Text_JP "ボスゴドラ"11
 	Friendship 255
 
 	Pokemon METAGROSS
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 20,31,20,20,31,20, 0
 	PV $0000001B
-	Text_EN "METAGROSS"11
-	Text_JP "メタグロス"11
+	db "METAGROSS@ "
+	; Text_JP "メタグロス"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

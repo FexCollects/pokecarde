@@ -1,5 +1,8 @@
 SECTION "payload/battle/wilson", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class PKMN_BREEDER_M
 	BT_Floor MOSSDEEP
-	Text_EN "WILSON"8
-	Text_JP "シンジ"8
+	db "WILSON@ "
+	; Text_JP "シンジ"8
 	OT_ID 00000, 00000
 
 	Intro_EN LISTEN,_EX,I,CARE,ABOUT,POKEMON
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, GLOOM_CHLOROPHYLL
 	PV $00000012 ; ♀ Bashful
-	Text_EN "GLOOM"11
-	Text_JP "クサイハナ"11
+	db "GLOOM@     "
+	; Text_JP "クサイハナ"11
 	Friendship 255
 
 	Pokemon WURMPLE
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, WURMPLE_SHIELD_DUST
 	PV $00000083 ; ♂ Docile
-	Text_EN "WURMPLE"11
-	Text_JP "ケムッソ"11
+	db "WURMPLE@   "
+	; Text_JP "ケムッソ"11
 	Friendship 255
 
 	Pokemon CLAMPERL
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,31, CLAMPERL_SHELL_ARMOR
 	PV $0000000F ; ♀ Modest
-	Text_EN "CLAMPERL"11
-	Text_JP "パールル"11
+	db "CLAMPERL@  "
+	; Text_JP "パールル"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

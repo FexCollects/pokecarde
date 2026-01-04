@@ -1,5 +1,8 @@
 SECTION "payload/battle/ritsue", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	Class LASS
 	BT_Floor 0
-	Text_EN "CLARA"8
-	Text_JP "リツエ"8
+	db "CLARA@  "
+	; Text_JP "リツエ"8
 	OT_ID 00000, 00000
 
 	Intro_JP $1c18, $0a34, $103e, $0a48, $020e, $0c00
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,31,15,15,15, 0
 	PV $00000021
-	Text_EN "LINOONE"11
-	Text_JP "マッスグマ"11
+	db "LINOONE@   "
+	; Text_JP "マッスグマ"11
 	Friendship 255
 
 	Pokemon PELIPPER
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,15,31,31, 0
 	PV $00000014
-	Text_EN "PELIPPER"11
-	Text_JP "ペリッパー"11
+	db "PELIPPER@  "
+	; Text_JP "ペリッパー"11
 	Friendship 255
 
 	Pokemon BRELOOM
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,15,31, 0
 	PV $000000E1
-	Text_EN "BRELOOM"11
-	Text_JP "キノガッサ"11
+	db "BRELOOM@   "
+	; Text_JP "キノガッサ"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

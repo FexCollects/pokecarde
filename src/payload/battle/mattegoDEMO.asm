@@ -1,5 +1,8 @@
 SECTION "payload/battle/mattegoDEMO", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db COOLTRAINER_M
 	BT_Floor 0
-	Text_EN "MATTEGO"8	
-	Text_JP "カノウ"8
+	db "MATTEGO@"
+	; Text_JP "カノウ"8
 	OT_ID 00000, 00000
 
 	Intro_JP $0204, $1621, $142f, $0e0a, $0620, $100f
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, 0
 	PV $0000000F
-	Text_EN "TREECKO"11
-	Text_JP "キモリ"11
+	db "TREECKO@   "
+	; Text_JP "キモリ"11
 	Friendship 255
 
 	Pokemon TORCHIC
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,15,15, 0
 	PV $000000D5
-	Text_EN "TORCHIC"11
-	Text_JP "アチャモ"11
+	db "TORCHIC@   "
+	; Text_JP "アチャモ"11
 	Friendship 255
 
 	Pokemon MUDKIP
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,31,15,31,15, 0
 	PV $000000E1
-	Text_EN "MUDKIP"11
-	Text_JP "ミズゴロウ"11
+	db "MUDKIP@    "
+	; Text_JP "ミズゴロウ"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

@@ -1,5 +1,8 @@
 SECTION "payload/battle/teruko", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	Class PSYCHIC_F
 	BT_Floor 0
-	Text_EN "NADINE"8
-	Text_JP "テルコ"8
+	db "NADINE@ "
+	; Text_JP "テルコ"8
 	OT_ID 00000, 00000
 
 	Intro_JP $246d, $0c01, $ffff, $0c13, $2006, $103e
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, 1
 	PV $0000000D
-	Text_EN "GRUMPIG"11
-	Text_JP "ブーピッグ"11
+	db "GRUMPIG@   "
+	; Text_JP "ブーピッグ"11
 	Friendship 255
 
 	Pokemon XATU
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, 0
 	PV $000000E0
-	Text_EN "XATU"11
-	Text_JP "ネイティオ"11
+	db "XATU@      "
+	; Text_JP "ネイティオ"11
 	Friendship 255
 
 	Pokemon STARMIE
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, 1
 	PV $0000000F
-	Text_EN "STARMIE"11
-	Text_JP "スターミー"11
+	db "STARMIE@   "
+	; Text_JP "スターミー"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

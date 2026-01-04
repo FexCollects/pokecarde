@@ -1,5 +1,8 @@
 SECTION "payload/battle/shizu", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 50
 	db COOLTRAINER_F
 	BT_Floor 19
-	Text_EN "KRISTEN"8
-	Text_JP "シズ"8
+	db "KRISTEN@"
+	; Text_JP "シズ"8
 	OT_ID 00000, 00000
 
 	Intro_EN FUFUFU, _ELIP_EX, LOOK, AT, MY, MOVE	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, 1
 	PV $0000000F
-	Text_EN "STARMIE"11
-	Text_JP "スターミー"11
+	db "STARMIE@   "
+	; Text_JP "スターミー"11
 	Friendship 255
 
 	Pokemon BRELOOM
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,15,15, 0
 	PV $0000008A
-	Text_EN "BRELOOM"11
-	Text_JP "キノガッサ"11
+	db "BRELOOM@   "
+	; Text_JP "キノガッサ"11
 	Friendship 255
 
 	Pokemon SLAKING
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, 0
 	PV $0000000D
-	Text_EN "SLAKING"11
-	Text_JP "ケッキング"11
+	db "SLAKING@   "
+	; Text_JP "ケッキング"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

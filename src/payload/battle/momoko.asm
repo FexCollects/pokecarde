@@ -1,5 +1,8 @@
 SECTION "payload/battle/momoko", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db PKMN_BREEDER_F
 	BT_Floor 0
-	Text_EN "MOMOKO"8
-	Text_JP "モモコ"8
+	db "MOMOKO@ "
+	; Text_JP "モモコ"8
 	OT_ID 00000, 00000
 
 	Intro_EN MY, POKEMON, HAVE, VERY, THICK_FAT, _EX	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,14,15,14,14,30, 0
 	PV $00000085
-	Text_EN "GYARADOS"11
-	Text_JP "ギャラドス"11
+	db "GYARADOS@  "
+	; Text_JP "ギャラドス"11
 	Friendship 255
 
 	Pokemon SWAMPERT
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, 0
 	PV $00000083
-	Text_EN "SWAMPERT"11
-	Text_JP "ラグラージ"11
+	db "SWAMPERT@  "
+	; Text_JP "ラグラージ"11
 	Friendship 255
 
 	Pokemon DUSCLOPS
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,31,15,15,15, 0
 	PV $0000001B
-	Text_EN "DUSCLOPS"11
-	Text_JP "サマヨール"11
+	db "DUSCLOPS@  "
+	; Text_JP "サマヨール"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

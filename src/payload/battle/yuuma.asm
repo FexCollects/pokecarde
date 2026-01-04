@@ -1,5 +1,8 @@
 SECTION "payload/battle/yuuma", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	Class SCHOOL_KID_M
 	BT_Floor 0
-	Text_EN "DANE"8
-	Text_JP "ユウマ"8
+	db "DANE@   "
+	; Text_JP "ユウマ"8
 	OT_ID 00000, 00000
 
 	Intro_JP $1a01, $1239, $0e08, $1c16, $1c0a, $1016
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,15,31, 0
 	PV $00000017
-	Text_EN "CACNEA"11
-	Text_JP "サボネア"11
+	db "CACNEA@    "
+	; Text_JP "サボネア"11
 	Friendship 255
 
 	Pokemon SEVIPER
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,31,15,15,31, 0
 	PV $000000DA
-	Text_EN "SEVIPER"11
-	Text_JP "ハブネーク"11
+	db "SEVIPER@   "
+	; Text_JP "ハブネーク"11
 	Friendship 255
 
 	Pokemon WOBBUFFET
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,31,15,15,31, 0
 	PV $000000E6
-	Text_EN "WOBBUFFET"11
-	Text_JP "ソーナンス"11
+	db "WOBBUFFET@ "
+	; Text_JP "ソーナンス"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

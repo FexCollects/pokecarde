@@ -1,5 +1,8 @@
 SECTION "payload/battle/oscar", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class SAILOR
 	BT_Floor MOSSDEEP
-	Text_EN "OSCAR"8
-	Text_JP "シゲカズ"8
+	db "OSCAR@  "
+	; Text_JP "シゲカズ"8
 	OT_ID 00000, 00000
 
 	Intro_EN DO,YOU,KNOW,THIS,POKEMON,_QU
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, ELECTRODE_STATIC
 	PV $00000013 ; ⚲ Rash
-	Text_EN "ELECTRODE"11
-	Text_JP "マルマイン"11
+	db "ELECTRODE@ "
+	; Text_JP "マルマイン"11
 	Friendship 255
 
 	Pokemon DODRIO
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,15,15, DODRIO_EARLY_BIRD
 	PV $0000001C ; ♀ Adamant
-	Text_EN "DODRIO"11
-	Text_JP "ドードリオ"11
+	db "DODRIO@    "
+	; Text_JP "ドードリオ"11
 	Friendship 255
 
 	Pokemon GENGAR
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,31,15,15,15, GENGAR_LEVITATE
 	PV $0000008C ; ♂ Modest
-	Text_EN "GENGAR"11
-	Text_JP "ゲンガー"11
+	db "GENGAR@    "
+	; Text_JP "ゲンガー"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

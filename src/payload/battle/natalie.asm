@@ -1,5 +1,8 @@
 SECTION "payload/battle/natalie", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class BATTLE_GIRL
 	BT_Floor MOSSDEEP
-	Text_EN "NATALIE"8
-	Text_JP "ノリコ"8
+	db "NATALIE@"
+	; Text_JP "ノリコ"8
 	OT_ID 00000, 00000
 
 	Intro_EN GET,READY,TO,START,THE,BATTLE
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,15,15, MAGIKARP_SWIFT_SWIM
 	PV $000000E4 ; ♂ Adamant
-	Text_EN "MAGIKARP"11
-	Text_JP "コイキング"11
+	db "MAGIKARP@  "
+	; Text_JP "コイキング"11
 	Friendship 255
 
 	Pokemon LAIRON
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, LAIRON_STURDY
 	PV $000000E4 ; ♂ Adamant
-	Text_EN "LAIRON"11
-	Text_JP "コドラ"11
+	db "LAIRON@    "
+	; Text_JP "コドラ"11
 	Friendship 255
 
 	Pokemon SHELGON
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,31, SHELGON_ROCK_HEAD
 	PV $0000001C ; ♀ Adamant
-	Text_EN "SHELGON"11
-	Text_JP "コモルー"11
+	db "SHELGON@   "
+	; Text_JP "コモルー"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

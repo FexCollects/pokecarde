@@ -1,5 +1,8 @@
 SECTION "payload/battle/craig", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 50
 	Class DRAGON_TAMER
 	BT_Floor 5
-	Text_EN "CRAIG"8
-	Text_JP "リュウタ"8
+	db "CRAIG@  "
+	; Text_JP "リュウタ"8
 	OT_ID 00000, 00000
 
 	Intro_JP $0a14, $1034, $123a, $043e, $1028, $1027
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,15,31, 0
 	PV $000000DC
-	Text_EN "ALTARIA"11
-	Text_JP "チルタリス"11
+	db "ALTARIA@   "
+	; Text_JP "チルタリス"11
 	Friendship 255
 
 	Pokemon KINGDRA
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,15,31,31, 0
 	PV $0000000F
-	Text_EN "KINGDRA"11
-	Text_JP "キングドラ"11
+	db "KINGDRA@   "
+	; Text_JP "キングドラ"11
 	Friendship 255
 
 	Pokemon SALAMENCE
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,15,15,31, 0
 	PV $000000DF
-	Text_EN "SALAMENCE"11
-	Text_JP "ボーマンダ"11
+	db "SALAMENCE@ "
+	; Text_JP "ボーマンダ"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

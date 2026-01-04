@@ -1,5 +1,8 @@
 SECTION "payload/battle/daikichi", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db GUITARIST
 	BT_Floor 0
-	Text_EN "VENTURO"8
-	Text_JP "ダイキチ"8
+	db "VENTURO@"
+	; Text_JP "ダイキチ"8
 	OT_ID 00000, 00000
 
 	Intro_EN HEY, HEY, LOOK, AT, MY, POKEMON	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, 0
 	PV $0000008C
-	Text_EN "SEVIPER"11
-	Text_JP "ハブネーク"11
+	db "SEVIPER@   "
+	; Text_JP "ハブネーク"11
 	Friendship 255
 
 	Pokemon SHARPEDO
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, 0
 	PV $0000000F
-	Text_EN "SHARPEDO"11
-	Text_JP "サメハダー"11
+	db "SHARPEDO@  "
+	; Text_JP "サメハダー"11
 	Friendship 255
 
 	Pokemon GIRAFARIG
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,31,15,15, 0
 	PV $0000000F
-	Text_EN "GIRAFARIG"11
-	Text_JP "キリンリキ"11
+	db "GIRAFARIG@ "
+	; Text_JP "キリンリキ"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

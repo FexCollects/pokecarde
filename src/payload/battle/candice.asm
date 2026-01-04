@@ -1,5 +1,8 @@
 SECTION "payload/battle/candice", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class PKMN_BREEDER_F
 	BT_Floor MOSSDEEP
-	Text_EN "CANDICE"8
-	Text_JP "モモコ"8
+	db "CANDICE@"
+	; Text_JP "モモコ"8
 	OT_ID 00000, 00000
 
 	Intro_EN WE,ARE,READY,_FOR,MORE,_GROWTH
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,14,15,14,14,30, MAGIKARP_SWIFT_SWIM
 	PV $00000085 ; ♂ Impish
-	Text_EN "MAGIKARP"11
-	Text_JP "コイキング"11
+	db "MAGIKARP@  "
+	; Text_JP "コイキング"11
 	Friendship 255
 
 	Pokemon MUDKIP
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, MUDKIP_TORRENT
 	PV $00000083 ; ♂ Docile
-	Text_EN "MUDKIP"11
-	Text_JP "ミズゴロウ"11
+	db "MUDKIP@    "
+	; Text_JP "ミズゴロウ"11
 	Friendship 255
 
 	Pokemon DUSKULL
@@ -54,11 +57,13 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,31,15,15,15, DUSKULL_LEVITATE
 	PV $0000001B ; ♀ Brave
-	Text_EN "DUSKULL"11
-	Text_JP "ヨマワル"11
+	db "DUSKULL@   "
+	; Text_JP "ヨマワル"11
 	Friendship 255
 
 	End_Trainer
 
 
         ds 44 ; Pad to 256
+
+POPC

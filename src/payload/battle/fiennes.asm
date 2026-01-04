@@ -1,5 +1,8 @@
 SECTION "payload/battle/fiennes", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db GENTLEMAN
 	BT_Floor 0
-	Text_EN "RANULF"8
-	Text_JP "ファインズ"8
+	db "RANULF@ "
+	; Text_JP "ファインズ"8
 	OT_ID 00000, 00000
 
 	Intro_EN I, HAVE, RARE, POKEMON, _EX, $ffff
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, 1
 	PV $00000087
-	Text_EN "GIRAFARIG"11
-	Text_JP "キリンリキ"11
+	db "GIRAFARIG@ "
+	; Text_JP "キリンリキ"11
 	Friendship 255
 
 	Pokemon WOBBUFFET
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,31, 0
 	PV $00000084
-	Text_EN "WOBBUFFET"11
-	Text_JP "ソーナンス"11
+	db "WOBBUFFET@ "
+	; Text_JP "ソーナンス"11
 	Friendship 255
 
 	Pokemon TYPHLOSION
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,31,15,15, 0
 	PV $0000000F
-	Text_EN "TYPHLOSION"11
-	Text_JP "バクフーン"11
+	db "TYPHLOSION@"
+	; Text_JP "バクフーン"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

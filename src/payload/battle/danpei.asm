@@ -1,5 +1,8 @@
 SECTION "payload/battle/danpei", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db TC_BLACK_BELT
 	BT_Floor 0
-	Text_EN "DAN"8
-	Text_JP "ダンペイ"8
+	db "DAN@    "
+	; Text_JP "ダンペイ"8
 	OT_ID 00000, 00000
 
 	Intro_EN I_AM, THE, INVINCIBLE, ROCK_HEAD, TRAINER, _EX_EX	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, 1
 	PV $0000001C
-	Text_EN "LAIRON"11
-	Text_JP "コドラ"11
+	db "LAIRON@    "
+	; Text_JP "コドラ"11
 	Friendship 255
 
 	Pokemon GRAVELER
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 30,31,14,15,15,14, 0
 	PV $000000E4
-	Text_EN "GRAVELER"11
-	Text_JP "ゴローン"11
+	db "GRAVELER@  "
+	; Text_JP "ゴローン"11
 	Friendship 255
 
 	Pokemon SHELGON
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, 0
 	PV $0000001C
-	Text_EN "SHELGON"11
-	Text_JP "コモルー"11
+	db "SHELGON@   "
+	; Text_JP "コモルー"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

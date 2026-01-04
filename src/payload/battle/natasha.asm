@@ -1,5 +1,8 @@
 SECTION "payload/battle/natasha", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 50
 	Class PSYCHIC_F
 	BT_Floor 12
-	Text_EN "NATASHA"8
-	Text_JP "ユキエ"8
+	db "NATASHA@"
+	; Text_JP "ユキエ"8
 	OT_ID 00000, 00000
 
 	Intro_EN LOOK,_EX,MY,SKILLED,ATTACK,_EX_EX
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, STARMIE_NATURAL_CURE
 	PV $0000000F ; ⚲ Modest
-	Text_EN "STARMIE"11
-	Text_JP "スターミー"11
+	db "STARMIE@   "
+	; Text_JP "スターミー"11
 	Friendship 255
 
 	Pokemon SALAMENCE
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,31,15, SALAMENCE_INTIMIDATE
 	PV $0000008C ; ♂ Modest
-	Text_EN "SALAMENCE"11
-	Text_JP "ボーマンダ"11
+	db "SALAMENCE@ "
+	; Text_JP "ボーマンダ"11
 	Friendship 255
 
 	Pokemon SCEPTILE
@@ -54,11 +57,13 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,31,15,15, SCEPTILE_OVERGROW
 	PV $0000000F ; ♀ Modest
-	Text_EN "SCEPTILE"11
-	Text_JP "ジュカイン"11
+	db "SCEPTILE@  "
+	; Text_JP "ジュカイン"11
 	Friendship 255
 
 	End_Trainer
 
 
         ds 44 ; Pad to 256
+
+POPC

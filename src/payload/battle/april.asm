@@ -1,5 +1,8 @@
 SECTION "payload/battle/april", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class AROMA_LADY
 	BT_Floor MOSSDEEP
-	Text_EN "APRIL"8
-	Text_JP "レイコ"8
+	db "APRIL@  "
+	; Text_JP "レイコ"8
 	OT_ID 00000, 00000
 
 	Intro_EN SMELL,THIS,_SWEET_SCENT,FROM,MY,POKEMON
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,31, WEEZING_LEVITATE
 	PV $00000080 ; ♂ Adamant
-	Text_EN "WEEZING"11
-	Text_JP "マタドガス"11
+	db "WEEZING@   "
+	; Text_JP "マタドガス"11
 	Friendship 255
 
 	Pokemon BELLOSSOM
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,31,15,15,15, BELLOSSOM_CHLOROPHYLL
 	PV $0000000F ; ♀ Modest
-	Text_EN "BELLOSSOM"11
-	Text_JP "キレイハナ"11
+	db "BELLOSSOM@ "
+	; Text_JP "キレイハナ"11
 	Friendship 255
 
 	Pokemon TROPIUS
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,31, TROPIUS_CHLOROPHYLL
 	PV $00000019 ; ♀ Hardy
-	Text_EN "TROPIUS"11
-	Text_JP "トロピウス"11
+	db "TROPIUS@   "
+	; Text_JP "トロピウス"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

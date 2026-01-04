@@ -1,5 +1,8 @@
 SECTION "payload/battle/jeffrey", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class YOUNGSTER
 	BT_Floor MOSSDEEP
-	Text_EN "JEFFREY"8
-	Text_JP "タツミ"8
+	db "JEFFREY@"
+	; Text_JP "タツミ"8
 	OT_ID 00000, 00000
 
 	Intro_EN I,WILL,SHOW,YOU,MY,SECRET
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,31, PINSIR_HYPER_CUTTER
 	PV $00000080 ; ♂ Adamant
-	Text_EN "PINSIR"11
-	Text_JP "カイロス"11
+	db "PINSIR@    "
+	; Text_JP "カイロス"11
 	Friendship 255
 
 	Pokemon NINETALES
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, NINETALES_FLASH_FIRE
 	PV $0000000F ; ♀ Modest
-	Text_EN "NINETALES"11
-	Text_JP "キュウコン"11
+	db "NINETALES@ "
+	; Text_JP "キュウコン"11
 	Friendship 255
 
 	Pokemon BLASTOISE
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, BLASTOISE_TORRENT
 	PV $00000083 ; ♂ Docile
-	Text_EN "BLASTOISE"11
-	Text_JP "カメックス"11
+	db "BLASTOISE@ "
+	; Text_JP "カメックス"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

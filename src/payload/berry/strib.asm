@@ -1,10 +1,13 @@
 SECTION "payload/berry/strib", ROM0
 INCLUDE "include/berry.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Enigma_Berry
 
-	Text_EN "STRIB@@"7
+	db "STRIB@@"
 	Firmness HARD
 	Size 12,2
 	Yield_Range 4, 12
@@ -19,9 +22,11 @@ BerrySprite::
 BerryPalette::
 	INCBIN "build/gfx/berries/strib.gbapal"
 
-	Text_EN "It grows slowly, but abundantly."45
-	Text_EN "Makes a soothing sound when shaken."45
+        db "It grows slowly, but abundantly.@            "
+        db "Makes a soothing sound when shaken.@         "
 
         ds 22 ; Pokéblock ingredient only
 
 	End_Berry
+
+POPC

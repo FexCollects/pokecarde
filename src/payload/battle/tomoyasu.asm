@@ -1,5 +1,8 @@
 SECTION "payload/battle/tomoyasu", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 50
 	db SCHOOL_KID_M
 	BT_Floor 5
-	Text_EN "EDDY"8
-	Text_JP "トモヤス"8
+	db "EDDY@   "
+	; Text_JP "トモヤス"8
 	OT_ID 00000, 00000
 
 	Intro_EN THIS, MOVE, IS, ABSOLUTELY, GENIUS, _EX	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,14,14, 0
 	PV $0000000D
-	Text_EN "BRELOOM"11
-	Text_JP "キノガッサ"11
+	db "BRELOOM@   "
+	; Text_JP "キノガッサ"11
 	Friendship 255
 
 	Pokemon MANECTRIC
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00140, 00000
 	IVs 15,15,15,31,31,15, 0
 	PV $000000D7
-	Text_EN "MANETRIC"11
-	Text_JP "ライボルト"11
+	db "MANETRIC@  "
+	; Text_JP "ライボルト"11
 	Friendship 255
 
 	Pokemon DUSCLOPS
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,31,15,15,15, 0
 	PV $00000020
-	Text_EN "DUSCLOPS"11
-	Text_JP "サマヨール"11
+	db "DUSCLOPS@  "
+	; Text_JP "サマヨール"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

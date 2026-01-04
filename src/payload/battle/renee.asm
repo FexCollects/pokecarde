@@ -1,5 +1,8 @@
 SECTION "payload/battle/renee", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class PICNICKER
 	BT_Floor MOSSDEEP
-	Text_EN "RENEE"8
-	Text_JP "モトコ"8
+	db "RENEE@  "
+	; Text_JP "モトコ"8
 	OT_ID 00000, 00000
 
 	Intro_EN MY,NATURE,IS,_ELIP,STATIC,_EX
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, CASTFORM_FORECAST
 	PV $00000012 ; ♀ Bashful
-	Text_EN "CASTFORM"11
-	Text_JP "ポワルン"11
+	db "CASTFORM@  "
+	; Text_JP "ポワルン"11
 	Friendship 255
 
 	Pokemon CASTFORM
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, CASTFORM_FORECAST
 	PV $000000DA ; ♂ Bashful
-	Text_EN "CASTFORM"11
-	Text_JP "ポワルン"11
+	db "CASTFORM@  "
+	; Text_JP "ポワルン"11
 	Friendship 255
 
 	Pokemon CASTFORM
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,31,31,15, CASTFORM_FORECAST
 	PV $00000012 ; ♀ Bashful
-	Text_EN "CASTFORM"11
-	Text_JP "ポワルン"11
+	db "CASTFORM@  "
+	; Text_JP "ポワルン"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

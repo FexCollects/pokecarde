@@ -1,5 +1,8 @@
 SECTION "payload/battle/annie", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class SWIMMER_F
 	BT_Floor MOSSDEEP
-	Text_EN "ANNIE"8
-	Text_JP "チハル"8
+	db "ANNIE@  "
+	; Text_JP "チハル"8
 	OT_ID 00000, 00000
 
 	Intro_EN HERE_I_COME,_EX,GO,MY,WATER,POKEMON
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, MACHAMP_GUTS
 	PV $000000E7 ; ♂ Docile
-	Text_EN "MACHAMP"11
-	Text_JP "カイリキー"11
+	db "MACHAMP@   "
+	; Text_JP "カイリキー"11
 	Friendship 255
 
 	Pokemon MAGNETON
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, MAGNETON_STURDY
 	PV $0000000C ; ⚲ Serious
-	Text_EN "MAGNETON"11
-	Text_JP "レアコイル"11
+	db "MAGNETON@  "
+	; Text_JP "レアコイル"11
 	Friendship 255
 
 	Pokemon BLASTOISE
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, BLASTOISE_TORRENT
 	PV $00000012 ; ♀ Bashful
-	Text_EN "BLASTOISE"11
-	Text_JP "カメックス"11
+	db "BLASTOISE@ "
+	; Text_JP "カメックス"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

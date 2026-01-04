@@ -1,5 +1,8 @@
 SECTION "payload/battle/noriko", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db BATTLE_GIRL
 	BT_Floor 0
-	Text_EN "NATALIE"8
-	Text_JP "ノリコ"8
+	db "NATALIE@"
+	; Text_JP "ノリコ"8
 	OT_ID 00000, 00000
 
 	Intro_EN HOW, ABOUT, _A, POKEMON, BATTLE, _QU_EX	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,31,15,15,15, 0
 	PV $000000E4
-	Text_EN "GYARADOS"11
-	Text_JP "ギャラドス"11
+	db "GYARADOS@  "
+	; Text_JP "ギャラドス"11
 	Friendship 255
 
 	Pokemon AGGRON
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,15,15,31, 0
 	PV $000000E4
-	Text_EN "AGGRON"11
-	Text_JP "ボスゴドラ"11
+	db "AGGRON@    "
+	; Text_JP "ボスゴドラ"11
 	Friendship 255
 
 	Pokemon SALAMENCE
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,15,15, 0
 	PV $0000001C
-	Text_EN "SALAMENCE"11
-	Text_JP "ボーマンダ"11
+	db "SALAMENCE@ "
+	; Text_JP "ボーマンダ"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

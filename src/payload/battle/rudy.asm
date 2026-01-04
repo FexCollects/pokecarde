@@ -1,5 +1,8 @@
 SECTION "payload/battle/rudy", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class YOUNGSTER
 	BT_Floor MOSSDEEP
-	Text_EN "RUDY"8
-	Text_JP "ケンジロウ"8
+	db "RUDY@   "
+	; Text_JP "ケンジロウ"8
 	OT_ID 00000, 00000
 
 	Intro_EN YEAH,_EX,GO,_EX,_TACKLE,_EX_EX
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, CASCOON_SHED_SKIN
 	PV $00000083 ; ♂ Docile
-	Text_EN "CASCOON"11
-	Text_JP "マユルド"11
+	db "CASCOON@   "
+	; Text_JP "マユルド"11
 	Friendship 255
 
 	Pokemon SILCOON
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, SILCOON_SHED_SKIN
 	PV $00000012 ; ♀ Bashful
-	Text_EN "SILCOON"11
-	Text_JP "カラサリス"11
+	db "SILCOON@   "
+	; Text_JP "カラサリス"11
 	Friendship 255
 
 	Pokemon MAGIKARP
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,31,15,15,15,15, MAGIKARP_SWIFT_SWIM
 	PV $00000095 ; ♂ Quirky
-	Text_EN "MAGIKARP"11
-	Text_JP "コイキング"11
+	db "MAGIKARP@  "
+	; Text_JP "コイキング"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

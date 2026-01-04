@@ -1,5 +1,8 @@
 SECTION "payload/battle/alana", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level MOSSDEEP
 	Class POKEFAN_F
 	BT_Floor MOSSDEEP
-	Text_EN "ALANA"8
-	Text_JP "チズ"8
+	db "ALANA@  "
+	; Text_JP "チズ"8
 	OT_ID 00000, 00000
 
 	Intro_EN LET_S,START,THIS,_ELIP,BATTLE,_EX
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,15,31,31, TORKOAL_WHITE_SMOKE
 	PV $000000D9 ; ♂ Quiet
-	Text_EN "TORKOAL"11
-	Text_JP "コータス"11
+	db "TORKOAL@   "
+	; Text_JP "コータス"11
 	Friendship 255
 
 	Pokemon DUSCLOPS
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,31,15,15,31, DUSCLOPS_PRESSURE
 	PV $00000016 ; ♀ Sassy
-	Text_EN "DUSCLOPS"11
-	Text_JP "サマヨール"11
+	db "DUSCLOPS@  "
+	; Text_JP "サマヨール"11
 	Friendship 255
 
 	Pokemon CORSOLA
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,15,15,15,31,31, CORSOLA_NATURAL_CURE
 	PV $0000001B ; ♀ Brave
-	Text_EN "CORSOLA"11
-	Text_JP "サニーゴ"11
+	db "CORSOLA@   "
+	; Text_JP "サニーゴ"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

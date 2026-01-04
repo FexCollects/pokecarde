@@ -1,5 +1,8 @@
 SECTION "payload/battle/sadayo", ROM0
 INCLUDE "include/trainer.asm"
+INCLUDE "include/charmaps.asm"
+
+PUSHC gen3text
 
 DataPacket::
 	Battle_Trainer
@@ -7,8 +10,8 @@ DataPacket::
 	BT_Level 0
 	db HEX_MANIAC
 	BT_Floor 0
-	Text_EN "LEILA"8
-	Text_JP "サダヨ"8
+	db "LEILA@  "
+	; Text_JP "サダヨ"8
 	OT_ID 00000, 00000
 
 	Intro_EN BEGINNING, _QU, END, _QU_EX, HUH_, _ELIP	
@@ -28,8 +31,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,31,15, 1
 	PV $00000018
-	Text_EN "ELECTRODE"11
-	Text_JP "マルマイン"11
+	db "ELECTRODE@ "
+	; Text_JP "マルマイン"11
 	Friendship 255
 
 	Pokemon CLAYDOL
@@ -41,8 +44,8 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 31,15,15,15,15,31, 0
 	PV $0000000C
-	Text_EN "CLAYDOL"11
-	Text_JP "ネンドール"11
+	db "CLAYDOL@   "
+	; Text_JP "ネンドール"11
 	Friendship 255
 
 	Pokemon SHEDINJA
@@ -54,10 +57,12 @@ DataPacket::
 	OT_ID 00000, 00000
 	IVs 15,31,15,31,15,15, 0
 	PV $0000001C
-	Text_EN "SHEDINJA"11
-	Text_JP "ヌケニン"11
+	db "SHEDINJA@  "
+	; Text_JP "ヌケニン"11
 	Friendship 255
 
 	End_Trainer
 
         ds 44 ; Pad to 256
+
+POPC

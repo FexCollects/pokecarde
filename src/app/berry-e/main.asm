@@ -1,5 +1,6 @@
 SECTION "app/berry-e/main", ROM0
 INCLUDE "../macros.asm"
+INCLUDE "include/charmaps.asm"
 
 db 0,0
 
