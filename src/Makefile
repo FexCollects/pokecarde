@@ -22,7 +22,6 @@ build/$(REGION)/%.crc: build/$(REGION)/%.z80
 build/$(REGION)/%.vpk: build/$(REGION)/%.crc
 	../bin/nedc/v1.4.1/nevpk -c -i $< -o $@
 build/$(REGION)/%-01.raw: build/$(REGION)/%.vpk
-	@echo " [CC]  $@"
 	../bin/nedc/v1.4.1/nedcmake -i $< -o $(subst -01.raw,,$@) -type 1 -region 1
 
 .PRECIOUS: build/$(REGION)/%.z80
