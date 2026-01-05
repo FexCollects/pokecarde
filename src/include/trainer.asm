@@ -1,4 +1,3 @@
-INCLUDE "../region.asm"
 INCLUDE "../constants/abilities.asm"
 INCLUDE "../constants/easychat.asm"
 INCLUDE "../constants/items.asm"
@@ -7,14 +6,15 @@ INCLUDE "../constants/natures.asm"
 INCLUDE "../constants/pokemon.asm"
 INCLUDE "../constants/trainerclasses.asm"
 
+INCLUDE "include/gba.asm"
+INCLUDE "constants/card_types.asm"
+INCLUDE "constants/regions.asm"
+
 DEF MOSSDEEP EQU 0
 
 MACRO Battle_Trainer
-	db $01
-	dl $02000000
-	db REGION,0,REGION,0,0,0,$04,0,$80,$01,0,0
-	db $0D
-	dl $02000018
+	CardHeader BATTLE_TRAINER
+        dl $02000018 ; GBAPtr
 	db $02,$00
 	ENDM
 

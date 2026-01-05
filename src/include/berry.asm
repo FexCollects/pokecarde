@@ -1,11 +1,10 @@
-INCLUDE "../region.asm"
+INCLUDE "include/gba.asm"
+INCLUDE "constants/card_types.asm"
+INCLUDE "constants/regions.asm"
 
 MACRO Enigma_Berry
-	db $01
-	dl $02000000
-	db REGION,0,REGION,0,0,0,$04,0,$80,$01,0,0
-	db $07
-	dl $02000018
+	CardHeader CUSTOM_BERRY
+        dl $02000018 ; GBAPtr
 	db $02,$00
 	ENDM
 

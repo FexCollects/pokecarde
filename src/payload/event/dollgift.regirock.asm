@@ -1,61 +1,31 @@
 SECTION "payload/event/dollgift.regirock", ROM0
-INCLUDE "../macros.asm"
-INCLUDE "../constants/items.asm"
-INCLUDE "../constants/scriptcommands.asm"
+INCLUDE "include/event.asm"
 INCLUDE "include/charmaps.asm"
 
 PUSHC gen3text
 
-MACRO myMystery_Event
-	db $01,$00,$00,$00,$02,$02,$00,$02,$00,$00,$00,$04,$00,$80,$01,$00,$00
-ENDM
-
-MACRO RelPtr
-	dd $02000000 + \1 - DataStartRegirock
-ENDM
-
-MACRO Relsetvirtualaddress
-	db $B8
-	RelPtr \1
-	ENDM
-MACRO Relvirtualgotoif
-	db $BB
-	db \1
-	RelPtr \2
-	ENDM
-MACRO Relvirtualmsgbox
-	db $BD
-	RelPtr \1
-	ENDM
-MACRO Relvirtualloadpointer
-	db $BE
-	RelPtr \1
-	ENDM
-
 DataStartRegirock::
-	myMystery_Event
-	db CHECKSUM_CRC 
-	dd 0 ; checksum placeholder
-	RelPtr ScriptStartRegirock
-	RelPtr RegirockEnd
+	Mystery_Event
+	GBAPtr ScriptStartRegirock
+	GBAPtr RegirockEnd
 
 ScriptStartRegirock:
 	db PRELOAD_SCRIPT
-	RelPtr PreloadScriptStartRegirock
+	GBAPtr PreloadScriptStartRegirock
 	db END_OF_CHUNKS
 
 PreloadScriptStartRegirock:
-	Relsetvirtualaddress PreloadScriptStartRegirock
+	setvirtualaddress PreloadScriptStartRegirock
 	bufferdecorationname $00, $0076 ;Regirock doll
 	adddecoration $0076
-	compare $800D, $0000
-	Relvirtualgotoif $01, TransferFailRegirock
-	Relvirtualloadpointer TransferSuccessRegirock
+	compare LASTRESULT, $0000
+	virtualgotoif $01, TransferFailRegirock
+	virtualloadpointer TransferSuccessRegirock
 	setbyte $02
 	end
 
 TransferFailRegirock:
-	Relvirtualloadpointer TransferFailTextRegirock
+	virtualloadpointer TransferFailTextRegirock
 	setbyte $03
 	end
 

@@ -1,5 +1,5 @@
-INCLUDE "../region.asm"
 SECTION "common/prologue", ROM0
+INCLUDE "constants/regions.asm"
 
 Prologue::
     db "GameFreak inc."

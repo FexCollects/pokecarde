@@ -37,7 +37,7 @@ verify:
 
 # Generate necessary dep files
 CARDS := $(wildcard card/*.ld)
-ASMS := $(shell find * -name "*.asm" -not -path "include/*")
+ASMS := $(shell find * -name "*.asm")
 build/deps/checksum.d: checksum.md5
 	python3 ../scripts/generate_deps_verify.py $< $@
 build/deps/cards.d: $(CARDS) 
