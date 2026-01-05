@@ -7,5 +7,6 @@ ROM0
   "common/prologue.corrupt"
   "payload/battle/mandy"
   "app/battle-e/school_kid_f.gfx"
+  "common/mem_struct"
   "app/battle-e/main"
   "common/eof"

@@ -7,5 +7,6 @@ ROM0
   "common/prologue.corrupt"
   "payload/battle/masaru"
   "app/battle-e/black_belt.gfx"
+  "common/mem_struct"
   "app/battle-e/main"
   "common/eof"

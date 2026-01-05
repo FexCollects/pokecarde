@@ -7,5 +7,6 @@ ROM0
   "common/prologue.corrupt"
   "payload/battle/jeffrey"
   "app/battle-e/youngster.gfx"
+  "common/mem_struct"
   "app/battle-e/main"
   "common/eof"

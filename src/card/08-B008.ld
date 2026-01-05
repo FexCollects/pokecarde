@@ -7,5 +7,6 @@ ROM0
   "common/prologue.corrupt"
   "payload/battle/kuen"
   "app/battle-e/dragon_tamer.gfx"
+  "common/mem_struct"
   "app/battle-e/main"
   "common/eof"

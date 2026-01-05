@@ -7,5 +7,6 @@ ROM0
   "common/prologue.corrupt"
   "payload/battle/yukio"
   "app/battle-e/bug_catcher.gfx"
+  "common/mem_struct"
   "app/battle-e/main"
   "common/eof"

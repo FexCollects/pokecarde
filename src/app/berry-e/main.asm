@@ -1,10 +1,6 @@
 SECTION "app/berry-e/main", ROM0
-INCLUDE "../macros.asm"
 INCLUDE "include/charmaps.asm"
-
-db 0,0
-
-INCLUDE "../common/mem_struct.asm"
+INCLUDE "include/erapi.asm"
 
 BackgroundSpriteData:
 	dw BackgroundSprite, BackgroundPalette, BackgroundTilemap
@@ -30,7 +26,7 @@ ABerryWasSent: ; C5D
 	db "Press the A Button to resend.\n"
 	db "Press the B Button to cancel.\0"
 
-INCLUDE "../common/battle_e_transfer.asm"
+INCLUDE "common/battle_e_transfer.asm"
 
 AfterTransfer:
 	ld hl, $5FFF
@@ -65,7 +61,7 @@ Start::
 	DrawText RegionHandlePtr, Instructions1, 8, 4
 	API $08D
 
-INCLUDE "../common/wait_for_link.asm"
+INCLUDE "common/wait_for_link.asm"
 
 	API_084 SpriteHandlePtr, 120, 56, 16 ; sprite move and fade in?
 	pop bc
@@ -76,12 +72,12 @@ INCLUDE "../common/wait_for_link.asm"
 	DrawText RegionHandlePtr, Instructions2, 8, 4
 
 DEF UNKNOWN_VALUE EQU $00F5
-INCLUDE "../common/wait_for_ready.asm"
+INCLUDE "common/wait_for_ready.asm"
 
 	DrawText RegionHandlePtr, BerrySendingInProcess, 8, 4
 
 DEF DATA_TRANSFER_LENGTH EQU 3072
-INCLUDE "../common/transfer_data.asm"
+INCLUDE "common/transfer_data.asm"
 
 	call AfterTransfer
 
@@ -95,9 +91,9 @@ INCLUDE "../common/transfer_data.asm"
 	pop bc
 	DrawText RegionHandlePtr, ABerryWasSent, 8, 4
 
-INCLUDE "../common/wrap_up.asm"
+INCLUDE "common/wrap_up.asm"
 
-INCLUDE "../common/word_shift_right.asm"
+INCLUDE "common/word_shift_right.asm"
 
 SomeVar1: db          ; EFA
 SomeVar2: dw          ; EFB

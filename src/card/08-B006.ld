@@ -7,5 +7,6 @@ ROM0
   "common/prologue.corrupt"
   "payload/battle/yu"
   "app/battle-e/ninja_boy.gfx"
+  "common/mem_struct"
   "app/battle-e/main"
   "common/eof"

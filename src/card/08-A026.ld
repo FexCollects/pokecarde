@@ -7,5 +7,6 @@ ROM0
   "common/prologue.corrupt"
   "payload/battle/sofia"
   "app/battle-e/parasol_lady.gfx"
+  "common/mem_struct"
   "app/battle-e/main"
   "common/eof"

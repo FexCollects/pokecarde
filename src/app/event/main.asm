@@ -1,5 +1,5 @@
 SECTION "app/event/main", ROM0
-INCLUDE "../macros.asm"
+INCLUDE "include/erapi.asm"
 
 ; this function is subtly different than the one
 ; on the Battle e cards, for no apparent reason
@@ -91,7 +91,7 @@ Start:: ; 1ae2
 	DrawText RegionHandlePtr, Instructions1, 8, 4
 	API $08D
 
-INCLUDE "../common/wait_for_link.asm"
+INCLUDE "common/wait_for_link.asm"
 
 	SpriteShow SpriteHandlePtr
 
@@ -102,12 +102,12 @@ INCLUDE "../common/wait_for_link.asm"
 	nop
 
 DEF UNKNOWN_VALUE EQU $0078
-INCLUDE "../common/wait_for_ready.asm"
+INCLUDE "common/wait_for_ready.asm"
 
 	DrawText RegionHandlePtr, DeliveryInProcess, 8, 4
 
 DEF DATA_TRANSFER_LENGTH EQU 6144
-INCLUDE "../common/transfer_data.asm"
+INCLUDE "common/transfer_data.asm"
 	ld hl, $5fff
 	LD_IND_HL Space_1
 	API_0C7 Space_1
@@ -122,9 +122,9 @@ INCLUDE "../common/transfer_data.asm"
 	ld c, a
 	nop
 
-INCLUDE "../common/wrap_up.asm"
+INCLUDE "common/wrap_up.asm"
 
-INCLUDE "../common/word_shift_right.asm"
+INCLUDE "common/word_shift_right.asm"
 
 SomeVar1: dw ; 1CA2
 RegionHandlePtr: db ; 1CA4

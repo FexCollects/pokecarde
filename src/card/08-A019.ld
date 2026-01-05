@@ -7,5 +7,6 @@ ROM0
   "common/prologue.corrupt"
   "payload/battle/hugo"
   "app/battle-e/hiker.gfx"
+  "common/mem_struct"
   "app/battle-e/main"
   "common/eof"

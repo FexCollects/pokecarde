@@ -1,14 +1,13 @@
-INCLUDE "../constants/abilities.asm"
-INCLUDE "../constants/easychat.asm"
-INCLUDE "../constants/items.asm"
-INCLUDE "../constants/moves.asm"
-INCLUDE "../constants/natures.asm"
-INCLUDE "../constants/pokemon.asm"
-INCLUDE "../constants/trainerclasses.asm"
-
 INCLUDE "include/gba.asm"
+INCLUDE "constants/abilities.asm"
 INCLUDE "constants/card_types.asm"
+INCLUDE "constants/easychat.asm"
+INCLUDE "constants/items.asm"
+INCLUDE "constants/moves.asm"
+INCLUDE "constants/natures.asm"
+INCLUDE "constants/pokemon.asm"
 INCLUDE "constants/regions.asm"
+INCLUDE "constants/trainerclasses.asm"
 
 DEF MOSSDEEP EQU 0
 

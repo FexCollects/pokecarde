@@ -7,5 +7,6 @@ ROM0
   "common/prologue.corrupt"
   "payload/battle/makio"
   "app/battle-e/pokefan_m.gfx"
+  "common/mem_struct"
   "app/battle-e/main"
   "common/eof"

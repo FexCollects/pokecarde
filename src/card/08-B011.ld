@@ -7,5 +7,6 @@ ROM0
   "common/prologue.corrupt"
   "payload/battle/jo"
   "app/battle-e/kindler.gfx"
+  "common/mem_struct"
   "app/battle-e/main"
   "common/eof"

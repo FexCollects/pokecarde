@@ -7,5 +7,6 @@ ROM0
   "common/prologue.corrupt"
   "payload/battle/mami"
   "app/battle-e/pkmn_breeder_f.gfx"
+  "common/mem_struct"
   "app/battle-e/main"
   "common/eof"

@@ -7,5 +7,6 @@ ROM0
   "common/prologue.corrupt"
   "payload/battle/heather"
   "app/battle-e/pkmn_ranger_f.gfx"
+  "common/mem_struct"
   "app/battle-e/main"
   "common/eof"

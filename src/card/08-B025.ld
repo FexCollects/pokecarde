@@ -7,5 +7,6 @@ ROM0
   "common/prologue.corrupt"
   "payload/battle/rina"
   "app/battle-e/hex_maniac.gfx"
+  "common/mem_struct"
   "app/battle-e/main"
   "common/eof"

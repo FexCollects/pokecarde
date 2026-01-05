@@ -7,5 +7,6 @@ ROM0
   "common/prologue.corrupt"
   "payload/battle/nozomu"
   "app/battle-e/triathlete_m_bike.gfx"
+  "common/mem_struct"
   "app/battle-e/main"
   "common/eof"

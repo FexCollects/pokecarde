@@ -7,5 +7,6 @@ ROM0
   "common/prologue.corrupt"
   "payload/battle/april"
   "app/battle-e/aroma_lady.gfx"
+  "common/mem_struct"
   "app/battle-e/main"
   "common/eof"

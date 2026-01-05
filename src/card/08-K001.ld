@@ -4,5 +4,6 @@ ROM0
   "app/berry-e/prologue"
   "common/prologue.corrupt"
   "payload/berry/pumkin"
+  "common/mem_struct"
   "app/berry-e/main"
   "common/eof"

@@ -7,5 +7,6 @@ ROM0
   "common/prologue.corrupt"
   "payload/battle/ryo"
   "app/battle-e/triathlete_m_swim.gfx"
+  "common/mem_struct"
   "app/battle-e/main"
   "common/eof"

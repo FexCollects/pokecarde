@@ -7,5 +7,6 @@ ROM0
   "common/prologue.corrupt"
   "payload/battle/yuka"
   "app/battle-e/beauty.gfx"
+  "common/mem_struct"
   "app/battle-e/main"
   "common/eof"

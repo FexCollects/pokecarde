@@ -7,5 +7,6 @@ ROM0
   "common/prologue.corrupt"
   "payload/battle/fuego"
   "app/battle-e/cooltrainer_m.gfx"
+  "common/mem_struct"
   "app/battle-e/main"
   "common/eof"

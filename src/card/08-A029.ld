@@ -7,5 +7,6 @@ ROM0
   "common/prologue.corrupt"
   "payload/battle/bryce"
   "app/battle-e/fisherman.gfx"
+  "common/mem_struct"
   "app/battle-e/main"
   "common/eof"

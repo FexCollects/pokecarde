@@ -7,5 +7,6 @@ ROM0
   "common/prologue.corrupt"
   "payload/battle/sandy"
   "app/battle-e/picnicker.gfx"
+  "common/mem_struct"
   "app/battle-e/main"
   "common/eof"

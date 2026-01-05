@@ -7,5 +7,6 @@ ROM0
   "common/prologue.corrupt"
   "payload/battle/satoe"
   "app/battle-e/psychic_f.gfx"
+  "common/mem_struct"
   "app/battle-e/main"
   "common/eof"

@@ -33,4 +33,6 @@ BerryPalette::
 
 	End_Berry
 
+	ds 2 ; padding
+
 POPC

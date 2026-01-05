@@ -1,13 +1,6 @@
 SECTION "app/battle-e/main", ROM0
-INCLUDE "../macros.asm"
 INCLUDE "include/charmaps.asm"
-
-TrainerSpriteData: ; 1738
-	dw TrainerSprite
-	dw TrainerPalette
-	db $08,$08,$01,$01,$01,$01,$01
-
-INCLUDE "../common/mem_struct.asm"
+INCLUDE "include/erapi.asm"
 
 BackdropSpriteData: ; 1777
 	dw BattleTrainerBackdrop
@@ -39,7 +32,7 @@ BattleEntryFinished: ; 188d
 	db "Press the A Button to resend.\n"
 	db "Press the B Button to cancel.\0"
 
-INCLUDE "../common/battle_e_transfer.asm"
+INCLUDE "common/battle_e_transfer.asm"
 
 Open_Doors: ; 1946
 	ld l, $20
@@ -121,7 +114,7 @@ Start:: ; 1984
 	DrawText RegionHandlePtr, Instructions1, 8, 4
 	API $08D
 
-INCLUDE "../common/wait_for_link.asm"
+INCLUDE "common/wait_for_link.asm"
 
 	call Open_Doors
 	DrawText RegionHandlePtr, Instructions2, 8, 4
@@ -130,13 +123,13 @@ INCLUDE "../common/wait_for_link.asm"
 	ld [bc], a
 	
 DEF UNKNOWN_VALUE EQU $02A6
-INCLUDE "../common/wait_for_ready.asm"
+INCLUDE "common/wait_for_ready.asm"
 
 	call Close_Doors
 	DrawText RegionHandlePtr, BattleEntryInProcess, 8, 4
 
 DEF DATA_TRANSFER_LENGTH EQU 6144
-INCLUDE "../common/transfer_data.asm"
+INCLUDE "common/transfer_data.asm"
 
 	ld hl, $5fff
 	LD_IND_HL Space_1
@@ -153,8 +146,8 @@ INCLUDE "../common/transfer_data.asm"
 	ld c, a
 	nop
 
-INCLUDE "../common/wrap_up.asm"
-INCLUDE "../common/word_shift_right.asm"
+INCLUDE "common/wrap_up.asm"
+INCLUDE "common/word_shift_right.asm"
 
 SomeVar1: db                ; 1B9F
 SomeVar2: dw                ; 1BA0

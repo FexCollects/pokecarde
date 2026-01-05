@@ -1,4 +1,4 @@
-SECTION "payload/event/dollgift.regice", ROM0
+SECTION "payload/event/gift.doll.regice", ROM0
 INCLUDE "include/event.asm"
 INCLUDE "include/charmaps.asm"
 
