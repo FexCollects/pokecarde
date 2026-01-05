@@ -1095,19 +1095,19 @@ label_2833:
     pop hl
     ret
 
-RegionHandlePtr283B:: ds 2
-RegionHandlePtr283D:: ds 2
-RegionHandlePtr283F:: ds 1
-RegionHandlePtr2840:: ds 1
-RegionHandlePtr2841:: ds 1
-RegionHandlePtr2842:: ds 2
-RegionHandlePtr2844:: ds 1
-RegionHandlePtr2845:: ds 2
-RegionHandlePtr2847:: ds 1
-RegionHandlePtr2848:: ds 1
-RegionHandlePtr2849:: ds 1
-RegionHandlePtr284A:: ds 1
+RegionHandlePtr283B:: dw
+RegionHandlePtr283D:: dw
+RegionHandlePtr283F:: db
+RegionHandlePtr2840:: db
+RegionHandlePtr2841:: db
+RegionHandlePtr2842:: dw
+RegionHandlePtr2844:: db
+RegionHandlePtr2845:: dw
+RegionHandlePtr2847:: db
+RegionHandlePtr2848:: db
+RegionHandlePtr2849:: db
+RegionHandlePtr284A:: db
 
-    ; Stripping metadata. How many bytes above this
-    ; byte should be stripped.
-    db $10
+; Stripping metadata. How many bytes above this
+; byte should be stripped.
+EOF_OFFSET $10

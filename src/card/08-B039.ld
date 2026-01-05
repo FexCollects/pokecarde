@@ -4,7 +4,7 @@ ROM0
   "app/battle-e/prologue.a"
   "app/battle-e/pkmn_breeder_f.pal"
   "app/battle-e/prologue.b"
-  "common/prologue"
+  "common/prologue.corrupt"
   "payload/battle/momoko"
   "app/battle-e/pkmn_breeder_f.gfx"
   "app/battle-e/main"

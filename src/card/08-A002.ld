@@ -4,7 +4,7 @@ ROM0
   "app/battle-e/prologue.a"
   "app/battle-e/ninja_boy.pal"
   "app/battle-e/prologue.b"
-  "common/prologue"
+  "common/prologue.corrupt"
   "payload/battle/goro"
   "app/battle-e/ninja_boy.gfx"
   "app/battle-e/main"

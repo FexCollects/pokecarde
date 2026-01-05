@@ -4,7 +4,7 @@ ROM0
   "app/battle-e/prologue.a"
   "app/battle-e/pokemaniac.pal"
   "app/battle-e/prologue.b"
-  "common/prologue"
+  "common/prologue.corrupt"
   "payload/battle/tyler"
   "app/battle-e/pokemaniac.gfx"
   "app/battle-e/main"

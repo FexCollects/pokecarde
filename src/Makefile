@@ -47,7 +47,7 @@ build/deps/asms.d: $(ASMS)
 generate: build/deps/checksum.d build/deps/asms.d build/deps/cards.d
 
 # Automatically create build dirs if missing
-BUILD_DIRS := build/EN/common build/EN/app/battle-e build/EN/app/berry-e build/EN/payload/battle build/EN/payload/berry build/EN/payload/event build/EN/card build/gfx/trainers build/gfx/battle-e build/gfx/berries build/gfx/berry-e build/gfx/decoration build/deps
+BUILD_DIRS := build/EN/common build/EN/app/battle-e build/EN/app/berry-e build/EN/app/event build/EN/payload/battle build/EN/payload/berry build/EN/payload/event build/EN/card build/gfx/trainers build/gfx/battle-e build/gfx/berries build/gfx/berry-e build/gfx/events build/gfx/decoration build/deps
 $(info $(shell mkdir -p $(BUILD_DIRS)))
 
 .PHONY: clean

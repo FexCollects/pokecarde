@@ -4,7 +4,7 @@ ROM0
   "app/battle-e/prologue.a"
   "app/battle-e/hiker.pal"
   "app/battle-e/prologue.b"
-  "common/prologue"
+  "common/prologue.corrupt"
   "payload/battle/hugo"
   "app/battle-e/hiker.gfx"
   "app/battle-e/main"

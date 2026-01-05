@@ -4,7 +4,7 @@ ROM0
   "app/battle-e/prologue.a"
   "app/battle-e/battle_girl.pal"
   "app/battle-e/prologue.b"
-  "common/prologue"
+  "common/prologue.corrupt"
   "payload/battle/noriko"
   "app/battle-e/battle_girl.gfx"
   "app/battle-e/main"

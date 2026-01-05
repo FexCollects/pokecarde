@@ -4,7 +4,7 @@ ROM0
   "app/battle-e/prologue.a"
   "app/battle-e/ruin_maniac.pal"
   "app/battle-e/prologue.b"
-  "common/prologue"
+  "common/prologue.corrupt"
   "payload/battle/logan"
   "app/battle-e/ruin_maniac.gfx"
   "app/battle-e/main"

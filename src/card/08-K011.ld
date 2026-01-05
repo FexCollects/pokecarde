@@ -2,7 +2,7 @@ ROM0
   ORG $100
   "common/app_init"
   "app/berry-e/prologue"
-  "common/prologue"
+  "common/prologue.corrupt"
   "payload/berry/niniku"
   "app/berry-e/main"
   "common/eof"

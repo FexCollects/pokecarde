@@ -1,4 +1,5 @@
 # Various mystery gift applications
+901180e44767e19e5dc9d5df881fe123  build/EN/card/00-C000.crc
 8ecbca4708991fa9edb772b9b7a16857  build/EN/card/08-O001.crc
 
 # Battle-e trainers
@@ -50,15 +51,8 @@ ebe7c17e61815351002744514c970e03  build/EN/card/08-A043.crc
 6a2f67a46600a396bf292d1dd157d128  build/EN/card/08-A046.crc
 90e3315b232fd956c495a880110a3203  build/EN/card/08-A047.crc
 18966453bdef23e566125aab79a4089a  build/EN/card/08-A048.crc
-e53f77ada353ba5a557944f5d77d2359  build/EN/card/08-K001.crc
-d51697c6ffc805038cee7e9e9bbc1a66  build/EN/card/08-K002.crc
-579aeb95be4516a4ccdfc7abd6d5c32f  build/EN/card/08-K003.crc
-18212da3adcf4ebdb9011b94dfc0f69d  build/EN/card/08-K004.crc
-5086e9248754cd3077021cbcfb94d580  build/EN/card/08-K005.crc
-565f2df48757c2e069a32dfa07e25fc4  build/EN/card/08-K006.crc
 9243e2d975dd790106e1774caba15dad  build/EN/card/129-B001.crc
 a817a172740de53ef1b74771a76583e0  build/EN/card/129-B002.crc
-
 # These have not been validated. Instead they are just what was produced
 4e0080679e3f78b21217cd838473b7f1  build/EN/card/08-P001.crc
 5184ece50173978395f8bae405cb3a14  build/EN/card/08-P002.crc
@@ -68,6 +62,15 @@ d7cc6591d1a221ec84ef3dde7b968c34  build/EN/card/08-P004.crc
 e97df3ebe48b857c745fea4a89a6026f  build/EN/card/08-P006.crc
 a4e45dc6e46eba0097868888e3824a84  build/EN/card/08-P007.crc
 889bc41406abcf480436208e24367bb1  build/EN/card/08-P008.crc
+
+# Battle-e berries
+e53f77ada353ba5a557944f5d77d2359  build/EN/card/08-K001.crc
+d51697c6ffc805038cee7e9e9bbc1a66  build/EN/card/08-K002.crc
+579aeb95be4516a4ccdfc7abd6d5c32f  build/EN/card/08-K003.crc
+18212da3adcf4ebdb9011b94dfc0f69d  build/EN/card/08-K004.crc
+5086e9248754cd3077021cbcfb94d580  build/EN/card/08-K005.crc
+565f2df48757c2e069a32dfa07e25fc4  build/EN/card/08-K006.crc
+# These have not been validated. Instead they are just what was produced
 4fd2121eb3e8fb23f17802f749bd1f59  build/EN/card/08-K007.crc
 0b6174d7765c231de42442e11cf24771  build/EN/card/08-K008.crc
 05a8419e3303581d835b8714fa2ccf82  build/EN/card/08-K009.crc

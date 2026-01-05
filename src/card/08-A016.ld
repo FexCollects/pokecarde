@@ -4,7 +4,7 @@ ROM0
   "app/battle-e/prologue.a"
   "app/battle-e/cooltrainer_m.pal"
   "app/battle-e/prologue.b"
-  "common/prologue"
+  "common/prologue.corrupt"
   "payload/battle/belford"
   "app/battle-e/cooltrainer_m.gfx"
   "app/battle-e/main"

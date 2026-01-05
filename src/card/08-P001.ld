@@ -4,7 +4,7 @@ ROM0
   "app/battle-e/prologue.a"
   "app/battle-e/dragon_tamer.pal"
   "app/battle-e/prologue.b"
-  "common/prologue"
+  "common/prologue.corrupt"
   "payload/battle/craig"
   "app/battle-e/dragon_tamer.gfx"
   "app/battle-e/main"

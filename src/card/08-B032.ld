@@ -4,7 +4,7 @@ ROM0
   "app/battle-e/prologue.a"
   "app/battle-e/pkmn_ranger_f.pal"
   "app/battle-e/prologue.b"
-  "common/prologue"
+  "common/prologue.corrupt"
   "payload/battle/hoyoshi"
   "app/battle-e/pkmn_ranger_f.gfx"
   "app/battle-e/main"

@@ -4,7 +4,7 @@ ROM0
   "app/battle-e/prologue.a"
   "app/battle-e/triathlete_m_bike.pal"
   "app/battle-e/prologue.b"
-  "common/prologue"
+  "common/prologue.corrupt"
   "payload/battle/nozomu"
   "app/battle-e/triathlete_m_bike.gfx"
   "app/battle-e/main"

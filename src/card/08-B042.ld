@@ -4,7 +4,7 @@ ROM0
   "app/battle-e/prologue.a"
   "app/battle-e/bird_keeper.pal"
   "app/battle-e/prologue.b"
-  "common/prologue"
+  "common/prologue.corrupt"
   "payload/battle/suekichi"
   "app/battle-e/bird_keeper.gfx"
   "app/battle-e/main"

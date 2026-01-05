@@ -4,7 +4,7 @@ ROM0
   "app/battle-e/prologue.a"
   "app/battle-e/hex_maniac.pal"
   "app/battle-e/prologue.b"
-  "common/prologue"
+  "common/prologue.corrupt"
   "payload/battle/sueno"
   "app/battle-e/hex_maniac.gfx"
   "app/battle-e/main"

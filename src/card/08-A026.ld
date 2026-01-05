@@ -4,7 +4,7 @@ ROM0
   "app/battle-e/prologue.a"
   "app/battle-e/parasol_lady.pal"
   "app/battle-e/prologue.b"
-  "common/prologue"
+  "common/prologue.corrupt"
   "payload/battle/sofia"
   "app/battle-e/parasol_lady.gfx"
   "app/battle-e/main"

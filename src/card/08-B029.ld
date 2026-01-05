@@ -4,7 +4,7 @@ ROM0
   "app/battle-e/prologue.a"
   "app/battle-e/bug_catcher.pal"
   "app/battle-e/prologue.b"
-  "common/prologue"
+  "common/prologue.corrupt"
   "payload/battle/yukio"
   "app/battle-e/bug_catcher.gfx"
   "app/battle-e/main"

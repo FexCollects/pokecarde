@@ -4,7 +4,7 @@ ROM0
   "app/battle-e/prologue.a"
   "app/battle-e/triathlete_m_swim.pal"
   "app/battle-e/prologue.b"
-  "common/prologue"
+  "common/prologue.corrupt"
   "payload/battle/dustin"
   "app/battle-e/triathlete_m_swim.gfx"
   "app/battle-e/main"
