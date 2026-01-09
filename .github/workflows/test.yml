@@ -1,4 +1,4 @@
-name: Test Python Scripts
+name: Match cards 
 on:
   pull_request:
   push:
@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  BuildGift:
+  VerifyAll:
     runs-on: ubuntu-24.04
     steps:
       - name: Check out repository code
@@ -14,54 +14,4 @@ jobs:
 
       - name: Verify gift 
         run: |
-          cd giftpokemon && make
-
-  BuildRibbons:
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-
-      - name: Verify ribbons
-        run: |
-          cd ribbons && make
-
-  BuildDecoration:
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-
-      - name: Verify decoration
-        run: |
-          cd decoration && make
-
-  BuildEonTicket:
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-
-      - name: Verify eonticket
-        run: |
-          cd eonticket && make
-
-  BuildBattleE:
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-
-      - name: Verify battle-e
-        run: |
-          cd battle-e && make -j4
-
-  Test:
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-
-      - name: Test stripgbc
-        run: |
-          cd tests/scripts/stripgbc/ && ./pass.sh
+          cd src && make generate && make verify
