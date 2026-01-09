@@ -1,13 +1,13 @@
 import struct
 import sys
 import itertools
+import pokemonstructure
 
 def d_word(data, idx):
     return struct.unpack('<I', data[idx:idx+4])[0] 
 
 def s_word(val):
     return struct.pack('<I', val) 
-
 
 def pairwise(iterable):
     "s -> (s0, s1), (s1, s2), (s2, s3), ..."
@@ -16,10 +16,9 @@ def pairwise(iterable):
     return zip(a, b)
 
 def read_binary_file():
-    data = ""
     with open(sys.argv[1], 'rb') as f:
         data = f.read()
-    return data
+    return bytearray(data)
 
 def find_all(a_str, sub):
     start = 0
@@ -35,18 +34,18 @@ chunk_names = [
     "UNKNOWN CHUNK 0x00",
     "UNKNOWN CHUNK 0x01",
     "END OF CHUNKS 0x02",
-    "UNKNOWN CHUNK 0x03",
-    "UNKNOWN CHUNK 0x04",
-    "UNKNOWN CHUNK 0x05",
-    "UNKNOWN CHUNK 0x06",
+    "LOADING MESSAGE 0x03",
+    "SET LOAD STATUS 0x04",
+    "PRELOAD SCRIPT 0x05",
+    "IN GAME SCRIPT 0x06",
     "CUSTOM BERRY 0x07",
-    "UNKNOWN CHUNK 0x08",
-    "UNKNOWN CHUNK 0x09",
-    "UNKNOWN CHUNK 0x0A",
-    "UNKNOWN CHUNK 0x0B",
-    "UNKNOWN CHUNK 0x0C",
+    "AWARD RIBBON 0x08",
+    "NATIONAL POKEDEX 0x09",
+    "ADD RARE WORD 0x0A",
+    "MIX RECORDS ITEM 0x0B",
+    "GIVE POKEMON 0x0C",
     "BATTLE TRAINER 0x0D",
-    "UNKNOWN CHUNK 0x0E",
+    "CLOCK ADJUSTMENT 0x0E",
     "CHECKSUM BYTES 0x0F",
     "CHECKSUM CRC 0x10",
     "DOME TRAINER 0x11",
@@ -58,6 +57,8 @@ wordwises = []
 wordwise_results = []
 crcs = []
 crc_results = []
+pokemon_structures = []
+
 data = read_binary_file()
 
 payloads=list(find_all(data,b'\x01\x00\x00\x00\x02\x02\x00\x02\x00\x00\x00\x04\x00\x80\x01\x00\x00'))
@@ -69,7 +70,7 @@ def crc_one_payload(payload_start, payload_end):
 
     while i < payload_end:
         chunk_type = data[i]
-        # print("Processing chunk:", chunk_names[chunk_type])
+        print("Processing chunk:", chunk_names[chunk_type])
         if chunk_type == 0x02: # END_OF_CHUNKS
             break
         elif chunk_type == 0x07: # CUSTOM_BERRY
@@ -77,6 +78,9 @@ def crc_one_payload(payload_start, payload_end):
             offset_size = berry_address - base_address
             data_idx = payload_start + offset_size
             bytewises.append([data_idx + 0x52C, data_idx, data_idx + 0x52C])
+        elif chunk_type == 0x0C: # GIVE_POKEMON
+            offset_size = d_word(data, i + 1) - base_address
+            pokemon_structures.append(payload_start + offset_size)
         elif chunk_type == 0x0D: # BATTLE_TRAINER
             trainer_address = d_word(data, i + 1)
             offset_size = trainer_address - base_address
@@ -106,6 +110,10 @@ def crc_one_payload(payload_start, payload_end):
 # stream is used instead.
 for (start, end) in pairwise(payloads + [len(data)]):
     crc_one_payload(start, end)
+
+# Patch all the pokemon structures present
+for offset in pokemon_structures:
+    data = pokemonstructure.do_pkmn_crc(data, offset)
 
 # calculate and insert all wordwise checksums
 for wordwise in wordwises:
@@ -148,7 +156,6 @@ i = 0
 for crc in crcs:
     data = data[0:crc[0]] + s_word(crc_results[i]) + data[(crc[0] + 4):]
     i += 1
-
 
 # write the updated file
 out = open(sys.argv[2], 'wb')

@@ -17,7 +17,7 @@ DataPacket::
 DataStart:
 	db GIVE_POKEMON
 	GBAPtr PokemonStart
-	db $02
+	db END_OF_CHUNKS
 
 PokemonStart:
 	PV SHINY_ADAMANT_MALE
@@ -26,7 +26,6 @@ PokemonStart:
 	Language $0202	;Language $0201=JP $0202=EN $0203=FR $0204=IT $0205=DE $0206=KR $0207=ES $0601=EGG
 	db "STEVEN@"
 	Markings 0
-        ; TODO: This needs to be fixed for it to match!!
 	dw 0 ;Checksum, computed later
 	dw 0 ;Unknown
 

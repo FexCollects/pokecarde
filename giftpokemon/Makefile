@@ -16,7 +16,7 @@ build/prologue-%.bin: build/prologue-%.gbc
 .PRECIOUS: build/prologue-%.tx build/prologue-%.o build/prologue-%.gbc build/prologue-%.bin
 
 build/giftpokemon-%.tx: giftpokemon.asm
-	python3 ../scripts/regionalize.py $< $@ $* $*
+	python3 ../scripts/regionalize.py $< $@ EN EN
 build/giftpokemon-%.o: build/giftpokemon-%.tx
 	../bin/rgbds/v0.9.1/rgbasm -M $@.d -o $@ $<
 build/giftpokemon-%.gbc: build/giftpokemon-%.o
