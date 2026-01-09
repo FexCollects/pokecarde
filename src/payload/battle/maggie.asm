@@ -5,63 +5,63 @@ INCLUDE "include/charmaps.asm"
 PUSHC gen3text
 
 DataPacket::
-	Battle_Trainer
+    Battle_Trainer
 
-	BT_Level MOSSDEEP
-	Class POKEFAN_F
-	BT_Floor MOSSDEEP
-	db "MAGGIE@ "
-	; Text_JP "ミスズ"8
-	OT_ID 00000, 00000
+    BT_Level MOSSDEEP
+    Class POKEFAN_F
+    BT_Floor MOSSDEEP
+    db "MAGGIE@ "
+    ; Text_JP "ミスズ"8
+    OT_ID 00000, 00000
 
-	Intro_EN LOOK,AT,MY,CUTE,POKEMON,_EX
-	Win_EN   MY,POKEMON,ARE,SO,CUTE,_EX
-	Loss_EN  YOU,BETTER,CARE,_FOR,MY,POKEMON
+    Intro_EN LOOK,AT,MY,CUTE,POKEMON,_EX
+    Win_EN   MY,POKEMON,ARE,SO,CUTE,_EX
+    Loss_EN  YOU,BETTER,CARE,_FOR,MY,POKEMON
 
-	Intro_JP $1643, $0c00, $ffff, $0a48, $0418, $020e
-	Win_JP $0a45, $1034, $020e, $0418, $0418, $0c00
-	Loss_JP $0c0c, $0c33, $0c00, $0e36, $1616, $103e
+    Intro_JP $1643, $0c00, $ffff, $0a48, $0418, $020e
+    Win_JP $0a45, $1034, $020e, $0418, $0418, $0c00
+    Loss_JP $0c0c, $0c33, $0c00, $0e36, $1616, $103e
 
-	Pokemon WYNAUT
-	Holds LUM_BERRY
-	Moves COUNTER, MIRROR_COAT, SAFEGUARD, DESTINY_BOND
-	Level 80
-	PP_Ups 0,0,0,0
-	EVs 252,0,252,0,0,6
-	OT_ID 00000, 00000
-	IVs 31,15,31,15,15,15, WYNAUT_SHADOW_TAG
-	PV $00000083 ; ♂ Docile
-	db "WYNAUT@    "
-	; Text_JP "ソーナノ"11
-	Friendship 255
+    Pokemon WYNAUT
+    Holds LUM_BERRY
+    Moves COUNTER, MIRROR_COAT, SAFEGUARD, DESTINY_BOND
+    Level 80
+    PP_Ups 0,0,0,0
+    EVs 252,0,252,0,0,6
+    OT_ID 00000, 00000
+    IVs 31,15,31,15,15,15, WYNAUT_SHADOW_TAG
+    PV $00000083 ; ♂ Docile
+    db "WYNAUT@    "
+    ; Text_JP "ソーナノ"11
+    Friendship 255
 
-	Pokemon WHISMUR
-	Holds SILK_SCARF
-	Moves HYPER_VOICE, ATTRACT, PROTECT, ASTONISH
-	Level 82
-	PP_Ups 0,0,0,0
-	EVs 252,252,6,0,0,0
-	OT_ID 00000, 00000
-	IVs 31,31,15,15,15,15, WHISMUR_SOUNDPROOF
-	PV $0000001F ; ♀ Docile
-	db "WHISMUR@   "
-	; Text_JP "ゴニョニョ"11
-	Friendship 255
+    Pokemon WHISMUR
+    Holds SILK_SCARF
+    Moves HYPER_VOICE, ATTRACT, PROTECT, ASTONISH
+    Level 82
+    PP_Ups 0,0,0,0
+    EVs 252,252,6,0,0,0
+    OT_ID 00000, 00000
+    IVs 31,31,15,15,15,15, WHISMUR_SOUNDPROOF
+    PV $0000001F ; ♀ Docile
+    db "WHISMUR@   "
+    ; Text_JP "ゴニョニョ"11
+    Friendship 255
 
-	Pokemon PIKACHU
-	Holds LIGHT_BALL
-	Moves THUNDERBOLT, IRON_TAIL, DOUBLE_TEAM, ATTRACT
-	Level 84
-	PP_Ups 0,0,0,0
-	EVs 252,0,6,252,0,0
-	OT_ID 00000, 00000
-	IVs 31,15,15,31,15,15, PIKACHU_STATIC
-	PV $00000083 ; ♂ Docile
-	db "PIKACHU@   "
-	; Text_JP "ピカチュウ"11
-	Friendship 255
+    Pokemon PIKACHU
+    Holds LIGHT_BALL
+    Moves THUNDERBOLT, IRON_TAIL, DOUBLE_TEAM, ATTRACT
+    Level 84
+    PP_Ups 0,0,0,0
+    EVs 252,0,6,252,0,0
+    OT_ID 00000, 00000
+    IVs 31,15,15,31,15,15, PIKACHU_STATIC
+    PV $00000083 ; ♂ Docile
+    db "PIKACHU@   "
+    ; Text_JP "ピカチュウ"11
+    Friendship 255
 
-	End_Trainer
+    End_Trainer
 
 
         ds 44 ; Pad to 256

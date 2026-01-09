@@ -933,9 +933,9 @@ sub_26E0:
 
 
 sub_270D: ; WriteText
-	CLEAR_REGION RegionHandlePtr2847
-	GetTextWidth RegionHandlePtr2847, TitleText
-	ld l,a
+    CLEAR_REGION RegionHandlePtr2847
+    GetTextWidth RegionHandlePtr2847, TitleText
+    ld l,a
     ld a,$d0
     sub l
     ld b,$02
@@ -953,93 +953,93 @@ sub_270D: ; WriteText
     ret
 
 sub_273C: ; RegiSelectText
-	DrawText RegionHandlePtr2844, RegirockText2, 0, 4
-	ld bc, RegiceText2
-	ld de, $0016
-	LD_A_IND RegionHandlePtr2844
-	API $099 ;DrawText
-	ld bc, RegisteelText2
-	ld de, $0028
-	LD_A_IND RegionHandlePtr2844
-	API $099 ;DrawText
-	ret
+    DrawText RegionHandlePtr2844, RegirockText2, 0, 4
+    ld bc, RegiceText2
+    ld de, $0016
+    LD_A_IND RegionHandlePtr2844
+    API $099 ;DrawText
+    ld bc, RegisteelText2
+    ld de, $0028
+    LD_A_IND RegionHandlePtr2844
+    API $099 ;DrawText
+    ret
 
 
 ;This is the text you see on the menu select textbox, in order they appear
 
 RegirockText2:
-	db "REGIROCK DOLL\0"
+    db "REGIROCK DOLL\0"
     ;db $83,$8C,$83,$57,$83,$8D,$83,$62,$83,$4E,$83,$68,$81,$5B,$83,$8B,$00
 
 RegiceText2:
-	db "REGICE DOLL\0"
+    db "REGICE DOLL\0"
     ;db $83,$8C,$83,$57,$83,$41,$83,$43,$83,$58,$83,$68,$81,$5B,$83,$8B,$00
 
 RegisteelText2:
-	db "REGISTEEL DOLL\0"
+    db "REGISTEEL DOLL\0"
     ;db $83,$8C,$83,$57,$83,$58,$83,$60,$83,$8B,$83,$68,$81,$5B,$83,$8B,$00
 
 
 sub_2796: ; RegiChangeText (I think)
-	push bc
-	push de
-	push hl
-	CLEAR_REGION RegionHandlePtr2841
-	pop hl
-	push hl
-	EX_DE_HL
-	LD_A_IND RegionHandlePtr2841
-	API $0C0 ;GetTextWidth
-	ld l, a
-	ld a, $f0
-	sub l
-	ld b, $02
-	call sub_2824
-	LD_IND_A RegionHandlePtr2848
-	pop bc
-	LD_A_IND RegionHandlePtr2848
-    ld de, $000A
-	or d
-	ld d, a
-	LD_A_IND RegionHandlePtr2841
-	API $099 ;DrawText
-	pop de
-	push de
-	LD_A_IND RegionHandlePtr2841
-	API $0C0 ;GetTextWidth
-	ld l, a
-	ld a, $f0
-	sub l
-	ld b, $2
-	call sub_2824
-	LD_IND_A RegionHandlePtr2848
-	pop bc
-	LD_A_IND RegionHandlePtr2848
-	ld de, $0014
-	or d
-	ld d, a
-	LD_A_IND RegionHandlePtr2841
-	API $099 ;DrawText
-	pop bc
-	push bc
-	ld e, c
-	ld d, b
-	LD_A_IND RegionHandlePtr2841
-	API $0C0 ;GetTextWidth
-	ld l, a
-	ld a, $f0
-	sub l
-	ld b, $2
-	call sub_2824
-	LD_IND_A RegionHandlePtr2848
+    push bc
+    push de
+    push hl
+    CLEAR_REGION RegionHandlePtr2841
+    pop hl
+    push hl
+    EX_DE_HL
+    LD_A_IND RegionHandlePtr2841
+    API $0C0 ;GetTextWidth
+    ld l, a
+    ld a, $f0
+    sub l
+    ld b, $02
+    call sub_2824
+    LD_IND_A RegionHandlePtr2848
     pop bc
     LD_A_IND RegionHandlePtr2848
-	ld de, $001E
-	or d
-	ld d, a
-	LD_A_IND RegionHandlePtr2841
-	API $099 ;DrawText
-	ret
+    ld de, $000A
+    or d
+    ld d, a
+    LD_A_IND RegionHandlePtr2841
+    API $099 ;DrawText
+    pop de
+    push de
+    LD_A_IND RegionHandlePtr2841
+    API $0C0 ;GetTextWidth
+    ld l, a
+    ld a, $f0
+    sub l
+    ld b, $2
+    call sub_2824
+    LD_IND_A RegionHandlePtr2848
+    pop bc
+    LD_A_IND RegionHandlePtr2848
+    ld de, $0014
+    or d
+    ld d, a
+    LD_A_IND RegionHandlePtr2841
+    API $099 ;DrawText
+    pop bc
+    push bc
+    ld e, c
+    ld d, b
+    LD_A_IND RegionHandlePtr2841
+    API $0C0 ;GetTextWidth
+    ld l, a
+    ld a, $f0
+    sub l
+    ld b, $2
+    call sub_2824
+    LD_IND_A RegionHandlePtr2848
+    pop bc
+    LD_A_IND RegionHandlePtr2848
+    ld de, $001E
+    or d
+    ld d, a
+    LD_A_IND RegionHandlePtr2841
+    API $099 ;DrawText
+    ret
 
 sub_2805:
     LD_IND_A_HL

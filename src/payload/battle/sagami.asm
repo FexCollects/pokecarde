@@ -5,63 +5,63 @@ INCLUDE "include/charmaps.asm"
 PUSHC gen3text
 
 DataPacket::
-	Battle_Trainer
+    Battle_Trainer
 
-	BT_Level 0
-	Class RUIN_MANIAC
-	BT_Floor 0
-	db "REGINALD"
-	; Text_JP "サガミ"8
-	OT_ID 00000, 00000
+    BT_Level 0
+    Class RUIN_MANIAC
+    BT_Floor 0
+    db "REGINALD"
+    ; Text_JP "サガミ"8
+    OT_ID 00000, 00000
 
-	Intro_JP $0a43, $1034, $1606, $1010, $020e, $081b
-	Win_JP $0a43, $1034, $020e, $1421, $1034, $100b
-	Loss_JP $0e38, $1606, $1010, $020e, $081b, $0c06
+    Intro_JP $0a43, $1034, $1606, $1010, $020e, $081b
+    Win_JP $0a43, $1034, $020e, $1421, $1034, $100b
+    Loss_JP $0e38, $1606, $1010, $020e, $081b, $0c06
 
-	Intro_EN LOOK, AT, MY, POKEMON, COLLECTION, _EX
-	Win_EN AREN_T, MY, POKEMON, AWESOME, _QU, $ffff
-	Loss_EN THEY, WERE, HARD, TO, COLLECT, _ELIP
+    Intro_EN LOOK, AT, MY, POKEMON, COLLECTION, _EX
+    Win_EN AREN_T, MY, POKEMON, AWESOME, _QU, $ffff
+    Loss_EN THEY, WERE, HARD, TO, COLLECT, _ELIP
 
-	Pokemon REGIROCK
-	Holds SHELL_BELL
-	Moves EXPLOSION, ANCIENTPOWER, SUPERPOWER, EARTHQUAKE
-	Level 60
-	PP_Ups 0,0,0,0
-	EVs 6,252,252,0,0,0
-	OT_ID 00000, 00000
-	IVs 15,31,31,15,15,15, 0
-	PV $0000001B
-	db "REGIROCK@  "
-	; Text_JP "レジロック"11
-	Friendship 255
+    Pokemon REGIROCK
+    Holds SHELL_BELL
+    Moves EXPLOSION, ANCIENTPOWER, SUPERPOWER, EARTHQUAKE
+    Level 60
+    PP_Ups 0,0,0,0
+    EVs 6,252,252,0,0,0
+    OT_ID 00000, 00000
+    IVs 15,31,31,15,15,15, 0
+    PV $0000001B
+    db "REGIROCK@  "
+    ; Text_JP "レジロック"11
+    Friendship 255
 
-	Pokemon REGICE
-	Holds LUM_BERRY
-	Moves EXPLOSION, ANCIENTPOWER, SUPERPOWER, ICE_BEAM
-	Level 70
-	PP_Ups 0,0,0,0
-	EVs 6,0,252,0,252,0
-	OT_ID 00000, 00000
-	IVs 15,15,31,15,31,15, 0
-	PV $00000020
-	db "REGICE@    "
-	; Text_JP "レジアイス"11
-	Friendship 255
+    Pokemon REGICE
+    Holds LUM_BERRY
+    Moves EXPLOSION, ANCIENTPOWER, SUPERPOWER, ICE_BEAM
+    Level 70
+    PP_Ups 0,0,0,0
+    EVs 6,0,252,0,252,0
+    OT_ID 00000, 00000
+    IVs 15,15,31,15,31,15, 0
+    PV $00000020
+    db "REGICE@    "
+    ; Text_JP "レジアイス"11
+    Friendship 255
 
-	Pokemon REGISTEEL
-	Holds LEFTOVERS
-	Moves EXPLOSION, ANCIENTPOWER, SUPERPOWER, IRON_DEFENSE
-	Level 75
-	PP_Ups 0,0,0,0
-	EVs 252,6,0,0,0,252
-	OT_ID 00000, 00000
-	IVs 31,15,15,15,15,31, 0
-	PV $0000001C
-	db "REGISTEEL@ "
-	; Text_JP "レジスチル"11
-	Friendship 255
+    Pokemon REGISTEEL
+    Holds LEFTOVERS
+    Moves EXPLOSION, ANCIENTPOWER, SUPERPOWER, IRON_DEFENSE
+    Level 75
+    PP_Ups 0,0,0,0
+    EVs 252,6,0,0,0,252
+    OT_ID 00000, 00000
+    IVs 31,15,15,15,15,31, 0
+    PV $0000001C
+    db "REGISTEEL@ "
+    ; Text_JP "レジスチル"11
+    Friendship 255
 
-	End_Trainer
+    End_Trainer
 
         ds 44 ; Pad to 256
 

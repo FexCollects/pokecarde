@@ -5,63 +5,63 @@ INCLUDE "include/charmaps.asm"
 PUSHC gen3text
 
 DataPacket::
-	Battle_Trainer
+    Battle_Trainer
 
-	BT_Level MOSSDEEP
-	Class FISHERMAN
-	BT_Floor MOSSDEEP
-	db "BRYCE@  "
-	; Text_JP "ナオユキ"8
-	OT_ID 00000, 00000
+    BT_Level MOSSDEEP
+    Class FISHERMAN
+    BT_Floor MOSSDEEP
+    db "BRYCE@  "
+    ; Text_JP "ナオユキ"8
+    OT_ID 00000, 00000
 
-	Intro_EN FISHING,IS,JUST,SO,FANTASTIC,_EX
-	Win_EN   I_AM,DONE,_AND,I_AM,GOING,FISHING
-	Loss_EN  OKAY,LET_S,GO,FISHING,TOGETHER,_EX
+    Intro_EN FISHING,IS,JUST,SO,FANTASTIC,_EX
+    Win_EN   I_AM,DONE,_AND,I_AM,GOING,FISHING
+    Loss_EN  OKAY,LET_S,GO,FISHING,TOGETHER,_EX
 
-	Intro_JP $1a20, $0e1d, $0e39, $1423, $1015, $0c00
-	Win_JP $0c37, $1c10, $ffff, $1a20, $160a, $100f
-	Loss_JP $081c, $0a1e, $ffff, $1a20, $1622, $1035
+    Intro_JP $1a20, $0e1d, $0e39, $1423, $1015, $0c00
+    Win_JP $0c37, $1c10, $ffff, $1a20, $160a, $100f
+    Loss_JP $081c, $0a1e, $ffff, $1a20, $1622, $1035
 
-	Pokemon LANTURN
-	Holds CHERI_BERRY
-	Moves CONFUSE_RAY, THUNDER_WAVE, SURF, THUNDERBOLT
-	Level 82
-	PP_Ups 0,0,0,0
-	EVs 0,0,0,255,255,0
-	OT_ID 00000, 00000
-	IVs 15,15,31,15,15,31, LANTURN_VOLT_ABSORB
-	PV $0000000F ; ♀ Modest
-	db "LANTURN@   "
-	; Text_JP "ランターン"11
-	Friendship 255
+    Pokemon LANTURN
+    Holds CHERI_BERRY
+    Moves CONFUSE_RAY, THUNDER_WAVE, SURF, THUNDERBOLT
+    Level 82
+    PP_Ups 0,0,0,0
+    EVs 0,0,0,255,255,0
+    OT_ID 00000, 00000
+    IVs 15,15,31,15,15,31, LANTURN_VOLT_ABSORB
+    PV $0000000F ; ♀ Modest
+    db "LANTURN@   "
+    ; Text_JP "ランターン"11
+    Friendship 255
 
-	Pokemon SHARPEDO
-	Holds MYSTIC_WATER
-	Moves CRUNCH, SURF, ICE_BEAM, DOUBLE_EDGE
-	Level 84
-	PP_Ups 0,0,0,0
-	EVs 0,255,0,0,255,0
-	OT_ID 00000, 00000
-	IVs 15,31,15,15,31,15, SHARPEDO_ROUGH_SKIN
-	PV $000000D9 ; ♂ Quiet
-	db "SHARPEDO@  "
-	; Text_JP "サメハダー"11
-	Friendship 255
+    Pokemon SHARPEDO
+    Holds MYSTIC_WATER
+    Moves CRUNCH, SURF, ICE_BEAM, DOUBLE_EDGE
+    Level 84
+    PP_Ups 0,0,0,0
+    EVs 0,255,0,0,255,0
+    OT_ID 00000, 00000
+    IVs 15,31,15,15,31,15, SHARPEDO_ROUGH_SKIN
+    PV $000000D9 ; ♂ Quiet
+    db "SHARPEDO@  "
+    ; Text_JP "サメハダー"11
+    Friendship 255
 
-	Pokemon WHISCASH
-	Holds LEFTOVERS
-	Moves SURF, EARTHQUAKE, FISSURE, ROCK_TOMB
-	Level 85
-	PP_Ups 0,0,0,0
-	EVs 0,255,0,0,255,0
-	OT_ID 00000, 00000
-	IVs 15,15,31,15,15,31, WHISCASH_OBLIVIOUS
-	PV $000000D4 ; ♂ Serious
-	db "WHISCASH@  "
-	; Text_JP "ナマズン"11
-	Friendship 255
+    Pokemon WHISCASH
+    Holds LEFTOVERS
+    Moves SURF, EARTHQUAKE, FISSURE, ROCK_TOMB
+    Level 85
+    PP_Ups 0,0,0,0
+    EVs 0,255,0,0,255,0
+    OT_ID 00000, 00000
+    IVs 15,15,31,15,15,31, WHISCASH_OBLIVIOUS
+    PV $000000D4 ; ♂ Serious
+    db "WHISCASH@  "
+    ; Text_JP "ナマズン"11
+    Friendship 255
 
-	End_Trainer
+    End_Trainer
 
         ds 44 ; Pad to 256
 

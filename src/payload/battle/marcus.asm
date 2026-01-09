@@ -5,63 +5,63 @@ INCLUDE "include/charmaps.asm"
 PUSHC gen3text
 
 DataPacket::
-	Battle_Trainer
+    Battle_Trainer
 
-	BT_Level 50
-	Class EXPERT_M
-	BT_Floor 5
-	db "MARCUS@ "
-	; Text_JP "ヨシヒコ"8
-	OT_ID 00000, 00000
+    BT_Level 50
+    Class EXPERT_M
+    BT_Floor 5
+    db "MARCUS@ "
+    ; Text_JP "ヨシヒコ"8
+    OT_ID 00000, 00000
 
-	Intro_EN MY,ATTACK,IS,GENIUS,_AND,INVINCIBLE
-	Win_EN   HOW,WAS,THE,POISON,ATTACK,_QU
-	Loss_EN  I,_ELIP,CAN_T,BEAT,YOU,_QU
+    Intro_EN MY,ATTACK,IS,GENIUS,_AND,INVINCIBLE
+    Win_EN   HOW,WAS,THE,POISON,ATTACK,_QU
+    Loss_EN  I,_ELIP,CAN_T,BEAT,YOU,_QU
 
-	Intro_JP $0a43, $1034, $0612, $0624, $0623, $100b
-	Win_JP $1e1b, $100b, $0c00, $265c, $0612, $0c01
-	Loss_JP $0a43, $0e1f, $ffff, $0a1a, $0e28, $060c
+    Intro_JP $0a43, $1034, $0612, $0624, $0623, $100b
+    Win_JP $1e1b, $100b, $0c00, $265c, $0612, $0c01
+    Loss_JP $0a43, $0e1f, $ffff, $0a1a, $0e28, $060c
 
-	Pokemon SKARMORY
-	Holds LEFTOVERS
-	Moves TOXIC, PROTECT, SKY_ATTACK, HIDDEN_POWER
-	Level 50
-	PP_Ups 0,0,0,0
-	EVs 252,0,6,0,0,252
-	OT_ID 00000, 00000
-	IVs 31,14,15,15,14,30, SKARMORY_KEEN_EYE ; HP Bug 70
-	PV $00000094 ; ♂ Careful
-	db "SKARMORY@  "
-	; Text_JP "エアームド"11
-	Friendship 255
+    Pokemon SKARMORY
+    Holds LEFTOVERS
+    Moves TOXIC, PROTECT, SKY_ATTACK, HIDDEN_POWER
+    Level 50
+    PP_Ups 0,0,0,0
+    EVs 252,0,6,0,0,252
+    OT_ID 00000, 00000
+    IVs 31,14,15,15,14,30, SKARMORY_KEEN_EYE ; HP Bug 70
+    PV $00000094 ; ♂ Careful
+    db "SKARMORY@  "
+    ; Text_JP "エアームド"11
+    Friendship 255
 
-	Pokemon HERACROSS
-	Holds SITRUS_BERRY
-	Moves TOXIC, PROTECT, MEGAHORN, DIG
-	Level 50
-	PP_Ups 0,0,0,0
-	EVs 252,6,0,252,0,0
-	OT_ID 00000, 00000
-	IVs 31,15,15,31,15,15, HERACROSS_GUTS
-	PV $0000000D ; ♀ Jolly
-	db "HERACROSS@ "
-	; Text_JP "ヘラクロス"11
-	Friendship 255
+    Pokemon HERACROSS
+    Holds SITRUS_BERRY
+    Moves TOXIC, PROTECT, MEGAHORN, DIG
+    Level 50
+    PP_Ups 0,0,0,0
+    EVs 252,6,0,252,0,0
+    OT_ID 00000, 00000
+    IVs 31,15,15,31,15,15, HERACROSS_GUTS
+    PV $0000000D ; ♀ Jolly
+    db "HERACROSS@ "
+    ; Text_JP "ヘラクロス"11
+    Friendship 255
 
-	Pokemon SWAMPERT
-	Holds SHELL_BELL
-	Moves TOXIC, PROTECT, ICE_BEAM, DIVE
-	Level 50
-	PP_Ups 0,0,0,0
-	EVs 252,0,6,0,0,252
-	OT_ID 00000, 00000
-	IVs 31,15,15,15,15,15, SWAMPERT_TORRENT
-	PV $0000007F ; ♂ Brave
-	db "SWAMPERT@  "
-	; Text_JP "ラグラージ"11
-	Friendship 255
+    Pokemon SWAMPERT
+    Holds SHELL_BELL
+    Moves TOXIC, PROTECT, ICE_BEAM, DIVE
+    Level 50
+    PP_Ups 0,0,0,0
+    EVs 252,0,6,0,0,252
+    OT_ID 00000, 00000
+    IVs 31,15,15,15,15,15, SWAMPERT_TORRENT
+    PV $0000007F ; ♂ Brave
+    db "SWAMPERT@  "
+    ; Text_JP "ラグラージ"11
+    Friendship 255
 
-	End_Trainer
+    End_Trainer
 
         ds 44 ; Pad to 256
 

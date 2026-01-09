@@ -5,63 +5,63 @@ INCLUDE "include/charmaps.asm"
 PUSHC gen3text
 
 DataPacket::
-	Battle_Trainer
+    Battle_Trainer
 
-	BT_Level MOSSDEEP
-	Class YOUNGSTER
-	BT_Floor MOSSDEEP
-	db "JEFFREY@"
-	; Text_JP "タツミ"8
-	OT_ID 00000, 00000
+    BT_Level MOSSDEEP
+    Class YOUNGSTER
+    BT_Floor MOSSDEEP
+    db "JEFFREY@"
+    ; Text_JP "タツミ"8
+    OT_ID 00000, 00000
 
-	Intro_EN I,WILL,SHOW,YOU,MY,SECRET
-	Win_EN   YEAH,MY,SECRET,_ELIP,IS,SECRET
-	Loss_EN  GO_EASY,ON,ME,_ELIP,PLEASE,_EX
+    Intro_EN I,WILL,SHOW,YOU,MY,SECRET
+    Win_EN   YEAH,MY,SECRET,_ELIP,IS,SECRET
+    Loss_EN  GO_EASY,ON,ME,_ELIP,PLEASE,_EX
 
-	Intro_JP $0a37, $1034, $1439, $1c28, $164c, $103e
-	Win_JP $1439, $1034, $1439, $0c06, $1439, $1016
-	Loss_JP $0e1b, $0622, $ffff, $1611, $100a, $0c06
+    Intro_JP $0a37, $1034, $1439, $1c28, $164c, $103e
+    Win_JP $1439, $1034, $1439, $0c06, $1439, $1016
+    Loss_JP $0e1b, $0622, $ffff, $1611, $100a, $0c06
 
-	Pokemon PINSIR
-	Holds KING_S_ROCK
-	Moves SWORDS_DANCE, GUILLOTINE, EARTHQUAKE, BRICK_BREAK
-	Level 60
-	PP_Ups 0,0,0,0
-	EVs 252,0,6,0,0,252
-	OT_ID 00000, 00000
-	IVs 31,15,15,15,15,31, PINSIR_HYPER_CUTTER
-	PV $00000080 ; ♂ Adamant
-	db "PINSIR@    "
-	; Text_JP "カイロス"11
-	Friendship 255
+    Pokemon PINSIR
+    Holds KING_S_ROCK
+    Moves SWORDS_DANCE, GUILLOTINE, EARTHQUAKE, BRICK_BREAK
+    Level 60
+    PP_Ups 0,0,0,0
+    EVs 252,0,6,0,0,252
+    OT_ID 00000, 00000
+    IVs 31,15,15,15,15,31, PINSIR_HYPER_CUTTER
+    PV $00000080 ; ♂ Adamant
+    db "PINSIR@    "
+    ; Text_JP "カイロス"11
+    Friendship 255
 
-	Pokemon NINETALES
-	Holds CHARCOAL
-	Moves FLAMETHROWER, CONFUSE_RAY, IRON_TAIL, FIRE_SPIN
-	Level 62
-	PP_Ups 0,0,0,0
-	EVs 6,0,0,252,252,0
-	OT_ID 00000, 00000
-	IVs 31,15,15,15,31,15, NINETALES_FLASH_FIRE
-	PV $0000000F ; ♀ Modest
-	db "NINETALES@ "
-	; Text_JP "キュウコン"11
-	Friendship 255
+    Pokemon NINETALES
+    Holds CHARCOAL
+    Moves FLAMETHROWER, CONFUSE_RAY, IRON_TAIL, FIRE_SPIN
+    Level 62
+    PP_Ups 0,0,0,0
+    EVs 6,0,0,252,252,0
+    OT_ID 00000, 00000
+    IVs 31,15,15,15,31,15, NINETALES_FLASH_FIRE
+    PV $0000000F ; ♀ Modest
+    db "NINETALES@ "
+    ; Text_JP "キュウコン"11
+    Friendship 255
 
-	Pokemon BLASTOISE
-	Holds MYSTIC_WATER
-	Moves SURF, BRICK_BREAK, EARTHQUAKE, ICE_BEAM
-	Level 64
-	PP_Ups 0,0,0,0
-	EVs 252,0,0,0,252,6
-	OT_ID 00000, 00000
-	IVs 31,15,15,15,31,15, BLASTOISE_TORRENT
-	PV $00000083 ; ♂ Docile
-	db "BLASTOISE@ "
-	; Text_JP "カメックス"11
-	Friendship 255
+    Pokemon BLASTOISE
+    Holds MYSTIC_WATER
+    Moves SURF, BRICK_BREAK, EARTHQUAKE, ICE_BEAM
+    Level 64
+    PP_Ups 0,0,0,0
+    EVs 252,0,0,0,252,6
+    OT_ID 00000, 00000
+    IVs 31,15,15,15,31,15, BLASTOISE_TORRENT
+    PV $00000083 ; ♂ Docile
+    db "BLASTOISE@ "
+    ; Text_JP "カメックス"11
+    Friendship 255
 
-	End_Trainer
+    End_Trainer
 
         ds 44 ; Pad to 256
 

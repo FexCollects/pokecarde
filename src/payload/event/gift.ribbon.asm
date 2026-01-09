@@ -4,15 +4,15 @@ INCLUDE "include/event.asm"
 INCLUDE "include/charmaps.asm"
 
 DataPacket::
-	Mystery_Event
-	GBAPtr DataStart
-	GBAPtr DataEnd
+    Mystery_Event
+    GBAPtr DataStart
+    GBAPtr DataEnd
 
 DataStart:
-	db AWARD_RIBBON 
-	db MARINE_RIBBON
-	db REGIONAL_TOURNEY_CHAMPION_2003
-	db END_OF_CHUNKS
+    db AWARD_RIBBON 
+    db MARINE_RIBBON
+    db REGIONAL_TOURNEY_CHAMPION_2003
+    db END_OF_CHUNKS
 
 DataEnd:
-	db 0,0,0 ; padding
+    db 0,0,0 ; padding

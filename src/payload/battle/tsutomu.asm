@@ -5,63 +5,63 @@ INCLUDE "include/charmaps.asm"
 PUSHC gen3text
 
 DataPacket::
-	Battle_Trainer
+    Battle_Trainer
 
-	BT_Level MOSSDEEP
-	Class TC_BLACK_BELT
-	BT_Floor MOSSDEEP
-	db "TSUTOMU@"
-	; Text_JP "トシユキ"8
-	OT_ID 00000, 00000
+    BT_Level MOSSDEEP
+    Class TC_BLACK_BELT
+    BT_Floor MOSSDEEP
+    db "TSUTOMU@"
+    ; Text_JP "トシユキ"8
+    OT_ID 00000, 00000
 
-	Intro_EN HIYAH,I,KNOW,YOUR,WEAK,POINTS
-	Win_EN   HAHAHA,_EX_EX,THAT_S,YOUR,WEAK,POINTS
-	Loss_EN  ARRGH,YOU,KNOW,MY,WEAK,POINTS
+    Intro_EN HIYAH,I,KNOW,YOUR,WEAK,POINTS
+    Win_EN   HAHAHA,_EX_EX,THAT_S,YOUR,WEAK,POINTS
+    Loss_EN  ARRGH,YOU,KNOW,MY,WEAK,POINTS
 
-	Intro_JP $0a1d, $0639, $062b, $0627, $100f, $ffff
-	Win_JP $0c28, $0c01, $0639, $062b, $1401, $1032
-	Loss_JP $0c0e, $0639, $062b, $061a, $164b, $1031
+    Intro_JP $0a1d, $0639, $062b, $0627, $100f, $ffff
+    Win_JP $0c28, $0c01, $0639, $062b, $1401, $1032
+    Loss_JP $0c0e, $0639, $062b, $061a, $164b, $1031
 
-	Pokemon ZANGOOSE
-	Holds SCOPE_LENS
-	Moves SWORDS_DANCE, REST, ATTRACT, SLASH
-	Level 50
-	PP_Ups 0,0,0,0
-	EVs 252,6,0,252,0,0
-	OT_ID 00000, 00000
-	IVs 31,15,15,31,15,15, ZANGOOSE_IMMUNITY
-	PV $0000001C ; ♀ Adamant
-	db "ZANGOOSE@  "
-	; Text_JP "ザングース"11
-	Friendship 255
+    Pokemon ZANGOOSE
+    Holds SCOPE_LENS
+    Moves SWORDS_DANCE, REST, ATTRACT, SLASH
+    Level 50
+    PP_Ups 0,0,0,0
+    EVs 252,6,0,252,0,0
+    OT_ID 00000, 00000
+    IVs 31,15,15,31,15,15, ZANGOOSE_IMMUNITY
+    PV $0000001C ; ♀ Adamant
+    db "ZANGOOSE@  "
+    ; Text_JP "ザングース"11
+    Friendship 255
 
-	Pokemon SEVIPER
-	Holds SCOPE_LENS
-	Moves POISON_TAIL,SWAGGER,GLARE,HAZE
-	Level 54
-	PP_Ups 0,0,0,0
-	EVs 252,6,0,252,0,0
-	OT_ID 00000, 00000
-	IVs 31,15,15,31,15,15, SEVIPER_SHED_SKIN
-	PV $00000080 ; ♂ Adamant
-	db "SEVIPER@   "
-	; Text_JP "ハブネーク"11
-	Friendship 255
+    Pokemon SEVIPER
+    Holds SCOPE_LENS
+    Moves POISON_TAIL,SWAGGER,GLARE,HAZE
+    Level 54
+    PP_Ups 0,0,0,0
+    EVs 252,6,0,252,0,0
+    OT_ID 00000, 00000
+    IVs 31,15,15,31,15,15, SEVIPER_SHED_SKIN
+    PV $00000080 ; ♂ Adamant
+    db "SEVIPER@   "
+    ; Text_JP "ハブネーク"11
+    Friendship 255
 
-	Pokemon MACHAMP
-	Holds SCOPE_LENS
-	Moves CROSS_CHOP, HIDDEN_POWER, BULK_UP, SCARY_FACE
-	Level 58
-	PP_Ups 0,0,0,0
-	EVs 252,252,0,0,0,6
-	OT_ID 00000, 00000
-	IVs 30,31,14,15,15,14, MACHAMP_GUTS ; HP Electric 70
-	PV $0000001C ; ♀ Adamant
-	db "MACHAMP@   "
-	; Text_JP "カイリキー"11
-	Friendship 255
+    Pokemon MACHAMP
+    Holds SCOPE_LENS
+    Moves CROSS_CHOP, HIDDEN_POWER, BULK_UP, SCARY_FACE
+    Level 58
+    PP_Ups 0,0,0,0
+    EVs 252,252,0,0,0,6
+    OT_ID 00000, 00000
+    IVs 30,31,14,15,15,14, MACHAMP_GUTS ; HP Electric 70
+    PV $0000001C ; ♀ Adamant
+    db "MACHAMP@   "
+    ; Text_JP "カイリキー"11
+    Friendship 255
 
-	End_Trainer
+    End_Trainer
 
         ds 44 ; Pad to 256
 

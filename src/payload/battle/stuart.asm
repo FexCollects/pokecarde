@@ -5,63 +5,63 @@ INCLUDE "include/charmaps.asm"
 PUSHC gen3text
 
 DataPacket::
-	Battle_Trainer
+    Battle_Trainer
 
-	BT_Level MOSSDEEP
-	Class COLLECTOR
-	BT_Floor MOSSDEEP
-	db "STUART@ "
-	; Text_JP "エツヤ"8
-	OT_ID 00000, 00000
+    BT_Level MOSSDEEP
+    Class COLLECTOR
+    BT_Floor MOSSDEEP
+    db "STUART@ "
+    ; Text_JP "エツヤ"8
+    OT_ID 00000, 00000
 
-	Intro_EN THERE,IS,NOTHING,BAD,ABOUT,THICK_FAT
-	Win_EN   MY,POKEMON,WILL,NEVER,DIET,_EX_EX
-	Loss_EN  MY,POKEMON,SHOULD,START,_A,DIET
+    Intro_EN THERE,IS,NOTHING,BAD,ABOUT,THICK_FAT
+    Win_EN   MY,POKEMON,WILL,NEVER,DIET,_EX_EX
+    Loss_EN  MY,POKEMON,SHOULD,START,_A,DIET
 
-	Intro_JP $0a3a, $020e, $245a, $1628, $0e2b, $0402
-	Win_JP $0a3a, $020e, $1a1a, $1e23, $1622, $100e
-	Loss_JP $0a3a, $020e, $0e1b, $1a1a, $100d, $1005
+    Intro_JP $0a3a, $020e, $245a, $1628, $0e2b, $0402
+    Win_JP $0a3a, $020e, $1a1a, $1e23, $1622, $100e
+    Loss_JP $0a3a, $020e, $0e1b, $1a1a, $100d, $1005
 
-	Pokemon AGGRON
-	Holds SCOPE_LENS
-	Moves EARTHQUAKE, ROCK_TOMB, IRON_TAIL, DOUBLE_EDGE
-	Level 50
-	PP_Ups 0,0,0,0
-	EVs 252,252,0,0,0,6
-	OT_ID 00000, 00000
-	IVs 31,31,15,15,15,15, AGGRON_ROCK_HEAD
-	PV $00000016 ; ♀ Sassy
-	db "AGGRON@    "
-	; Text_JP "ボスゴドラ"11
-	Friendship 255
+    Pokemon AGGRON
+    Holds SCOPE_LENS
+    Moves EARTHQUAKE, ROCK_TOMB, IRON_TAIL, DOUBLE_EDGE
+    Level 50
+    PP_Ups 0,0,0,0
+    EVs 252,252,0,0,0,6
+    OT_ID 00000, 00000
+    IVs 31,31,15,15,15,15, AGGRON_ROCK_HEAD
+    PV $00000016 ; ♀ Sassy
+    db "AGGRON@    "
+    ; Text_JP "ボスゴドラ"11
+    Friendship 255
 
-	Pokemon WAILORD
-	Holds CHESTO_BERRY
-	Moves AMNESIA, REST, HYDRO_PUMP, BLIZZARD
-	Level 51
-	PP_Ups 0,0,3,3
-	EVs 252,0,0,0,6,252
-	OT_ID 00000, 00000
-	IVs 31,15,15,15,15,31, WAILORD_OBLIVIOUS
-	PV $00000091 ; ♂ Calm
-	db "WAILORD@   "
-	; Text_JP "ホエルオー"11
-	Friendship 255
+    Pokemon WAILORD
+    Holds CHESTO_BERRY
+    Moves AMNESIA, REST, HYDRO_PUMP, BLIZZARD
+    Level 51
+    PP_Ups 0,0,3,3
+    EVs 252,0,0,0,6,252
+    OT_ID 00000, 00000
+    IVs 31,15,15,15,15,31, WAILORD_OBLIVIOUS
+    PV $00000091 ; ♂ Calm
+    db "WAILORD@   "
+    ; Text_JP "ホエルオー"11
+    Friendship 255
 
-	Pokemon METAGROSS
-	Holds QUICK_CLAW
-	Moves METEOR_MASH, EARTHQUAKE, AERIAL_ACE, REFLECT
-	Level 52
-	PP_Ups 0,0,0,0
-	EVs 252,252,0,0,6,0
-	OT_ID 00000, 00000
-	IVs 31,31,15,15,15,15, METAGROSS_CLEAR_BODY
-	PV $00000017 ; ⚲ Careful
-	db "METAGROSS@ "
-	; Text_JP "メタグロス"11
-	Friendship 255
+    Pokemon METAGROSS
+    Holds QUICK_CLAW
+    Moves METEOR_MASH, EARTHQUAKE, AERIAL_ACE, REFLECT
+    Level 52
+    PP_Ups 0,0,0,0
+    EVs 252,252,0,0,6,0
+    OT_ID 00000, 00000
+    IVs 31,31,15,15,15,15, METAGROSS_CLEAR_BODY
+    PV $00000017 ; ⚲ Careful
+    db "METAGROSS@ "
+    ; Text_JP "メタグロス"11
+    Friendship 255
 
-	End_Trainer
+    End_Trainer
 
         ds 44 ; Pad to 256
 

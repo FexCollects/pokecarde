@@ -6,6 +6,6 @@ INCLUDE "constants/regions.asm"
 
 MACRO Mystery_Event
         CardHeader CHECKSUM_CRC
-	dl 0 ; checksum placeholder
+    dl 0 ; checksum placeholder
         ENDM
 

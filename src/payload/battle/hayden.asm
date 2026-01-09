@@ -5,63 +5,63 @@ INCLUDE "include/charmaps.asm"
 PUSHC gen3text
 
 DataPacket::
-	Battle_Trainer
+    Battle_Trainer
 
-	BT_Level MOSSDEEP
-	Class GUITARIST
-	BT_Floor MOSSDEEP
-	db "HAYDEN@ "
-	; Text_JP "シュウキチ"8
-	OT_ID 00000, 00000
+    BT_Level MOSSDEEP
+    Class GUITARIST
+    BT_Floor MOSSDEEP
+    db "HAYDEN@ "
+    ; Text_JP "シュウキチ"8
+    OT_ID 00000, 00000
 
-	Intro_EN YEAH,_EX,COOL,_EXPLOSION,SONGS,_EX_EX
-	Win_EN   YEAH,_EX_EX,INCREDIBLE,_EXPLOSION,SONGS,_EX_EX
-	Loss_EN  NO,_EX,MY,SONGS,AREN_T,POPULAR
+    Intro_EN YEAH,_EX,COOL,_EXPLOSION,SONGS,_EX_EX
+    Win_EN   YEAH,_EX_EX,INCREDIBLE,_EXPLOSION,SONGS,_EX_EX
+    Loss_EN  NO,_EX,MY,SONGS,AREN_T,POPULAR
 
-	Intro_JP $2805, $0c00, $2699, $2208, $1013, $0c01
-	Win_JP $2805, $0c01, $0a14, $2806, $2699, $0c01
-	Loss_JP $081d, $0c00, $0a14, $1034, $2208, $201f
+    Intro_JP $2805, $0c00, $2699, $2208, $1013, $0c01
+    Win_JP $2805, $0c01, $0a14, $2806, $2699, $0c01
+    Loss_JP $081d, $0c00, $0a14, $1034, $2208, $201f
 
-	Pokemon ELECTRODE
-	Holds MAGNET
-	Moves EXPLOSION, MIRROR_COAT, LIGHT_SCREEN, SWIFT
-	Level 80
-	PP_Ups 0,0,0,0
-	EVs 252,6,252,0,0,0
-	OT_ID 00000, 00000
-	IVs 31,15,15,15,15,15, ELECTRODE_STATIC
-	PV $00000080 ; ⚲ Adamant
-	db "ELECTRODE@ "
-	; Text_JP "マルマイン"11
-	Friendship 255
+    Pokemon ELECTRODE
+    Holds MAGNET
+    Moves EXPLOSION, MIRROR_COAT, LIGHT_SCREEN, SWIFT
+    Level 80
+    PP_Ups 0,0,0,0
+    EVs 252,6,252,0,0,0
+    OT_ID 00000, 00000
+    IVs 31,15,15,15,15,15, ELECTRODE_STATIC
+    PV $00000080 ; ⚲ Adamant
+    db "ELECTRODE@ "
+    ; Text_JP "マルマイン"11
+    Friendship 255
 
-	Pokemon SOLROCK
-	Holds HARD_STONE
-	Moves EXPLOSION, COSMIC_POWER, ROCK_SLIDE, PSYCHIC
-	Level 82
-	PP_Ups 0,0,0,0
-	EVs 252,0,6,0,0,252
-	OT_ID 00000, 00000
-	IVs 31,15,15,15,15,31, SOLROCK_LEVITATE
-	PV $0000007F ; ⚲ Brave
-	db "SOLROCK@   "
-	; Text_JP "ソルロック"11
-	Friendship 255
+    Pokemon SOLROCK
+    Holds HARD_STONE
+    Moves EXPLOSION, COSMIC_POWER, ROCK_SLIDE, PSYCHIC
+    Level 82
+    PP_Ups 0,0,0,0
+    EVs 252,0,6,0,0,252
+    OT_ID 00000, 00000
+    IVs 31,15,15,15,15,31, SOLROCK_LEVITATE
+    PV $0000007F ; ⚲ Brave
+    db "SOLROCK@   "
+    ; Text_JP "ソルロック"11
+    Friendship 255
 
-	Pokemon SHIFTRY
-	Holds FOCUS_BAND
-	Moves EXPLOSION, FAINT_ATTACK, PROTECT, TOXIC
-	Level 84
-	PP_Ups 0,0,0,0
-	EVs 252,0,0,252,6,0
-	OT_ID 00000, 00000
-	IVs 31,15,15,31,15,15, SHIFTRY_EARLY_BIRD
-	PV $00000080 ; ♂ Adamant
-	db "SHIFTRY@   "
-	; Text_JP "ダーテング"11
-	Friendship 255
+    Pokemon SHIFTRY
+    Holds FOCUS_BAND
+    Moves EXPLOSION, FAINT_ATTACK, PROTECT, TOXIC
+    Level 84
+    PP_Ups 0,0,0,0
+    EVs 252,0,0,252,6,0
+    OT_ID 00000, 00000
+    IVs 31,15,15,31,15,15, SHIFTRY_EARLY_BIRD
+    PV $00000080 ; ♂ Adamant
+    db "SHIFTRY@   "
+    ; Text_JP "ダーテング"11
+    Friendship 255
 
-	End_Trainer
+    End_Trainer
 
         ds 44 ; Pad to 256
 

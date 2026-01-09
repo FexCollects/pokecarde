@@ -5,63 +5,63 @@ INCLUDE "include/charmaps.asm"
 PUSHC gen3text
 
 DataPacket::
-	Battle_Trainer
+    Battle_Trainer
 
-	BT_Level 0
-	db GUITARIST
-	BT_Floor 0
-	db "CLYDE@  "
-	; Text_JP "キョウヘイ"8
-	OT_ID 00000, 00000
+    BT_Level 0
+    db GUITARIST
+    BT_Floor 0
+    db "CLYDE@  "
+    ; Text_JP "キョウヘイ"8
+    OT_ID 00000, 00000
 
-	Intro_EN HEAR, ME, ROAR, WROOOAAR_, _EX_EX, $ffff
-	Win_EN WHOAH, _EX, THAT_S, MY, SPIKES, SONG	
-	Loss_EN THIS, IS, _A, SAD, SONG, $ffff
+    Intro_EN HEAR, ME, ROAR, WROOOAAR_, _EX_EX, $ffff
+    Win_EN WHOAH, _EX, THAT_S, MY, SPIKES, SONG    
+    Loss_EN THIS, IS, _A, SAD, SONG, $ffff
 
-	Intro_JP $2010, $0612, $1621, $1236, $100e, $ffff
-	Win_JP $0612, $1628, $0e2b, $0a1e, $122f, $0c01
-	Loss_JP $0a1d, $0612, $0e28, $060c, $100e, $ffff
+    Intro_JP $2010, $0612, $1621, $1236, $100e, $ffff
+    Win_JP $0612, $1628, $0e2b, $0a1e, $122f, $0c01
+    Loss_JP $0a1d, $0612, $0e28, $060c, $100e, $ffff
 
-	Pokemon RAICHU
-	Holds MAGNET
-	Moves THUNDER, RAIN_DANCE, FACADE, REVERSAL
-	Level 54
-	PP_Ups 0,0,0,0
-	EVs 0,0,0,255,255,0
-	OT_ID 00000, 00000
-	IVs 15,15,15,31,31,15, 0
-	PV $000000D7
-	db "RAICHU@    "
-	; Text_JP "ライチュウ"11
-	Friendship 255
+    Pokemon RAICHU
+    Holds MAGNET
+    Moves THUNDER, RAIN_DANCE, FACADE, REVERSAL
+    Level 54
+    PP_Ups 0,0,0,0
+    EVs 0,0,0,255,255,0
+    OT_ID 00000, 00000
+    IVs 15,15,15,31,31,15, 0
+    PV $000000D7
+    db "RAICHU@    "
+    ; Text_JP "ライチュウ"11
+    Friendship 255
 
-	Pokemon SHARPEDO
-	Holds SHELL_BELL
-	Moves SURF, CRUNCH, EARTHQUAKE, ROCK_TOMB
-	Level 56
-	PP_Ups 0,0,0,0
-	EVs 0,0,0,255,255,0
-	OT_ID 00000, 00000
-	IVs 15,31,15,15,31,15, 0
-	PV $000000E1
-	db "SHARPEDO@  "
-	; Text_JP "サメハダー"11
-	Friendship 255
+    Pokemon SHARPEDO
+    Holds SHELL_BELL
+    Moves SURF, CRUNCH, EARTHQUAKE, ROCK_TOMB
+    Level 56
+    PP_Ups 0,0,0,0
+    EVs 0,0,0,255,255,0
+    OT_ID 00000, 00000
+    IVs 15,31,15,15,31,15, 0
+    PV $000000E1
+    db "SHARPEDO@  "
+    ; Text_JP "サメハダー"11
+    Friendship 255
 
-	Pokemon ROSELIA
-	Holds POISON_BARB
-	Moves SLUDGE_BOMB, GIGA_DRAIN, GRASSWHISTLE, SYNTHESIS
-	Level 58
-	PP_Ups 0,0,0,0
-	EVs 0,255,0,0,255,0
-	OT_ID 00000, 00000
-	IVs 15,31,15,31,15,15, 1
-	PV $00000019
-	db "ROSELIA@   "
-	; Text_JP "ロゼリア"11
-	Friendship 255
+    Pokemon ROSELIA
+    Holds POISON_BARB
+    Moves SLUDGE_BOMB, GIGA_DRAIN, GRASSWHISTLE, SYNTHESIS
+    Level 58
+    PP_Ups 0,0,0,0
+    EVs 0,255,0,0,255,0
+    OT_ID 00000, 00000
+    IVs 15,31,15,31,15,15, 1
+    PV $00000019
+    db "ROSELIA@   "
+    ; Text_JP "ロゼリア"11
+    Friendship 255
 
-	End_Trainer
+    End_Trainer
 
         ds 44 ; Pad to 256
 

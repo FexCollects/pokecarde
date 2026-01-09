@@ -5,55 +5,55 @@ INCLUDE "include/charmaps.asm"
 PUSHC gen3text
 
 DataPacket::
-	Battle_Trainer
+    Battle_Trainer
 
-	BT_Level 50
-	Class GENTLEMAN
-	BT_Floor 0
-	db "NILS@   "
-	OT_ID 00000, 00000
+    BT_Level 50
+    Class GENTLEMAN
+    BT_Floor 0
+    db "NILS@   "
+    OT_ID 00000, 00000
 
-	Intro_EN YOUR,CHALLENGE,IS,MORE,THAN,WELCOME
-	Win_EN   THAT_S,REALLY,ALL,YOU,GOT,_QU
-	Loss_EN  HMM,WELL,DONE,_ELIP,YOUNG,TRAINER
+    Intro_EN YOUR,CHALLENGE,IS,MORE,THAN,WELCOME
+    Win_EN   THAT_S,REALLY,ALL,YOU,GOT,_QU
+    Loss_EN  HMM,WELL,DONE,_ELIP,YOUNG,TRAINER
 
-	Pokemon SABLEYE
-	Holds SITRUS_BERRY
-	Moves NIGHT_SHADE, FAKE_OUT, DETECT, KNOCK_OFF
-	Level 50
-	PP_Ups 0,0,0,0
-	EVs 255,100,0,155,0,0
-	OT_ID 00000, 00000
-	IVs 15,15,15,15,15,15, SABLEYE_KEEN_EYE
-	PV $000000CE ; ♂ Docile
-	db "SABLEYE@   "
-	Friendship 255
+    Pokemon SABLEYE
+    Holds SITRUS_BERRY
+    Moves NIGHT_SHADE, FAKE_OUT, DETECT, KNOCK_OFF
+    Level 50
+    PP_Ups 0,0,0,0
+    EVs 255,100,0,155,0,0
+    OT_ID 00000, 00000
+    IVs 15,15,15,15,15,15, SABLEYE_KEEN_EYE
+    PV $000000CE ; ♂ Docile
+    db "SABLEYE@   "
+    Friendship 255
 
-	Pokemon PLUSLE
-	Holds MAGNET
-	Moves FAKE_TEARS, SPARK, QUICK_ATTACK, ENCORE
-	Level 50
-	PP_Ups 0,0,0,0
-	EVs 0,0,0,255,255,0
-	OT_ID 00000, 00000
-	IVs 15,15,15,15,15,15, PLUSLE_PLUS
-	PV $0000000F ; ♀ Modest
-	db "PLUSLE@    "
-	Friendship 255
+    Pokemon PLUSLE
+    Holds MAGNET
+    Moves FAKE_TEARS, SPARK, QUICK_ATTACK, ENCORE
+    Level 50
+    PP_Ups 0,0,0,0
+    EVs 0,0,0,255,255,0
+    OT_ID 00000, 00000
+    IVs 15,15,15,15,15,15, PLUSLE_PLUS
+    PV $0000000F ; ♀ Modest
+    db "PLUSLE@    "
+    Friendship 255
 
-	Pokemon LUDICOLO
-	Holds SHELL_BELL
-	Moves RAIN_DANCE, SURF, THIEF, GIGA_DRAIN
-	Level 50
-	PP_Ups 0,0,0,0
-	EVs 170,0,0,170,170,0
-	OT_ID 00000, 00000
-	IVs 15,15,15,15,15,15, LUDICOLO_SWIFT_SWIM
-	PV $000000D2 ; ♂ Timid
-	db "LUDICOLO@  "
-	Friendship 255
+    Pokemon LUDICOLO
+    Holds SHELL_BELL
+    Moves RAIN_DANCE, SURF, THIEF, GIGA_DRAIN
+    Level 50
+    PP_Ups 0,0,0,0
+    EVs 170,0,0,170,170,0
+    OT_ID 00000, 00000
+    IVs 15,15,15,15,15,15, LUDICOLO_SWIFT_SWIM
+    PV $000000D2 ; ♂ Timid
+    db "LUDICOLO@  "
+    Friendship 255
 
-	End_Trainer
+    End_Trainer
 
         ds 44 ; Pad to 256
 

@@ -3,10 +3,10 @@ INCLUDE "constants/card_types.asm"
 INCLUDE "constants/regions.asm"
 
 MACRO Enigma_Berry
-	CardHeader CUSTOM_BERRY
+    CardHeader CUSTOM_BERRY
         dl $02000018 ; GBAPtr
-	db $02,$00
-	ENDM
+    db $02,$00
+    ENDM
 
 ; firmness
 DEF Firmness EQUS "db"
@@ -17,12 +17,12 @@ DEF VERY_HARD  EQU 4
 DEF SUPER_HARD EQU 5
 
 MACRO Yield_Range
-	db \2, \1
-	ENDM
+    db \2, \1
+    ENDM
 
 MACRO Size
-	dw \1 * 10 + \2
-	ENDM
+    dw \1 * 10 + \2
+    ENDM
 
 DEF Growth_Stage_Hours EQUS "db"
 DEF Flavor EQUS "db"

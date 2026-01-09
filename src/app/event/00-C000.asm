@@ -2,26 +2,26 @@ SECTION "app/event/00-C000", ROM0
 INCLUDE "include/charmaps.asm"
 
 SpriteData::
-	dw TicketSprite,TicketPalette
-	db $15,$08,$01,$01,$01,$01,$01 ; width 21, height 8
+    dw TicketSprite,TicketPalette
+    db $15,$08,$01,$01,$01,$01,$01 ; width 21, height 8
 
 Instructions1:: ; 1921
-	db "Link e-Reader to Pokémon Ruby or \n"
-	db "Sapphire and select MYSTERY EVENTS\n"
-	db "on the game's main menu.\n"
-	db "Press the B Button to cancel.\0"
+    db "Link e-Reader to Pokémon Ruby or \n"
+    db "Sapphire and select MYSTERY EVENTS\n"
+    db "on the game's main menu.\n"
+    db "Press the B Button to cancel.\0"
 
 Instructions2:: ; 199d
-	db "Press the A Button on the Game Boy\n"
-	db "Advance containing Pokémon Ruby or\n"
-	db "Sapphire to begin sending the EON\n"
-	db "TICKET.\0"
+    db "Press the A Button on the Game Boy\n"
+    db "Advance containing Pokémon Ruby or\n"
+    db "Sapphire to begin sending the EON\n"
+    db "TICKET.\0"
 
 DeliveryInProcess:: ; 1a0d
-	db "EON TICKET delivery in Process...\0"
+    db "EON TICKET delivery in Process...\0"
 
 TicketDelivered:: ; 1a2f
-	db "EON TICKET delivered!\n"
-	db "\n"
-	db "Press the A Button to resend.\n"
-	db "Press the B Button to cancel.\0"
+    db "EON TICKET delivered!\n"
+    db "\n"
+    db "Press the A Button to resend.\n"
+    db "Press the B Button to cancel.\0"

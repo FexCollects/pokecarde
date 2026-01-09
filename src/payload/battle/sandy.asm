@@ -5,63 +5,63 @@ INCLUDE "include/charmaps.asm"
 PUSHC gen3text
 
 DataPacket::
-	Battle_Trainer
+    Battle_Trainer
 
-	BT_Level 50
-	Class PICNICKER
-	BT_Floor 19
-	db "SANDY@  "
-	; Text_JP "トシミ"8
-	OT_ID 00000, 00000
+    BT_Level 50
+    Class PICNICKER
+    BT_Floor 19
+    db "SANDY@  "
+    ; Text_JP "トシミ"8
+    OT_ID 00000, 00000
 
-	Intro_EN I,GOT,MY,POKEMON,WITH,POKEBLOCK
-	Win_EN   I,COLLECT,MORE,POKEMON,WITH,POKEBLOCK
-	Loss_EN  URGH,I,HAVE,NO,MORE,POKEBLOCK
+    Intro_EN I,GOT,MY,POKEMON,WITH,POKEBLOCK
+    Win_EN   I,COLLECT,MORE,POKEMON,WITH,POKEBLOCK
+    Loss_EN  URGH,I,HAVE,NO,MORE,POKEBLOCK
 
-	Intro_JP $2212, $162c, $0201, $1e11, $020e, $103e
-	Win_JP $2212, $162c, $0e36, $020e, $0201, $100d
-	Loss_JP $0c0a, $0c06, $1c27, $2212, $142f, $103f
+    Intro_JP $2212, $162c, $0201, $1e11, $020e, $103e
+    Win_JP $2212, $162c, $0e36, $020e, $0201, $100d
+    Loss_JP $0c0a, $0c06, $1c27, $2212, $142f, $103f
 
-	Pokemon HERACROSS
-	Holds BLACK_BELT
-	Moves BRICK_BREAK, COUNTER, MEGAHORN, EARTHQUAKE
-	Level 50
-	PP_Ups 0,0,0,0
-	EVs 6,252,0,252,0,0
-	OT_ID 00000, 00000
-	IVs 15,31,15,31,15,15, HERACROSS_GUTS
-	PV $00000080 ; ♂ Adamant
-	db "HERACROSS@ "
-	; Text_JP "ヘラクロス"11
-	Friendship 255
+    Pokemon HERACROSS
+    Holds BLACK_BELT
+    Moves BRICK_BREAK, COUNTER, MEGAHORN, EARTHQUAKE
+    Level 50
+    PP_Ups 0,0,0,0
+    EVs 6,252,0,252,0,0
+    OT_ID 00000, 00000
+    IVs 15,31,15,31,15,15, HERACROSS_GUTS
+    PV $00000080 ; ♂ Adamant
+    db "HERACROSS@ "
+    ; Text_JP "ヘラクロス"11
+    Friendship 255
 
-	Pokemon GIRAFARIG
-	Holds TWISTEDSPOON
-	Moves PSYCHIC, MAGIC_COAT, CRUNCH, STOMP
-	Level 50
-	PP_Ups 0,0,0,0
-	EVs 252,0,0,252,6,0
-	OT_ID 00000, 00000
-	IVs 31,15,15,31,15,15, GIRAFARIG_INNER_FOCUS
-	PV $00000018 ; ♀ Quirky
-	db "GIRAFARIG@ "
-	; Text_JP "キリンリキ"11
-	Friendship 255
+    Pokemon GIRAFARIG
+    Holds TWISTEDSPOON
+    Moves PSYCHIC, MAGIC_COAT, CRUNCH, STOMP
+    Level 50
+    PP_Ups 0,0,0,0
+    EVs 252,0,0,252,6,0
+    OT_ID 00000, 00000
+    IVs 31,15,15,31,15,15, GIRAFARIG_INNER_FOCUS
+    PV $00000018 ; ♀ Quirky
+    db "GIRAFARIG@ "
+    ; Text_JP "キリンリキ"11
+    Friendship 255
 
-	Pokemon DODRIO
-	Holds SHARP_BEAK
-	Moves TRI_ATTACK, DRILL_PECK, STEEL_WING, PROTECT
-	Level 50
-	PP_Ups 0,0,0,0
-	EVs 6,252,0,252,0,0
-	OT_ID 00000, 00000
-	IVs 15,31,15,31,15,15, DODRIO_EARLY_BIRD
-	PV $00000080 ; ♂ Adamant
-	db "DODRIO@    "
-	; Text_JP "ドードリオ"11
-	Friendship 255
+    Pokemon DODRIO
+    Holds SHARP_BEAK
+    Moves TRI_ATTACK, DRILL_PECK, STEEL_WING, PROTECT
+    Level 50
+    PP_Ups 0,0,0,0
+    EVs 6,252,0,252,0,0
+    OT_ID 00000, 00000
+    IVs 15,31,15,31,15,15, DODRIO_EARLY_BIRD
+    PV $00000080 ; ♂ Adamant
+    db "DODRIO@    "
+    ; Text_JP "ドードリオ"11
+    Friendship 255
 
-	End_Trainer
+    End_Trainer
 
         ds 44 ; Pad to 256
 

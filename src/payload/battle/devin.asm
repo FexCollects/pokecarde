@@ -5,63 +5,63 @@ INCLUDE "include/charmaps.asm"
 PUSHC gen3text
 
 DataPacket::
-	Battle_Trainer
+    Battle_Trainer
 
-	BT_Level 50
-	db COOLTRAINER_M
-	BT_Floor 19
-	db "DEVIN@  "
-	; Text_JP "シュウサク"8
-	OT_ID 00000, 00000
+    BT_Level 50
+    db COOLTRAINER_M
+    BT_Floor 19
+    db "DEVIN@  "
+    ; Text_JP "シュウサク"8
+    OT_ID 00000, 00000
 
-	Intro_EN POWER,BATTLE,IS,ALWAYS,TRENDY,_EX
-	Win_EN   SEE,_QU,POWER,BATTLE,IS,TRENDY
-	Loss_EN  IS,_ELIP,POWER,BATTLE,TRENDY,_QU
+    Intro_EN POWER,BATTLE,IS,ALWAYS,TRENDY,_EX
+    Win_EN   SEE,_QU,POWER,BATTLE,IS,TRENDY
+    Loss_EN  IS,_ELIP,POWER,BATTLE,TRENDY,_QU
 
-	Intro_JP $1c07, $061e, $0618, $0e0b, $280f, $1012
-	Win_JP $0c32, $0e39, $061e, $0618, $280f, $1021
-	Loss_JP $0c0e, $061e, $0618, $280f, $102b, $0c03
+    Intro_JP $1c07, $061e, $0618, $0e0b, $280f, $1012
+    Win_JP $0c32, $0e39, $061e, $0618, $280f, $1021
+    Loss_JP $0c0e, $061e, $0618, $280f, $102b, $0c03
 
-	Pokemon HERACROSS
-	Holds SCOPE_LENS
-	Moves MEGAHORN, RETURN, BULK_UP, BRICK_BREAK
-	Level 50
-	PP_Ups 0,0,0,0
-	EVs 0,252,6,252,0,0
-	OT_ID 00000, 00000
-	IVs 15,31,15,31,15,15, HERACROSS_SWARM
-	PV $000000E4 ; ♂ Adamant
-	db "HERACROSS@ "
-	; Text_JP "ヘラクロス"11
-	Friendship 255
+    Pokemon HERACROSS
+    Holds SCOPE_LENS
+    Moves MEGAHORN, RETURN, BULK_UP, BRICK_BREAK
+    Level 50
+    PP_Ups 0,0,0,0
+    EVs 0,252,6,252,0,0
+    OT_ID 00000, 00000
+    IVs 15,31,15,31,15,15, HERACROSS_SWARM
+    PV $000000E4 ; ♂ Adamant
+    db "HERACROSS@ "
+    ; Text_JP "ヘラクロス"11
+    Friendship 255
 
-	Pokemon SALAMENCE
-	Holds LUM_BERRY
-	Moves AERIAL_ACE, EARTHQUAKE, RETURN, DRAGON_DANCE
-	Level 50
-	PP_Ups 0,0,0,0
-	EVs 6,252,0,252,0,0
-	OT_ID 00000, 00000
-	IVs 15,31,15,31,15,15, SALAMENCE_INTIMIDATE
-	PV $000000E4 ; ♂ Adamant
-	db "SALAMENCE@ "
-	; Text_JP "ボーマンダ"11
-	Friendship 255
+    Pokemon SALAMENCE
+    Holds LUM_BERRY
+    Moves AERIAL_ACE, EARTHQUAKE, RETURN, DRAGON_DANCE
+    Level 50
+    PP_Ups 0,0,0,0
+    EVs 6,252,0,252,0,0
+    OT_ID 00000, 00000
+    IVs 15,31,15,31,15,15, SALAMENCE_INTIMIDATE
+    PV $000000E4 ; ♂ Adamant
+    db "SALAMENCE@ "
+    ; Text_JP "ボーマンダ"11
+    Friendship 255
 
-	Pokemon METAGROSS
-	Holds QUICK_CLAW
-	Moves METEOR_MASH, SHADOW_BALL, EARTHQUAKE, SLUDGE_BOMB
-	Level 50
-	PP_Ups 0,0,0,0
-	EVs 0,252,0,252,0,6
-	OT_ID 00000, 00000
-	IVs 15,31,15,31,15,15, METAGROSS_CLEAR_BODY
-	PV $000000E4 ; ⚲ Adamant
-	db "METAGROSS@ "
-	; Text_JP "メタグロス"11
-	Friendship 255
+    Pokemon METAGROSS
+    Holds QUICK_CLAW
+    Moves METEOR_MASH, SHADOW_BALL, EARTHQUAKE, SLUDGE_BOMB
+    Level 50
+    PP_Ups 0,0,0,0
+    EVs 0,252,0,252,0,6
+    OT_ID 00000, 00000
+    IVs 15,31,15,31,15,15, METAGROSS_CLEAR_BODY
+    PV $000000E4 ; ⚲ Adamant
+    db "METAGROSS@ "
+    ; Text_JP "メタグロス"11
+    Friendship 255
 
-	End_Trainer
+    End_Trainer
 
         ds 44 ; Pad to 256
 
