@@ -16,9 +16,9 @@ build/$(REGION)/%.o: %.asm
 
 # ROM -> Card .raw Rules
 build/$(REGION)/%.z80: build/$(REGION)/%.gbc
-	python3 ../scripts/stripgbc2.py $< $@
+	python3 ../scripts/stripgbc.py $< $@
 build/$(REGION)/%.crc: build/$(REGION)/%.z80
-	python3 ../scripts/checksum_regi.py $< $@
+	python3 ../scripts/checksum.py $< $@
 build/$(REGION)/%.vpk: build/$(REGION)/%.crc
 	../bin/nedc/v1.4.1/nevpk -c -i $< -o $@
 build/$(REGION)/%-01.raw: build/$(REGION)/%.vpk

@@ -1,31 +1,15 @@
-# -*- coding: utf-8 -*-
 import sys
 
-out = open(sys.argv[2], 'wb')
-buffering = False
-buf = bytes()
 with open(sys.argv[1], 'rb') as f:
-	f.read(256) # skip to $0100
-	while True:
-		byte = f.read(1)
-		if not byte:
-			break
+    contents = f.read()
 
-		# the program shall end with $FF followed only by $00 bytes
-		# for every $FF we hit, buffer until something that isn’t $00
-		if not buffering and ord(byte) == 0xFF:
-			buf += byte
-			buffering = True
-		elif buffering and ord(byte) == 0x00:
-			buf += byte
-		elif buffering and ord(byte) == 0xFF:
-			out.write(buf)
-			buf = byte
-		elif buffering:
-			out.write(buf)
-			out.write(byte)
-			buf = bytes()
-			buffering = False
-		else:
-			out.write(byte)
-f.closed
+front_trim = 256
+back_trim = contents.find(b'\xEE\x00\xFF\xEE\xEE\x00\xFF\x00\xEE\x00\xFF\xFF\xEE\x00\xFF\x99')
+
+# The byte just before the EOF sequence contains "extra trim" that should also be deleted
+# before that byte. Update the number to account for the ammount and move back one extra
+# to account for the extra trim byte.
+back_trim = back_trim - contents[back_trim - 1] - 1
+
+with open(sys.argv[2], 'wb') as f:
+    f.write(contents[front_trim:back_trim])

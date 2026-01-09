@@ -1,7 +1,55 @@
 import struct
 import sys
+import itertools
+import pokemonstructure
 
-chunk_lengths = [0,0,0,6,2,5,12,5,3,1,2,5,5,5,1,13,13]
+def d_word(data, idx):
+    return struct.unpack('<I', data[idx:idx+4])[0] 
+
+def s_word(val):
+    return struct.pack('<I', val) 
+
+def pairwise(iterable):
+    "s -> (s0, s1), (s1, s2), (s2, s3), ..."
+    a, b = itertools.tee(iterable)
+    next(b, None)
+    return zip(a, b)
+
+def read_binary_file():
+    with open(sys.argv[1], 'rb') as f:
+        data = f.read()
+    return bytearray(data)
+
+def find_all(a_str, sub):
+    start = 0
+    while True:
+        start = a_str.find(sub, start)
+        if start == -1: return
+        yield start
+        start += len(sub) # use start += 1 to find overlapping matches
+
+
+chunk_lengths = [0,0,0,6,2,5,12,5,3,1,2,5,5,5,1,13,13,5]
+chunk_names = [
+    "UNKNOWN CHUNK 0x00",
+    "UNKNOWN CHUNK 0x01",
+    "END OF CHUNKS 0x02",
+    "LOADING MESSAGE 0x03",
+    "SET LOAD STATUS 0x04",
+    "PRELOAD SCRIPT 0x05",
+    "IN GAME SCRIPT 0x06",
+    "CUSTOM BERRY 0x07",
+    "AWARD RIBBON 0x08",
+    "NATIONAL POKEDEX 0x09",
+    "ADD RARE WORD 0x0A",
+    "MIX RECORDS ITEM 0x0B",
+    "GIVE POKEMON 0x0C",
+    "BATTLE TRAINER 0x0D",
+    "CLOCK ADJUSTMENT 0x0E",
+    "CHECKSUM BYTES 0x0F",
+    "CHECKSUM CRC 0x10",
+    "DOME TRAINER 0x11",
+]
 
 bytewises = []
 bytewise_results = []
@@ -9,46 +57,73 @@ wordwises = []
 wordwise_results = []
 crcs = []
 crc_results = []
+pokemon_structures = []
 
-with open(sys.argv[1], 'rb') as f:
-    data = f.read()
-f.closed
+data = read_binary_file()
 
-base_address = struct.unpack('<I', data[1:5])[0]
-i = 0x11 # first chunk location
-while i < len(data):
-    chunk_type = data[i]
-    if chunk_type == 0x02: # END_OF_CHUNKS
-        break
-    elif chunk_type == 0x07: # CUSTOM_BERRY
-        start_address = struct.unpack('<I', data[i+1:i+5])[0] - base_address
-        bytewises.append([start_address + 0x52C, start_address, start_address + 0x52C])
-    elif chunk_type == 0x0D: # BATTLE_TRAINER
-        start_address = struct.unpack('<I', data[i+1:i+5])[0] - base_address
-        wordwises.append([start_address + 0xB8, start_address, start_address + 0xB8])
-    elif chunk_type == 0x0F: # CHECKSUM_BYTES
-        start_address = struct.unpack('<I', data[i+5:i+9])[0] - base_address
-        end_address = struct.unpack('<I', data[i+9:i+13])[0] - base_address
-        bytewise.append([i + 1, start_address, end_address])
-    elif chunk_type == 0x10: # CHECKSUM_CRC
-        start_address = struct.unpack('<I', data[i+5:i+9])[0] - base_address
-        end_address = struct.unpack('<I', data[i+9:i+13])[0] - base_address
-        crcs.append([i + 1, start_address, end_address])
-    elif chunk_type < 0x02 or chunk_type > 0x10:
-        print("Unknown chunk {0:X}".format(chunk_type))
-        raise TypeError
-    i += chunk_lengths[chunk_type]
+payloads=list(find_all(data,b'\x01\x00\x00\x00\x02\x02\x00\x02\x00\x00\x00\x04\x00\x80\x01\x00\x00'))
+base_address = d_word(data, payloads[0] + 1)
 
+def crc_one_payload(payload_start, payload_end):
+    # move past the header to start of the chunks
+    i = payload_start + 17
+
+    while i < payload_end:
+        chunk_type = data[i]
+        print("Processing chunk:", chunk_names[chunk_type])
+        if chunk_type == 0x02: # END_OF_CHUNKS
+            break
+        elif chunk_type == 0x07: # CUSTOM_BERRY
+            berry_address = d_word(data, i + 1)
+            offset_size = berry_address - base_address
+            data_idx = payload_start + offset_size
+            bytewises.append([data_idx + 0x52C, data_idx, data_idx + 0x52C])
+        elif chunk_type == 0x0C: # GIVE_POKEMON
+            offset_size = d_word(data, i + 1) - base_address
+            pokemon_structures.append(payload_start + offset_size)
+        elif chunk_type == 0x0D: # BATTLE_TRAINER
+            trainer_address = d_word(data, i + 1)
+            offset_size = trainer_address - base_address
+            data_idx = payload_start + offset_size
+            wordwises.append([data_idx + 0xB8, data_idx, data_idx + 0xB8])
+        elif chunk_type == 0x0F: # CHECKSUM_BYTES
+            raise NotImplementedError
+            start_address = d_word(data, i + 5) - base_address
+            end_address = d_word(data, i + 9) - base_address
+            bytewise.append([i + 1, start_address, end_address])
+        elif chunk_type == 0x10: # CHECKSUM_CRC
+            start_offset = d_word(data, i + 5) - base_address
+            end_offset = d_word(data, i + 9) - base_address
+            crcs.append([i + 1, payload_start + start_offset, payload_start + end_offset])
+        elif chunk_type == 0x11: # DOME_TRAINER
+            raise NotImplementedError
+            start_address = d_word(data, i + 1) - base_address
+            wordwises.append([start_address + 0x13C, start_address, start_address + 0x13C])
+        elif chunk_type < 0x02 or chunk_type > 0x11:
+            print("Unknown chunk {0:X}".format(chunk_type))
+            raise TypeError
+        i += chunk_lengths[chunk_type]
+
+# For each payload in payloads build a pair representing
+# the starting index of the payload and the index one past
+# the end of the payload. For the final payload the end of the
+# stream is used instead.
+for (start, end) in pairwise(payloads + [len(data)]):
+    crc_one_payload(start, end)
+
+# Patch all the pokemon structures present
+for offset in pokemon_structures:
+    data = pokemonstructure.do_pkmn_crc(data, offset)
 
 # calculate and insert all wordwise checksums
 for wordwise in wordwises:
     sum = 0
     for i in range(wordwise[1], wordwise[2], 4):
-        sum = (sum + struct.unpack('<I', data[i:i+4])[0]) & 0xFFFFFFFF
+        sum = (sum + d_word(data, i)) & 0xFFFFFFFF
     wordwise_results.append(sum)
 i = 0
 for wordwise in wordwises:
-    data = data[0:wordwise[0]] + struct.pack('<I', wordwise_results[i]) + data[(wordwise[0] + 4):]
+    data = data[0:wordwise[0]] + s_word(wordwise_results[i]) + data[(wordwise[0] + 4):]
     i += 1
 
 
@@ -60,7 +135,7 @@ for bytewise in bytewises:
     bytewise_results.append(sum)
 i = 0
 for bytewise in bytewises:
-    data = data[0:bytewise[0]] + struct.pack('<I', bytewise_results[i]) + data[(bytewise[0] + 4):]
+    data = data[0:bytewise[0]] + s_word(bytewise_results[i]) + data[(bytewise[0] + 4):]
     i += 1
 
 
@@ -79,9 +154,8 @@ for crc in crcs:
 
 i = 0
 for crc in crcs:
-    data = data[0:crc[0]] + struct.pack('<I', crc_results[i]) + data[(crc[0] + 4):]
+    data = data[0:crc[0]] + s_word(crc_results[i]) + data[(crc[0] + 4):]
     i += 1
-
 
 # write the updated file
 out = open(sys.argv[2], 'wb')
