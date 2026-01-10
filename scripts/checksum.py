@@ -70,7 +70,7 @@ def crc_one_payload(payload_start, payload_end):
 
     while i < payload_end:
         chunk_type = data[i]
-        print("Processing chunk:", chunk_names[chunk_type])
+        #print("Processing chunk:", chunk_names[chunk_type])
         if chunk_type == 0x02: # END_OF_CHUNKS
             break
         elif chunk_type == 0x07: # CUSTOM_BERRY

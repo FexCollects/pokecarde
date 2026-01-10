@@ -12,7 +12,7 @@ build/%.gbapal: %.png
 # Asm -> Object Rules
 # TODO: notdir below is wrong
 build/$(REGION)/%.o: %.asm
-	../bin/rgbds/v0.9.1/rgbasm -M build/deps/$(notdir $@).d -DREGION=REGION_$(REGION) -o $@ $<
+	../bin/rgbds/v1.0.1/rgbasm -M build/deps/$(notdir $@).d -DREGION=REGION_$(REGION) -o $@ $<
 
 # ROM -> Card .raw Rules
 build/$(REGION)/%.z80: build/$(REGION)/%.gbc
@@ -28,7 +28,7 @@ build/$(REGION)/%-01.raw: build/$(REGION)/%.vpk
 
 # Baseline ROM generation rule, deps for specfic files are generated
 build/$(REGION)/%.gbc:
-	../bin/rgbds/v0.9.1/rgblink -m $@.map -t -l card/$(notdir $(basename $@)).ld -o $@ $^
+	../bin/rgbds/v1.0.1/rgblink -m $@.map -t -l card/$(notdir $(basename $@)).ld -o $@ $^
 
 # Baseline verify rule, deps for each card are generated
 verify: 
