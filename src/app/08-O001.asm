@@ -9,19 +9,19 @@ DataPointers:
 
 ; Transfer data
 sub_02D2:
-    LD_IND_HL RegionHandlePtr283D
+    ld_ind_hl RegionHandlePtr283D
     push de
     ld hl,$bbbb
-    LD_IND_HL RegionHandlePtr0104
+    ld_ind_hl RegionHandlePtr0104
     EX_DE_HL
-    LD_IND_HL RegionHandlePtr0106
+    ld_ind_hl RegionHandlePtr0106
     API_0C7 RegionHandlePtr0104
     wait $01
     pop hl
     inc hl
     ld b,$01
     call sub_2817
-    LD_IND_HL RegionHandlePtr283B
+    ld_ind_hl RegionHandlePtr283B
 
 label_27:
     LD_HL_IND RegionHandlePtr283B
@@ -29,7 +29,7 @@ label_27:
     or h
     jr z,label_28
     ld hl,$8888
-    LD_IND_HL RegionHandlePtr0104
+    ld_ind_hl RegionHandlePtr0104
     ld e,$01
 
 label_29:
@@ -42,7 +42,7 @@ label_29:
     inc hl
     ld b, [hl]
     inc hl
-    LD_IND_HL RegionHandlePtr283D
+    ld_ind_hl RegionHandlePtr283D
     ld l,e
     ld h,$00
     add hl,hl
@@ -54,7 +54,7 @@ label_29:
     pop de
     LD_HL_IND RegionHandlePtr283B
     dec hl
-    LD_IND_HL RegionHandlePtr283B
+    ld_ind_hl RegionHandlePtr283B
     ld a,l
     or h
     jr z,label_30
@@ -87,7 +87,7 @@ label_28:
 
 sub_0348:
     ld hl,$5fff
-    LD_IND_HL RegionHandlePtr0104
+    ld_ind_hl RegionHandlePtr0104
     API_0C7 RegionHandlePtr0104
     wait $01
     ret
@@ -1042,7 +1042,7 @@ sub_2796: ; RegiChangeText (I think)
     ret
 
 sub_2805:
-    LD_IND_A_HL
+    ld a, [hl]
     or a
     jr z,label_18
     inc hl

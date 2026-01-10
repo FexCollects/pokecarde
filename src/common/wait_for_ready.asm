@@ -4,7 +4,7 @@
 
     ld l, a
     ld h, $00
-    LD_IND_HL Space_5
+    ld_ind_hl Space_5
     API $0CA
 
     cp $02

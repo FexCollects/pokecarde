@@ -132,7 +132,7 @@ DEF DATA_TRANSFER_LENGTH EQU 6144
 INCLUDE "common/transfer_data.asm"
 
     ld hl, $5fff
-    LD_IND_HL Space_1
+    ld_ind_hl Space_1
     API_0C7 Space_1
 
     LD_HL_IND TrainerSpriteHandle

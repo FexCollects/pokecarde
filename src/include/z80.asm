@@ -1,10 +1,31 @@
+; Opcode $08
+; Z80: ex af, af'
+; SM83: ld [$xxxx], sp
+MACRO? ex_af_af2
+	db $08
+ENDM
+
+; Opcode $10
+; Z80: djnz $xxxx
+; SM83: stop
+MACRO? djnz ; address
+	db $10
+	assert (\1) - @ > -128 && (\1) - @ <= 128, \
+		"`djnz` target must be between -128 and 127 bytes away"
+	db LOW((\1) - @ - 1)
+ENDM
+
+; Opcode $22
+; Z80: ld [$xxxx], hl
+; SM83: ld [hli], a
+MACRO? ld_ind_hl ; address
+	db $22
+	dw \1
+ENDM
+
 ; some Z80 opcodes aren’t supported by Game Boy, 
 ; but are used in e-Reader programs
 
-; ld [\1], hl
-MACRO LD_IND_HL
-    db $22, (\1 & $FF), (\1 >> 8)
-    ENDM
 ; ld [\1], a
 MACRO LD_IND_A
     db $32, (\1 & $FF), (\1 >> 8)
@@ -24,14 +45,10 @@ MACRO waita
     ld a, \1
     db $76
     ENDM
+
 ; ld [hl], a
 MACRO LD_IND_HL_A
     db $77
-    ENDM
-
-; ld a, [hl]
-MACRO LD_IND_A_HL
-    db $7E
     ENDM
 
 ; ld c, [hl]

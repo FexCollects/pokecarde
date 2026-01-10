@@ -13,7 +13,7 @@
 
 .asm_1c18
     LD_HL_IND Space_3
-    LD_IND_HL Space_4
+    ld_ind_hl Space_4
     ld a, l
     cp $22
     jr nz, .asm_1bfe

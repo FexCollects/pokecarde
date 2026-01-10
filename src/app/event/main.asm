@@ -4,12 +4,12 @@ INCLUDE "include/erapi.asm"
 ; this function is subtly different than the one
 ; on the Battle e cards, for no apparent reason
 TransferData:
-    LD_IND_HL SomeVar1
+    ld_ind_hl SomeVar1
     push de
     ld hl, $bbbb
-    LD_IND_HL Space_1
+    ld_ind_hl Space_1
     EX_DE_HL
-    LD_IND_HL Space_2
+    ld_ind_hl Space_2
     API_0C7 Space_1
 
     wait $01
@@ -18,7 +18,7 @@ TransferData:
     ld b, $01
     call WordShiftRight
 
-    LD_IND_HL SomeVar2
+    ld_ind_hl SomeVar2
 .asm_1aa1
     LD_HL_IND SomeVar2
     ld a, l
@@ -26,7 +26,7 @@ TransferData:
     ret z
 
     ld hl, $8888
-    LD_IND_HL Space_1
+    ld_ind_hl Space_1
     ld e, $01
 
 .asm_1aaf
@@ -40,7 +40,7 @@ TransferData:
     inc hl
     ld b, [hl]
     inc hl
-    LD_IND_HL SomeVar1
+    ld_ind_hl SomeVar1
     ld l, e
     ld h, $00
     add hl, hl
@@ -52,7 +52,7 @@ TransferData:
     pop de
     LD_HL_IND SomeVar2
     dec hl
-    LD_IND_HL SomeVar2
+    ld_ind_hl SomeVar2
     ld a, l
     or h
     jr z, .asm_1ad9
@@ -109,7 +109,7 @@ INCLUDE "common/wait_for_ready.asm"
 DEF DATA_TRANSFER_LENGTH EQU 6144
 INCLUDE "common/transfer_data.asm"
     ld hl, $5fff
-    LD_IND_HL Space_1
+    ld_ind_hl Space_1
     API_0C7 Space_1
 
     wait $80

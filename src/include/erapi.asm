@@ -89,7 +89,7 @@ MACRO CreateCustomSprite
     ld e, \2
     ld hl, \3
     API $04D
-    LD_IND_HL \1
+    ld_ind_hl \1
     ENDM
 MACRO SpriteAutoScaleUntilSize
     ld c, \2

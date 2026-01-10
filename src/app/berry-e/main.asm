@@ -30,7 +30,7 @@ INCLUDE "common/battle_e_transfer.asm"
 
 AfterTransfer:
     ld hl, $5FFF
-    LD_IND_HL Space_1
+    ld_ind_hl Space_1
     ld hl, Space_1
     API $0C7
 

@@ -1,10 +1,10 @@
 TransferData:
-    LD_IND_HL SomeVar2
+    ld_ind_hl SomeVar2
     push de
     ld hl, $BBBB
-    LD_IND_HL Space_1 ; Space_1 = $BBBB
+    ld_ind_hl Space_1 ; Space_1 = $BBBB
     EX_DE_HL
-    LD_IND_HL Space_2 ; store transfer length in Space_2, which is odd,
+    ld_ind_hl Space_2 ; store transfer length in Space_2, which is odd,
               ; because we never refer to it again
     API_0C7 Space_1
 
@@ -25,7 +25,7 @@ TransferData:
     ; while de > 0…
 
     ld hl, $8888
-    LD_IND_HL Space_1 ; Space_1 = $8888
+    ld_ind_hl Space_1 ; Space_1 = $8888
     ld a, $01
     LD_IND_A SomeVar1 ; SomeVar1 = 1
 
@@ -40,7 +40,7 @@ TransferData:
     inc hl
     ld b, [hl]
     inc hl
-    LD_IND_HL SomeVar2
+    ld_ind_hl SomeVar2
     ld hl, SomeVar1
     ld l, [hl]
     ld h, $00
