@@ -15,7 +15,7 @@ sub_02D2:
     ld_ind_hl RegionHandlePtr0104
     EX_DE_HL
     ld_ind_hl RegionHandlePtr0106
-    API_0C7 RegionHandlePtr0104
+    ER_API_0C7 RegionHandlePtr0104
     wait $01
     pop hl
     inc hl
@@ -62,8 +62,8 @@ label_29:
     jr label_29
 
 label_30:
-    API_0C7 RegionHandlePtr0104
-    API $0CA
+    ER_API_0C7 RegionHandlePtr0104
+    ER_API ER_ID_Unk0CA
     cp $02
     jr nc,label_31
     xor a
@@ -71,7 +71,7 @@ label_30:
 
 label_31:
     ld hl,RegionHandlePtr0114
-    API $0C8
+    ER_API ER_ID_Unk0C8
     or a
     jr nz,label_32
     xor a
@@ -88,29 +88,29 @@ label_28:
 sub_0348:
     ld hl,$5fff
     ld_ind_hl RegionHandlePtr0104
-    API_0C7 RegionHandlePtr0104
+    ER_API_0C7 RegionHandlePtr0104
     wait $01
     ret
 
 sub_0356:
-    API $0EB
+    ER_API ER_ID_Unk0EB
     wait $01
-    API $0C6
+    ER_API ER_ID_Unk0C6
     wait $01
     ld l,$02
     push hl
     ld bc,$b9a0
     ld de,$0076
     ld a,$08
-    API $0C4
+    ER_API ER_ID_Unk0C4
     pop bc
-    API $0C5
+    ER_API ER_ID_Unk0C5
 label_19:
     wait $01
-    API $0DB
+    ER_API ER_ID_Unk0DB
     cp $01
     jr z,label_19
-    API $0DB
+    ER_API ER_ID_Unk0DB
     or a
     jr z,label_19
 label_20:
@@ -119,11 +119,11 @@ label_20:
     ld a,l
     and $02
     jr z,label_21
-    API $0EB
+    ER_API ER_ID_Unk0EB
     xor a
     ret
 label_21:
-    API $0CA
+    ER_API ER_ID_Unk0CA
     cp $02
     jr c,label_20
     ld a,$01
@@ -131,17 +131,17 @@ label_21:
 
 sub_0392:
     wait $01
-    API $0CA
+    ER_API ER_ID_Unk0CA
     cp $02
     jr nc,label_23
-    API $0EB
+    ER_API ER_ID_Unk0EB
     xor a
     ret
 label_23:
-    API $0DB
+    ER_API ER_ID_Unk0DB
     cp $04
     jr z,label_24
-    API $0DB
+    ER_API ER_ID_Unk0DB
     cp $03
     jr nz,sub_0392
 label_24:
@@ -151,10 +151,10 @@ label_24:
 sub_03AD:
     wait $01
     ld hl,RegionHandlePtr0114
-    API $0C8
+    ER_API ER_ID_Unk0C8
     or a
     jr nz,label_26
-    API $0EB
+    ER_API ER_ID_Unk0EB
     xor a
     ret
 label_26:
@@ -175,7 +175,7 @@ sub_03CB:
     call sub_02D2 ; TransferData
     or a
     jr nz,label_33
-    API $0EB
+    ER_API ER_ID_Unk0EB
     xor a
     ret
 label_33:
@@ -193,7 +193,7 @@ label_33:
     call sub_02D2 ; TransferData
     or a
     jp nz,sub_0348
-    API $0EB
+    ER_API ER_ID_Unk0EB
     xor a
     ret
     db $00
@@ -224,7 +224,7 @@ FirstPageLine2:
 FirstPageLine3:
     db "from the list to send.\0"
     ;db $00
-    
+
 
 SecondPage:
     db "Link e-Reader to Pokémon Ruby or\0"
@@ -339,7 +339,7 @@ TextboxesTilemap:
     INCBIN "gfx/decoration/textboxes.tilemap"
 
 PokeballBgTiles:
-    INCBIN "build/gfx/decoration/pokeball_bg.4bpp" 
+    INCBIN "build/gfx/decoration/pokeball_bg.4bpp"
 PokeballBgPalette:
     INCBIN "build/gfx/decoration/pokeball_bg.gbapal"
 PokeballBgTilemap:
@@ -362,23 +362,29 @@ RegirockSpriteData:
     dw RegiPalette
     db $04,$04,$03,$01,$00,$00,$03  ;first 2 bytes are 4 because the sprites are 32x32px, 3rd byte is 3 because of 3 frames (I think)
 
-TextboxesData:
-    dw TextboxesTiles
-    dw TextboxesPalette
-    dw TextboxesTilemap
-    db $0A,$00,$01,$00
+dstruct ER_CustomBackground, \
+  TextboxesData, \
+    .TilePtr=TextboxesTiles, \
+    .PalettePtr=TextboxesPalette, \
+    .MapPtr=TextboxesTilemap, \
+    .TileCount=10, \
+    .PaletteCount=1
 
-PokeballBgData:
-    dw PokeballBgTiles
-    dw PokeballBgPalette
-    dw PokeballBgTilemap
-    db $0A,$00,$01,$00
+dstruct ER_CustomBackground, \
+  PokeballBgData, \
+    .TilePtr=PokeballBgTiles, \
+    .PalettePtr=PokeballBgPalette, \
+    .MapPtr=PokeballBgTilemap, \
+    .TileCount=10, \
+    .PaletteCount=1
 
-TextboxMainData:
-    dw TextboxesTiles
-    dw TextboxesPalette
-    dw TextboxMainTilemap
-    db $0A,$00,$01,$00
+dstruct ER_CustomBackground, \
+  TextboxMainData, \
+    .TilePtr=TextboxesTiles, \
+    .PalettePtr=TextboxesPalette, \
+    .MapPtr=TextboxMainTilemap, \
+    .TileCount=10, \
+    .PaletteCount=1
 
 ;Not exactly sure what this is but I think it's setting up layer stuff
 BGSetUpStuffIThink:
@@ -400,16 +406,18 @@ TextPalette:
 
 ;Starting function, sets everything up
 Start::
-    SetBackgroundMode 0
+    ld e, 0
+    push de
+    ER_SetBackgroundMode 0
 
     ld e, $10
     ld a, $32
-    API $01a
+    ER_API ER_ID_Unk01a
 
-    LoadCustomBackground TextboxesData, 1
-    LoadCustomBackground PokeballBgData, 0
-    SetBackgroundAutoScroll $ff80, $0080
-    LoadCustomBackground TextboxMainData, 3
+    ER_LoadCustomBackground TextboxesData, 1
+    ER_LoadCustomBackground PokeballBgData, 0
+    ER_SetBackgroundAutoScroll 0, $ff80, $0080
+    ER_LoadCustomBackground TextboxMainData, 3
     SetBackgroundPalette 6, $00f0, TextPalette
     CreateRegion RegionHandlePtr2847, 26, 3, 2, 0, 2, 15
     CreateRegion RegionHandlePtr2844, 13, 7, 3, 5, 2, 15
@@ -454,8 +462,8 @@ Start::
     ld c, $06
     ld e, $14
     ld hl, $00f0
-    API $11A            ; Unknown API call
-    API $08d 
+    ER_API ER_ID_Unk81A            ; Unknown API call
+    ER_API ER_ID_Unk08D
     add a,c
     nop
     pop de
@@ -469,7 +477,7 @@ Start::
     call sub_25ED
     ld de, stuff_22AC
     ld a, $20
-    API $08e
+    ER_API ER_ID_Unk08E
     call sub_26E0
     pop de
 sub_23C2:
@@ -486,7 +494,7 @@ label_2:
     dec e
 label_3:
     push de
-    API $08d
+    ER_API ER_ID_Unk08D
     nop
     nop
     pop de
@@ -494,7 +502,7 @@ label_3:
     ld a, e
     call sub_2463
     LD_HL_IND RegionHandlePtr2845
-    API $034
+    ER_API ER_ID_SetSpriteFrameNext
     pop de
 label_1:
     LD_HL_IND $00C2
@@ -510,7 +518,7 @@ label_5:
     inc e
 label_6:
     push de
-    API $08d
+    ER_API ER_ID_Unk08D
     nop
     nop
     pop de
@@ -518,7 +526,7 @@ label_6:
     ld a,e
     call sub_2463
     LD_HL_IND RegionHandlePtr2845
-    API $035
+    ER_API ER_ID_SetSpriteFramePrevious
     pop de
 label_4:
     LD_HL_IND $00C2
@@ -526,8 +534,8 @@ label_4:
     and $01
     jr z,label_7
     push de
-    call sub_248C 
-    API $08D
+    call sub_248C
+    ER_API ER_ID_Unk08D
     dec b
     nop
     pop de
@@ -542,7 +550,7 @@ label_8:
     and $01
     jr z,label_9
     push de
-    API $08D
+    ER_API ER_ID_Unk08D
     dec b
     nop
     call sub_247C
@@ -553,7 +561,7 @@ label_8:
     ld de,FirstPageLine2
     ld hl,FirstPage
     call sub_2796
-    API $08D
+    ER_API ER_ID_Unk08D
     add a,c
     nop
     pop de
@@ -574,7 +582,7 @@ label_7:
     push de
     wait $01
     pop de
-    jp sub_23C2  
+    jp sub_23C2
 
 
 sub_2463:
@@ -593,7 +601,7 @@ sub_2463:
     ld b,h
     ld de,$0012
     LD_HL_IND RegionHandlePtr2842
-    API $032
+    ER_API ER_ID_SetSpritePos
     ret
 
 sub_247C:
@@ -602,23 +610,23 @@ sub_247C:
     ld bc,$0002
     ld de,$0600
     LD_HL_IND RegionHandlePtr2842
-    API $059
+    ER_API ER_ID_Unk059
     pop bc
     ret
 
-sub_248C:    
+sub_248C:
     ld l,$41
     push hl
     ld bc,$0000
     ld de,$0000
     LD_HL_IND RegionHandlePtr2842
-    API $059
+    ER_API ER_ID_Unk059
     pop bc
     ret
 
 sub_249C:
     LD_IND_A RegionHandlePtr2840
-    API_106 $0040,$0081
+    ER_API_106 $0040,$0081
     SuppressPauseScreen
     ld bc,SecondPageLine3
     ld de,SecondPageLine2
@@ -628,7 +636,7 @@ sub_249C:
     or a
     jr nz,label_11
     wait $01
-    API $08D
+    ER_API ER_ID_Unk08D
     inc b
     nop
     ld bc,FinishB2
@@ -668,7 +676,7 @@ label_11:
     or a
     jr nz,label_12
     wait $01
-    API $08D
+    ER_API ER_ID_Unk08D
     inc b
     nop
     ld bc,FinishB
@@ -684,7 +692,7 @@ label_12:
     or a
     jr nz,label_13
     wait $01
-    API $08D
+    ER_API ER_ID_Unk08D
     inc b
     nop
     ld bc,FinishB
@@ -727,7 +735,7 @@ label_13:
     or a
     jr nz,label_14
     wait $01
-    API $08D
+    ER_API ER_ID_Unk08D
     inc b
     nop
     ld bc,FinishB
@@ -764,32 +772,32 @@ label_14:
     ld hl,RegionHandlePtr284A
     call sub_2796
     UnsuppressPauseScreen
-    API $08D
+    ER_API ER_ID_Unk08D
     db $FA,$00,$3E,$01 ; idk what instructions these bytes are, if you know tell me
     ret
 
 sub_25ED:
     ld de,stuff_229C
     ld a,$20
-    API $08E
+    ER_API ER_ID_Unk08E
     ld de, stuff_22A4
     ld a, $40
-    API $08E
+    ER_API ER_ID_Unk08E
     ld a,$03
-    API $020
+    ER_API ER_ID_LayerShow
     ld bc,$1a07
     ld de,$0205
     ld hl,$030f
-    API $090 ; CreateRegion
+    ER_API ER_ID_CreateRegion
     ld c,a
     push bc
     ld a,c
     ld e,$02
-    API $091 ; SetRegionColor
+    ER_API ER_ID_SetRegionColor
     pop bc
     push bc
     ld a,c
-    API $092 ; Clear region
+    ER_API ER_ID_ClearRegion
     pop bc
     push bc
     ld hl,$0001
@@ -801,12 +809,12 @@ sub_25ED:
     push bc
     ld a,c
     ld de,$0102
-    API $098 ; SetTextColor
+    ER_API ER_ID_SetTextColor
     pop bc
     push bc
     ld a,c
     ld de,FrontPageText
-    API $0C0 ; GetTextWidth
+    ER_API ER_ID_GetTextWidth
     ld l,a
     ld a,$d0
     sub l
@@ -821,12 +829,12 @@ sub_25ED:
     ld d,a
     ld a,c
     ld bc,FrontPageText
-    API $099 ; DrawText
+    ER_API ER_ID_DrawText
     pop bc
     push bc
     ld a,c
     ld de,FrontPageTextLine2
-    API $0C0 ; GetTextWidth
+    ER_API ER_ID_GetTextWidth
     ld l,a
     ld a,$d0
     sub l
@@ -841,12 +849,12 @@ sub_25ED:
     ld d,a
     ld a,c
     ld bc,FrontPageTextLine2
-    API $099 ; DrawText
+    ER_API ER_ID_DrawText
     pop bc
     push bc
     ld a,c
     ld de,FrontPageTextLine3
-    API $0C0 ; GetTextWidth
+    ER_API ER_ID_GetTextWidth
     ld l,a
     ld a,$d0
     sub l
@@ -860,8 +868,8 @@ sub_25ED:
     ld d,a
     ld a,c
     ld bc,FrontPageTextLine3
-    API $099 ; DrawText
-    FadeIn $20
+    ER_API ER_ID_DrawText
+    ER_FadeIn $20
 
 label_15:
     LD_HL_IND $00C2
@@ -872,28 +880,28 @@ label_15:
     jr label_15
 
 label_16:
-    API $08D
+    ER_API ER_ID_Unk08D
     dec b
     nop
     ld a,$03
-    API $021 ; LayerHide
+    ER_API ER_ID_LayerHide
     ld a,$20
-    API $08F ; WindowHide
+    ER_API ER_ID_Unk08F ; WindowHide
     ld a,$40
-    API $08F ; WindowHide
+    ER_API ER_ID_Unk08F ; WindowHide
     wait $01
     ret
 
 sub_26B6:
-    API $08D
+    ER_API ER_ID_Unk08D
     inc d
     nop
     ld c,$30
     ld de,$0180
     LD_HL_IND RegionHandlePtr2845
-    API $05B ; SpriteAutoScaleUntilSize
+    ER_API ER_ID_SpriteAutoScaleUntilSize
     wait $60
-    API $08D
+    ER_API ER_ID_Unk08D
     ld l,b
     nop
     ld l,$20
@@ -901,7 +909,7 @@ sub_26B6:
     ld bc,$ffe0
     ld de,$00b8
     LD_HL_IND RegionHandlePtr2845
-    API $03B
+    ER_API ER_ID_Unk03B
     pop bc
     wait $10
     xor a
@@ -913,17 +921,17 @@ sub_26E0:
     ld c,$01
     ld de,$0f00
     LD_HL_IND RegionHandlePtr2845
-    API $05B ; SpriteAutoScaleUntilSize
+    ER_API ER_ID_SpriteAutoScaleUntilSize
     ld bc,$0044
     ld de,$00b8
     LD_HL_IND RegionHandlePtr2845
-    API $032 ; SetSpritePos
+    ER_API ER_ID_SetSpritePos
     ld c,$40
     ld de,$0100
     LD_HL_IND RegionHandlePtr2845
-    API $05B ; SpriteAutoScaleUntilSize
+    ER_API ER_ID_SpriteAutoScaleUntilSize
     wait $20
-    API $08D
+    ER_API ER_ID_Unk08D
     ld l,b
     nop
     wait $40
@@ -949,7 +957,7 @@ sub_270D: ; WriteText
     LD_A_IND RegionHandlePtr2848
     ld d, a
     LD_A_IND RegionHandlePtr2847
-    API $099 ; DrawText
+    ER_API ER_ID_DrawText
     ret
 
 sub_273C: ; RegiSelectText
@@ -957,11 +965,11 @@ sub_273C: ; RegiSelectText
     ld bc, RegiceText2
     ld de, $0016
     LD_A_IND RegionHandlePtr2844
-    API $099 ;DrawText
+    ER_API ER_ID_DrawText
     ld bc, RegisteelText2
     ld de, $0028
     LD_A_IND RegionHandlePtr2844
-    API $099 ;DrawText
+    ER_API ER_ID_DrawText
     ret
 
 
@@ -989,7 +997,7 @@ sub_2796: ; RegiChangeText (I think)
     push hl
     EX_DE_HL
     LD_A_IND RegionHandlePtr2841
-    API $0C0 ;GetTextWidth
+    ER_API ER_ID_GetTextWidth
     ld l, a
     ld a, $f0
     sub l
@@ -1002,11 +1010,11 @@ sub_2796: ; RegiChangeText (I think)
     or d
     ld d, a
     LD_A_IND RegionHandlePtr2841
-    API $099 ;DrawText
+    ER_API ER_ID_DrawText
     pop de
     push de
     LD_A_IND RegionHandlePtr2841
-    API $0C0 ;GetTextWidth
+    ER_API ER_ID_GetTextWidth
     ld l, a
     ld a, $f0
     sub l
@@ -1019,13 +1027,13 @@ sub_2796: ; RegiChangeText (I think)
     or d
     ld d, a
     LD_A_IND RegionHandlePtr2841
-    API $099 ;DrawText
+    ER_API ER_ID_DrawText
     pop bc
     push bc
     ld e, c
     ld d, b
     LD_A_IND RegionHandlePtr2841
-    API $0C0 ;GetTextWidth
+    ER_API ER_ID_GetTextWidth
     ld l, a
     ld a, $f0
     sub l
@@ -1038,7 +1046,7 @@ sub_2796: ; RegiChangeText (I think)
     or d
     ld d, a
     LD_A_IND RegionHandlePtr2841
-    API $099 ;DrawText
+    ER_API ER_ID_DrawText
     ret
 
 sub_2805:

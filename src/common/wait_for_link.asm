@@ -6,19 +6,19 @@
     ld bc, $B9A0
     ld de, $0076
     ld a, $08
-    API $0C4
+    ER_API ER_ID_Unk0C4
     pop bc
 .asm_1b64
-    API $0DB
+    ER_API ER_ID_Unk0DB
 
     cp $01
     jr z, .asm_1b6f
-    API $0DB
+    ER_API ER_ID_Unk0DB
     or a
     jr nz, .asm_1b76
 .asm_1b6f
     waita $01
-    API $0C5
+    ER_API ER_ID_Unk0C5
     jr .asm_1b64
 
 .asm_1b76
@@ -31,6 +31,6 @@
     IS_SOUND_PLAYING 2 ; exit
 
 .asm_1b90
-    API $0CA
+    ER_API ER_ID_Unk0CA
     cp $02
     jr c, .asm_1b76

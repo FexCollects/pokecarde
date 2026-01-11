@@ -10,7 +10,7 @@ TransferData:
     ld_ind_hl Space_1
     EX_DE_HL
     ld_ind_hl Space_2
-    API_0C7 Space_1
+    ER_API_0C7 Space_1
 
     wait $01
     pop hl
@@ -61,7 +61,7 @@ TransferData:
     jr .asm_1aaf
 
 .asm_1ad9
-    API_0C7 Space_1
+    ER_API_0C7 Space_1
     wait $01
     jr .asm_1aa1
 
@@ -83,20 +83,20 @@ Start:: ; 1ae2
     SetRegionColor RegionHandlePtr, 0
     SetBackgroundPalette 16, $0040, TicketPalette
 
-    FadeIn 16
+    ER_FadeIn 16
     wait 16
 
-    API $0C6
+    ER_API ER_ID_Unk0C6
 
     DrawText RegionHandlePtr, Instructions1, 8, 4
-    API $08D
+    ER_API ER_ID_Unk08D
 
 INCLUDE "common/wait_for_link.asm"
 
     SpriteShow SpriteHandlePtr
 
     DrawText RegionHandlePtr, Instructions2, 8, 4
-    API $08D
+    ER_API ER_ID_Unk08D
 
     ld a, b
     nop
@@ -110,7 +110,7 @@ DEF DATA_TRANSFER_LENGTH EQU 6144
 INCLUDE "common/transfer_data.asm"
     ld hl, $5fff
     ld_ind_hl Space_1
-    API_0C7 Space_1
+    ER_API_0C7 Space_1
 
     wait $80
 
@@ -118,7 +118,7 @@ INCLUDE "common/transfer_data.asm"
 
     DrawText RegionHandlePtr, TicketDelivered, 8, 4
 
-    API $08D
+    ER_API ER_ID_Unk08D
     ld c, a
     nop
 

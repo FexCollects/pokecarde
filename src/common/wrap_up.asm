@@ -7,12 +7,12 @@
     jr z, .asm_1c7c
 
     ; IS_SOUND_PLAYING 1
-    API $08D
+    ER_API ER_ID_Unk08D
     dec b ; was this supposed
     nop   ; to be ld b, $00?
     ld e, $01
     ld hl, $0005 ; was this supposed to be $0006?
-    API $119
+    ER_API ER_ID_IsSoundPlaying
     ld a, $01 ; return
     EXIT
 

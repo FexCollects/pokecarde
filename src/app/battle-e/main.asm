@@ -2,11 +2,14 @@ SECTION "app/battle-e/main", ROM0
 INCLUDE "include/charmaps.asm"
 INCLUDE "include/erapi.asm"
 
-BackdropSpriteData: ; 1777
-    dw BattleTrainerBackdrop
-    dw BackdropPalettes
-    dw BackdropTilemap
-    db $28,$00,$04,$00
+dstruct ER_CustomBackground, \
+  BackdropSpriteData, \
+    .TilePtr=BattleTrainerBackdrop, \
+    .PalettePtr=BackdropPalettes, \
+    .MapPtr=BackdropTilemap, \
+    .TileCount=40, \
+    .PaletteCount=4
+
 DoorSpriteData: ; 1781
     dw DoorSprite
     dw DoorPalette
@@ -40,7 +43,7 @@ Open_Doors: ; 1946
     ld bc, $0040
     ld de, $0048
     LD_HL_IND LeftDoorSpriteHandle
-    API $03B
+    ER_API ER_ID_Unk03B
 
     pop bc
     ld l, $20
@@ -48,7 +51,7 @@ Open_Doors: ; 1946
     ld bc, $0040
     ld de, $00A8
     LD_HL_IND RightDoorSpriteHandle
-    API $03B
+    ER_API ER_ID_Unk03B
 
     pop bc
     ret
@@ -59,7 +62,7 @@ Close_Doors: ; 1965
     ld bc, $0040
     ld de, $0068
     LD_HL_IND LeftDoorSpriteHandle
-    API $03B
+    ER_API ER_ID_Unk03B
 
     pop bc
     ld l, $20
@@ -67,7 +70,7 @@ Close_Doors: ; 1965
     ld bc, $0040
     ld de, $0088
     LD_HL_IND RightDoorSpriteHandle
-    API $03B
+    ER_API ER_ID_Unk03B
 
     pop bc
     ret
@@ -75,22 +78,22 @@ Close_Doors: ; 1965
 Start:: ; 1984
     SuppressPauseScreen
 
-        ; Load the background on layer 0
-    LoadCustomBackground BackdropSpriteData, 0
-        ; Clear garbage in the text area
-        TileFillBackground 0, 0, 0, 14, 30, 6, 0
+    ; Load the background on layer 0
+    ER_LoadCustomBackground BackdropSpriteData, 0
+    ; Clear garbage in the text area
+    ER_FillBackgroundTile 0, 0, 0, 14, 30, 6, 0
 
-        ; Load the background on layer 1
-        ; Pretty sure this is to allow the doors to be covered by their frame
-    LoadCustomBackground BackdropSpriteData, 1
-        ; Clear the garbage in the text area
-        TileFillBackground 0, 0, 0, 14, 30, 6, 1
+    ; Load the background on layer 1
+    ; Pretty sure this is to allow the doors to be covered by their frame
+    ER_LoadCustomBackground BackdropSpriteData, 1
+    ; Clear the garbage in the text area
+    ER_FillBackgroundTile 0, 0, 0, 14, 30, 6, 1
 
-        ; Clear the door area on layer 0
-        TileFillBackground 0, 0, 11, 4, 8, 8, 0
+    ; Clear the door area on layer 0
+    ER_FillBackgroundTile 0, 0, 11, 4, 8, 8, 0
 
     ld a, $4
-    API $0AE
+    ER_API ER_ID_Unk0AE
 
     CreateCustomSprite TrainerSpriteHandle, $80, TrainerSpriteData
     SetSpritePos TrainerSpriteHandle, 119, 64
@@ -105,20 +108,20 @@ Start:: ; 1984
     ld h, a
     ld l, $00
     SetTextSize
-        IncreaseTextKerning RegionHandlePtr, 01, 02
+    IncreaseTextKerning RegionHandlePtr, 01, 02
     SetTextColor RegionHandlePtr, 3, 0
 
-    FadeIn 16
+    ER_FadeIn 16
     wait 16
-    API $0C6
+    ER_API ER_ID_Unk0C6
     DrawText RegionHandlePtr, Instructions1, 8, 4
-    API $08D
+    ER_API ER_ID_Unk08D
 
 INCLUDE "common/wait_for_link.asm"
 
     call Open_Doors
     DrawText RegionHandlePtr, Instructions2, 8, 4
-    API $08D
+    ER_API ER_ID_Unk08D
     and [hl]
     ld [bc], a
     
@@ -133,15 +136,15 @@ INCLUDE "common/transfer_data.asm"
 
     ld hl, $5fff
     ld_ind_hl Space_1
-    API_0C7 Space_1
+    ER_API_0C7 Space_1
 
     LD_HL_IND TrainerSpriteHandle
-    API $047
+    ER_API ER_ID_SpriteHide
     wait 128
     call Open_Doors
 
     DrawText RegionHandlePtr, BattleEntryFinished, 8, 4
-    API $08D
+    ER_API ER_ID_Unk08D
 
     ld c, a
     nop

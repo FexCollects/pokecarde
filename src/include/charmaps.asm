@@ -517,3 +517,5 @@ CHARMAP "\{", $7B
 CHARMAP "|", $7C 
 CHARMAP "}", $7D 
 CHARMAP "~", $7E 
+; CHARMAP "“", $E2
+; CHARMAP "”", $E2

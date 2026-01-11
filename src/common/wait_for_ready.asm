@@ -1,11 +1,11 @@
 .asm_1baf
     waita $01
-    API $0DB
+    ER_API ER_ID_Unk0DB
 
     ld l, a
     ld h, $00
     ld_ind_hl Space_5
-    API $0CA
+    ER_API ER_ID_Unk0CA
 
     cp $02
     jr nc, .asm_1bd4

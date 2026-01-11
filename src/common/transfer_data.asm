@@ -1,10 +1,10 @@
-    API_106 $0040, UNKNOWN_VALUE
+    ER_API_106 $0040, UNKNOWN_VALUE
 
 .asm_1bfe
     waita $01
 
     ld hl, Space_3
-    API $0C8
+    ER_API ER_ID_Unk0C8
 
     or a
     jr nz, .asm_1c18

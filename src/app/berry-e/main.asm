@@ -2,9 +2,14 @@ SECTION "app/berry-e/main", ROM0
 INCLUDE "include/charmaps.asm"
 INCLUDE "include/erapi.asm"
 
-BackgroundSpriteData:
-    dw BackgroundSprite, BackgroundPalette, BackgroundTilemap
-    db $05,$00,$01,$00
+dstruct ER_CustomBackground, \
+  BackgroundSpriteData, \
+    .TilePtr=BackgroundSprite, \
+    .PalettePtr=BackgroundPalette, \
+    .MapPtr=BackgroundTilemap, \
+    .TileCount=5, \
+    .PaletteCount=1
+
 BerrySpriteData:
     dw BerrySprite, BerryPalette 
     db $06,$06,$01,$01,$01,$01,$01
@@ -32,15 +37,15 @@ AfterTransfer:
     ld hl, $5FFF
     ld_ind_hl Space_1
     ld hl, Space_1
-    API $0C7
+    ER_API ER_ID_Unk0C7
 
     wait $01
     ret
 
 Start::
     SuppressPauseScreen
-    LoadCustomBackground BackgroundSpriteData, 0
-        TileFillBackground 0, 0, 0, 14, 30, 6, 0
+    ER_LoadCustomBackground BackgroundSpriteData, 0
+    ER_FillBackgroundTile 0, 0, 0, 14, 30, 6, 0
 
     CreateCustomSprite SpriteHandlePtr, $80, BerrySpriteData
     SetSpritePos SpriteHandlePtr, 376, 56
@@ -49,23 +54,23 @@ Start::
     ld h, a
     ld l, $00
     SetTextSize
-        IncreaseTextKerning RegionHandlePtr, 01, 02
+    IncreaseTextKerning RegionHandlePtr, 01, 02
     SetTextColor RegionHandlePtr, 2, 0
     SetRegionColor RegionHandlePtr, 0
     SetBackgroundPalette $10, $0040, UnknownPalette
 
-    FadeIn 16
+    ER_FadeIn 16
     wait 16
-    API $0C6
+    ER_API ER_ID_Unk0C6
 
     DrawText RegionHandlePtr, Instructions1, 8, 4
-    API $08D
+    ER_API ER_ID_Unk08D
 
 INCLUDE "common/wait_for_link.asm"
 
-    API_084 SpriteHandlePtr, 120, 56, 16 ; sprite move and fade in?
+    ER_API_084 SpriteHandlePtr, 120, 56, 16 ; sprite move and fade in?
     pop bc
-    API $08D
+    ER_API ER_ID_Unk08D
     push af
     nop
 
@@ -82,11 +87,11 @@ INCLUDE "common/transfer_data.asm"
     call AfterTransfer
 
     wait 128
-    API $08D
+    ER_API ER_ID_Unk08D
 
     ld c, a
     nop
-    API_084 SpriteHandlePtr, $FF78, 56, 16 ; sprite move and fade out?
+    ER_API_084 SpriteHandlePtr, $FF78, 56, 16 ; sprite move and fade out?
 
     pop bc
     DrawText RegionHandlePtr, ABerryWasSent, 8, 4
