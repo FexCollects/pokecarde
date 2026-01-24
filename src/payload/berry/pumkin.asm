@@ -7,23 +7,31 @@ PUSHC gen3text
 DataPacket::
     Enigma_Berry
 
-    db "PUMKIN@"
-    Firmness SUPER_HARD
-    Size 4,8
-    Yield_Range 2, 3
-    dl 0
-    dl 0
-    Growth_Stage_Hours 18
-    Flavor 0, 0, 0, 0, 40
-    Smoothness 65
+dstruct BerryData, \
+  PumpkinBerryData, \
+    .Name="PUMKIN@", \
+    .Firmness=SUPER_HARD, \
+    .Size=48, \
+    .MaxYield=3, \
+    .MinYield=2, \
+    .Description=0, \
+    .StageDuration=18, \
+    .Spicy=0, \
+    .Dry=0, \
+    .Sweet=0, \
+    .Bitter=0, \
+    .Sour=40, \
+    .Smoothness=65
+
+    ds 1  ; end marker?
 
 BerrySprite::
     INCBIN "build/gfx/berries/pumkin.4bpp"
 BerryPalette::
     INCBIN "build/gfx/berries/pumkin.gbapal"
 
-        db "This BERRY is amazingly sour.@               "
-        db "It’s heavy due to its dense filling.@        "
+    db "This BERRY is amazingly sour.@               "
+    db "It’s heavy due to its dense filling.@        "
 
     db 0,0,0
     db $04 ; cures freeze

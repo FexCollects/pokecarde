@@ -7,25 +7,33 @@ PUSHC gen3text
 DataPacket::
     Enigma_Berry
 
-    db "NUTPEA@"
-    Firmness SUPER_HARD
-    Size 12,4
-    Yield_Range 1, 3
-    dl 0
-    dl 0
-    Growth_Stage_Hours 18
-    Flavor 10, 10, 10, 10, 10
-    Smoothness 5
+dstruct BerryData, \
+  NutpeaBerryData, \
+    .Name="NUTPEA@", \
+    .Firmness=SUPER_HARD, \
+    .Size=124, \
+    .MaxYield=3, \
+    .MinYield=1, \
+    .Description=0, \
+    .StageDuration=18, \
+    .Spicy=10, \
+    .Dry=10, \
+    .Sweet=10, \
+    .Bitter=10, \
+    .Sour=10, \
+    .Smoothness=5
+
+    ds 1  ; end marker?
 
 BerrySprite::
     INCBIN "build/gfx/berries/nutpea.4bpp"
 BerryPalette::
     INCBIN "build/gfx/berries/nutpea.gbapal"
 
-        db "This BERRY is rigid and cracks open@         "
-        db "when the center is squeezed.@                "
+    db "This BERRY is rigid and cracks open@         "
+    db "when the center is squeezed.@                "
 
-        ds 22 ; Pokéblock ingredient only
+    ds 22 ; Pokéblock ingredient only
 
     End_Berry
 

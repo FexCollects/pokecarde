@@ -7,23 +7,31 @@ PUSHC gen3text
 DataPacket::
     Enigma_Berry
 
-    db "DRASH@@"
-    Firmness VERY_HARD
-    Size 13,4
-    Yield_Range 2, 3
-    dl 0
-    dl 0
-    Growth_Stage_Hours 18
-    Flavor 0, 0, 40, 0, 0
-    Smoothness 65
+dstruct BerryData, \
+  DrashBerryData, \
+    .Name="DRASH@@", \
+    .Firmness=VERY_HARD, \
+    .Size=134, \
+    .MaxYield=3, \
+    .MinYield=2, \
+    .Description=0, \
+    .StageDuration=18, \
+    .Spicy=0, \
+    .Dry=0, \
+    .Sweet=40, \
+    .Bitter=0, \
+    .Sour=0, \
+    .Smoothness=65
+
+    ds 1  ; end marker?
 
 BerrySprite::
     INCBIN "build/gfx/berries/drash.4bpp"
 BerryPalette::
     INCBIN "build/gfx/berries/drash.gbapal"
 
-        db "When it ripens, this sweet BERRY@            "
-        db "falls and sticks into the ground.@           "
+    db "When it ripens, this sweet BERRY@            "
+    db "falls and sticks into the ground.@           "
 
     db 0,0,0
     db $10 ; cures poison

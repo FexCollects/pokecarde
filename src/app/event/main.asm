@@ -68,9 +68,9 @@ TransferData:
 Start:: ; 1ae2
     SuppressPauseScreen
 
-    CreateCustomSprite SpriteHandlePtr, $80, SpriteData
-    SetSpritePos SpriteHandlePtr, 120, 64
-    SpriteHide SpriteHandlePtr
+    ER_SpriteCreate SpriteHandlePtr, $80, SpriteData
+    ER_SetSpritePos SpriteHandlePtr, 120, 64
+    ER_SpriteHide SpriteHandlePtr
 
     CreateRegion RegionHandlePtr, 30, 6, 0, 14, 0, 4
 
@@ -78,7 +78,7 @@ Start:: ; 1ae2
     ld l, $00
     SetTextSize
 
-        IncreaseTextKerning RegionHandlePtr, 01, 02
+    IncreaseTextKerning RegionHandlePtr, 01, 02
     SetTextColor RegionHandlePtr, 2, 0
     SetRegionColor RegionHandlePtr, 0
     SetBackgroundPalette 16, $0040, TicketPalette
@@ -93,7 +93,7 @@ Start:: ; 1ae2
 
 INCLUDE "common/wait_for_link.asm"
 
-    SpriteShow SpriteHandlePtr
+    ER_SpriteShow SpriteHandlePtr
 
     DrawText RegionHandlePtr, Instructions2, 8, 4
     ER_API ER_ID_Unk08D
@@ -114,7 +114,7 @@ INCLUDE "common/transfer_data.asm"
 
     wait $80
 
-    SpriteHide SpriteHandlePtr
+    ER_SpriteHide SpriteHandlePtr
 
     DrawText RegionHandlePtr, TicketDelivered, 8, 4
 

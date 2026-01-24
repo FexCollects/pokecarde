@@ -10,9 +10,17 @@ dstruct ER_CustomBackground, \
     .TileCount=5, \
     .PaletteCount=1
 
-BerrySpriteData:
-    dw BerrySprite, BerryPalette 
-    db $06,$06,$01,$01,$01,$01,$01
+dstruct ER_CustomSprite, \
+  BerrySpriteData, \
+    .TilePtr=BerrySprite, \
+    .PalettePtr=BerryPalette, \
+    .Width=6, \
+    .Height=6, \
+    .FramesPerBank=1, \
+    .Unknown=1, \
+    .HitBoxWidth=1, \
+    .HitBoxHeight=1, \
+    .FrameCount=1
 
 Instructions1: ; B65
     db "Link e-Reader to Pokémon Ruby or \n"
@@ -47,8 +55,8 @@ Start::
     ER_LoadCustomBackground BackgroundSpriteData, 0
     ER_FillBackgroundTile 0, 0, 0, 14, 30, 6, 0
 
-    CreateCustomSprite SpriteHandlePtr, $80, BerrySpriteData
-    SetSpritePos SpriteHandlePtr, 376, 56
+    ER_SpriteCreate SpriteHandlePtr, $80, BerrySpriteData
+    ER_SetSpritePos SpriteHandlePtr, 376, 56
 
     CreateRegion RegionHandlePtr, 30, 6, 0, 14, 0, 4
     ld h, a

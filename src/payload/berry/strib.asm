@@ -7,25 +7,33 @@ PUSHC gen3text
 DataPacket::
     Enigma_Berry
 
-    db "STRIB@@"
-    Firmness HARD
-    Size 12,2
-    Yield_Range 4, 12
-    dl 0
-    dl 0
-    Growth_Stage_Hours 24
-    Flavor 30, 0, 0, 30, 0
-    Smoothness 85
+dstruct BerryData, \
+  StripBerryData, \
+    .Name="STRIB@@", \
+    .Firmness=HARD, \
+    .Size=122, \
+    .MaxYield=12, \
+    .MinYield=4, \
+    .Description=0, \
+    .StageDuration=24, \
+    .Spicy=30, \
+    .Dry=0, \
+    .Sweet=0, \
+    .Bitter=30, \
+    .Sour=0, \
+    .Smoothness=85
+
+    ds 1  ; end marker?
 
 BerrySprite::
     INCBIN "build/gfx/berries/strib.4bpp"
 BerryPalette::
     INCBIN "build/gfx/berries/strib.gbapal"
 
-        db "It grows slowly, but abundantly.@            "
-        db "Makes a soothing sound when shaken.@         "
+    db "It grows slowly, but abundantly.@            "
+    db "Makes a soothing sound when shaken.@         "
 
-        ds 22 ; Pokéblock ingredient only
+    ds 22 ; Pokéblock ingredient only
 
     End_Berry
 

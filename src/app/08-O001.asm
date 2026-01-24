@@ -351,16 +351,29 @@ TextboxMainTilemap:
 
 
 ;Pointers to graphics
+dstruct ER_CustomSprite, \
+  ArrowSpriteData, \
+    .TilePtr=ArrowSprite, \
+    .PalettePtr=ArrowPalette, \
+    .Width=1, \
+    .Height=1, \
+    .FramesPerBank=1, \
+    .Unknown=1, \
+    .HitBoxWidth=0, \
+    .HitBoxHeight=0, \
+    .FrameCount=1
 
-ArrowSpriteData:
-    dw ArrowSprite
-    dw ArrowPalette
-    db $01,$01,$01,$01,$00,$00,$01  ;byte 1&2=width and height of sprite in tiles,3=No. of frames?  4=Starting Frame? 5&6=Unk 7=Unk
-
-RegirockSpriteData:
-    dw RegirockSprite
-    dw RegiPalette
-    db $04,$04,$03,$01,$00,$00,$03  ;first 2 bytes are 4 because the sprites are 32x32px, 3rd byte is 3 because of 3 frames (I think)
+dstruct ER_CustomSprite, \
+  RegirockSpriteData, \
+    .TilePtr=RegirockSprite, \
+    .PalettePtr=RegiPalette, \
+    .Width=4, \
+    .Height=4, \
+    .FramesPerBank=3, \
+    .Unknown=1, \
+    .HitBoxWidth=0, \
+    .HitBoxHeight=0, \
+    .FrameCount=3
 
 dstruct ER_CustomBackground, \
   TextboxesData, \
@@ -453,11 +466,11 @@ Start::
     ld hl,FirstPage
     call sub_2796
 
-    CreateCustomSprite RegionHandlePtr2842, $80, ArrowSpriteData
-    CreateCustomSprite RegionHandlePtr2845, $02, RegirockSpriteData
-    SetSpritePos RegionHandlePtr2845, $00b8, $0044
-    SpriteAutoScaleUntilSize RegionHandlePtr2845, $01, $0100
-    SpriteShow RegionHandlePtr2845
+    ER_SpriteCreate ArrowSpriteHandlePtr, $80, ArrowSpriteData
+    ER_SpriteCreate RegirockSpriteHandlePtr, $02, RegirockSpriteData
+    ER_SetSpritePos RegirockSpriteHandlePtr, $00b8, $0044
+    SpriteAutoScaleUntilSize RegirockSpriteHandlePtr, $01, $0100
+    ER_SpriteShow RegirockSpriteHandlePtr
 
     ld c, $06
     ld e, $14
@@ -472,7 +485,7 @@ Start::
     call sub_2463
     call sub_247C
 
-    SpriteAutoScaleUntilSize RegionHandlePtr2845, $01, $0f00
+    SpriteAutoScaleUntilSize RegirockSpriteHandlePtr, $01, $0f00
 
     call sub_25ED
     ld de, stuff_22AC
@@ -501,7 +514,7 @@ label_3:
     push de
     ld a, e
     call sub_2463
-    LD_HL_IND RegionHandlePtr2845
+    LD_HL_IND RegirockSpriteHandlePtr
     ER_API ER_ID_SetSpriteFrameNext
     pop de
 label_1:
@@ -525,7 +538,7 @@ label_6:
     push de
     ld a,e
     call sub_2463
-    LD_HL_IND RegionHandlePtr2845
+    LD_HL_IND RegirockSpriteHandlePtr
     ER_API ER_ID_SetSpriteFramePrevious
     pop de
 label_4:
@@ -600,7 +613,7 @@ sub_2463:
     ld c,l
     ld b,h
     ld de,$0012
-    LD_HL_IND RegionHandlePtr2842
+    LD_HL_IND ArrowSpriteHandlePtr
     ER_API ER_ID_SetSpritePos
     ret
 
@@ -609,7 +622,7 @@ sub_247C:
     push hl
     ld bc,$0002
     ld de,$0600
-    LD_HL_IND RegionHandlePtr2842
+    LD_HL_IND ArrowSpriteHandlePtr
     ER_API ER_ID_Unk059
     pop bc
     ret
@@ -619,7 +632,7 @@ sub_248C:
     push hl
     ld bc,$0000
     ld de,$0000
-    LD_HL_IND RegionHandlePtr2842
+    LD_HL_IND ArrowSpriteHandlePtr
     ER_API ER_ID_Unk059
     pop bc
     ret
@@ -886,9 +899,9 @@ label_16:
     ld a,$03
     ER_API ER_ID_LayerHide
     ld a,$20
-    ER_API ER_ID_Unk08F ; WindowHide
+    ER_API ER_ID_WindowHide
     ld a,$40
-    ER_API ER_ID_Unk08F ; WindowHide
+    ER_API ER_ID_WindowHide
     wait $01
     ret
 
@@ -898,7 +911,7 @@ sub_26B6:
     nop
     ld c,$30
     ld de,$0180
-    LD_HL_IND RegionHandlePtr2845
+    LD_HL_IND RegirockSpriteHandlePtr
     ER_API ER_ID_SpriteAutoScaleUntilSize
     wait $60
     ER_API ER_ID_Unk08D
@@ -908,7 +921,7 @@ sub_26B6:
     push hl
     ld bc,$ffe0
     ld de,$00b8
-    LD_HL_IND RegionHandlePtr2845
+    LD_HL_IND RegirockSpriteHandlePtr
     ER_API ER_ID_Unk03B
     pop bc
     wait $10
@@ -920,15 +933,15 @@ sub_26B6:
 sub_26E0:
     ld c,$01
     ld de,$0f00
-    LD_HL_IND RegionHandlePtr2845
+    LD_HL_IND RegirockSpriteHandlePtr
     ER_API ER_ID_SpriteAutoScaleUntilSize
     ld bc,$0044
     ld de,$00b8
-    LD_HL_IND RegionHandlePtr2845
+    LD_HL_IND RegirockSpriteHandlePtr
     ER_API ER_ID_SetSpritePos
     ld c,$40
     ld de,$0100
-    LD_HL_IND RegionHandlePtr2845
+    LD_HL_IND RegirockSpriteHandlePtr
     ER_API ER_ID_SpriteAutoScaleUntilSize
     wait $20
     ER_API ER_ID_Unk08D
@@ -1108,9 +1121,9 @@ RegionHandlePtr283D:: dw
 RegionHandlePtr283F:: db
 RegionHandlePtr2840:: db
 RegionHandlePtr2841:: db
-RegionHandlePtr2842:: dw
+ArrowSpriteHandlePtr: dw
 RegionHandlePtr2844:: db
-RegionHandlePtr2845:: dw
+RegirockSpriteHandlePtr:: dw
 RegionHandlePtr2847:: db
 RegionHandlePtr2848:: db
 RegionHandlePtr2849:: db

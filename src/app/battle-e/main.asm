@@ -10,10 +10,17 @@ dstruct ER_CustomBackground, \
     .TileCount=40, \
     .PaletteCount=4
 
-DoorSpriteData: ; 1781
-    dw DoorSprite
-    dw DoorPalette
-    db $04,$08,$01,$01,$01,$01,$01
+dstruct ER_CustomSprite, \
+  DoorSpriteData, \
+    .TilePtr=DoorSprite, \
+    .PalettePtr=DoorPalette, \
+    .Width=4, \
+    .Height=8, \
+    .FramesPerBank=1, \
+    .Unknown=1, \
+    .HitBoxWidth=1, \
+    .HitBoxHeight=1, \
+    .FrameCount=1
 
 Instructions1: ; 178c
     db "Link e-Reader to Pokémon Ruby or \n"
@@ -95,14 +102,14 @@ Start:: ; 1984
     ld a, $4
     ER_API ER_ID_Unk0AE
 
-    CreateCustomSprite TrainerSpriteHandle, $80, TrainerSpriteData
-    SetSpritePos TrainerSpriteHandle, 119, 64
+    ER_SpriteCreate TrainerSpriteHandle, $80, TrainerSpriteData
+    ER_SetSpritePos TrainerSpriteHandle, 119, 64
 
-    CreateCustomSprite LeftDoorSpriteHandle, $81, DoorSpriteData
-    CreateCustomSprite RightDoorSpriteHandle, $81, DoorSpriteData
-    SpriteMirrorToggle $01, LeftDoorSpriteHandle
-    SetSpritePos LeftDoorSpriteHandle, 104, 64
-    SetSpritePos RightDoorSpriteHandle, 136, 64
+    ER_SpriteCreate LeftDoorSpriteHandle, $81, DoorSpriteData
+    ER_SpriteCreate RightDoorSpriteHandle, $81, DoorSpriteData
+    ER_SpriteMirrorToggle $01, LeftDoorSpriteHandle
+    ER_SetSpritePos LeftDoorSpriteHandle, 104, 64
+    ER_SetSpritePos RightDoorSpriteHandle, 136, 64
 
     CreateRegion RegionHandlePtr, 30, 6, 0, 14, 0, 3
     ld h, a

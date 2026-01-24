@@ -2,30 +2,37 @@ INCLUDE "include/gba.asm"
 INCLUDE "constants/card_types.asm"
 INCLUDE "constants/regions.asm"
 
+INCLUDE "include/structs.inc"
+rgbds_structs_version 4.1.0
+def STRUCT_SEPARATOR equs "."
+
+struct BerryData
+    bytes 7, Name
+    bytes 1, Firmness
+    words 1, Size
+    bytes 1, MaxYield
+    bytes 1, MinYield
+    longs 2, Description
+    bytes 1, StageDuration
+    bytes 1, Spicy
+    bytes 1, Dry
+    bytes 1, Sweet
+    bytes 1, Bitter
+    bytes 1, Sour
+    bytes 1, Smoothness
+end_struct
+
 MACRO Enigma_Berry
     CardHeader CUSTOM_BERRY
-        dl $02000018 ; GBAPtr
+    dl $02000018 ; GBAPtr
     db $02,$00
     ENDM
 
 ; firmness
-DEF Firmness EQUS "db"
 DEF VERY_SOFT  EQU 1
 DEF SOFT       EQU 2
 DEF HARD       EQU 3
 DEF VERY_HARD  EQU 4
 DEF SUPER_HARD EQU 5
-
-MACRO Yield_Range
-    db \2, \1
-    ENDM
-
-MACRO Size
-    dw \1 * 10 + \2
-    ENDM
-
-DEF Growth_Stage_Hours EQUS "db"
-DEF Flavor EQUS "db"
-DEF Smoothness EQUS "dw" ; not sure if the second byte is significant on its own
 
 DEF End_Berry EQUS "dl"

@@ -7,24 +7,31 @@ PUSHC gen3text
 DataPacket::
     Enigma_Berry
 
-    db "BITMEL@"
-    ; Text_JP "ヤゴ@@@@@"7
-    Firmness VERY_HARD
-    Size 3,6
-    Yield_Range 2, 3
-    dl 0
-    dl 0
-    Growth_Stage_Hours 18
-    Flavor 0, 0, 0, 0, 40
-    Smoothness 65
+dstruct BerryData, \
+  BitmelBerryData, \
+    .Name="BITMEL@", \
+    .Firmness=VERY_HARD, \
+    .Size=36, \
+    .MaxYield=3, \
+    .MinYield=2, \
+    .Description=0, \
+    .StageDuration=18, \
+    .Spicy=0, \
+    .Dry=0, \
+    .Sweet=0, \
+    .Bitter=0, \
+    .Sour=40, \
+    .Smoothness=65
+
+    ds 1  ; end marker?
 
 BerrySprite::
     INCBIN "build/gfx/berries/yago.4bpp"
 BerryPalette::
     INCBIN "build/gfx/berries/yago.gbapal"
 
-        db "This BERRY is amazingly bitter.@             "
-        db "It feels weightless when held.@              "
+    db "This BERRY is amazingly bitter.@             "
+    db "It feels weightless when held.@              "
     
     ; Text_JP "とてつもなく　にがい。　てで　もっても"45
     ; Text_JP "おもさを　かんじない　くらい　かるい。"45    

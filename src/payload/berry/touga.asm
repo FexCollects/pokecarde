@@ -7,24 +7,31 @@ PUSHC gen3text
 DataPacket::
     Enigma_Berry
 
-    db "CHIPEP@"
-    ; Text_JP "トウガ@@@@"7
-    Firmness SUPER_HARD
-    Size 15,3
-    Yield_Range 2, 3
-    dl 0
-    dl 0
-    Growth_Stage_Hours 18
-    Flavor 40, 0, 00, 0, 0
-    Smoothness 65
+dstruct BerryData, \
+  ChipepBerryData, \
+    .Name="CHIPEP@", \
+    .Firmness=SUPER_HARD, \
+    .Size=153, \
+    .MaxYield=3, \
+    .MinYield=2, \
+    .Description=0, \
+    .StageDuration=18, \
+    .Spicy=40, \
+    .Dry=0, \
+    .Sweet=0, \
+    .Bitter=0, \
+    .Sour=0, \
+    .Smoothness=65
+
+    ds 1  ; end marker?
 
 BerrySprite::
     INCBIN "build/gfx/berries/touga.4bpp"
 BerryPalette::
     INCBIN "build/gfx/berries/touga.gbapal"
 
-        db "This BERRY is amazingly spicy.@              "
-        db "No one has been able to eat it whole.@       "
+    db "This BERRY is amazingly spicy.@              "
+    db "No one has been able to eat it whole.@       "
     
     ; Text_JP "とてつもなく　からい。　１どに　まるごと"45
     ; Text_JP "たべられた　ひとは　まだ　だれも　いない。"45    

@@ -7,15 +7,23 @@ PUSHC gen3text
 DataPacket::
     Enigma_Berry
 
-    db "CHILAN@"
-    Firmness SOFT
-    Size 27,2
-    Yield_Range 1, 2
-    dl 0
-    dl 0
-    Growth_Stage_Hours 1
-    Flavor 30, 0, 30, 0, 0
-    Smoothness 85
+dstruct BerryData, \
+  ChilanBerryData, \
+    .Name="CHILAN@", \
+    .Firmness=SOFT, \
+    .Size=272, \
+    .MaxYield=2, \
+    .MinYield=1, \
+    .Description=0, \
+    .StageDuration=1, \
+    .Spicy=30, \
+    .Dry=0, \
+    .Sweet=30, \
+    .Bitter=0, \
+    .Sour=0, \
+    .Smoothness=85
+
+    ds 1  ; end marker?
 
 BerrySprite::
     INCBIN "build/gfx/berries/chilan.4bpp"
@@ -25,7 +33,7 @@ BerryPalette::
     db "This sparse BERRY grows quickly.@            "
     db "Its skin is quite tough.@                    "
 
-        ds 22 ; Pokéblock ingredient only
+    ds 22 ; Pokéblock ingredient only
 
     End_Berry
 

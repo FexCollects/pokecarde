@@ -1,9 +1,18 @@
 SECTION "app/event/00-G000", ROM0
 INCLUDE "include/charmaps.asm"
+INCLUDE "include/erapi.asm"
 
-SpriteData::
-    dw TicketSprite,TicketPalette
-    db $15,$08,$01,$01,$01,$01,$01 ; width 21, height 8
+dstruct ER_CustomSprite, \
+  SpriteData, \
+    .TilePtr=TicketSprite, \
+    .PalettePtr=TicketPalette, \
+    .Width=21, \
+    .Height=8, \
+    .FramesPerBank=1, \
+    .Unknown=1, \
+    .HitBoxWidth=1, \
+    .HitBoxHeight=1, \
+    .FrameCount=1
 
 Instructions1:: ; 1921
     db "Link e-Reader to Pokémon Ruby or\n"

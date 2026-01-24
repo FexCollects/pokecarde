@@ -7,23 +7,31 @@ PUSHC gen3text
 DataPacket::
     Enigma_Berry
 
-    db "EGGANT@"
-    Firmness SOFT
-    Size 4,1
-    Yield_Range 2, 3
-    dl 0
-    dl 0
-    Growth_Stage_Hours 18
-    Flavor 0, 40, 0, 0, 0
-    Smoothness 65
+dstruct BerryData, \
+  EggantBerryData, \
+    .Name="EGGANT@", \
+    .Firmness=SOFT, \
+    .Size=41, \
+    .MaxYield=3, \
+    .MinYield=2, \
+    .Description=0, \
+    .StageDuration=18, \
+    .Spicy=0, \
+    .Dry=40, \
+    .Sweet=0, \
+    .Bitter=0, \
+    .Sour=0, \
+    .Smoothness=65
+
+    ds 1  ; end marker?
 
 BerrySprite::
     INCBIN "build/gfx/berries/eggant.4bpp"
 BerryPalette::
     INCBIN "build/gfx/berries/eggant.gbapal"
 
-        db "Very dry tasting, especially the@            "
-        db "parts not exposed to the sun.@               "
+    db "Very dry tasting, especially the@            "
+    db "parts not exposed to the sun.@               "
 
     db 0,0,0
     db $00

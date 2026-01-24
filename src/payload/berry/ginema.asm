@@ -7,24 +7,31 @@ PUSHC gen3text
 DataPacket::
     Enigma_Berry
 
-    db "ONYON@@"
-    ; Text_JP "ギネマ@@@@"7    
-    Firmness VERY_HARD
-    Size 3,5
-    Yield_Range 2, 3
-    dl 0
-    dl 0
-    Growth_Stage_Hours 18
-    Flavor 0, 30, 0, 0, 30
-    Smoothness 70
+dstruct BerryData, \
+  OnyonBerryData, \
+    .Name="ONYON@@", \
+    .Firmness=VERY_HARD, \
+    .Size=35, \
+    .MaxYield=3, \
+    .MinYield=2, \
+    .Description=0, \
+    .StageDuration=18, \
+    .Spicy=0, \
+    .Dry=30, \
+    .Sweet=0, \
+    .Bitter=0, \
+    .Sour=30, \
+    .Smoothness=70
+
+    ds 1  ; end marker?
 
 BerrySprite::
     INCBIN "build/gfx/berries/ginema.4bpp"
 BerryPalette::
     INCBIN "build/gfx/berries/ginema.gbapal"
 
-        db "If you peel off its thin skin,@              "
-        db "this sour BERRY is perfectly round.@         "
+    db "If you peel off its thin skin,@              "
+    db "this sour BERRY is perfectly round.@         "
     
     ; Text_JP "うすい　かわを　すべて　むくと　まんまるい"45
     ; Text_JP "みに　なる。　とても　しぶくて　すっぱい。"45    
