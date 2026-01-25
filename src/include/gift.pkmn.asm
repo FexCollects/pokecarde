@@ -56,9 +56,10 @@ struct BoxPokemon
     words 1, SpDefense
 end_struct
 
-; MACRO PP_Ups
-;     db (\1) + (\2 << 2) + (\3 << 4) + (\4 << 6)
-;     ENDM
+MACRO PP_Ups ; 4 2bit numbers, one for each move
+    db (\1) + (\2 << 2) + (\3 << 4) + (\4 << 6)
+ENDM
+
 ; MACRO IVs
 ;     dw \1 + (\2 << 5) + (\3 << 10) + ((\4 & 1) << 15)
 ;     dw (\4 >> 1) + (\5 << 4) + (\6 << 9) + (\7 << 15)

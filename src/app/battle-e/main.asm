@@ -44,42 +44,26 @@ BattleEntryFinished: ; 188d
 
 INCLUDE "common/battle_e_transfer.asm"
 
+DEF DoorPaletteIdx EQU 129
+DEF LeftDoorXPos EQU 104
+DEF LeftDoorOpenXPos EQU (LeftDoorXPos - 32)
+DEF RightDoorXPos EQU 136
+DEF RightDoorOpenXPos EQU (RightDoorXPos + 32)
+DEF DoorYPos EQU 64
+
+DEF TrainerPaletteIdx EQU 128
+DEF TrainerXPos EQU 119
+DEF TrainerYPos EQU 64
+DEF DoorOpenDuration EQU 32
+
 Open_Doors: ; 1946
-    ld l, $20
-    push hl
-    ld bc, $0040
-    ld de, $0048
-    LD_HL_IND LeftDoorSpriteHandle
-    ER_API ER_ID_Unk03B
-
-    pop bc
-    ld l, $20
-    push hl
-    ld bc, $0040
-    ld de, $00A8
-    LD_HL_IND RightDoorSpriteHandle
-    ER_API ER_ID_Unk03B
-
-    pop bc
+    ER_SetSpritePosAnimatedDuration LeftDoorSpriteHandle, LeftDoorOpenXPos, DoorYPos, DoorOpenDuration
+    ER_SetSpritePosAnimatedDuration RightDoorSpriteHandle, RightDoorOpenXPos, DoorYPos, DoorOpenDuration
     ret
 
 Close_Doors: ; 1965
-    ld l, $20
-    push hl
-    ld bc, $0040
-    ld de, $0068
-    LD_HL_IND LeftDoorSpriteHandle
-    ER_API ER_ID_Unk03B
-
-    pop bc
-    ld l, $20
-    push hl
-    ld bc, $0040
-    ld de, $0088
-    LD_HL_IND RightDoorSpriteHandle
-    ER_API ER_ID_Unk03B
-
-    pop bc
+    ER_SetSpritePosAnimatedDuration LeftDoorSpriteHandle, LeftDoorXPos, DoorYPos, DoorOpenDuration
+    ER_SetSpritePosAnimatedDuration RightDoorSpriteHandle, RightDoorXPos, DoorYPos, DoorOpenDuration
     ret
 
 Start:: ; 1984
@@ -99,44 +83,53 @@ Start:: ; 1984
     ; Clear the door area on layer 0
     ER_FillBackgroundTile 0, 0, 11, 4, 8, 8, 0
 
+    ; [202FD2Ch+122h]=4
     ld a, $4
     ER_API ER_ID_Unk0AE
 
-    ER_SpriteCreate TrainerSpriteHandle, $80, TrainerSpriteData
-    ER_SetSpritePos TrainerSpriteHandle, 119, 64
+    ; Create and position the trainer sprite
+    ER_SpriteCreate TrainerSpriteHandle, TrainerPaletteIdx, TrainerSpriteData
+    ER_SetSpritePos TrainerSpriteHandle, TrainerXPos, TrainerYPos
 
-    ER_SpriteCreate LeftDoorSpriteHandle, $81, DoorSpriteData
-    ER_SpriteCreate RightDoorSpriteHandle, $81, DoorSpriteData
-    ER_SpriteMirrorToggle $01, LeftDoorSpriteHandle
-    ER_SetSpritePos LeftDoorSpriteHandle, 104, 64
-    ER_SetSpritePos RightDoorSpriteHandle, 136, 64
+    ; Create and position the doors, this is done with 2 door sprites
+    ER_SpriteCreate LeftDoorSpriteHandle, DoorPaletteIdx, DoorSpriteData
+    ER_SpriteCreate RightDoorSpriteHandle, DoorPaletteIdx, DoorSpriteData
+    ER_SpriteMirrorToggle LeftDoorSpriteHandle, ER_SpriteMirrorToggle_Horizontal
+    ER_SetSpritePos LeftDoorSpriteHandle, LeftDoorXPos, DoorYPos
+    ER_SetSpritePos RightDoorSpriteHandle, RightDoorXPos, DoorYPos
 
-    CreateRegion RegionHandlePtr, 30, 6, 0, 14, 0, 3
-    ld h, a
-    ld l, $00
-    SetTextSize
-    IncreaseTextKerning RegionHandlePtr, 01, 02
-    SetTextColor RegionHandlePtr, 3, 0
+    ; Create textbox and initialize the settings
+    CreateRegion TextboxHandlePtr, 30, 6, 0, 14, 0, 3
+    ER_SetTextSizeA ER_SetTextSize_Small ; Handle still in a from CreateRegion
+    ER_IncreaseTextKerning TextboxHandlePtr, 1, 2
+    SetTextColor TextboxHandlePtr, 3, 0
 
+    ; Fade in over 16 frames
     ER_FadeIn 16
     wait 16
+
+    ; Unk
     ER_API ER_ID_Unk0C6
-    DrawText RegionHandlePtr, Instructions1, 8, 4
+
+    ; Draw the first set of instrucion text
+    DrawText TextboxHandlePtr, Instructions1, 8, 4
+
+    ; Unk
     ER_API ER_ID_Unk08D
 
 INCLUDE "common/wait_for_link.asm"
 
     call Open_Doors
-    DrawText RegionHandlePtr, Instructions2, 8, 4
+    DrawText TextboxHandlePtr, Instructions2, 8, 4
     ER_API ER_ID_Unk08D
     and [hl]
     ld [bc], a
-    
+
 DEF UNKNOWN_VALUE EQU $02A6
 INCLUDE "common/wait_for_ready.asm"
 
     call Close_Doors
-    DrawText RegionHandlePtr, BattleEntryInProcess, 8, 4
+    DrawText TextboxHandlePtr, BattleEntryInProcess, 8, 4
 
 DEF DATA_TRANSFER_LENGTH EQU 6144
 INCLUDE "common/transfer_data.asm"
@@ -150,7 +143,7 @@ INCLUDE "common/transfer_data.asm"
     wait 128
     call Open_Doors
 
-    DrawText RegionHandlePtr, BattleEntryFinished, 8, 4
+    DrawText TextboxHandlePtr, BattleEntryFinished, 8, 4
     ER_API ER_ID_Unk08D
 
     ld c, a
@@ -161,7 +154,7 @@ INCLUDE "common/word_shift_right.asm"
 
 SomeVar1: ds 1              ; 1B9F
 SomeVar2: ds 2              ; 1BA0
-RegionHandlePtr: ds 1       ; 1BA2
+TextboxHandlePtr: ds 1      ; 1BA2
 LeftDoorSpriteHandle: ds 2  ; 1BA3
 RightDoorSpriteHandle: ds 2 ; 1BA5
 TrainerSpriteHandle: ds 2   ; 1BA7

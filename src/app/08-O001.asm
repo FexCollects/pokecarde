@@ -440,19 +440,19 @@ Start::
     ld hl,$0002
     or h
     ld h,a
-    SetTextSize
+    ER_API ER_ID_SetTextSize
 
     LD_A_IND RegionHandlePtr2844
     ld hl,$0002
     or h
     ld h,a
-    SetTextSize
+    ER_API ER_ID_SetTextSize
 
     LD_A_IND RegionHandlePtr2841
     ld hl,$0001
     or h
     ld h,a
-    SetTextSize
+    ER_API ER_ID_SetTextSize
 
     SetTextColor RegionHandlePtr2847, 1, 0
     SetTextColor RegionHandlePtr2844, 1, 0
@@ -817,7 +817,7 @@ sub_25ED:
     ld a,c
     or h
     ld h,a
-    SetTextSize
+    ER_API ER_ID_SetTextSize
     pop bc
     push bc
     ld a,c
@@ -917,13 +917,7 @@ sub_26B6:
     ER_API ER_ID_Unk08D
     ld l,b
     nop
-    ld l,$20
-    push hl
-    ld bc,$ffe0
-    ld de,$00b8
-    LD_HL_IND RegirockSpriteHandlePtr
-    ER_API ER_ID_Unk03B
-    pop bc
+    ER_SetSpritePosAnimatedDuration RegirockSpriteHandlePtr, $00b8, $ffe0, $20
     wait $10
     xor a
     LD_IND_A TextPaletteBefore

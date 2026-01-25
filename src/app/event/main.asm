@@ -73,12 +73,9 @@ Start:: ; 1ae2
     ER_SpriteHide SpriteHandlePtr
 
     CreateRegion RegionHandlePtr, 30, 6, 0, 14, 0, 4
+    ER_SetTextSizeA ER_SetTextSize_Small ; Handle still in a from CreateRegion
 
-    ld h, a
-    ld l, $00
-    SetTextSize
-
-    IncreaseTextKerning RegionHandlePtr, 01, 02
+    ER_IncreaseTextKerning RegionHandlePtr, 1, 2
     SetTextColor RegionHandlePtr, 2, 0
     SetRegionColor RegionHandlePtr, 0
     SetBackgroundPalette 16, $0040, TicketPalette

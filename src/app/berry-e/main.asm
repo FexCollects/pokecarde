@@ -59,10 +59,8 @@ Start::
     ER_SetSpritePos SpriteHandlePtr, 376, 56
 
     CreateRegion RegionHandlePtr, 30, 6, 0, 14, 0, 4
-    ld h, a
-    ld l, $00
-    SetTextSize
-    IncreaseTextKerning RegionHandlePtr, 01, 02
+    ER_SetTextSizeA ER_SetTextSize_Small ; Handle still in a from CreateRegion
+    ER_IncreaseTextKerning RegionHandlePtr, 01, 02
     SetTextColor RegionHandlePtr, 2, 0
     SetRegionColor RegionHandlePtr, 0
     SetBackgroundPalette $10, $0040, UnknownPalette

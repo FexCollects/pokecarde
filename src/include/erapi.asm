@@ -51,7 +51,7 @@ DEF ER_ID_SetSpriteFrameBank EQU $037
 ; 0x38 (?) sprite_unk4
 ; 0x39 ERAPI_SetSpriteAutoMove
 ; 0x3A (?) sprite_unk5
-DEF ER_ID_Unk03B EQU $03B ; sprite related
+DEF ER_ID_SetSpritePosAnimatedDuration EQU $03B
 DEF ER_ID_SpriteAutoAnimate EQU $03C
 ; 0x3D (?) sprite_unk7
 DEF ER_ID_SpriteAutoRotateUntilAngle EQU $03E
@@ -323,6 +323,23 @@ MACRO ER_SetSpritePos
     ER_API ER_ID_SetSpritePos
 ENDM
 
+; ER_SetSpritePosAnimatedDuration:
+;   Animates the sprite to a new position over the given duration
+;
+;   hl: sprite handle
+;   de: x in pixels (offset or actual?)
+;   bc: y in pixels
+;   LOW(sp): duration
+MACRO ER_SetSpritePosAnimatedDuration ; handle x y duration
+    ld l, \4
+    push hl
+    ld bc, \3
+    ld de, \2
+    LD_HL_IND \1
+    ER_API ER_ID_SetSpritePosAnimatedDuration
+    pop bc
+ENDM
+
 ; ER_SpriteShow
 ;   Shows a previously hidden sprite
 ;
@@ -341,7 +358,11 @@ MACRO ER_SpriteHide
     ER_API ER_ID_SpriteHide
 ENDM
 
-; ER_SpriteMirrorToggle
+DEF ER_SpriteMirrorToggle_None EQU 0
+DEF ER_SpriteMirrorToggle_Horizontal EQU 1
+DEF ER_SpriteMirrorToggle_Vertical EQU 2
+DEF ER_SpriteMirrorToggle_Diagonal EQU 3
+; ER_SpriteMirrorToggle:
 ;   Toggles horizontal, vertical, or both mirroring for a sprite. Mirroring
 ;   looks to be done with an affine transform, so just like scaling and
 ;   rotating, only early allocated sprites can mirror.
@@ -354,9 +375,9 @@ ENDM
 ;
 ;   hl: sprite handle
 ;   e: bitmask
-MACRO ER_SpriteMirrorToggle
-    ld e, \1
-    LD_HL_IND \2
+MACRO ER_SpriteMirrorToggle ; sprite handle, bitmask
+    ld e, \2
+    LD_HL_IND \1
     ER_API ER_ID_SpriteMirrorToggle
 ENDM
 
@@ -379,7 +400,8 @@ end_struct
 ;
 ;   hl: pointer to ER_CustomSprite struct
 ;   e: palette index
-MACRO ER_SpriteCreate
+;   returns handle in hl
+MACRO ER_SpriteCreate ; handle ptr, palette index, ER_CustomSprite ptr
     ld e, \2
     ld hl, \3
     ER_API ER_ID_SpriteCreate
@@ -434,21 +456,49 @@ MACRO DrawText
     LD_A_IND \1
     ER_API ER_ID_DrawText
     ENDM
-MACRO SetTextSize
+
+DEF ER_SetTextSize_Small EQU 0
+DEF ER_SetTextSize_Medium EQU 1
+DEF ER_SetTextSize_Large EQU 2
+; ER_SetTextSize:
+;   Sets the size of the text in the region
+;   Warning: Has been known to not work/lock up the system
+;
+;   Text Size:
+;     0 - Small
+;     1 - Medium
+;     2 - Large
+;
+;   h: region handle
+;   l: text size
+MACRO ER_SetTextSize ; handle, size
+    ld h, \1
+    ld l, \2
     ER_API ER_ID_SetTextSize
-    ENDM
-; IncreaseTextKerning ($9B rst 0)
-; Increases the number of pixels between each letter in the region.
-;  initial kerning is 1,1
-; Params
-; d: x kerning
-; e: y kerning
-; a: region handle
-MACRO IncreaseTextKerning
+ENDM
+
+; ER_SetTextSizeA:
+;   See ER_SetTextSize except handle is assumed
+;   to already be in A
+MACRO ER_SetTextSizeA ; size
+    ld h, a
+    ld l, \1
+    ER_API ER_ID_SetTextSize
+ENDM
+
+; ER_IncreaseTextKerning:
+;   Increases the number of pixels between each letter in the region.
+;   initial kerning is 1,1
+;
+;   d: x kerning increase
+;   e: y kerning increase
+;   a: region handle
+MACRO ER_IncreaseTextKerning ; handle, x, y
     ld de, (\2 << 8 + \3)
     LD_A_IND \1
     ER_API ER_ID_SetTextSpacing
-    ENDM
+ENDM
+
 MACRO GetTextWidth
     ld de, \2
     LD_A_IND \1
