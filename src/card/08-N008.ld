@@ -8,4 +8,3 @@ ROM0
   "payload/battle/taisen"
   "app/battle-e/expert_m.gfx"
   "app/battle-e/main"
-  "common/eof"

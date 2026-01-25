@@ -6,4 +6,3 @@ ROM0
   "payload/berry/drash"
   "common/mem_struct"
   "app/berry-e/main"
-  "common/eof"

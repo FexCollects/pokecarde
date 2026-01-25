@@ -8,4 +8,3 @@ ROM0
   "payload/battle/kimiko"
   "app/battle-e/triathlete_f_swim.gfx"
   "app/battle-e/main"
-  "common/eof"

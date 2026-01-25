@@ -1,8 +1,8 @@
 INCLUDE "include/gba.asm"
+INCLUDE "include/structs.inc"
 INCLUDE "constants/card_types.asm"
 INCLUDE "constants/regions.asm"
 
-INCLUDE "include/structs.inc"
 rgbds_structs_version 4.1.0
 def STRUCT_SEPARATOR equs "."
 

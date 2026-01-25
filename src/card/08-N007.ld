@@ -8,4 +8,3 @@ ROM0
   "payload/battle/yuuma"
   "app/battle-e/school_kid_m.gfx"
   "app/battle-e/main"
-  "common/eof"

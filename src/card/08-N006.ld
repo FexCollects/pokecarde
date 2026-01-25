@@ -8,4 +8,3 @@ ROM0
   "payload/battle/ritsue"
   "app/battle-e/lass.gfx"
   "app/battle-e/main"
-  "common/eof"

@@ -9,4 +9,3 @@ ROM0
   "app/battle-e/rich_boy.gfx"
   "common/mem_struct"
   "app/battle-e/main"
-  "common/eof"

@@ -28,7 +28,7 @@ build/$(REGION)/%-01.raw: build/$(REGION)/%.vpk
 
 # Baseline ROM generation rule, deps for specfic files are generated
 build/$(REGION)/%.gbc:
-	../bin/rgbds/v1.0.1/rgblink -m $@.map -t -l card/$(notdir $(basename $@)).ld -o $@ $^
+	../bin/rgbds/v1.0.1/rgblink --nopad -m $@.map -t -l card/$(notdir $(basename $@)).ld -o $@ $^
 
 # Baseline verify rule, deps for each card are generated
 verify: 

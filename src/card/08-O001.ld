@@ -7,4 +7,3 @@ ROM0
   "payload/event/gift.doll.regice"
   "payload/event/gift.doll.registeel"
   "app/08-O001"
-  "common/eof"

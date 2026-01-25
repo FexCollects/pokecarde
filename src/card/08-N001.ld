@@ -8,4 +8,3 @@ ROM0
   "payload/battle/teruko"
   "app/battle-e/psychic_f.gfx"
   "app/battle-e/main"
-  "common/eof"

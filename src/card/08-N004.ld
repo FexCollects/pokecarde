@@ -8,4 +8,3 @@ ROM0
   "payload/battle/simon"
   "app/battle-e/guitarist.gfx"
   "app/battle-e/main"
-  "common/eof"

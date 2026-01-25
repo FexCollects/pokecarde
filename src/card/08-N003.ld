@@ -8,4 +8,3 @@ ROM0
   "payload/battle/norton"
   "app/battle-e/gentleman.gfx"
   "app/battle-e/main"
-  "common/eof"

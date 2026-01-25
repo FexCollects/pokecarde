@@ -6,4 +6,3 @@ ROM0
   "payload/berry/chilan"
   "common/mem_struct"
   "app/berry-e/main"
-  "common/eof"

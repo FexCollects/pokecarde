@@ -19,49 +19,53 @@ DataStart:
     GBAPtr PokemonStart
     db END_OF_CHUNKS
 
-PokemonStart:
-    PV SHINY_ADAMANT_MALE
-    OT_ID 00000, 00000
-    db "BELDUM@   "
-    Language $0202    ;Language $0201=JP $0202=EN $0203=FR $0204=IT $0205=DE $0206=KR $0207=ES $0601=EGG
-    db "STEVEN@"
-    Markings 0
-    dw 0 ;Checksum, computed later
-    dw 0 ;Unknown
-
-;Substruct1
-    Pokemon BELDUM
-    Holds ITEM_NONE
-    Experience 156
-    PP_Ups 0,0,0,0
-    Friendship 0
-    dw 0 ;Unknown
-
-;Substruct2
-    Moves METEOR_MASH, SHADOW_BALL, EARTHQUAKE, SLUDGE_BOMB
-    PP 10, 15, 10, 15
-
-;Substruct3
-    EVs 0,255,0,0,255,0
-    Condition 0,0,0,0,0,0    ;i.e. Contest Condition
-
-;Substruct4
-    PokerusStatus 0
-    MetLocation $FF
-    Origins 5,3,4,0  ;Lv met, Game of Origin, Ball, OT Gender
-    IVs 31,31,31,31,31,31, BELDUM_CLEAR_BODY
-    Ribbons 0
-
-    dl 0  ;Status condition
-    db 5  ;Lv
-    db 0  ;pokerus remaining
-    dw 20 ;Current HP
-    dw 20 ;Total HP
-    dw 16 ;Attack
-    dw 14 ;Def
-    dw 9  ;Speed
-    dw 9  ;Sp Atk
-    dw 15 ;Sp Def
+dstruct BoxPokemon, \
+  PokemonStart, \
+    .Personality=SHINY_ADAMANT_MALE, \
+    .OTTID=00000, \
+    .OTSID=00000, \
+    .Name="BELDUM@   ", \
+    .Language=$02, \
+    .Flags=$02, \
+    .OTName="STEVEN@", \
+    .Markings=0, \
+    .Checksum=0, \
+    .Unknown=0, \
+    .Species=BELDUM, \
+    .HeldItem=ITEM_NONE, \
+    .Experience=156, \
+    .PPUps=0, \
+    .Friendship=0, \
+    .Unknown2=0, \
+    .Moves=METEOR_MASH\, SHADOW_BALL\, EARTHQUAKE\, SLUDGE_BOMB, \
+    .PP=10\, 15\, 10\, 15, \
+    .HPEV=0, \
+    .AttackEV=255, \
+    .DefenseEV=0, \
+    .SpeedEV=0, \
+    .SpAttackEV=255, \
+    .SpDefenseEV=0, \
+    .Cool=0, \
+    .Beauty=0, \
+    .Cute=0, \
+    .Smart=0, \
+    .Tough=0, \
+    .Sheen=0, \
+    .Pokerus=0, \
+    .MetLocation=$FF, \
+    .Origins=8581, \
+    .IVs=$3FFFFFFF, \
+    .Ribbons=0, \
+    .Status=0, \
+    .Level=5, \
+    .Mail=0, \
+    .CurrentHP=20, \
+    .MaxHP=20, \
+    .Attack=16, \
+    .Defense=14, \
+    .Speed=9, \
+    .SpAttack=9, \
+    .SpDefense=15, \
 
     End_GiftPokemon ;Use End_GiftEgg if sending egg
 

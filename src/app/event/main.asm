@@ -126,10 +126,10 @@ INCLUDE "common/wrap_up.asm"
 
 INCLUDE "common/word_shift_right.asm"
 
-SomeVar1: dw ; 1CA2
-RegionHandlePtr: db ; 1CA4
-SpriteHandlePtr: dw ; 1CA5
-SomeVar2: dw ; 1CA7
+SomeVar1: ds 2 ; 1CA2
+RegionHandlePtr: ds 1 ; 1CA4
+SpriteHandlePtr: ds 2 ; 1CA5
+SomeVar2: ds 2 ; 1CA7
 
 ; Stripping metadata. How many bytes above this
 ; byte should be stripped.

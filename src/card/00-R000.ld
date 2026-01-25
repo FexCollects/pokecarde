@@ -7,4 +7,3 @@ ROM0
   "common/mem_struct"
   "app/event/00-R000"
   "app/event/main"
-  "common/eof"

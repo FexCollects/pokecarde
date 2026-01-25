@@ -8,4 +8,3 @@ ROM0
   "payload/battle/hozumi"
   "app/battle-e/battle_girl.gfx"
   "app/battle-e/main"
-  "common/eof"

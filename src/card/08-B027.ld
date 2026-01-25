@@ -9,4 +9,3 @@ ROM0
   "app/battle-e/triathlete_m_bike.gfx"
   "common/mem_struct"
   "app/battle-e/main"
-  "common/eof"

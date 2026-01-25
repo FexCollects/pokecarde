@@ -9,4 +9,3 @@ ROM0
   "app/battle-e/sailor.gfx"
   "common/mem_struct"
   "app/battle-e/main"
-  "common/eof"
