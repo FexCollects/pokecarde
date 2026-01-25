@@ -7,4 +7,5 @@ ROM0
   "common/prologue.corrupt"
   "payload/battle/teruko"
   "app/battle-e/psychic_f.gfx"
+  "common/mem_struct"
   "app/battle-e/main"

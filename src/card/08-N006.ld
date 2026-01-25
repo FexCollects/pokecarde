@@ -7,4 +7,5 @@ ROM0
   "common/prologue.corrupt"
   "payload/battle/ritsue"
   "app/battle-e/lass.gfx"
+  "common/mem_struct"
   "app/battle-e/main"

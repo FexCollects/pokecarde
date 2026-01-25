@@ -7,4 +7,5 @@ ROM0
   "common/prologue.corrupt"
   "payload/battle/hozumi"
   "app/battle-e/battle_girl.gfx"
+  "common/mem_struct"
   "app/battle-e/main"

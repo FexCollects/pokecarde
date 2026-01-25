@@ -7,4 +7,5 @@ ROM0
   "common/prologue.corrupt"
   "payload/battle/kimiko"
   "app/battle-e/triathlete_f_swim.gfx"
+  "common/mem_struct"
   "app/battle-e/main"

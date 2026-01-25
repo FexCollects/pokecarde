@@ -7,4 +7,5 @@ ROM0
   "common/prologue.corrupt"
   "payload/battle/norton"
   "app/battle-e/gentleman.gfx"
+  "common/mem_struct"
   "app/battle-e/main"

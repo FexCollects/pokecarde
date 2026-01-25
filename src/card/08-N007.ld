@@ -7,4 +7,5 @@ ROM0
   "common/prologue.corrupt"
   "payload/battle/yuuma"
   "app/battle-e/school_kid_m.gfx"
+  "common/mem_struct"
   "app/battle-e/main"
