@@ -153,7 +153,7 @@ DEF ER_ID_FindClosestSprite EQU $0AA
 DEF ER_ID_CalcDistanceBetweenSprites EQU $0AB
 DEF ER_ID_CalcAngleBetweenTwoSprites EQU $0AC
 ; 0xAD (?) RegionUnk5
-DEF ER_ID_Unk0AE EQU $0AE
+DEF ER_ID_SetNewSpritePriority EQU $0AE
 DEF ER_ID_GetTextWidth EQU $0C0
 ; 0xC1 (?) RegionUnk1
 DEF ER_ID_ScanDotCode EQU $0C2
@@ -572,6 +572,26 @@ ENDM
 MACRO ER_PauseSong ; song id
     ld hl, \1
     ER_API ER_ID_PauseSound
+ENDM
+
+; ER_SetNewSpritePriority
+;   Sets the sprite priority for all subsequent created sprites. Higher
+;   priorities are drawn first, and thus lower priority draws will cover them up.
+;
+;   Due to bitshifting and bitpacking shenanigans, the numbers seem to be off
+;   from what may be expected.
+;
+;   Priorites:
+;     0x00 - priority 0
+;     0x04 - priority 1
+;     0x08 - priority 2
+;     0x0C - priority 3
+;     0xFF - clear this setting and go back to the default configuration
+;
+;   a: priority value
+MACRO ER_SetNewSpritePriority ; priority value
+    ld a, \1
+    ER_API ER_ID_SetNewSpritePriority
 ENDM
 
 MACRO SuppressPauseScreen

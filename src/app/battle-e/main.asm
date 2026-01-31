@@ -157,9 +157,10 @@ Start:: ; 1984
     ; Clear the door area on layer 0
     ER_FillBackgroundTile 0, 0, 11, 4, 8, 8, 0
 
-    ; [202FD2Ch+122h]=4
-    ld a, $4
-    ER_API ER_ID_Unk0AE
+    ; Set all new sprites to be drawn with priority 1, this causes them
+    ; to be sandwiched between the two background layers allowing the
+    ; doors to be hidden when they slide open
+    ER_SetNewSpritePriority $04
 
     ; Create and position the trainer sprite
     ER_SpriteCreate TrainerSpriteHandle, TrainerPaletteIdx, TrainerSpriteData
@@ -307,17 +308,18 @@ DEF DATA_TRANSFER_LENGTH EQU 6144
 .asm_1bfe
     waita $01
 
-    ld hl, Space_3
-    ER_API ER_ID_Unk0C8
-
+    ld hl, Space_3 ; hl = &Space_3
+    ER_API ER_ID_Unk0C8 ; reads from hl, returns in a. Space_3 is a pointer here. Does the runtime fill the pointer as a return??
     or a
     jr nz, .asm_1c18
+    ; this seems like its checking for some error but idk
 
     GF_PlaySystemSoundThenExit $0006, ER_Exit_Restart
 
 .asm_1c18
-    LD_HL_IND Space_3
-    ld_ind_hl Space_4
+    LD_HL_IND Space_3 ; hl = *Space_3 ; sure looks like its returning via the pointer
+    ; it also looks like maybe Space_3 is an array??
+    ld_ind_hl Space_4 ; *Space_4 = hl
     ld a, l
     cp $22
     jr nz, .asm_1bfe
@@ -336,8 +338,8 @@ DEF DATA_TRANSFER_LENGTH EQU 6144
 ;^^^^^^^^^^^^^^^^^^^^^^^^^ transfer data ^^^^^^^^^^^^^^^^^^^^^^^^^
 
     ld hl, $5fff
-    ld_ind_hl Space_1
-    ER_API_0C7 Space_1 ; SIO_write
+    ld_ind_hl Space_1 ; *Space_1 = $5fff
+    ER_API_0C7 Space_1 ; SIO_write 2*n bytes
 
     LD_HL_IND TrainerSpriteHandle
     ER_API ER_ID_SpriteHide
