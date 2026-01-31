@@ -53,7 +53,7 @@ DEF ER_ID_SetBackgroundAutoScroll EQU $012
 DEF ER_ID_BackgroundMirrorToggle EQU $013
 ; 0x16 (?) write_000000FF_to_02029494_
 DEF ER_ID_SetBackgroundMode EQU $019
-DEF ER_ID_Unk01a EQU $01a
+DEF ER_ID_SetBackgroundPriority EQU $01a
 DEF ER_ID_LayerShow EQU $020
 DEF ER_ID_LayerHide EQU $021
 DEF ER_ID_FillBackgroundTile EQU $02C
@@ -592,6 +592,19 @@ ENDM
 MACRO ER_SetNewSpritePriority ; priority value
     ld a, \1
     ER_API ER_ID_SetNewSpritePriority
+ENDM
+
+; ER_SetBackgroundPriority
+;   Sets the priority (0-3) of the backround layers. Parameters are bitpacked
+;
+; a, top nibble: Background 0 priority
+; a, bot nibble: Background 1 priority
+; e, top nibble: Background 2 priority
+; e, bot nibble: Background 3 priority
+MACRO ER_SetBackgroundPriority ; B0 priority, B1 priority, B2 priority, B3 priority
+    ld e, ((\4 & 0xF) | ((\3 & 0xF) << 4))
+    ld a, ((\2 & 0xF) | ((\1 & 0xF) << 4))
+    ER_API ER_ID_SetBackgroundPriority
 ENDM
 
 MACRO SuppressPauseScreen

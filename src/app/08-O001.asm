@@ -420,9 +420,7 @@ Start::
     push de
     ER_SetBackgroundMode 0
 
-    ld e, $10
-    ld a, $32
-    ER_API ER_ID_Unk01a ; SetBackgroundPriority
+    ER_SetBackgroundPriority 3, 2, 1, 0
 
     ER_LoadCustomBackground TextboxesData, 1
     ER_LoadCustomBackground PokeballBgData, 0
