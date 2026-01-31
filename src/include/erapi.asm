@@ -565,9 +565,15 @@ MACRO ER_FadeOutSong ; song id, fade out duration
     ER_API ER_ID_FadeOutSong
 ENDM
 
-MACRO SOUND_PAUSE
+; ER_PauseSong:
+;   Pauses the song with the given id
+;
+;   hl: song id to pause
+MACRO ER_PauseSong ; song id
+    ld hl, \1
     ER_API ER_ID_PauseSound
-    ENDM
+ENDM
+
 MACRO SuppressPauseScreen
     ld de, $0000
     ld hl, $0000

@@ -10,9 +10,7 @@
     cp $02
     jr nc, .asm_1bd4
 
-    ld hl, LINKED_UP_SONG
-    SOUND_PAUSE
-
+    ER_PauseSong LINKED_UP_SONG
     GF_PlaySystemSoundThenExit $0006, ER_Exit_Restart
 
 .asm_1bd4

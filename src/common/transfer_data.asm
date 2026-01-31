@@ -1,5 +1,3 @@
-    ER_FadeOutSong LINKED_UP_SONG, $0040
-
 .asm_1bfe
     waita $01
 

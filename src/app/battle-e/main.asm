@@ -279,9 +279,7 @@ Start:: ; 1984
     cp $02
     jr nc, .asm_1bd4
 
-    ld hl, LINKED_UP_SONG
-    SOUND_PAUSE
-
+    ER_PauseSong LINKED_UP_SONG
     GF_PlaySystemSoundThenExit $0006, ER_Exit_Restart
 
 .asm_1bd4
@@ -301,12 +299,11 @@ Start:: ; 1984
 
     call Close_Doors
     DrawText TextboxHandlePtr, BattleEntryInProcess, 8, 4
+    ER_FadeOutSong LINKED_UP_SONG, $0040
 
 DEF DATA_TRANSFER_LENGTH EQU 6144
 
 ;vvvvvvvvvv INCLUDE "common/transfer_data.asm" vvvvvvvvvvvvvvvvvvv
-    ER_FadeOutSong LINKED_UP_SONG, $0040
-
 .asm_1bfe
     waita $01
 

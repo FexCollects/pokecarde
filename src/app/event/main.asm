@@ -101,6 +101,7 @@ INCLUDE "common/wait_for_link.asm"
 INCLUDE "common/wait_for_ready.asm"
 
     DrawText RegionHandlePtr, DeliveryInProcess, 8, 4
+    ER_FadeOutSong LINKED_UP_SONG, $0040
 
 DEF DATA_TRANSFER_LENGTH EQU 6144
 INCLUDE "common/transfer_data.asm"
