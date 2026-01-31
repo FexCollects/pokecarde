@@ -2,6 +2,8 @@ SECTION "app/berry-e/main", ROM0
 INCLUDE "include/charmaps.asm"
 INCLUDE "include/gfapi.asm"
 
+DEF LINKED_UP_SONG EQU $00F5
+
 dstruct ER_CustomBackground, \
   BackgroundSpriteData, \
     .TilePtr=BackgroundSprite, \
@@ -77,11 +79,10 @@ INCLUDE "common/wait_for_link.asm"
     ER_API_084 SpriteHandlePtr, 120, 56, 16 ; sprite move and fade in?
     pop bc
 
-    ER_PlayStaticSystemSound $00F5
+    ER_PlayStaticSystemSound LINKED_UP_SONG
 
     DrawText RegionHandlePtr, Instructions2, 8, 4
-
-DEF UNKNOWN_VALUE EQU $00F5
+ 
 INCLUDE "common/wait_for_ready.asm"
 
     DrawText RegionHandlePtr, BerrySendingInProcess, 8, 4

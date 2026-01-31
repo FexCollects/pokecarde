@@ -1,4 +1,4 @@
-    ER_StopSong $0040, UNKNOWN_VALUE
+    ER_FadeOutSong LINKED_UP_SONG, $0040
 
 .asm_1bfe
     waita $01

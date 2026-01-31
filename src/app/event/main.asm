@@ -1,6 +1,8 @@
 SECTION "app/event/main", ROM0
 INCLUDE "include/gfapi.asm"
 
+DEF LINKED_UP_SONG EQU $0078
+
 ; this function is subtly different than the one
 ; on the Battle e cards, for no apparent reason
 TransferData:
@@ -94,9 +96,8 @@ INCLUDE "common/wait_for_link.asm"
 
     DrawText RegionHandlePtr, Instructions2, 8, 4
 
-    ER_PlayStaticSystemSound $0078
+    ER_PlayStaticSystemSound LINKED_UP_SONG
 
-DEF UNKNOWN_VALUE EQU $0078
 INCLUDE "common/wait_for_ready.asm"
 
     DrawText RegionHandlePtr, DeliveryInProcess, 8, 4

@@ -2,6 +2,8 @@ SECTION "app/battle-e/main", ROM0
 INCLUDE "include/charmaps.asm"
 INCLUDE "include/gfapi.asm"
 
+DEF LINKED_UP_SONG EQU $02A6
+
 dstruct ER_CustomBackground, \
   BackdropSpriteData, \
     .TilePtr=BattleTrainerBackdrop, \
@@ -262,9 +264,7 @@ Start:: ; 1984
     call Open_Doors
     DrawText TextboxHandlePtr, Instructions2, 8, 4
 
-    ER_PlayStaticSystemSound $02A6
-
-DEF UNKNOWN_VALUE EQU $02A6
+    ER_PlayStaticSystemSound LINKED_UP_SONG
 
 ;vvvvvvvvvvvvv INCLUDE "common/wait_for_ready.asm" vvvvvvvvvvvvvvvv
 .asm_1baf
@@ -279,7 +279,7 @@ DEF UNKNOWN_VALUE EQU $02A6
     cp $02
     jr nc, .asm_1bd4
 
-    ld hl, UNKNOWN_VALUE
+    ld hl, LINKED_UP_SONG
     SOUND_PAUSE
 
     GF_PlaySystemSoundThenExit $0006, ER_Exit_Restart
@@ -305,7 +305,7 @@ DEF UNKNOWN_VALUE EQU $02A6
 DEF DATA_TRANSFER_LENGTH EQU 6144
 
 ;vvvvvvvvvv INCLUDE "common/transfer_data.asm" vvvvvvvvvvvvvvvvvvv
-    ER_StopSong $0040, UNKNOWN_VALUE
+    ER_FadeOutSong LINKED_UP_SONG, $0040
 
 .asm_1bfe
     waita $01

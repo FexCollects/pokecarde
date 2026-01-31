@@ -182,7 +182,7 @@ DEF ER_ID_Mul16 EQU $802
 DEF ER_ID_Div EQU $803
 DEF ER_ID_Mod EQU $804
 DEF ER_ID_PlaySystemSound EQU $805
-DEF ER_ID_StopSong EQU $806
+DEF ER_ID_FadeOutSong EQU $806
 DEF ER_ID_Rand EQU $807
 ; 0x08 ERAPI_SetSoundVolume
 ; 0x0B ERAPI_Set_040000xx
@@ -554,13 +554,15 @@ MACRO ER_API_0C7
     ER_API ER_ID_Unk0C7
     ENDM
 
-; ER_StopSong
+; ER_FadeOutSong:
+;   Stops playing a song by fading it out over the duration
 ;
-; de/hl Song index/fade out time
-MACRO ER_StopSong
-    ld de, \1
-    ld hl, \2
-    ER_API ER_ID_StopSong
+;   hl: song id
+;   de: fade out duration
+MACRO ER_FadeOutSong ; song id, fade out duration
+    ld de, \2
+    ld hl, \1
+    ER_API ER_ID_FadeOutSong
 ENDM
 
 MACRO SOUND_PAUSE

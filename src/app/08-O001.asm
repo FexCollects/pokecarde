@@ -608,7 +608,7 @@ sub_248C:
 
 sub_249C:
     LD_IND_A RegionHandlePtr2840
-    ER_StopSong $0040,$0081
+    ER_FadeOutSong $0081, $0040
     SuppressPauseScreen
     ld bc,SecondPageLine3
     ld de,SecondPageLine2

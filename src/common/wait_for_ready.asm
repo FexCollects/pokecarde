@@ -10,7 +10,7 @@
     cp $02
     jr nc, .asm_1bd4
 
-    ld hl, UNKNOWN_VALUE
+    ld hl, LINKED_UP_SONG
     SOUND_PAUSE
 
     GF_PlaySystemSoundThenExit $0006, ER_Exit_Restart
