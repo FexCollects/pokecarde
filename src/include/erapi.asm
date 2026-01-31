@@ -21,6 +21,24 @@ MACRO ER_API
     db (\1 & $FF)
 ENDM
 
+; KEY_INPUT:
+;   Handles checking for key presses from the user. Both registers return a
+;   word containing a bitfield of the keys pressed. NEW returns true for keys
+;   just pressed this frame, while CUR returns all keys currently pressed
+DEF ER_KEY_INPUT_NEW EQU $C2
+DEF ER_KEY_INPUT_CUR EQU $C4
+DEF ER_KEY_A      EQU 0b00000001
+DEF ER_KEY_B      EQU 0b00000010
+DEF ER_KEY_SELECT EQU 0b00000100
+DEF ER_KEY_START  EQU 0b00001000
+DEF ER_KEY_DRIGHT EQU 0b00010000
+DEF ER_KEY_DLEFT  EQU 0b00100000
+DEF ER_KEY_DUP    EQU 0b01000000
+DEF ER_KEY_DDOWN  EQU 0b10000000
+; These are in the high byte
+DEF ER_KEY_TR     EQU 0b00000001
+DEF ER_KEY_TL     EQU 0b00000010
+
 ; The IDs for each ereader api function
 DEF ER_ID_FadeIn EQU $000
 DEF ER_ID_FadeOut EQU $001
@@ -112,9 +130,9 @@ DEF ER_ID_Unk084 EQU $084
 ; 0x88 (?) _0202FD2C_unk7
 ; 0x8A (?) _0202FD2C_unk6
 ; 0x8B (?) _0202FD2C_unk5
-DEF ER_ID_Unk08D EQU $08D
+DEF ER_ID_PlayStaticSystemSound EQU $08D
 DEF ER_ID_Unk08E EQU $08E
-DEF ER_ID_WindowHide EQU $08F ; Not documented by Matt
+DEF ER_ID_WindowHide EQU $08F ; Not documented by Matt. a = $20 else anything
 DEF ER_ID_CreateRegion EQU $090
 DEF ER_ID_SetRegionColor EQU $091
 DEF ER_ID_ClearRegion EQU $092
@@ -147,6 +165,7 @@ DEF ER_ID_Unk0C8 EQU $0C8
 DEF ER_ID_Unk0CA EQU $0CA
 DEF ER_ID_SetSpritePosAnimatedSpeed EQU $0DA
 DEF ER_ID_Unk0DB EQU $0DB
+DEF ER_ID_Unk0DC EQU $0DC ; [0300465] = 1
 DEF ER_ID_DecompressVPKOrNonVPK EQU $0DD
 ; 0xE0 ERAPI_SoftReset
 DEF ER_ID_SpriteFindCollisions EQU $0E5
@@ -163,7 +182,7 @@ DEF ER_ID_Mul16 EQU $802
 DEF ER_ID_Div EQU $803
 DEF ER_ID_Mod EQU $804
 DEF ER_ID_PlaySystemSound EQU $805
-DEF ER_ID_Unk806 EQU $806 ; sound related
+DEF ER_ID_StopSong EQU $806
 DEF ER_ID_Rand EQU $807
 ; 0x08 ERAPI_SetSoundVolume
 ; 0x0B ERAPI_Set_040000xx
@@ -408,6 +427,32 @@ MACRO ER_SpriteCreate ; handle ptr, palette index, ER_CustomSprite ptr
     ld_ind_hl \1
 ENDM
 
+DEF ER_Exit_Restart EQU 1
+DEF ER_Exit_Menu EQU 2
+; ER_Exit:
+;   Exits the game and either resets or returns to menu
+;
+;   Exit Option:
+;     1 - Restart app
+;     2 - Exit to e-Reader menu
+;
+;   a: exit option
+MACRO ER_Exit ; exit option
+    ld a, \1
+    ER_API ER_ID_Exit
+ENDM
+
+; ER_PlayStaticSystemSound:
+;   Plays a system sound that must be known at compile time
+;   This function is prefered when always playing the same audio
+;   as it saves a byte over the dynamic version
+;
+;  rom: Song id to play
+MACRO ER_PlayStaticSystemSound ; song_id
+    ER_API ER_ID_PlayStaticSystemSound
+    dw \1
+ENDM
+
 MACRO SpriteAutoScaleUntilSize
     ld c, \2
     ld de, \3
@@ -508,25 +553,18 @@ MACRO ER_API_0C7
     ld hl, \1
     ER_API ER_ID_Unk0C7
     ENDM
-MACRO EXIT
-    ER_API ER_ID_Exit
-    ENDM
-MACRO ER_API_106
+
+; ER_StopSong
+;
+; de/hl Song index/fade out time
+MACRO ER_StopSong
     ld de, \1
     ld hl, \2
-    ER_API ER_ID_Unk806
-    ENDM
+    ER_API ER_ID_StopSong
+ENDM
+
 MACRO SOUND_PAUSE
     ER_API ER_ID_PauseSound
-    ENDM
-MACRO IS_SOUND_PLAYING
-    ER_API ER_ID_Unk08D
-    ld b, $00
-    ld e, $01
-    ld hl, $0006
-    ER_API ER_ID_IsSoundPlaying
-    ld a, \1
-    EXIT
     ENDM
 MACRO SuppressPauseScreen
     ld de, $0000

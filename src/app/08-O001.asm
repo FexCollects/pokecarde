@@ -1,6 +1,6 @@
 SECTION "app/08-O001", ROM0
 INCLUDE "include/charmaps.asm"
-INCLUDE "include/erapi.asm"
+INCLUDE "include/gfapi.asm"
 
 DataPointers:
     dw DataStartRegirock
@@ -115,10 +115,7 @@ label_19:
     jr z,label_19
 label_20:
     wait $01
-    LD_HL_IND $00C2
-    ld a,l
-    and $02
-    jr z,label_21
+    GF_JumpIfNotPressed $02, label_21
     ER_API ER_ID_Unk0EB
     xor a
     ret
@@ -425,7 +422,7 @@ Start::
 
     ld e, $10
     ld a, $32
-    ER_API ER_ID_Unk01a
+    ER_API ER_ID_Unk01a ; SetBackgroundPriority
 
     ER_LoadCustomBackground TextboxesData, 1
     ER_LoadCustomBackground PokeballBgData, 0
@@ -476,9 +473,7 @@ Start::
     ld e, $14
     ld hl, $00f0
     ER_API ER_ID_Unk81A            ; Unknown API call
-    ER_API ER_ID_Unk08D
-    add a,c
-    nop
+    ER_PlayStaticSystemSound $0081
     pop de
     push de
     ld a,e
@@ -494,10 +489,7 @@ Start::
     call sub_26E0
     pop de
 sub_23C2:
-    LD_HL_IND $00C2
-    ld a, l
-    and $40
-    jr z, label_1
+    GF_JumpIfNotPressed $40, label_1
     inc e
     dec e
     jr nz, label_2
@@ -507,9 +499,7 @@ label_2:
     dec e
 label_3:
     push de
-    ER_API ER_ID_Unk08D
-    nop
-    nop
+    ER_PlayStaticSystemSound $0000
     pop de
     push de
     ld a, e
@@ -518,10 +508,7 @@ label_3:
     ER_API ER_ID_SetSpriteFrameNext
     pop de
 label_1:
-    LD_HL_IND $00C2
-    ld a,l
-    and $80
-    jr z,label_4
+    GF_JumpIfNotPressed $80, label_4
     ld a,e
     cp $02
     jr nz,label_5
@@ -531,9 +518,7 @@ label_5:
     inc e
 label_6:
     push de
-    ER_API ER_ID_Unk08D
-    nop
-    nop
+    ER_PlayStaticSystemSound $0000
     pop de
     push de
     ld a,e
@@ -542,15 +527,10 @@ label_6:
     ER_API ER_ID_SetSpriteFramePrevious
     pop de
 label_4:
-    LD_HL_IND $00C2
-    ld a,l
-    and $01
-    jr z,label_7
+    GF_JumpIfNotPressed $01, label_7
     push de
     call sub_248C
-    ER_API ER_ID_Unk08D
-    dec b
-    nop
+    ER_PlayStaticSystemSound $0005
     pop de
     push de
     ld a,e
@@ -558,14 +538,9 @@ label_4:
     wait $01
     pop de
 label_8:
-    LD_HL_IND $00C2
-    ld a,l
-    and $01
-    jr z,label_9
+    GF_JumpIfNotPressed $01, label_9
     push de
-    ER_API ER_ID_Unk08D
-    dec b
-    nop
+    ER_PlayStaticSystemSound $0005
     call sub_247C
     LD_A_IND TextPaletteBefore
     or a
@@ -574,19 +549,13 @@ label_8:
     ld de,FirstPageLine2
     ld hl,FirstPage
     call sub_2796
-    ER_API ER_ID_Unk08D
-    add a,c
-    nop
+    ER_PlayStaticSystemSound $0081
     pop de
     jr label_7
 label_9:
     push de
-    LD_HL_IND $00C2
-    ld a,l
-    and $02
-    jr z,label_10
-    ld a,$02
-    EXIT
+    GF_JumpIfNotPressed ER_KEY_B, label_10
+    ER_Exit ER_Exit_Menu
 label_10:
     wait $01
     pop de
@@ -639,7 +608,7 @@ sub_248C:
 
 sub_249C:
     LD_IND_A RegionHandlePtr2840
-    ER_API_106 $0040,$0081
+    ER_StopSong $0040,$0081
     SuppressPauseScreen
     ld bc,SecondPageLine3
     ld de,SecondPageLine2
@@ -649,9 +618,7 @@ sub_249C:
     or a
     jr nz,label_11
     wait $01
-    ER_API ER_ID_Unk08D
-    inc b
-    nop
+    ER_PlayStaticSystemSound $0004
     ld bc,FinishB2
     ld de,PressA2
     ld hl,TransferCancelled
@@ -689,9 +656,7 @@ label_11:
     or a
     jr nz,label_12
     wait $01
-    ER_API ER_ID_Unk08D
-    inc b
-    nop
+    ER_PlayStaticSystemSound $0004
     ld bc,FinishB
     ld de,PressA
     ld hl,TransferFailed
@@ -705,9 +670,7 @@ label_12:
     or a
     jr nz,label_13
     wait $01
-    ER_API ER_ID_Unk08D
-    inc b
-    nop
+    ER_PlayStaticSystemSound $0004
     ld bc,FinishB
     ld de,PressA
     ld hl,TransferFailed
@@ -748,9 +711,7 @@ label_13:
     or a
     jr nz,label_14
     wait $01
-    ER_API ER_ID_Unk08D
-    inc b
-    nop
+    ER_PlayStaticSystemSound $0004
     ld bc,FinishB
     ld de,PressA
     ld hl,TransferFailed
@@ -785,8 +746,9 @@ label_14:
     ld hl,RegionHandlePtr284A
     call sub_2796
     UnsuppressPauseScreen
-    ER_API ER_ID_Unk08D
-    db $FA,$00,$3E,$01 ; idk what instructions these bytes are, if you know tell me
+    ER_PlayStaticSystemSound $00FA
+    ; v ld a, 1?
+    db $3E,$01 ; idk what instructions these bytes are, if you know tell me
     ret
 
 sub_25ED:
@@ -885,17 +847,12 @@ sub_25ED:
     ER_FadeIn $20
 
 label_15:
-    LD_HL_IND $00C2
-    ld a,l
-    and $01
-    jr nz,label_16
+    GF_JumpIfPressed $01, label_16
     wait $01
     jr label_15
 
 label_16:
-    ER_API ER_ID_Unk08D
-    dec b
-    nop
+    ER_PlayStaticSystemSound $0005
     ld a,$03
     ER_API ER_ID_LayerHide
     ld a,$20
@@ -906,17 +863,13 @@ label_16:
     ret
 
 sub_26B6:
-    ER_API ER_ID_Unk08D
-    inc d
-    nop
+    ER_PlayStaticSystemSound $0014
     ld c,$30
     ld de,$0180
     LD_HL_IND RegirockSpriteHandlePtr
     ER_API ER_ID_SpriteAutoScaleUntilSize
     wait $60
-    ER_API ER_ID_Unk08D
-    ld l,b
-    nop
+    ER_PlayStaticSystemSound $0068
     ER_SetSpritePosAnimatedDuration RegirockSpriteHandlePtr, $00b8, $ffe0, $20
     wait $10
     xor a
@@ -938,9 +891,7 @@ sub_26E0:
     LD_HL_IND RegirockSpriteHandlePtr
     ER_API ER_ID_SpriteAutoScaleUntilSize
     wait $20
-    ER_API ER_ID_Unk08D
-    ld l,b
-    nop
+    ER_PlayStaticSystemSound $0068
     wait $40
     ld a,$01
     LD_IND_A TextPaletteBefore

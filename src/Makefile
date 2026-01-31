@@ -12,7 +12,7 @@ build/%.gbapal: %.png
 # Asm -> Object Rules
 # TODO: notdir below is wrong
 build/$(REGION)/%.o: %.asm
-	../bin/rgbds/v1.0.1/rgbasm -M build/deps/$(notdir $@).d -DREGION=REGION_$(REGION) -o $@ $<
+	../bin/rsgbds/rgbasm -M build/deps/$(notdir $@).d -DREGION=REGION_$(REGION) -o $@ $<
 
 # ROM -> Card .raw Rules
 build/$(REGION)/%.z80: build/$(REGION)/%.gbc
@@ -31,7 +31,7 @@ build/$(REGION)/%.gbc:
 	../bin/rgbds/v1.0.1/rgblink --nopad -m $@.map -t -l card/$(notdir $(basename $@)).ld -o $@ $^
 
 # Baseline verify rule, deps for each card are generated
-verify: 
+verify:
 	md5sum --check checksum.md5
 
 # Generate necessary dep files
@@ -39,7 +39,7 @@ CARDS := $(wildcard card/*.ld)
 ASMS := $(shell find * -name "*.asm")
 build/deps/checksum.d: checksum.md5
 	python3 ../scripts/generate_deps_verify.py $< $@
-build/deps/cards.d: $(CARDS) 
+build/deps/cards.d: $(CARDS)
 	python3 ../scripts/generate_deps_linkers.py $@ $(REGION) $^
 build/deps/asms.d: $(ASMS)
 	python3 ../scripts/generate_deps_genfile.py $@ $(REGION) $^

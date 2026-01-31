@@ -1,4 +1,4 @@
-    ER_API_106 $0040, UNKNOWN_VALUE
+    ER_StopSong $0040, UNKNOWN_VALUE
 
 .asm_1bfe
     waita $01
@@ -9,7 +9,7 @@
     or a
     jr nz, .asm_1c18
 
-    IS_SOUND_PLAYING 1 ; return
+    GF_PlaySystemSoundThenExit $0006, ER_Exit_Restart
 
 .asm_1c18
     LD_HL_IND Space_3

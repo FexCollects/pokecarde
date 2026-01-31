@@ -13,7 +13,7 @@
     ld hl, UNKNOWN_VALUE
     SOUND_PAUSE
 
-    IS_SOUND_PLAYING 1 ; return
+    GF_PlaySystemSoundThenExit $0006, ER_Exit_Restart
 
 .asm_1bd4
     LD_HL_IND Space_5

@@ -1,5 +1,5 @@
 SECTION "app/event/main", ROM0
-INCLUDE "include/erapi.asm"
+INCLUDE "include/gfapi.asm"
 
 ; this function is subtly different than the one
 ; on the Battle e cards, for no apparent reason
@@ -86,17 +86,15 @@ Start:: ; 1ae2
     ER_API ER_ID_Unk0C6
 
     DrawText RegionHandlePtr, Instructions1, 8, 4
-    ER_API ER_ID_Unk08D
+    ER_PlayStaticSystemSound $00D8
 
 INCLUDE "common/wait_for_link.asm"
 
     ER_SpriteShow SpriteHandlePtr
 
     DrawText RegionHandlePtr, Instructions2, 8, 4
-    ER_API ER_ID_Unk08D
 
-    ld a, b
-    nop
+    ER_PlayStaticSystemSound $0078
 
 DEF UNKNOWN_VALUE EQU $0078
 INCLUDE "common/wait_for_ready.asm"
@@ -115,9 +113,7 @@ INCLUDE "common/transfer_data.asm"
 
     DrawText RegionHandlePtr, TicketDelivered, 8, 4
 
-    ER_API ER_ID_Unk08D
-    ld c, a
-    nop
+    ER_PlayStaticSystemSound $004F
 
 INCLUDE "common/wrap_up.asm"
 

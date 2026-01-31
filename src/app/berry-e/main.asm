@@ -1,6 +1,6 @@
 SECTION "app/berry-e/main", ROM0
 INCLUDE "include/charmaps.asm"
-INCLUDE "include/erapi.asm"
+INCLUDE "include/gfapi.asm"
 
 dstruct ER_CustomBackground, \
   BackgroundSpriteData, \
@@ -70,15 +70,14 @@ Start::
     ER_API ER_ID_Unk0C6
 
     DrawText RegionHandlePtr, Instructions1, 8, 4
-    ER_API ER_ID_Unk08D
+    ER_PlayStaticSystemSound $00D8
 
 INCLUDE "common/wait_for_link.asm"
 
     ER_API_084 SpriteHandlePtr, 120, 56, 16 ; sprite move and fade in?
     pop bc
-    ER_API ER_ID_Unk08D
-    push af
-    nop
+
+    ER_PlayStaticSystemSound $00F5
 
     DrawText RegionHandlePtr, Instructions2, 8, 4
 
@@ -93,10 +92,8 @@ INCLUDE "common/transfer_data.asm"
     call AfterTransfer
 
     wait 128
-    ER_API ER_ID_Unk08D
+    ER_PlayStaticSystemSound $004F
 
-    ld c, a
-    nop
     ER_API_084 SpriteHandlePtr, $FF78, 56, 16 ; sprite move and fade out?
 
     pop bc
