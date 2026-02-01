@@ -45,16 +45,23 @@ BattleEntryFinished: ; 188d
     db "Press the A Button to resend.\n"
     db "Press the B Button to cancel.\0"
 
+; SomeVar1 = CopiedToTXBufferCount
+; SomeVar2 = NextByteToTX
+; Space_1 = TXBufferStart
+; Space_2 = TXBufferOffset1
+
 ; vvvvv INCLUDE "common/battle_e_transfer.asm" vvvvvv
-TransferData:
-    ld_ind_hl SomeVar2
-    push de
+; tx per is either 8 or 16
+TransferData: ; hl = address of buffer, de = transfer_length
+    ld_ind_hl SomeVar2 ; ld [SomeVar2], Address of buffer
+    push de ; stack = transfer size
     ld hl, $BBBB
-    ld_ind_hl Space_1 ; Space_1 = $BBBB
-    EX_DE_HL
-    ld_ind_hl Space_2 ; store transfer length in Space_2, which is odd,
-              ; because we never refer to it again
-    ER_API_0C7 Space_1
+    ld_ind_hl Space_1 ; ld [Space_1], $BBBB
+    EX_DE_HL ; hl = transfer_length, de = $BBBB
+    ld_ind_hl Space_2 ; ld [Space_2], transfer length
+        ; store transfer length in Space_2, which is odd, ; we are telling the gba how many bytes to expect
+        ; because we never refer to it again
+    ER_SIOWrite Space_1 ; transfer $BBBB, transfer size, 6 words of zero (first write would clear)
 
     wait 1
     pop hl ; number of bytes to transfer
@@ -66,57 +73,83 @@ TransferData:
     call WordShiftRight
     EX_DE_HL
 
-.asm_18FE
+.while_words_left_to_tx
     ld a, e
     or d
-    ret z
+    ret z ; function end
     ; while de > 0…
 
     ld hl, $8888
-    ld_ind_hl Space_1 ; Space_1 = $8888
+    ld_ind_hl Space_1 ; ld [Space_1], $8888
     ld a, $01
-    LD_IND_A SomeVar1 ; SomeVar1 = 1
+    LD_IND_A SomeVar1 ; ld [SomeVar1], 1
 
-.asm_190C
-    LD_A_IND SomeVar1 ; a = SomeVar1
+; Copies 8 words from source buffer to transfer buffer
+; while keeping count of the words left to transfer and
+; the pointer to the next untransferred byte
+.copy_8_words_to_tx_buffer
+    LD_A_IND SomeVar1 ; ld a, [SomeVar1]
     cp $08
-    jr nc, .asm_193B
+    jr nc, .do_transfer ; if a >= 8, goto do_transfer
 
+    ; stash away the words left to transfer
     push de
-    LD_HL_IND SomeVar2
-    ld c, [hl]
-    inc hl
-    ld b, [hl]
-    inc hl
-    ld_ind_hl SomeVar2
-    ld hl, SomeVar1
-    ld l, [hl]
+
+    ; load the word to transfer from the src buffer into c,b
+    LD_HL_IND SomeVar2 ; ld hl, [SomeVar2]
+    ld c, [hl] ; c = first byte of the data left to transfer (c = *buff_next)
+    inc hl ; hl = next location (buff_next++)
+    ld b, [hl]; b = second byte of the data left to transfer (b = *buff_next)
+    inc hl ; hl = next location (buff_next++)
+    ld_ind_hl SomeVar2 ; ld [SomeVar2], buff_next
+
+    ; Calculate the offset pointer to write into
+    ld hl, SomeVar1 ; hl = &SomeVar1
+    ld l, [hl] ; l = *SomeVar1
     ld h, $00
-    add hl, hl
-    ld de, Space_1
-    add hl, de
-    ld [hl], c
-    inc hl
-    ld [hl], b
+    add hl, hl ; hl = $00XX * 2
+    ld de, Space_1 ; de = &Space_1
+    add hl, de ; hl = hl + de, hl is a pointer set SomeVar1*2 bytes past Space_1
+
+    ; Write the word c,b into the offset buffer
+    ld [hl], c ; first byte is written into offset address
+    inc hl ; next addr
+    ld [hl], b ; second byte is written into offset address
+
+    ; restore words left to transfer
     pop de
+    ; transfer count goes down by 1
     dec de
+
+    ; if words left to transfer == 0 jump
     ld a, e
     or d
-    jr z, .asm_193B
+    jr z, .do_transfer
 
-    ld hl, SomeVar1
+    ; SomeVar1++
+    ld hl, SomeVar1 ; hl = &SomeVar1
     ld a, $01
-    add a, [hl]
-    ld [hl], a
-    jr .asm_190C
+    add a, [hl] ; a = *SomeVar1 + 1
+    ld [hl], a ; *SomeVar1 = a
 
-.asm_193B ; if SomeVar1 > 8
+    ; Copy the next word
+    jr .copy_8_words_to_tx_buffer
+
+.do_transfer ; if SomeVar1 > 8
+    ; stash away the words left to transfer
     push de
-    ER_API_0C7 Space_1 ; this must be the data transfer? it’s the only API function called
 
+    ; do the transfer
+    ER_SIOWrite Space_1
+
+    ; wait a frame
     wait 1
+
+    ; restore words left to transfer
     pop de
-    jr .asm_18FE
+
+    ; queue up the next 8 words
+    jr .while_words_left_to_tx
 ; ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 DEF DoorPaletteIdx EQU 129
@@ -192,7 +225,7 @@ Start:: ; 1984
     ER_PlayStaticSystemSound $00D8
 
 ;vvvvvvvvvvv INCLUDE "common/wait_for_link.asm" vvvvvvvvvvvvvvvvvv
-    wait 32 
+    wait 32
 
     ER_ConfigureSIO $02, $B9A0, $0076, $08
 
@@ -224,7 +257,7 @@ Start:: ; 1984
     ER_GetSIOConnectedStatus
     ; if A < 2, loop back to waiting
     cp 2
-    jr c, .wait_for_linked 
+    jr c, .wait_for_linked
 
 .link_established
 
@@ -236,34 +269,40 @@ Start:: ; 1984
     ER_PlayStaticSystemSound LINKED_UP_SONG
 
 ;vvvvvvvvvvvvv INCLUDE "common/wait_for_ready.asm" vvvvvvvvvvvvvvvv
-.asm_1baf
+.wait_for_ready
     waita $01
-    ER_API ER_ID_Unk0DB
 
+    ; Read and save the status2 to Space_5
+    ER_GetSIOConnectedStatus2
     ld l, a
     ld h, $00
-    ld_ind_hl Space_5
-    ER_API ER_ID_Unk0CA
+    ld_ind_hl Space_5 ; ld [Space_5], $00XX
 
+    ; if Status >= 2, keep going
+    ER_GetSIOConnectedStatus
     cp $02
-    jr nc, .asm_1bd4
+    jr nc, .check_status_3_4
 
+    ; otherwise something went wrong. Should be connected but we aren't
+    ; Restart the application
     ER_PauseSong LINKED_UP_SONG
     GF_PlaySystemSoundThenExit APP_EXITED_SOUND, ER_Exit_Restart
 
-.asm_1bd4
-    LD_HL_IND Space_5
-    ld a, l
-    sub $04
-    or h
-    jr z, .asm_1be6
+.check_status_3_4
+    ; Restore the value ($00XX) from ER_GetSIOConnectedStatus2
+    LD_HL_IND Space_5 ; ld hl, [Space_5]
+    ld a, l ; a = $XX
+    sub $04 ; a = a - 4
+    or h    ; a = a or 0
+    jr z, .link_ready ; if Space_5 == 4, goto .link_ready
 
-    LD_HL_IND Space_5
-    ld a, l
-    sub $03
-    or h
-    jr nz, .asm_1baf
-.asm_1be6
+    ; Restore the value ($00XX) from ER_GetSIOConnectedStatus2
+    LD_HL_IND Space_5 ; ld hl, [Space_5]
+    ld a, l ; a = $XX
+    sub $03 ; a = a - 3
+    or h    ; a = a or 0
+    jr nz, .wait_for_ready ; if Space_5 != 3, goto .wait_for_ready
+.link_ready
 ;^^^^^^^^^^^^^^^^^^^^^^^^^ wait for ready ^^^^^^^^^^^^^^^^^^^^^^^^^
 
     call Close_Doors
@@ -273,49 +312,55 @@ Start:: ; 1984
 DEF DATA_TRANSFER_LENGTH EQU 6144
 
 ;vvvvvvvvvv INCLUDE "common/transfer_data.asm" vvvvvvvvvvvvvvvvvvv
-.asm_1bfe
-    waita $01
+.do_sio_initial_read
+    waita 1
 
-    ld hl, Space_3 ; hl = &Space_3
-    ER_API ER_ID_Unk0C8 ; reads from hl, returns in a. Space_3 is a pointer here. Does the runtime fill the pointer as a return??
-    or a
-    jr nz, .asm_1c18
-    ; this seems like its checking for some error but idk
+    ER_SIORead Space_3
+    or a ; a = a or a
+    jr nz, .sio_read_okay ; a != 0, goto .sio_read_okay
 
     GF_PlaySystemSoundThenExit APP_EXITED_SOUND, ER_Exit_Restart
 
-.asm_1c18
-    LD_HL_IND Space_3 ; hl = *Space_3 ; sure looks like its returning via the pointer
-    ; it also looks like maybe Space_3 is an array??
-    ld_ind_hl Space_4 ; *Space_4 = hl
+.sio_read_okay
+    ; load the value returned in Space_3 to hl
+    LD_HL_IND Space_3 ; ld hl, [Space_3]
+    ; and make a copy of it in Space_4
+    ld_ind_hl Space_4 ; ld [Space_4], hl
+
     ld a, l
     cp $22
-    jr nz, .asm_1bfe
+    jr nz, .do_sio_initial_read
 
     ld a, h
     cp $22
-    jr nz, .asm_1bfe
+    jr nz, .do_sio_initial_read
 
-    ld de, 60 ; transfer length
+    ; if hl != $2222 try initial read again
+    ; otherwise start the transfer
+    ; $2222 is the link message from the GBA
+
+    ld de, 60 ; prologue transfer length
     ld hl, Prologue
     call TransferData
 
-    ld de, DATA_TRANSFER_LENGTH ; transfer length
+    ld de, DATA_TRANSFER_LENGTH ; payload transfer length
     ld hl, DataPacket
     call TransferData
 ;^^^^^^^^^^^^^^^^^^^^^^^^^ transfer data ^^^^^^^^^^^^^^^^^^^^^^^^^
 
+    ; Write $5fff. signal end of transmission?
     ld hl, $5fff
-    ld_ind_hl Space_1 ; *Space_1 = $5fff
-    ER_API_0C7 Space_1 ; SIO_write 2*n bytes
+    ld_ind_hl Space_1 ; ld [Space_1], $5fff
+    ER_SIOWrite Space_1
 
-    LD_HL_IND TrainerSpriteHandle
-    ER_API ER_ID_SpriteHide
+    ; Hide the sprite
+    ER_SpriteHide TrainerSpriteHandle
     wait 128
+    ; Open the doors
     call Open_Doors
-
+    ; Draw the final set of instructions
     DrawText TextboxHandlePtr, BattleEntryFinished, 8, 4
-
+    ; Play a sound
     ER_PlayStaticSystemSound $004F
 
 INCLUDE "common/wrap_up.asm"

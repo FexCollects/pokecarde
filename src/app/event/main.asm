@@ -12,7 +12,7 @@ TransferData:
     ld_ind_hl Space_1
     EX_DE_HL
     ld_ind_hl Space_2
-    ER_API_0C7 Space_1
+    ER_SIOWrite Space_1
 
     wait $01
     pop hl
@@ -63,7 +63,7 @@ TransferData:
     jr .asm_1aaf
 
 .asm_1ad9
-    ER_API_0C7 Space_1
+    ER_SIOWrite Space_1
     wait $01
     jr .asm_1aa1
 
@@ -107,7 +107,7 @@ DEF DATA_TRANSFER_LENGTH EQU 6144
 INCLUDE "common/transfer_data.asm"
     ld hl, $5fff
     ld_ind_hl Space_1
-    ER_API_0C7 Space_1
+    ER_SIOWrite Space_1
 
     wait $80
 

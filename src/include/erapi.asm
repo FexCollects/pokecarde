@@ -549,10 +549,6 @@ MACRO GetTextWidth
     LD_A_IND \1
     ER_API ER_ID_GetTextWidth
     ENDM
-MACRO ER_API_0C7
-    ld hl, \1
-    ER_API ER_ID_Unk0C7
-    ENDM
 
 ; ER_FadeOutSong:
 ;   Stops playing a song by fading it out over the duration
@@ -610,20 +606,20 @@ ENDM
 ; ER_InitializeSIO
 ;   First step in enabling link cable support. Not fully reverse engineered
 ;   must be called to able eventual transfers.
-; 
+;
 ;   No parameters
-MACRO ER_InitializeSIO 
+MACRO ER_InitializeSIO
     ER_API ER_ID_Unk0C6
 ENDM
 
 ; ER_ConfigureSIO
 ;   Second step in enabling link cable support. Not fully reverse engineered
 ;   must be called to able eventual transfers.
-; 
+;
 ;   stack:??
 ;   bc: ??
 ;   de: ??
-;   a: ??
+;   a: ?? tx size / 2?
 MACRO ER_ConfigureSIO ; stack, bc, de, a
     ld l, \1
     push hl
@@ -666,9 +662,40 @@ ENDM
 ;   Returns an unreversed number in A.
 ;   Greater than 2 seems to imply connected
 ;
-;   Returns the status in a (0-3)
+;   2 = connected
+;   3 = ready one ?
+;   4 = ready two ?
+;
+;   Returns ($var & 0b00011100) >> 2 where $var seems to be the status in a
 MACRO ER_GetSIOConnectedStatus
     ER_API ER_ID_Unk0CA
+ENDM
+
+; ER_GetSIOConnectedStatus2
+;   Returns an unreversed number in A. this is the same number
+;   from ER_GetSIOConnectedStatus with different processing
+;
+;   Returns $var where $var seems to be the status in a
+MACRO ER_GetSIOConnectedStatus2
+    ER_API ER_ID_Unk0DB
+ENDM
+
+; ER_SIORead
+;   Reads ??? bytes into the provided buffer
+;
+;   Returns in a: 1 if okay, 0 if error
+MACRO ER_SIORead ; pointer to buffer
+    ld hl, \1
+    ER_API ER_ID_Unk0C8
+ENDM
+
+; ER_SIOWrite
+;   Writes ??? bytes from the provided buffer
+;
+; No return
+MACRO ER_SIOWrite ; pointer to buffer
+    ld hl, \1
+    ER_API ER_ID_Unk0C7
 ENDM
 
 MACRO SuppressPauseScreen

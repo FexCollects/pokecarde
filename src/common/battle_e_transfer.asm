@@ -6,7 +6,7 @@ TransferData:
     EX_DE_HL
     ld_ind_hl Space_2 ; store transfer length in Space_2, which is odd,
               ; because we never refer to it again
-    ER_API_0C7 Space_1
+    ER_SIOWrite Space_1
 
     wait 1
     pop hl ; number of bytes to transfer
@@ -64,7 +64,7 @@ TransferData:
 
 .asm_193B ; if SomeVar1 > 8
     push de
-    ER_API_0C7 Space_1 ; this must be the data transfer? it’s the only API function called
+    ER_SIOWrite Space_1 ; this must be the data transfer? it’s the only API function called
 
     wait 1
     pop de

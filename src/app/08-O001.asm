@@ -15,7 +15,7 @@ sub_02D2:
     ld_ind_hl RegionHandlePtr0104
     EX_DE_HL
     ld_ind_hl RegionHandlePtr0106
-    ER_API_0C7 RegionHandlePtr0104
+    ER_SIOWrite RegionHandlePtr0104
     wait $01
     pop hl
     inc hl
@@ -62,7 +62,7 @@ label_29:
     jr label_29
 
 label_30:
-    ER_API_0C7 RegionHandlePtr0104
+    ER_SIOWrite RegionHandlePtr0104
     ER_API ER_ID_Unk0CA
     cp $02
     jr nc,label_31
@@ -88,7 +88,7 @@ label_28:
 sub_0348:
     ld hl,$5fff
     ld_ind_hl RegionHandlePtr0104
-    ER_API_0C7 RegionHandlePtr0104
+    ER_SIOWrite RegionHandlePtr0104
     wait $01
     ret
 
