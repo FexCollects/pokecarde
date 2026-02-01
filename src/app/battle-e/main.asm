@@ -45,15 +45,13 @@ BattleEntryFinished: ; 188d
     db "Press the A Button to resend.\n"
     db "Press the B Button to cancel.\0"
 
-; SomeVar1 = CopiedToTXBufferCount
-; SomeVar2 = NextByteToTX
 ; Space_1 = TXBufferStart
 ; Space_2 = TXBufferOffset1
 
 ; vvvvv INCLUDE "common/battle_e_transfer.asm" vvvvvv
 ; tx per is either 8 or 16
 TransferData: ; hl = address of buffer, de = transfer_length
-    ld_ind_hl SomeVar2 ; ld [SomeVar2], Address of buffer
+    ld_ind_hl NextByteToTX ; ld [NextByteToTX], Address of buffer
     push de ; stack = transfer size
     ld hl, $BBBB
     ld_ind_hl Space_1 ; ld [Space_1], $BBBB
@@ -82,13 +80,13 @@ TransferData: ; hl = address of buffer, de = transfer_length
     ld hl, $8888
     ld_ind_hl Space_1 ; ld [Space_1], $8888
     ld a, $01
-    LD_IND_A SomeVar1 ; ld [SomeVar1], 1
+    LD_IND_A CopiedToTXBufferCount ; ld [CopiedToTXBufferCount], 1
 
 ; Copies 8 words from source buffer to transfer buffer
 ; while keeping count of the words left to transfer and
 ; the pointer to the next untransferred byte
 .copy_8_words_to_tx_buffer
-    LD_A_IND SomeVar1 ; ld a, [SomeVar1]
+    LD_A_IND CopiedToTXBufferCount ; ld a, [CopiedToTXBufferCount]
     cp $08
     jr nc, .do_transfer ; if a >= 8, goto do_transfer
 
@@ -96,20 +94,20 @@ TransferData: ; hl = address of buffer, de = transfer_length
     push de
 
     ; load the word to transfer from the src buffer into c,b
-    LD_HL_IND SomeVar2 ; ld hl, [SomeVar2]
+    LD_HL_IND NextByteToTX ; ld hl, [NextByteToTX]
     ld c, [hl] ; c = first byte of the data left to transfer (c = *buff_next)
     inc hl ; hl = next location (buff_next++)
     ld b, [hl]; b = second byte of the data left to transfer (b = *buff_next)
     inc hl ; hl = next location (buff_next++)
-    ld_ind_hl SomeVar2 ; ld [SomeVar2], buff_next
+    ld_ind_hl NextByteToTX ; ld [NextByteToTX], buff_next
 
     ; Calculate the offset pointer to write into
-    ld hl, SomeVar1 ; hl = &SomeVar1
-    ld l, [hl] ; l = *SomeVar1
+    ld hl, CopiedToTXBufferCount ; hl = &CopiedToTXBufferCount
+    ld l, [hl] ; l = *CopiedToTXBufferCount
     ld h, $00
     add hl, hl ; hl = $00XX * 2
     ld de, Space_1 ; de = &Space_1
-    add hl, de ; hl = hl + de, hl is a pointer set SomeVar1*2 bytes past Space_1
+    add hl, de ; hl = hl + de, hl is a pointer set CopiedToTXBufferCount*2 bytes past Space_1
 
     ; Write the word c,b into the offset buffer
     ld [hl], c ; first byte is written into offset address
@@ -126,16 +124,16 @@ TransferData: ; hl = address of buffer, de = transfer_length
     or d
     jr z, .do_transfer
 
-    ; SomeVar1++
-    ld hl, SomeVar1 ; hl = &SomeVar1
+    ; CopiedToTXBufferCount++
+    ld hl, CopiedToTXBufferCount ; hl = &CopiedToTXBufferCount
     ld a, $01
-    add a, [hl] ; a = *SomeVar1 + 1
-    ld [hl], a ; *SomeVar1 = a
+    add a, [hl] ; a = *CopiedToTXBufferCount + 1
+    ld [hl], a ; *CopiedToTXBufferCount = a
 
     ; Copy the next word
     jr .copy_8_words_to_tx_buffer
 
-.do_transfer ; if SomeVar1 > 8
+.do_transfer ; if CopiedToTXBufferCount > 8
     ; stash away the words left to transfer
     push de
 
@@ -366,8 +364,8 @@ DEF DATA_TRANSFER_LENGTH EQU 6144
 INCLUDE "common/wrap_up.asm"
 INCLUDE "common/word_shift_right.asm"
 
-SomeVar1: ds 1              ; 1B9F
-SomeVar2: ds 2              ; 1BA0
+CopiedToTXBufferCount: ds 1 ; 1B9F
+NextByteToTX: ds 2          ; 1BA0
 TextboxHandlePtr: ds 1      ; 1BA2
 LeftDoorSpriteHandle: ds 2  ; 1BA3
 RightDoorSpriteHandle: ds 2 ; 1BA5
