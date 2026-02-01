@@ -3,6 +3,7 @@ INCLUDE "include/charmaps.asm"
 INCLUDE "include/gfapi.asm"
 
 DEF LINKED_UP_SONG EQU $02A6
+DEF APP_EXITED_SOUND EQU $0006
 
 dstruct ER_CustomBackground, \
   BackdropSpriteData, \
@@ -149,7 +150,6 @@ Start:: ; 1984
     ER_FillBackgroundTile 0, 0, 0, 14, 30, 6, 0
 
     ; Load the background on layer 1
-    ; Pretty sure this is to allow the doors to be covered by their frame
     ER_LoadCustomBackground BackdropSpriteData, 1
     ; Clear the garbage in the text area
     ER_FillBackgroundTile 0, 0, 0, 14, 30, 6, 1
@@ -183,12 +183,8 @@ Start:: ; 1984
     ER_FadeIn 16
     wait 16
 
-    ; Some kind of init function.
-    ; Needed to progress linking.
-    ; Does a number of things
-    ; never goes from 0 -> 1 without this.
-    ; ER_SIO
-    ER_API ER_ID_Unk0C6
+    ; Start the process of making a multiplayer link
+    ER_InitializeSIO
 
     ; Draw the first set of instrucion text
     DrawText TextboxHandlePtr, Instructions1, 8, 4
@@ -196,69 +192,41 @@ Start:: ; 1984
     ER_PlayStaticSystemSound $00D8
 
 ;vvvvvvvvvvv INCLUDE "common/wait_for_link.asm" vvvvvvvvvvvvvvvvvv
-    wait 32 ; wait for 32 frames, assuming to give 0C6 some time?
+    wait 32 
 
-    ; Calling 0C4 with stack = $02 (h is empty?), bc = $B9A0, de = $0076, a = $08
-    ld l, $02
-    push hl
-    ld bc, $B9A0
-    ld de, $0076
-    ld a, $08
-    ER_API ER_ID_Unk0C4 ; Configure SIO? what is diferent between 0C6
-    pop bc
+    ER_ConfigureSIO $02, $B9A0, $0076, $08
 
-; 00 = unintialized
-; 01 = initializing
-; 02 = initialized
-; 04 = connected
+.wait_for_link_initialized
+    ER_GetSIOLinkStatus
 
-; .loop
-;  A = [3003E51h]
-;  if A == $01:
-;   jmp .service_loop
-;  else:
-;   A = [3003E51h]
-;   A = A or A
-;   if A != 0:
-;     jmp .next
-;   else:
-;     jmp .service_loop
-; .service_loop
-;  wait 1 frame
-;  [0300465h] = [3003E51h] if [0202949h] == 1 and [3003E51h] == 1
-;  jmp .loop
+    ; if initializing jump to .wait_and_update
+    cp ER_GetSIOLinkStatus_Initializing
+    jr z, .wait_and_update
 
-.asm_1b64
-    ; GetLinkStatus
-    ER_API ER_ID_Unk0DB ; A=[3003E51h]
+    ER_GetSIOLinkStatus
+    ; if a != 0, jump to .wait_for_linked
+    or a
+    jr nz, .wait_for_linked
+.wait_and_update
+    waita 1
+    ER_UpdateSIOLinkStatus
+    jr .wait_for_link_initialized
 
-    ; if a is $01 jump to .asm_1b6f
-    cp $01
-    jr z, .asm_1b6f
+.wait_for_linked
+    waita 1
 
-    ; Maybe update ??
-    ER_API ER_ID_Unk0DB ; A=[3003E51h]
-    or a ; update the z flag without changing a?
-    jr nz, .asm_1b76 ; if a is not zero, jump 1b76
-.asm_1b6f ; no link seen? so wait a frame and try again?
-    waita $01
-    ER_API ER_ID_Unk0C5
-    jr .asm_1b64
+    ; if the user presses B while waiting for linked
+    ; give up and exit to the menu
+    GF_JumpIfNotPressed ER_KEY_B, .check_if_linked
+    GF_PlaySystemSoundThenExit APP_EXITED_SOUND, ER_Exit_Menu
 
-.asm_1b76 ; not one and not zero?
-    waita $01 ; wait a frame
+.check_if_linked
+    ER_GetSIOConnectedStatus
+    ; if A < 2, loop back to waiting
+    cp 2
+    jr c, .wait_for_linked 
 
-    ; if b was not pressed then loop
-    GF_JumpIfNotPressed ER_KEY_B, .asm_1b90
-    ; else exit
-    GF_PlaySystemSoundThenExit $0006, ER_Exit_Menu
-
-.asm_1b90
-    ER_API ER_ID_Unk0CA ; returns 0 - 3 in A from a different variable.
-    cp $02
-    jr c, .asm_1b76 ; if A < 2, loop back to waiting
-
-    ; if A >= 2, open door animation, show instructions. Games are linked at this point
+.link_established
 
 ;^^^^^^^^^^^^^^^^^^^^^^^^^ wait for link ^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -281,7 +249,7 @@ Start:: ; 1984
     jr nc, .asm_1bd4
 
     ER_PauseSong LINKED_UP_SONG
-    GF_PlaySystemSoundThenExit $0006, ER_Exit_Restart
+    GF_PlaySystemSoundThenExit APP_EXITED_SOUND, ER_Exit_Restart
 
 .asm_1bd4
     LD_HL_IND Space_5
@@ -314,7 +282,7 @@ DEF DATA_TRANSFER_LENGTH EQU 6144
     jr nz, .asm_1c18
     ; this seems like its checking for some error but idk
 
-    GF_PlaySystemSoundThenExit $0006, ER_Exit_Restart
+    GF_PlaySystemSoundThenExit APP_EXITED_SOUND, ER_Exit_Restart
 
 .asm_1c18
     LD_HL_IND Space_3 ; hl = *Space_3 ; sure looks like its returning via the pointer

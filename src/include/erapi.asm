@@ -607,6 +607,70 @@ MACRO ER_SetBackgroundPriority ; B0 priority, B1 priority, B2 priority, B3 prior
     ER_API ER_ID_SetBackgroundPriority
 ENDM
 
+; ER_InitializeSIO
+;   First step in enabling link cable support. Not fully reverse engineered
+;   must be called to able eventual transfers.
+; 
+;   No parameters
+MACRO ER_InitializeSIO 
+    ER_API ER_ID_Unk0C6
+ENDM
+
+; ER_ConfigureSIO
+;   Second step in enabling link cable support. Not fully reverse engineered
+;   must be called to able eventual transfers.
+; 
+;   stack:??
+;   bc: ??
+;   de: ??
+;   a: ??
+MACRO ER_ConfigureSIO ; stack, bc, de, a
+    ld l, \1
+    push hl
+    ld bc, \2
+    ld de, \3
+    ld a, \4
+    ER_API ER_ID_Unk0C4
+    pop bc
+ENDM
+
+DEF ER_GetSIOLinkStatus_Uninitialized EQU 0
+DEF ER_GetSIOLinkStatus_Initializing EQU 1
+; ER_GetSIOLinkStatus
+;   Checks the SIO Link status, not fully reversed. Use should alternate between
+;   getting and updating the status.
+;
+;   These names are guesses, I wouldn't rely heavily on them
+;   0 = unintialized
+;   1 = initializing
+;   2 = initialized
+;   3 = connected one ?
+;   4 = connected two ?
+;
+;   Returns the status in a
+MACRO ER_GetSIOLinkStatus
+    ER_API ER_ID_Unk0DB
+ENDM
+
+; ER_UpdateSIOLinkStatus
+;   Triggers an update to the status value returned from ER_GetSIOLinkStatus
+;   Must be called in an alternating pattern with it
+;   Not fully reversed
+;
+;   No return
+MACRO ER_UpdateSIOLinkStatus
+    ER_API ER_ID_Unk0C5
+ENDM
+
+; ER_GetSIOConnectedStatus
+;   Returns an unreversed number in A.
+;   Greater than 2 seems to imply connected
+;
+;   Returns the status in a (0-3)
+MACRO ER_GetSIOConnectedStatus
+    ER_API ER_ID_Unk0CA
+ENDM
+
 MACRO SuppressPauseScreen
     ld de, $0000
     ld hl, $0000
