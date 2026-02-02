@@ -2,11 +2,11 @@ TransferData:
     ld_ind_hl SomeVar2
     push de
     ld hl, $BBBB
-    ld_ind_hl Space_1 ; Space_1 = $BBBB
+    ld_ind_hl SIO_TX_PacketId ; SIO_TX_PacketId = $BBBB
     EX_DE_HL
-    ld_ind_hl Space_2 ; store transfer length in Space_2, which is odd,
+    ld_ind_hl SIO_TX_Buff ; store transfer length in SIO_TX_Buff, which is odd,
               ; because we never refer to it again
-    ER_SIOWrite Space_1
+    ER_SIOWrite SIO_TX_PacketId
 
     wait 1
     pop hl ; number of bytes to transfer
@@ -25,7 +25,7 @@ TransferData:
     ; while de > 0…
 
     ld hl, $8888
-    ld_ind_hl Space_1 ; Space_1 = $8888
+    ld_ind_hl SIO_TX_PacketId ; SIO_TX_PacketId = $8888
     ld a, $01
     LD_IND_A SomeVar1 ; SomeVar1 = 1
 
@@ -45,7 +45,7 @@ TransferData:
     ld l, [hl]
     ld h, $00
     add hl, hl
-    ld de, Space_1
+    ld de, SIO_TX_PacketId
     add hl, de
     ld [hl], c
     inc hl
@@ -64,7 +64,7 @@ TransferData:
 
 .asm_193B ; if SomeVar1 > 8
     push de
-    ER_SIOWrite Space_1 ; this must be the data transfer? it’s the only API function called
+    ER_SIOWrite SIO_TX_PacketId ; this must be the data transfer? it’s the only API function called
 
     wait 1
     pop de

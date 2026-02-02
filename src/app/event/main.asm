@@ -9,10 +9,10 @@ TransferData:
     ld_ind_hl SomeVar1
     push de
     ld hl, $bbbb
-    ld_ind_hl Space_1
+    ld_ind_hl SIO_TX_PacketId
     EX_DE_HL
-    ld_ind_hl Space_2
-    ER_SIOWrite Space_1
+    ld_ind_hl SIO_TX_Buff
+    ER_SIOWrite SIO_TX_PacketId
 
     wait $01
     pop hl
@@ -28,7 +28,7 @@ TransferData:
     ret z
 
     ld hl, $8888
-    ld_ind_hl Space_1
+    ld_ind_hl SIO_TX_PacketId
     ld e, $01
 
 .asm_1aaf
@@ -46,7 +46,7 @@ TransferData:
     ld l, e
     ld h, $00
     add hl, hl
-    ld de, Space_1
+    ld de, SIO_TX_PacketId
     add hl, de
     ld [hl], c
     inc hl
@@ -63,7 +63,7 @@ TransferData:
     jr .asm_1aaf
 
 .asm_1ad9
-    ER_SIOWrite Space_1
+    ER_SIOWrite SIO_TX_PacketId
     wait $01
     jr .asm_1aa1
 
@@ -106,8 +106,8 @@ INCLUDE "common/wait_for_ready.asm"
 DEF DATA_TRANSFER_LENGTH EQU 6144
 INCLUDE "common/transfer_data.asm"
     ld hl, $5fff
-    ld_ind_hl Space_1
-    ER_SIOWrite Space_1
+    ld_ind_hl SIO_TX_PacketId
+    ER_SIOWrite SIO_TX_PacketId
 
     wait $80
 

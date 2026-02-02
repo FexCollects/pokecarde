@@ -45,21 +45,17 @@ BattleEntryFinished: ; 188d
     db "Press the A Button to resend.\n"
     db "Press the B Button to cancel.\0"
 
-; Space_1 = TXBufferStart
-; Space_2 = TXBufferOffset1
-
 ; vvvvv INCLUDE "common/battle_e_transfer.asm" vvvvvv
 ; tx per is either 8 or 16
 TransferData: ; hl = address of buffer, de = transfer_length
     ld_ind_hl NextByteToTX ; ld [NextByteToTX], Address of buffer
     push de ; stack = transfer size
     ld hl, $BBBB
-    ld_ind_hl Space_1 ; ld [Space_1], $BBBB
+    ld_ind_hl SIO_TX_PacketId ; ld [SIO_TX_PacketId], $BBBB
     EX_DE_HL ; hl = transfer_length, de = $BBBB
-    ld_ind_hl Space_2 ; ld [Space_2], transfer length
-        ; store transfer length in Space_2, which is odd, ; we are telling the gba how many bytes to expect
-        ; because we never refer to it again
-    ER_SIOWrite Space_1 ; transfer $BBBB, transfer size, 6 words of zero (first write would clear)
+    ; write the transfer length into the package so the gba knows what to expect
+    ld_ind_hl SIO_TX_Buff ; ld [SIO_TX_Buff], transfer length
+    ER_SIOWrite SIO_TX_PacketId ; transfer $BBBB, transfer size, 6 words of zero (first write would clear)
 
     wait 1
     pop hl ; number of bytes to transfer
@@ -78,7 +74,7 @@ TransferData: ; hl = address of buffer, de = transfer_length
     ; while de > 0…
 
     ld hl, $8888
-    ld_ind_hl Space_1 ; ld [Space_1], $8888
+    ld_ind_hl SIO_TX_PacketId ; ld [SIO_TX_PacketId], $8888
     ld a, $01
     LD_IND_A CopiedToTXBufferCount ; ld [CopiedToTXBufferCount], 1
 
@@ -106,8 +102,8 @@ TransferData: ; hl = address of buffer, de = transfer_length
     ld l, [hl] ; l = *CopiedToTXBufferCount
     ld h, $00
     add hl, hl ; hl = $00XX * 2
-    ld de, Space_1 ; de = &Space_1
-    add hl, de ; hl = hl + de, hl is a pointer set CopiedToTXBufferCount*2 bytes past Space_1
+    ld de, SIO_TX_PacketId ; de = &SIO_TX_PacketId
+    add hl, de ; hl = hl + de, hl is a pointer set CopiedToTXBufferCount*2 bytes past SIO_TX_PacketId
 
     ; Write the word c,b into the offset buffer
     ld [hl], c ; first byte is written into offset address
@@ -138,7 +134,7 @@ TransferData: ; hl = address of buffer, de = transfer_length
     push de
 
     ; do the transfer
-    ER_SIOWrite Space_1
+    ER_SIOWrite SIO_TX_PacketId
 
     ; wait a frame
     wait 1
@@ -270,11 +266,11 @@ Start:: ; 1984
 .wait_for_ready
     waita $01
 
-    ; Read and save the status2 to Space_5
+    ; Read and save the status2 to SIO_ConnectedStatus
     ER_GetSIOConnectedStatus2
     ld l, a
     ld h, $00
-    ld_ind_hl Space_5 ; ld [Space_5], $00XX
+    ld_ind_hl SIO_ConnectedStatus ; ld [SIO_ConnectedStatus], $00XX
 
     ; if Status >= 2, keep going
     ER_GetSIOConnectedStatus
@@ -288,18 +284,18 @@ Start:: ; 1984
 
 .check_status_3_4
     ; Restore the value ($00XX) from ER_GetSIOConnectedStatus2
-    LD_HL_IND Space_5 ; ld hl, [Space_5]
+    LD_HL_IND SIO_ConnectedStatus ; ld hl, [SIO_ConnectedStatus]
     ld a, l ; a = $XX
     sub $04 ; a = a - 4
     or h    ; a = a or 0
-    jr z, .link_ready ; if Space_5 == 4, goto .link_ready
+    jr z, .link_ready ; if SIO_ConnectedStatus == 4, goto .link_ready
 
     ; Restore the value ($00XX) from ER_GetSIOConnectedStatus2
-    LD_HL_IND Space_5 ; ld hl, [Space_5]
+    LD_HL_IND SIO_ConnectedStatus ; ld hl, [SIO_ConnectedStatus]
     ld a, l ; a = $XX
     sub $03 ; a = a - 3
     or h    ; a = a or 0
-    jr nz, .wait_for_ready ; if Space_5 != 3, goto .wait_for_ready
+    jr nz, .wait_for_ready ; if SIO_ConnectedStatus != 3, goto .wait_for_ready
 .link_ready
 ;^^^^^^^^^^^^^^^^^^^^^^^^^ wait for ready ^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -313,18 +309,20 @@ DEF DATA_TRANSFER_LENGTH EQU 6144
 .do_sio_initial_read
     waita 1
 
-    ER_SIORead Space_3
+    ER_SIORead SIO_RX_Buff
     or a ; a = a or a
     jr nz, .sio_read_okay ; a != 0, goto .sio_read_okay
 
     GF_PlaySystemSoundThenExit APP_EXITED_SOUND, ER_Exit_Restart
 
 .sio_read_okay
-    ; load the value returned in Space_3 to hl
-    LD_HL_IND Space_3 ; ld hl, [Space_3]
-    ; and make a copy of it in Space_4
-    ld_ind_hl Space_4 ; ld [Space_4], hl
+    ; load the value returned in SIO_RX_Buff to hl
+    LD_HL_IND SIO_RX_Buff ; ld hl, [SIO_RX_Buff]
+    ; and make a copy of it in GBA_InitalPacketId
+    ld_ind_hl GBA_InitalPacketId ; ld [GBA_InitalPacketId], hl
 
+    ; Ensure the GBA message is packet $2222
+    ; if not, try to read again
     ld a, l
     cp $22
     jr nz, .do_sio_initial_read
@@ -333,9 +331,7 @@ DEF DATA_TRANSFER_LENGTH EQU 6144
     cp $22
     jr nz, .do_sio_initial_read
 
-    ; if hl != $2222 try initial read again
-    ; otherwise start the transfer
-    ; $2222 is the link message from the GBA
+    ; Send the payload
 
     ld de, 60 ; prologue transfer length
     ld hl, Prologue
@@ -348,8 +344,8 @@ DEF DATA_TRANSFER_LENGTH EQU 6144
 
     ; Write $5fff. signal end of transmission?
     ld hl, $5fff
-    ld_ind_hl Space_1 ; ld [Space_1], $5fff
-    ER_SIOWrite Space_1
+    ld_ind_hl SIO_TX_PacketId ; ld [SIO_TX_PacketId], $5fff
+    ER_SIOWrite SIO_TX_PacketId
 
     ; Hide the sprite
     ER_SpriteHide TrainerSpriteHandle

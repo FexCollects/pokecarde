@@ -131,7 +131,7 @@ DEF ER_ID_Unk084 EQU $084
 ; 0x8A (?) _0202FD2C_unk6
 ; 0x8B (?) _0202FD2C_unk5
 DEF ER_ID_PlayStaticSystemSound EQU $08D
-DEF ER_ID_Unk08E EQU $08E
+DEF ER_ID_WindowShow EQU $08E
 DEF ER_ID_WindowHide EQU $08F ; Not documented by Matt. a = $20 else anything
 DEF ER_ID_CreateRegion EQU $090
 DEF ER_ID_SetRegionColor EQU $091

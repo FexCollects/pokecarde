@@ -1,8 +1,7 @@
 SECTION "common/mem_struct", ROM0
 
-; what do these store?
-Space_1:: dw
-Space_2:: ds 14
-Space_3:: ds 32
-Space_4:: dw
-Space_5:: dw
+SIO_TX_PacketId:: dw
+SIO_TX_Buff:: ds 14
+SIO_RX_Buff:: ds 32
+GBA_InitalPacketId:: dw
+SIO_ConnectedStatus:: dw

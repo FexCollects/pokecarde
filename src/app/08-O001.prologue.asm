@@ -1,5 +1,5 @@
 SECTION "app/08-O001.prologue", ROM0
 
-RegionHandlePtr0104:: ds 2
-RegionHandlePtr0106:: ds 14
-RegionHandlePtr0114:: ds 32
+SIO_TX_PacketId:: ds 2
+SIO_TX_Buff:: ds 14
+SIO_RX_Buff:: ds 32

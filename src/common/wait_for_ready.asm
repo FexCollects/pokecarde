@@ -4,7 +4,7 @@
 
     ld l, a
     ld h, $00
-    ld_ind_hl Space_5
+    ld_ind_hl SIO_ConnectedStatus
     ER_API ER_ID_Unk0CA
 
     cp $02
@@ -14,13 +14,13 @@
     GF_PlaySystemSoundThenExit $0006, ER_Exit_Restart
 
 .asm_1bd4
-    LD_HL_IND Space_5
+    LD_HL_IND SIO_ConnectedStatus
     ld a, l
     sub $04
     or h
     jr z, .asm_1be6
 
-    LD_HL_IND Space_5
+    LD_HL_IND SIO_ConnectedStatus
     ld a, l
     sub $03
     or h

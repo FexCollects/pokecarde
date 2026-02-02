@@ -45,8 +45,8 @@ INCLUDE "common/battle_e_transfer.asm"
 
 AfterTransfer:
     ld hl, $5FFF
-    ld_ind_hl Space_1
-    ld hl, Space_1
+    ld_ind_hl SIO_TX_PacketId
+    ld hl, SIO_TX_PacketId
     ER_API ER_ID_Unk0C7
 
     wait $01
