@@ -17,6 +17,26 @@ MACRO DG_UpdateText ; Line1, Line2, Line3
     call UpdateText
 ENDM
 
+MACRO COPY_SELECTION_STR_INTO_BUF
+    xor a
+    LD_IND_A SelectedRegiTextPtr ; ld [\1], a
+    ld hl,TransferDataSelection ; hl = &TransferDataSelection (selcted index from above)
+    LD_IND_L_HL ; ld l, [hl]
+    ld h,$00 ; hl = 00XX / index into array
+    ld e,l
+    ld d,h
+    add hl,hl
+    add hl,hl
+    add hl,hl
+    add hl,hl
+    add hl,de ; hl = hl * 9
+    ld de,RegirockDollText ; de = &RegirockDollText
+    add hl,de ; hl = hl + de
+    EX_DE_HL ; de = hl;
+    ld hl,SelectedRegiTextPtr ; ld = &SelectedRegiTextPtr
+    call StringCat ; copy selected doll name into SelectedRegiTextPtr
+ENDM
+
 DataPointers:
     dw DataStartRegirock
     dw DataStartRegice
@@ -720,8 +740,8 @@ ClearArrowSpriteAnimation:
     pop bc
     ret
 
-TransferSelection:
-    LD_IND_A RegionHandlePtr2840
+TransferSelection: ; a = selected idx
+    LD_IND_A TransferDataSelection
     ER_FadeOutSong $0081, $0040
     SuppressPauseScreen
     DG_UpdateText SecondPage, SecondPageLine2, SecondPageLine3
@@ -736,26 +756,10 @@ TransferSelection:
     ret
 
 .past_link
-    xor a
-    LD_IND_A SelectedRegiTextPtr
-    ld hl,RegionHandlePtr2840
-    LD_IND_L_HL
-    ld h,$00
-    ld e,l
-    ld d,h
-    add hl,hl
-    add hl,hl
-    add hl,hl
-    add hl,hl
-    add hl,de
-    ld de,RegirockDollText
-    add hl,de
-    EX_DE_HL
-    ld hl,SelectedRegiTextPtr
-    call StringCat
+    COPY_SELECTION_STR_INTO_BUF
     ld de,ThirdPage
     ld hl,SelectedRegiTextPtr
-    call StringCat
+    call StringCat ; copy ThirdPage into SelectedRegiTextPtr after the name
     DG_UpdateText SelectedRegiTextPtr, ThirdPageLine2, ThirdPageLine3
     call WaitForGBALinkReady
     or a
@@ -779,30 +783,14 @@ TransferSelection:
     ret
 
 .past_verify_partner
-    call sub_26B6
-    xor a
-    LD_IND_A SelectedRegiTextPtr
-    ld hl,RegionHandlePtr2840
-    LD_IND_L_HL
-    ld h,$00
-    ld e,l
-    ld d,h
-    add hl,hl
-    add hl,hl
-    add hl,hl
-    add hl,hl
-    add hl,de
-    ld de,RegirockDollText
-    add hl,de
-    EX_DE_HL
-    ld hl,SelectedRegiTextPtr
-    call StringCat
+    call AnimateDollOut
+    COPY_SELECTION_STR_INTO_BUF
     ld de,FourthPage ; $05ad
     ld hl,SelectedRegiTextPtr
     call StringCat
     DG_UpdateText SelectedRegiTextPtr, FourthPageLine2, FourthPageLine3
     wait $01
-    LD_A_IND RegionHandlePtr2840
+    LD_A_IND TransferDataSelection
     call SendDataPayload
     or a
     jr nz, .past_send_payload
@@ -814,23 +802,7 @@ TransferSelection:
     ret
 
 .past_send_payload
-    xor a
-    LD_IND_A SelectedRegiTextPtr
-    ld hl,RegionHandlePtr2840
-    LD_IND_L_HL
-    ld h,$00
-    ld e,l
-    ld d,h
-    add hl,hl
-    add hl,hl
-    add hl,hl
-    add hl,hl
-    add hl,de
-    ld de,RegirockDollText
-    add hl,de
-    EX_DE_HL
-    ld hl,SelectedRegiTextPtr
-    call StringCat
+    COPY_SELECTION_STR_INTO_BUF
     ld de,FifthPage
     ld hl,SelectedRegiTextPtr
     call StringCat
@@ -892,11 +864,11 @@ RenderWelcomePage:
     sub l
     ld b,$02
     call unclear_math
-    LD_IND_A RegionHandlePtr2848
+    LD_IND_A UnclearMathResult
     pop bc
 
     push bc
-    LD_A_IND RegionHandlePtr2848
+    LD_A_IND UnclearMathResult
     ld de,$000a
     or d
     ld d,a
@@ -914,11 +886,11 @@ RenderWelcomePage:
     sub l
     ld b,$02
     call unclear_math
-    LD_IND_A RegionHandlePtr2848
+    LD_IND_A UnclearMathResult
     pop bc
 
     push bc
-    LD_A_IND RegionHandlePtr2848
+    LD_A_IND UnclearMathResult
     ld de,$0014
     or d
     ld d,a
@@ -936,10 +908,10 @@ RenderWelcomePage:
     sub l
     ld b,$02
     call unclear_math
-    LD_IND_A RegionHandlePtr2848
+    LD_IND_A UnclearMathResult
     pop bc
 
-    LD_A_IND RegionHandlePtr2848
+    LD_A_IND UnclearMathResult
     ld de,$0028
     or d
     ld d,a
@@ -965,7 +937,7 @@ RenderWelcomePage:
     wait $01
     ret
 
-sub_26B6:
+AnimateDollOut:
     ER_PlayStaticSystemSound $0014
     ld c,$30
     ld de,$0180
@@ -1013,13 +985,13 @@ WriteText:
     sub l
     ld b,$02
     call unclear_math
-    LD_IND_A RegionHandlePtr2848
+    LD_IND_A UnclearMathResult
     ld a, $06
-    LD_IND_A RegionHandlePtr2849
+    LD_IND_A WriteTextStash
     ld bc, TitleText
-    LD_A_IND RegionHandlePtr2849
+    LD_A_IND WriteTextStash
     ld e, a
-    LD_A_IND RegionHandlePtr2848
+    LD_A_IND UnclearMathResult
     ld d, a
     LD_A_IND TitleRegionHandlePtr
     ER_API ER_ID_DrawText
@@ -1068,9 +1040,9 @@ UpdateText: ; hl = Line1, de = Line2, bc = Line2
     sub l
     ld b, $02
     call unclear_math
-    LD_IND_A RegionHandlePtr2848
+    LD_IND_A UnclearMathResult
     pop bc
-    LD_A_IND RegionHandlePtr2848
+    LD_A_IND UnclearMathResult
     ld de, $000A
     or d
     ld d, a
@@ -1085,9 +1057,9 @@ UpdateText: ; hl = Line1, de = Line2, bc = Line2
     sub l
     ld b, $2
     call unclear_math
-    LD_IND_A RegionHandlePtr2848
+    LD_IND_A UnclearMathResult
     pop bc
-    LD_A_IND RegionHandlePtr2848
+    LD_A_IND UnclearMathResult
     ld de, $0014
     or d
     ld d, a
@@ -1104,9 +1076,9 @@ UpdateText: ; hl = Line1, de = Line2, bc = Line2
     sub l
     ld b, $2
     call unclear_math
-    LD_IND_A RegionHandlePtr2848
+    LD_IND_A UnclearMathResult
     pop bc
-    LD_A_IND RegionHandlePtr2848
+    LD_A_IND UnclearMathResult
     ld de, $001E
     or d
     ld d, a
@@ -1176,14 +1148,14 @@ label_2833:
 WordTransferCount:: dw
 NextByteToTX:: dw
 SendDataPayloadIdx:: db
-RegionHandlePtr2840:: db
+TransferDataSelection:: db
 InstructRegionHandlePtr:: db
 ArrowSpriteHandlePtr: dw
 OptionsRegionHandlePtr:: db
 RegirockSpriteHandlePtr:: dw
 TitleRegionHandlePtr:: db
-RegionHandlePtr2848:: db
-RegionHandlePtr2849:: db
+UnclearMathResult:: db
+WriteTextStash:: db
 SelectedRegiTextPtr:: db
 
 ; Stripping metadata. How many bytes above this
