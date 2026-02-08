@@ -37,6 +37,11 @@ MACRO COPY_SELECTION_STR_INTO_BUF
     call StringCat ; copy selected doll name into SelectedRegiTextPtr
 ENDM
 
+MACRO SET_PACKET_ID ; packet id
+    ld hl, \1
+    ld_ind_hl SIO_TX_PacketId ; ld [SIO_TX_PacketId], $\1
+ENDM
+
 DataPointers:
     dw DataStartRegirock
     dw DataStartRegice
@@ -47,9 +52,8 @@ DataPointers:
 TransferData:
     ld_ind_hl NextByteToTX ; ld [NextByteToTX], Address of buffer
     push de ; stack = transfer size
-    ld hl, $BBBB
-    ld_ind_hl SIO_TX_PacketId ; ld [SIO_TX_PacketId], $BBBB
-    EX_DE_HL ; hl = transfer_length, de = $BBBB
+    SET_PACKET_ID $BBBB
+    EX_DE_HL ; hl = transfer_length
     ; write the transfer length into the package so the gba knows what to expect
     ld_ind_hl SIO_TX_Buff ; ld [SIO_TX_Buff], transfer length
     ER_SIOWrite SIO_TX_PacketId ; transfer $BBBB, transfer size, 6 words of zero (first write would clear)
@@ -70,8 +74,7 @@ TransferData:
     or h
     jr z, .transfer_ret_ok ; if WordTransferCount == 0
 
-    ld hl, $8888
-    ld_ind_hl SIO_TX_PacketId ; ld [SIO_TX_PacketId], $8888
+    SET_PACKET_ID $8888
 
     ; initialize words copied to 1
     ld e, $01
@@ -84,7 +87,7 @@ TransferData:
     cp $08
     jr nc, .do_transfer ; if a >= 8, goto do_transfer
 
-    ; stash away the words left to transfer
+    ; stash away e, number of words copied. d garbage?
     push de
 
     ; load the word to transfer from the src buffer into c,b
@@ -107,7 +110,7 @@ TransferData:
     inc hl ; next addr
     ld [hl], b ; second byte is written into offset address
 
-    ; restore words left to transfer
+    ; restore into e, number of words copied
     pop de
 
     ; transfer count goes down by 1
@@ -160,8 +163,7 @@ TransferData:
     ret
 
 SendFinalPacket:
-    ld hl,$5fff
-    ld_ind_hl SIO_TX_PacketId
+    SET_PACKET_ID $5FFF
     ER_SIOWrite SIO_TX_PacketId
     wait $01
     ret
@@ -275,7 +277,7 @@ SendDataPayload: ; a = payload idx to send
     add hl,hl
     ; de = DataPointers, which is an array to all the data payloads
     ld de,DataPointers
-    ; hl = DataPointers[SendDataPayloadIdx], a poiner to a specific data payload
+    ; hl = &DataPointers[SendDataPayloadIdx], a poiner to a specific data payload
     add hl,de
     ; load the first byte of the pointer to the tranfer data into e
     ld e,[hl]
@@ -285,6 +287,9 @@ SendDataPayload: ; a = payload idx to send
     ld d,[hl]
     ; hl = de, hl holds the pointer to the data to be transfered
     EX_DE_HL
+    ; this number is just WAY over allocated
+    ; sending $101 is fine, though $100 is too small
+    ; strange since the payload is $7f
     ld de, $0800 ; transfer size
     call TransferData
     or a

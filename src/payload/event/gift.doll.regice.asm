@@ -30,11 +30,11 @@ TransferFailRegice:
     end
 
 TransferSuccessRegice:
-        db "\\v2 has been sent!@"
+    db "\\v2 has been sent!@"
     ;db $FD,$02,$37,$00,$05,$08,$27,$2A,$13,$00,$07,$10,$AB,$FF
 
 TransferFailTextRegice:
-        db "There is no room for the\\n"
+    db "There is no room for the\\n"
     db "\\v2...@"
     ;db $FD,$02,$2D,$00,$02,$2A,$29,$FE,$46,$0C,$36,$37,$00,$01,$02,$13,$00,$02,$15,$06,$50,$10,$B0,$FF
 RegiceEnd:
